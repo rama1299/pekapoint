@@ -1,19 +1,10 @@
-# editable-website
+# SpecWar
 
-A SvelteKit template for coding **completely custom websites**, while allowing non-technical people to **make edits** to the content by simply logging in with a secure admin password.
+SpecWar is an product comparison website that will give complete information of the products and comparable each other. And then system will suggest you some the best price options from some differen online shop in your current position.  So, you can make a choice which the best one to buy easily. 
 
-Check out the demo at [editable.website](https://editable.website).
-
-See it out in the wild at [sonjastojanovic.com](https://sonjastojanovic.com), [nisse.tech](https://nisse.tech), [michaelaufreiter.com](https://michaelaufreiter.com), [postowl.com](https://postowl.com)
-and [officegallery.cz](https://officegallery.cz).
-
-Read the discussion on [Hackernews](https://news.ycombinator.com/item?id=35456083).
-
-Editable Website won the 2nd price in the [SvelteHack 2023](https://hack.sveltesociety.dev/winners). 🥳 We still can't believe it. Big thanks to the [Svelte Society](https://sveltesociety.dev/) and congrats to the other winners, and everyone who participated. 🙏 So many inspiring projects!
 
 ## But why?
 
-It's a dynamic website but light as a feather compared to building on top of a CMS. It makes editing content self-explanatory for end-users.
 
 ## Step 0 - Requirements
 
@@ -29,9 +20,16 @@ This is a full-fledged web app you want to adjust to your own needs. So please *
 Copy the contents of `.env.example` into `.env` and adjust to your needs.
 
 ```bash
-DB_PATH=./data/db.sqlite3
-ADMIN_PASSWORD=xxxxxxxxxxxx
+# DB_PATH=./data/db.sqlite3 #not used anymore
+ADMIN_PASSWORD={Choose Your Password}
 ORIGIN=http://localhost:5173
+
+# Server env vars
+POSTGRES_HOST=127.0.0.1
+POSTGRES_USER=fu4d
+POSTGRES_PASSWORD="Cikarang~42"
+POSTGRES_DB="rust"
+POSTGRES_PORT=5432
 ```
 
 Seed the database:
@@ -165,12 +163,3 @@ To restore a backup in production, you need to be a bit careful and follow these
 1. Restart the app (so that the new DB gets picked up)
    - `fly apps restart`
 
-## Get in touch
-
-If you have questions or need help (with development or deployment), please email me at michael@letsken.com.
-
-## Examples
-
-Community provided examples of additional features you can add to your editable website:
-
-- [ChatGPT completion tool](https://github.com/nilskj/editable-website)
