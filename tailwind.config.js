@@ -13,7 +13,7 @@ export default {
   content: ['./src/**/*.{html,js,svelte,ts}'],
   theme: {
     fontFamily: {
-      sans: ['Jost', 'system-ui']
+      sans: ['Poppins', 'sans']
     },
     extend: {
       typography: {

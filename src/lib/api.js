@@ -2,23 +2,23 @@ import slugify from 'slugify';
 import { SHORTCUTS } from './constants';
 import Database from 'better-sqlite3';
 import { nanoid } from '$lib/util';
-import { DB_PATH, ADMIN_PASSWORD } from '$env/static/private';
+import { ADMIN_PASSWORD, POSTGRES_DB, POSTGRES_HOST, POSTGRES_PASSWORD, POSTGRES_PORT, POSTGRES_USER } from '$env/static/private';
 import { Blob } from 'node:buffer';
 import { Pool } from 'pg'
 
-const {
-  POSTGRES_HOST,
-  POSTGRES_USER,
-  POSTGRES_PASSWORD,
-  POSTGRES_DB,
-  POSTGRES_PORT,
-} = process.env
+// const {
+//   POSTGRES_HOST,
+//   POSTGRES_USER,
+//   POSTGRES_PASSWORD,
+//   POSTGRES_DB,
+//   POSTGRES_PORT,
+// } = process.env
 
 const pool = new Pool({
   host: POSTGRES_HOST,
   user: POSTGRES_USER,
-  password: "Cikarang~42",
-  database: "rust",
+  password: POSTGRES_PASSWORD,
+  database: POSTGRES_DB,
   port: POSTGRES_PORT,
   connectionTimeoutMillis: 5000,
 })
