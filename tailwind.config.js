@@ -1,3 +1,4 @@
+// Gabungan kedua file konfigurasi Tailwind CSS
 import forms from '@tailwindcss/forms';
 import typography from '@tailwindcss/typography';
 
@@ -8,12 +9,18 @@ const round = num =>
     .replace(/\.0$/, '');
 const em = (px, base) => `${round(px / base)}em`;
 
-/** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./src/**/*.{html,js,svelte,ts}'],
+  content: [
+    './src/**/*.{html,js,svelte,ts}',
+    "./node_modules/flowbite-svelte/**/*.{html,js,svelte,ts}",
+  ],
   theme: {
     fontFamily: {
-      sans: ['Poppins', 'sans']
+      sans: ['Jost', 'system-ui'],
+      inter: ['Inter', 'sans-serif'],
+      monst: ['Montserrat', 'sans-serif'],
+      roboto: ['Roboto', 'sans-serif'],
+      lexend: ['Lexend', 'sans-serif']
     },
     extend: {
       typography: {
@@ -61,8 +68,15 @@ export default {
             }
           }
         }
-      }
+      },
+      colors: {
+        primary: { 50: '#FFF5F2', 100: '#FFF1EE', 200: '#FFE4DE', 300: '#FFD5CC', 400: '#FFBCAD', 500: '#FE795D', 600: '#EF562F', 700: '#EB4F27', 800: '#CC4522', 900: '#A5371B'},
+      },
+      width: {
+        'wrap': '81rem'
+      },
     }
   },
-  plugins: [forms, typography]
+  darkMode: 'class',
+  plugins: [forms, typography, require('flowbite/plugin')]
 };
