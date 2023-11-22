@@ -1,10 +1,9 @@
 <script>
-	import Card from './Card.svelte';
-	import Tabs from './Tabs.svelte';
-	import Afiliate from './Afiliate.svelte';
-	import TagCompare from './../layout/TagCompare.svelte';
-	import Ranking from './../../../routes/products/components/Ranking.svelte';  
-
+	import Card from './productList/Card.svelte';
+	import Tabs from './productList/Tabs.svelte';
+	import Afiliate from './productList/Afiliate.svelte';
+	import TagCompare from './productList/TagCompare.svelte';
+  import ChartDonut from './productList/ChartDonut.svelte';
   export let item
 
   let tabControl = {
@@ -23,7 +22,7 @@
 <div class="w-full cursor-default bg-white rounded-lg overflow-hidden shadow-lg">
   <div>
     <Card data={item} tabControl={tabControl}>
-      <Ranking value={item.rank}/>
+      <ChartDonut score={item.rank}></ChartDonut>
   </Card>
   <Afiliate/>
   <Tabs data={item.Specs} on:message={handleMessage}/>

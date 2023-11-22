@@ -1,8 +1,9 @@
 <script>
+	import { goto } from '$app/navigation';
 	import SpecDetail from './SpecDetail.svelte';
     import { onMount } from "svelte";
-    import { compareDataStore } from '../../stores'
-    import { saveToSessionStorage, getFromSessionStorage} from '../../storageHelper'
+    import { compareDataStore } from '../../../../stores'
+    import { saveToSessionStorage, getFromSessionStorage} from '../../../../helpers/sessionStorage'
     export let data;
     export let tabControl
 
@@ -37,10 +38,10 @@
 </script>
 
     <div class="m-auto bg-white px-4 pt-6 w-full relative h-[360px]">
-        <div class="flex w-full justify-center cursor-pointer">
+        <div class="flex w-full justify-center cursor-pointer" on:click={() => {goto(`/products/${data.title.toLowerCase().replace(/\s+/g, '-')}`)}}>
             <div class="w-1/2 pr-2">
                 <img src={data.image_url} alt="" class="h-56 m-auto cursor-pointer hover:scale-105 duration-200">
-                <div class="h-12 w-12 rounded-full absolute top-4 left-4 bg_img">
+                <div class="h-12 w-12 rounded-full absolute top-4 left-4 bg_img border">
                     <slot/>
                     <p class="relative score font-semibold">{data.rank}</p>
                 </div>
@@ -54,7 +55,7 @@
             <p class="rounded-tl-lg py-1 px-2 font-medium bg-gradient-to-l from-yellow-300 to-orange-500 text-white text-end cursor-pointer hover:scale-105 duration-200">{priceIdr}</p>
         </div>
         <div class="flex justify-between justify-items-center items-start mt-2 relative overflow-hidden">
-            <p class="text-xl font-semibold cursor-pointer hover:underline underline-offset-1">{data.title}</p>
+            <p class="text-xl font-semibold cursor-pointer hover:underline underline-offset-1" on:click={() => {goto(`/products/${data.title.toLowerCase().replace(/\s+/g, '-')}`)}}>{data.title}</p>
             <div class="flex items-center gap-2 bg-gradient-to-r from-sky-600 to-indigo-800 px-2 text-white rounded-tl-lg absolute cursor-pointer compare_btn">
                 <i class='bx bx-git-compare text-xl compare_btn'></i>
                 <p class="font-medium" on:click={()=> {handleCompare(data)}}>| Add to comparison</p>

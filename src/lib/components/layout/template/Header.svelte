@@ -1,20 +1,18 @@
 <script>
-    import { createEventDispatcher } from "svelte";
-
+	import { isFilterProduct } from './../../../../stores.js';
     export let isProductPage
+    export let isDetailProductPage
+
     let toggleMenu = false
     let toggleDropdown = false
-    let filterToggleMobile = false
     let y
-    const dispatch = createEventDispatcher()
 
     function handleMenu() {
         toggleMenu = !toggleMenu
     }
 
     function handleToggleFilterMobile() {
-        filterToggleMobile = true
-        dispatch('message', {filterToggleMobile})
+        isFilterProduct.set(true)
     }
 
 </script>
@@ -22,7 +20,7 @@
 <svelte:window bind:scrollY={y} />
 
 
-<nav class="w-full z-50 top-0 {y > 1 ? 'bg-[#0A1831]' : 'bg-transparent'} duration-200 ease-out fixed">
+<nav class="w-full z-50 top-0 {isDetailProductPage ? 'bg-[#0A1831]' : y > 1 ? 'bg-[#0A1831]' : 'bg-transparent'} duration-200 ease-out fixed">
     <div class="container lg:w-wrap mx-auto ">
         <div class="flex w-full justify-between items-center font-monst text-white">
             <div class="w-full lg:w-1/2 flex justify-between lg:justify-start items-center lg:gap-8 lg:px-0 lg:py-0 gap-3 py-2 px-2">
@@ -31,7 +29,7 @@
                     <h1 class=" text-2xl md:text-4xl font-bold italic">Specwar.</h1>
                 </div>
                 <div class="flex justify-end gap-1 items-center">
-                    <div class="flex justify-between items-center w-auto lg:w-80 md:h-9 lg:h-12 rounded-md overflow-hidden glass-effect">
+                    <div class="flex justify-between items-center w-auto lg:w-80 md:h-9 lg:h-12 rounded-md overflow-hidden bg-white/10 backdrop-blur-sm">
                         <div>
                             <input type="text" class="ring-0 focus:ring-0 border-none text-sm md:text-base focus:border-none w-32 md:w-64 md:font-medium search" placeholder="Search item...">
                         </div>
@@ -126,11 +124,6 @@
         -webkit-clip-path: polygon(100% 0, 0 0, 0 0, 100% 0);
         clip-path: polygon(100% 0, 0 0, 0 0, 100% 0);
         transition: 0.3s ease;
-    }
-
-    .glass-effect {
-        backdrop-filter: blur(10px); /* Sesuaikan nilai blur sesuai keinginan Anda */
-        background-color: rgba(255, 255, 255, 0.07);
     }
 
     .search::placeholder {

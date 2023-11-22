@@ -1,6 +1,6 @@
 <script>
-    import { saveToSessionStorage } from '../../storageHelper';
-	import { compareDataStore } from '../../stores';
+    import { saveToSessionStorage } from '../../../../helpers/sessionStorage';
+	import { compareDataStore } from '../../../../stores';
 
     let isToggleBtn = false
     let isToggleSearch = false

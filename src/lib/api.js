@@ -6,14 +6,6 @@ import { ADMIN_PASSWORD, POSTGRES_DB, POSTGRES_HOST, POSTGRES_PASSWORD, POSTGRES
 import { Blob } from 'node:buffer';
 import { Pool } from 'pg'
 
-// const {
-//   POSTGRES_HOST,
-//   POSTGRES_USER,
-//   POSTGRES_PASSWORD,
-//   POSTGRES_DB,
-//   POSTGRES_PORT,
-// } = process.env
-
 const pool = new Pool({
   host: POSTGRES_HOST,
   user: POSTGRES_USER,

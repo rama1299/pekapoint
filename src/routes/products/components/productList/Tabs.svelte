@@ -1,5 +1,5 @@
 <script>
-    import Radar from "../../../routes/products/components/Radar.svelte";
+    import Radar from "./Radar.svelte";
     import { createEventDispatcher } from 'svelte';
     export let data;
 
@@ -28,45 +28,6 @@
 			object: tabControl
 		});
         }
-
-    // function handleDisplay() {
-    //     isDisplayTab.set(true)
-    //     isPerformanceTab.set(false)
-    //     isCameraTab.set(false)
-    //     isBatteryTab.set(false)
-    //     isAudioTab.set(false)
-    // }
-
-    // function handlePerformance() {
-    //     isDisplayTab.set(false)
-    //     isPerformanceTab.set(true)
-    //     isCameraTab.set(false)
-    //     isBatteryTab.set(false)
-    //     isAudioTab.set(false)
-    // }
-
-    //  function handleCamera() {
-    //     isDisplayTab.set(false)
-    //     isPerformanceTab.set(false)
-    //     isCameraTab.set(true)
-    //     isBatteryTab.set(false)
-    //     isAudioTab.set(false)
-    // }
-
-    //  function handleBattery() {
-    //     isDisplayTab.set(false)
-    //     isPerformanceTab.set(false)
-    //     isCameraTab.set(false)
-    //     isBatteryTab.set(true)
-    //     isAudioTab.set(false)
-    // }
-
-    //  function handleAudio() {
-    //     isDisplayTab.set(false)
-    //     isPerformanceTab.set(false)
-    //     isCameraTab.set(false)
-    //     isBatteryTab.set(false)
-    //     isAudioTab.set(true)   }
 
 </script>
 <!-- display -->

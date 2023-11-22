@@ -1,6 +1,12 @@
 <script>
+	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
   import Limiter from '$lib/components/Limiter.svelte';
   export let form;
+  
+  onMount(() => {
+    goto('/')
+  })
 </script>
 
 <Limiter>

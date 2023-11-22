@@ -1,8 +1,7 @@
 <script>
-    import { afterUpdate, createEventDispatcher, onMount } from "svelte";
-    
-    const dispatch = createEventDispatcher();
-    
+    import { onMount } from "svelte";
+    import { isFilterProduct } from "../../../stores";
+        
     let filterToggle = {
         isBrand: false,
         isPrice: false,
@@ -10,7 +9,6 @@
         isStorage: false
     }
     
-    export let toggleFilterMobile
     let sortToggle = false
     let ram = 8
     let storage = 64
@@ -34,8 +32,7 @@
     }
 
     function handleToggleMobile() {
-        let toggleFilterMobile = false
-        dispatch('message', {toggleFilterMobile})
+        isFilterProduct.set(false)
     }
 
     function handleSortToggle() {
@@ -270,7 +267,7 @@
         </div>
     </div>
 </div>
-{#if toggleFilterMobile}
+{#if $isFilterProduct}
     <div class="w-full bg-black bg-opacity-70 h-screen fixed z-50 top-0 left-0 lg:hidden">
         <button class="fixed top-3 right-3 flex justify-center items-center w-8 h-8" on:click={handleToggleMobile}>
             <i class='bx bx-x font-semibold text-white text-4xl'></i>
