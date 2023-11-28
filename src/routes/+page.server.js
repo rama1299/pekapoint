@@ -1,13 +1,8 @@
-// import { getArticles, getPage } from '$lib/api';
+// import { getProductList } from "./products/api/products";
 
-// export async function load({ locals }) {
-//   const currentUser = locals.user;
-//   const articles = await getArticles();
-//   const page = await getPage('home');
-
+// export async function load() {
+//     const res = await getProductList(1, 15)
 //   return {
-//     currentUser,
-//     articles: articles.slice(0, 3),
-//     page
+//     res
 //   };
 // }

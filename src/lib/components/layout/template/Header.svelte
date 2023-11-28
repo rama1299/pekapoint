@@ -47,7 +47,7 @@
             <div class="w-1/2 lg:flex justify-between font-medium text-white items-center hidden">
                 <div class="flex justify-center gap-12 capitalize text">
                     <a href="/" class="hover:text-[#F14D5D] duration-200 ease-in-out">home</a>
-                    <a href="/products" class="hover:text-[#F14D5D] duration-200 ease-in-out">product</a>
+                    <a href="/product" class="hover:text-[#F14D5D] duration-200 ease-in-out">product</a>
                     <a href="" class="hover:text-[#F14D5D] duration-200 ease-in-out">articles</a>
                     <a href="" class="hover:text-[#F14D5D] duration-200 ease-in-out">about us</a>
                 </div>
