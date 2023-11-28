@@ -8,11 +8,6 @@ const config = {
     csrf: {
       checkOrigin: false
     },
-    vite: {
-      optimizeDeps: {
-        include: ['lodash.get', 'lodash.isequal', 'lodash.clonedeep']
-      },
-    },
   },
   preprocess: vitePreprocess()
 };
