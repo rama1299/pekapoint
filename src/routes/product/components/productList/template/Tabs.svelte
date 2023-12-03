@@ -1,30 +1,31 @@
 <script>
     import ProgressBar from "./ProgressBar.svelte";
-    import Radar from "./Radar.svelte";
     import { createEventDispatcher } from 'svelte';
+    export let antutu_score
+    export let geekbench_score
     export let data;
+    let dataTab = JSON.parse(data)
 
-	const dispatch = createEventDispatcher();
+    let titleTab = Object.keys(dataTab)[0]
+    let dataProgressBar = dataTab[titleTab]
 
-    let display = data[0];
+	const dispatch = createEventDispatcher(); 
+
     // let performance = data.find(item => item.title === 'Performance');
     // let camera = data.find(item => item.title === 'Camera');
     // let battery = data.find(item => item.title === 'Battery');
     // let audio = data.find(item => item.title === 'Audio');
-    let labels = display.labels
-    let scores = display.scores
 
-
-    let dataBars = labels.map((label, index) => {
-    return {
-        label: label,
-        score: scores[index]
-    };
-    });
+    // let dataBars = labels.map((label, index) => {
+    // return {
+    //     label: label,
+    //     score: scores[index]
+    // };
+    // });
 
     let tabControl = {
-        isDisplay: true,
-        isPerformance: false,
+        isDisplay: false,
+        isPerformance: true,
         isCamera: false,
         isBattery: false,
         isAudio: false
@@ -42,27 +43,29 @@
 
 </script>
 <!-- display -->
-<div class="bg-white w-full relative px-4 h-40 m-auto {tabControl.isDisplay ? '' : 'hidden'}">
-    <p class="text-center text-md font-medium absolute left-4 -top-5 text-gray-700">{display.title}</p>
+<div class="bg-white w-full relative px-4 h-40 m-auto {tabControl.isPerformance ? '' : 'hidden'}">
+    <p class="text-center text-md font-medium absolute left-4 -top-5 text-gray-700">{titleTab}</p>
     <div class="flex justify-center md:justify-between justify-items-center items-center gap-6 mt-3 pt-1 ">
         <div class="w-3/4 h-36 space-y-[6px]">
             <!-- <Radar labels={display.labels} scores={display.scores}/> -->
-            {#each dataBars as dataBar, i}
-                <ProgressBar title={dataBar.label} score={dataBar.score}/>
+            {#each dataProgressBar as item, i (i)}
+                {#if i <= 4}
+                    <ProgressBar title={item.title} score={item.score} key={i}/>
+                {/if}
             {/each}
         </div>
         <div class="space-y-1 w-1/4 text-center">
             <div class="flex flex-col items-center">
                 <div class="bg-[url('/antutu.png')] h-14 w-12 bg-no-repeat p-1 bg-contain flex justify-center">
-                    <p class="text-white text-md font-bold items-center mx-auto mt-4">{display.antutu_score}</p>
+                    <p class="text-white text-lg font-bold items-center mx-auto mt-4">{antutu_score}</p>
                 </div>
-                <p class="text-xs font-medium text-red-700">Antutu Score</p>
+                <p class="text-xs font-medium text-black">Antutu Score</p>
             </div>
             <div class="flex flex-col items-center">
-                <div class="bg-[url('/dxo.png')] h-14 w-14 bg-no-repeat p-1 bg-contain flex justify-center">
-                    <p class="text-black text-md font-bold items-center m-auto">{display.dxo_score}</p>
+                <div class="bg-[url('/geekbench.jpg')] h-12 w-12 bg-no-repeat p-1 bg-contain flex justify-center rounded-lg">
+                    <p class="text-black text-lg font-bold items-center mx-auto mt-2">{geekbench_score}</p>
                 </div>
-                <p class="text-xs font-medium text-black">DXO Score</p>
+                <p class="text-xs font-medium text-black">Geekbench</p>
             </div>
         </div>
     </div>

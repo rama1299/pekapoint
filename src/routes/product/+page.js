@@ -12,7 +12,7 @@ export async function load({url}) {
 		} else if (parseJson && data.length < 0) {
 			data = [...data, ...parseJson]
 		}
-		return {data, specs, page}
+		return {data, page}
 	} catch (error) {
 		console.log(error)
 	}

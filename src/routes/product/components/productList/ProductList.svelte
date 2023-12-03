@@ -6,11 +6,10 @@
   import ChartDonut from './template/ChartDonut.svelte';
 
   export let item
-  export let specs
 
   let tabControl = {
-        isDisplay: true,
-        isPerformance: false,
+        isDisplay: false,
+        isPerformance: true,
         isCamera: false,
         isBattery: false,
         isAudio: false
@@ -19,15 +18,17 @@
   function handleMessage(event) {
     tabControl= event.detail.object
   }
+
+
 </script>
 
 <div class="w-full cursor-default bg-white rounded-lg overflow-hidden shadow-lg">
   <div>
-    <Card data={item} tabControl={tabControl} specs={specs}>
+    <Card data={item} tabControl={tabControl} specs={item.summary}>
       <ChartDonut score={item.spec_score}></ChartDonut>
   </Card>
-  <Afiliate/>
-  <Tabs data={specs} on:message={handleMessage}/>
+  <Afiliate data={item.affiliate}/>
+  <Tabs data={item.summary} geekbench_score={item.geekbench_score} antutu_score={item.antutu_score} on:message={handleMessage}/>
   </div>
   <TagCompare/>
 </div>

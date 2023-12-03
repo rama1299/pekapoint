@@ -5,7 +5,6 @@
     import Layout from '../../lib/components/layout/Layout.svelte';
 
     export let data
-    let specs = data.specs
     let productList = data.data
     let currentPage = data.page
     $: if (currentPage === null) {currentPage = 1}
@@ -14,7 +13,6 @@
         const message = event.detail.data
         productList = [...productList, ...message]
     }
-
 </script>
 
 <Layout isProductPage={true}>
@@ -29,7 +27,7 @@
         </div>
         <div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row m-auto gap-4 px-1">
             {#each productList as item (item.id)}
-                <ProductList item={item} specs={specs}/>
+                <ProductList item={item}/>
             {/each}
         </div>
         <div class="w-full">

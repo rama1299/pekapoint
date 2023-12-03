@@ -1,15 +1,44 @@
 <script>
-    export let data
+    import {removeHtmlTags} from '../../../../../helpers/removeHtmlTags'
     export let tabControl
+    export let data
 
-    let display = data.find(item => item.title === 'Display');
-    let performance = data.find(item => item.title === 'Performance');
-    let camera = data.find(item => item.title === 'Camera');
-    let battery = data.find(item => item.title === 'Battery');
-    let audio = data.find(item => item.title === 'Audio');
+    let dataSpec = JSON.parse(data)
+    let titleSpec = Object.keys(dataSpec)[0]
+    let specs = dataSpec[titleSpec]
+
+    let cleanedSpecs = specs.map(item => {
+        return {
+            title: item.title,
+            score: item.score,
+            spec: removeHtmlTags(item.spec)
+        };
+    });
+
+
+
+    // let display = data.find(item => item.title === 'Display');
+    // let performance = data.find(item => item.title === 'Performance');
+    // let camera = data.find(item => item.title === 'Camera');
+    // let battery = data.find(item => item.title === 'Battery');
+    // let audio = data.find(item => item.title === 'Audio');
+
 </script>
 
-{#if tabControl.isDisplay}
+{#if tabControl.isPerformance && specs}
+    {#each cleanedSpecs as spec, i (i)}
+    <div class="leading-tight w-full" key={i}>
+        <div class="w-full">
+            <p class="text-start font-medium">{spec.title}</p>
+        </div>
+        <div>
+            <p class="italic">{spec.spec}</p>
+        </div>
+    </div>
+    {/each}
+{/if}
+
+<!-- {#if tabControl.isDisplay}
     {#each display.details as detail (detail.title)}
         <div class="leading-tight w-full">
             <div class="w-full">
@@ -64,4 +93,4 @@
             </div>
         </div>
     {/each}
-{/if}
+{/if} -->

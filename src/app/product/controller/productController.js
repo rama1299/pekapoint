@@ -13,7 +13,7 @@ export class ProductController {
             const offset = (page - 1) * perPage;
 
             const response = await client.query(
-                'SELECT * FROM products ORDER BY spec_score DESC, created_at DESC LIMIT $1 OFFSET $2',
+                `SELECT *, '[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\"},{\"store\":\"Tokopedia\",\"price\":\"20000000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\"}]' as affiliate, '21000000' as launch_price FROM products WHERE summary IS NOT NULL ORDER BY spec_score DESC, created_at DESC LIMIT $1 OFFSET $2`,
                 [limit, offset]
             );
             const data = response.rows
@@ -36,7 +36,7 @@ export class ProductController {
             const slug = req.params.slug
 
             const response = await client.query(
-                'SELECT * FROM products WHERE slug=$1',
+                "SELECT * FROM products WHERE slug=$1",
                 [slug]
             )
             const data = response.rows
@@ -49,6 +49,74 @@ export class ProductController {
             client.release()
         } catch (error) {
             
+        }
+    }
+
+    static async findProductSpecById(req, res) {
+        try {
+            const id = parseInt(req.params.id)
+
+            const client = await pool.connect()
+            const response = await client.query(
+                `SELECT 
+                product_id, 
+                concat(
+                    '[', 
+                    array_to_string(
+                        array_agg(resume), 
+                        ', '
+                    ),
+                    ']'
+                ) AS datas 
+            FROM (
+                SELECT 
+                    psa.product_id, 
+                    concat(
+                        '{"title":"', 
+                        ag.name, 
+                        '","score":', case WHEN ags.score is null THEN 0 ELSE ags.score END    ,',"attributes":[', 
+                        array_to_string(
+                            array_agg(
+                                concat(
+                                    '{"title":"', 
+                                    sa.name, 
+                                    '","score":',
+                                    CASE
+                                        WHEN psa.value = 'Yes' THEN 100
+                                        WHEN psa.value = 'No' THEN 0
+                                        ELSE psa.score
+                                    END,
+                                    ',"spec":"', 
+                                    replace(psa.value, '"', ''''), 
+                                    '"}'
+                                ) 
+                            ), 
+                            ', '
+                        ),
+                        ']}'
+                    ) AS resume 
+                FROM 
+                    public.prod_spec_attributes psa 
+                    INNER JOIN spec_attributes sa ON psa.attribute_id=sa.id
+                    INNER JOIN attribute_groups ag ON psa.attribute_group_id=ag.id
+                    LEFT JOIN attr_group_spec_score ags ON ag.id=ags.attr_group_id AND psa.product_id=ags.product_id
+                WHERE 
+                    psa.product_id=$1
+                GROUP BY 
+                    psa.product_id, ag.id, ags.id
+            ) product_summary
+            GROUP BY 
+                product_id;
+            `,
+                [id]
+            )
+
+            const data = response.rows
+
+            res.status(200).json(data)
+            client.release()
+        } catch (error) {
+            res.status(500).json({message: 'Internal Server Error!'})
         }
     }
 }

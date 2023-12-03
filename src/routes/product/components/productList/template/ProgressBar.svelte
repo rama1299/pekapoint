@@ -1,7 +1,6 @@
 <script>
     export let title 
     export let score 
-    $: score = score.toString()
     
 </script>
 

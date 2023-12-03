@@ -4,6 +4,7 @@
     import { onMount } from "svelte";
     import { compareDataStore } from '../../../../../stores'
     import { saveToSessionStorage, getFromSessionStorage} from '../../../../../helpers/sessionStorage'
+    import { formatCurrencyIDR } from '../../../../../helpers/currency';
 
     export let data;
     export let tabControl
@@ -14,16 +15,6 @@
 
         initialValue ? compareDataStore.set(initialValue) : compareDataStore.set([])
     })
-
-    const minValue = 5000000;
-    const maxValue = 25000000;
-    const randomPrice = Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue;
-    let priceIdr = new Intl.NumberFormat('id-ID', {
-        style: 'currency',
-        currency: 'IDR',
-        }).format(randomPrice);
-    $: priceIdr = priceIdr.slice(0, -3)
-
 
     async function handleCompare(title, slug, feature_image) {
         const data = {title, slug, feature_image}
@@ -58,7 +49,7 @@
             </div>
         </div>
         <div class="flex w-full justify-end mt-3">
-            <p class="rounded-tl-lg py-1 px-2 font-medium bg-gradient-to-l from-yellow-300 to-orange-500 text-white text-end cursor-pointer hover:scale-105 duration-200">{priceIdr}</p>
+            <p class="rounded-tl-lg py-1 px-2 font-medium bg-gradient-to-l from-yellow-300 to-orange-500 text-white text-end cursor-pointer hover:scale-105 duration-200">{formatCurrencyIDR(data.launch_price)}</p>
         </div>
         <div class="flex justify-between justify-items-center items-start mt-2 relative overflow-hidden">
             <p class="text-xl font-semibold cursor-pointer hover:underline underline-offset-1" on:keypress={() => {goto(`/product/${data.slug}`)}}  on:click={() => {goto(`/product/${data.slug}`)}}>{data.title}</p>
