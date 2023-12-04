@@ -12,6 +12,6 @@
 <Layout isDetailProductPage={true} >
   <main class="w-auto h-auto mx-auto pt-14 lg:pt-20 bg-gray-50">
       <ProductDetail data={dataProduct} spec={dataSpec}/>
-      <!-- <SpecDetail data={dataSpec}/> -->
+      <SpecDetail data={dataSpec}/>
   </main>
 </Layout>

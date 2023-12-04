@@ -1,19 +1,22 @@
 <script>
-  import { afterUpdate } from "svelte";
+  import { onMount } from "svelte";
   import ChartDonut from "./ChartDonut.svelte";
   import Radar from "./Radar.svelte";
-
+  import { removeHtmlTags } from "../../../../../../helpers/removeHtmlTags";
   export let data
+
+  onMount(() => {
+    btnTabs[index].active = true
+  })
   let datas = JSON.parse(data.datas)
-    console.log(datas[0].attributes)
 
-  function handleTabs(name) {
-    key = name
+  function handleTabs(i) {
+    index = i
 
-    btnTabs = btnTabs.map((btn) => {
+    btnTabs = btnTabs.map((btn, index) => {
     return {
       ...btn,
-      active: btn.name === name,
+      active: index === i,
     };
   });
   }
@@ -25,9 +28,16 @@ $: dataRadar = datas[index].attributes.map(data => {
         score: data.score
     }
 }).slice(0, 8)
-afterUpdate(() => {
-    console.log(dataRadar)
-})
+
+
+$: datas = datas.map(data => {
+    if (data.title.toLocaleLowerCase() != 'miscellaneous') {
+        return {
+            ...data
+        }
+    }
+    return undefined
+}).filter(Boolean)
 
     $: btnTabs = [
         {
@@ -43,7 +53,7 @@ afterUpdate(() => {
         {
             name: 'Performance',
             className: 'bx bx-microchip',
-            active: true
+            active: false
         },
         {
             name: 'Cameras',
@@ -77,10 +87,14 @@ afterUpdate(() => {
         <p class="text-2xl font-semibold">Summary</p>
         <div class="w-full flex flex-row-reverse lg:block mx-auto gap-2 border-gray-100 border-2 rounded-lg pb-5">
             <div class="w-1/6 lg:w-full grid grid-rows-8 lg:grid-cols-8 divide-gray-200 lg:divide-y-0 divide-y-2 divide-x-0 lg:divide-x-2 border-gray-100 border-y-2 lg:border-y-0 border-l-0 lg:border-r-0  h-96 lg:h-auto lg:static sticky top-12">
-                {#each btnTabs as btn, i (i)}
-                    <div class="w-full col-span-1 lg:py-2 flex justify-center items-center {btn.active ? 'bg-white' : 'bg-gray-100 group'} " on:click={() => {handleTabs(btn.name)}}>
-                        <i class="{btn.className} {btn.active ? 'text-blue-600' : ''} text-2xl lg:group-hover:text-blue-600" ></i>
-                    </div>
+                {#each datas as data, i (i)}
+                    {#each btnTabs as btn, i (i)}
+                        {#if data.title.toLocaleLowerCase() == btn.name.toLocaleLowerCase()}
+                        <div class="w-full col-span-1 lg:py-2 flex justify-center items-center {btn.active ? 'bg-gray-200' : 'bg-gray-100 group'} " on:click={() => {handleTabs(i)}}>
+                            <i class="{btn.className} {btn.active ? 'text-blue-600' : ''} text-2xl lg:group-hover:text-blue-600" ></i>
+                        </div>
+                        {/if}
+                    {/each}
                 {/each}
             </div>
             <div class="w-5/6 lg:w-full lg:p-5 lg:space-y-5">
@@ -90,22 +104,22 @@ afterUpdate(() => {
                         <p class="absolute w-full h-full inset-0 text-center items-center flex justify-center score text-sm font-semibold">{datas[index].score}</p>
                     </div>
                     <div class="flex items-center">
-                        <p class=" text-xl font-semibold"></p>
+                        <p class=" text-xl font-semibold">{datas[index].title}</p>
                     </div>
                 </div>
                 <div class="w-full flex lg:flex-row flex-col-reverse lg:justify-start justify-center gap-5 lg:relative">
                     <div class="w-full lg:w-1/2 h-auto">
                         <Radar data={dataRadar}/>
                     </div>
-                    <div class="w-full lg:w-1/2 lg:border-2 rounded-lg lg:bg-gray-100 lg:border-gray-100 py-0 lg:py-5 px-5 space-y-1 lg:absolute -top-16 right-0 lg:overflow-auto lg:max-h-[425px]">
+                    <div class="w-full lg:w-1/2  rounded-lg  py-0 lg:py-5 px-5 space-y-1 lg:absolute -top-16 right-0 lg:overflow-auto lg:max-h-[425px]">
                         {#each datas[index].attributes as spec, i (i)}
-                             {#if i < 8}
+                             {#if spec.spec.toLocaleLowerCase() != 'yes' && spec.spec.toLocaleLowerCase() != 'no' && spec.spec != ''}
                                  <div class="leading-tight w-full ">
                                      <div class="w-full">
                                          <div class="text-start font-medium">{spec.title}</div>
                                      </div>
                                      <div>
-                                         <div class="italic">{spec.spec}</div>
+                                         <div class="italic">{removeHtmlTags(spec.spec)}</div>
                                      </div>
                                  </div>
                              {/if}

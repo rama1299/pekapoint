@@ -11,15 +11,8 @@
             radarHeight = '350px'
         }
     })
-    let radarHeight
-     let labels = ['Size', 'Resolution', 'Refresh Rate', 'Brightnes', 'Dislay Type']
-     let scores = [80, 87, 79, 93, 97]
-  
+    let radarHeight 
     export let data
-    
-    setTimeout(() => {
-      console.log(data)
-    }, 3000);
   
     let options = {
       radar: {
