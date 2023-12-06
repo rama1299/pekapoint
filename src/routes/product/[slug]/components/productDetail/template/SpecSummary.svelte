@@ -1,9 +1,8 @@
 <script>
 	import RadarChart from './RadarChart.svelte';
   import { onMount } from "svelte";
-  import ChartDonut from "./ChartDonut.svelte";
-  import Radar from "./Radar.svelte";
   import { removeHtmlTags } from "../../../../../../helpers/removeHtmlTags";
+  import DoughnutChart from './DoughnutChart.svelte';
   export let data
 
   onMount(() => {
@@ -37,10 +36,6 @@ $: dataRadar = datas[index].attributes.map(data => {
 }).filter(Boolean)
 
 $: dataRadarLimit = dataRadar.slice(0, 8)
-setTimeout(() => {
-    console.log(dataRadarLimit)
-    
-}, 1000);
 
 $: datas = datas.map(data => {
     if (data.title.toLocaleLowerCase() != 'miscellaneous') {
@@ -110,9 +105,9 @@ $: datas = datas.map(data => {
                 {/each}
             </div>
             <div class="w-5/6 lg:w-full lg:p-5">
-                <div class=" w-full flex justify-start gap-3 item-center py-3 px-5 ">
-                    <div class="h-8 w-8 rounded-full relative">
-                        <ChartDonut score={datas[index].score}/>
+                <div class=" w-full flex justify-start gap-2 item-center py-3 px-5 ">
+                    <div class="h-10 w-10 rounded-full relative">
+                        <DoughnutChart data={datas[index].score}/>
                         <p class="absolute w-full h-full inset-0 text-center items-center flex justify-center score text-sm font-semibold">{datas[index].score}</p>
                     </div>
                     <div class="flex items-center">
@@ -122,10 +117,8 @@ $: datas = datas.map(data => {
                 <div class="w-full flex lg:flex-row flex-col-reverse lg:justify-start justify-center gap-5 lg:relative">
                     <div class="w-full lg:w-1/2 flex justify-center ">
                         <div class="w-full lg:w-4/6 aspect-square ">
-                            <!-- <Radar data={dataRadar}/> -->
                             <RadarChart dataRadar={dataRadarLimit}/>
                         </div>
-                        <!-- <RadarChart dataRadar={dataRadar}/> -->
                     </div>
                     <div class="w-full lg:w-1/2 rounded-lg  py-0 lg:py-5 px-5 space-y-2 lg:absolute -top-16 right-0 lg:overflow-auto lg:max-h-[425px]">
                         {#each datas[index].attributes as spec, i (i)}

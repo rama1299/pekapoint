@@ -27,7 +27,7 @@
 
 <svelte:window bind:innerWidth={innerWidth}/>
 
-<div class="w-full ">
+<div class="w-full divide-y-2 space-y-5">
     <div class="w-full space-y-3">
         <div class="w-full flex justify-between items-end">
             <p class="text-2xl font-semibold">Price</p>
@@ -70,6 +70,7 @@
             </Carousel>
         </div>
     </div>
+    <div></div>
 </div>
 
 

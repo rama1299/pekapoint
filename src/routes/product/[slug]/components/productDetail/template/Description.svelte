@@ -1,8 +1,7 @@
 <script>
-  import ChartDonut from "./ChartDonut.svelte";
   import {removeHtmlTags} from '../../../../../../helpers/removeHtmlTags'
   import { createEventDispatcher } from "svelte";
-
+  import DoughnutChart from './DoughnutChart.svelte';
   let dispatch = createEventDispatcher()
 
     export let data
@@ -24,8 +23,8 @@
                 <p class=" text-3xl font-semibold">{data.title}</p>
             </div>
             <div class="h-11 w-11 rounded-full relative flex justify-center items-center">
-                <ChartDonut score={data.spec_score}/>
-                <p class="absolute w-full h-full top-[10px] text-center flex justify-center score font-semibold">90</p>
+                <DoughnutChart data={data.spec_score}/>
+                <p class="absolute w-full h-full top-[10px] text-center flex justify-center score font-semibold">{data.spec_score}</p>
             </div>
         </div>
         <div>
