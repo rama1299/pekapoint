@@ -16,13 +16,9 @@
     onMount(() => {
       const ctx = document.getElementById('myChart_2').getContext('2d');
 
-      // if (Chart.getChart("myChart_2")){
-      //     Chart.getChart("myChart_2").destroy();
-      //   }
-  
-      if (chart) {
-        chart.destroy();
-      }
+      if (Chart.getChart("myChart_2")){
+          Chart.getChart("myChart_2").destroy();
+        }
   
       chart = new Chart(ctx, {
         type: 'doughnut',

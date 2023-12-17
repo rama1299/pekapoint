@@ -5,6 +5,6 @@ const router = Router()
 
 router.get('/product', ProductController.findProduct)
 router.get('/product/:slug', ProductController.findProductBySlug)
-router.get('/product/:id/spec', ProductController.findProductSpecById)
+router.get('/product/spec/:id', ProductController.findProductSpecById)
 
 export default router

@@ -16,44 +16,48 @@
     });
     
 </script>
-<div class="w-full space-y-5  divide-y-2">
-    <div class="w-full space-y-3"> 
-        <div class=" w-full flex justify-between">
-            <div class="flex items-center w-5/6">
-                <p class=" text-3xl font-semibold">{data.title}</p>
+<div class="w-full space-y-5 pt-5 lg:pt-10">
+    <div class="divide-y-2 space-y-5">
+        <div class="w-full space-y-3"> 
+            <div class=" w-full flex justify-between">
+                <div class="flex items-center w-5/6">
+                    <p class=" text-3xl font-semibold">{data.title}</p>
+                </div>
+                <div class="h-11 w-11 rounded-full relative flex justify-center items-center">
+                    <DoughnutChart data={data.spec_score}/>
+                    <p class="absolute w-full h-full top-[10px] text-center flex justify-center score font-semibold">{data.spec_score}</p>
+                </div>
             </div>
-            <div class="h-11 w-11 rounded-full relative flex justify-center items-center">
-                <DoughnutChart data={data.spec_score}/>
-                <p class="absolute w-full h-full top-[10px] text-center flex justify-center score font-semibold">{data.spec_score}</p>
+            <div>
+                {#if data.summary}
+                    {#each cleanedDesc as desc}
+                        <p class="text-start font-medium">{desc.title}</p>
+                        <p class="italic">{desc.spec}</p>
+                    {/each}
+                {:else}
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+                        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+                        optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
+                        obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
+                        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
+                        tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,
+                        quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos 
+                        sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam
+                        recusandae alias error harum maxime adipisci amet laborum.</p>
+                {/if}
+                
+            </div>
+            <div class="w-full">
+                <div class="flex justify-center items-center text-blue-500 hover:text-blue-600 gap-2 cursor-pointer lg:w-1/2 mx-auto">
+                    <p class="font-medium">Show more</p>
+                    <i class='bx bx-down-arrow-alt text-2xl'></i>
+                </div>
             </div>
         </div>
-        <div>
-            {#if data.summary}
-                {#each cleanedDesc as desc}
-                    <p class="text-start font-medium">{desc.title}</p>
-                    <p class="italic">{desc.spec}</p>
-                {/each}
-            {:else}
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-                    molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-                    numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-                    optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
-                    obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
-                    nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
-                    tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,
-                    quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos 
-                    sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam
-                    recusandae alias error harum maxime adipisci amet laborum.</p>
-            {/if}
-            
-        </div>
-        <div class="w-full">
-            <div class="flex justify-center items-center text-blue-500 hover:text-blue-600 gap-2 cursor-pointer lg:w-1/2 mx-auto">
-                <p class="font-medium">Show more</p>
-                <i class='bx bx-down-arrow-alt text-2xl'></i>
-            </div>
-        </div>
+        <div></div>
     </div>
+    <div class="divide-y-2 space-y-5">
         <div class="space-y-3 pt-3">
             <p class="text-2xl font-semibold">Color</p>
             <div class="grid grid-cols-6 lg:grid-cols-3 gap-3 text-sm">
@@ -78,6 +82,9 @@
                 </div>
             </div>
         </div>
+        <div></div>
+    </div>
+    <div class="divide-y-2 space-y-5">
         <div class="space-y-3 pt-3">
             <p class="text-2xl font-semibold">Capacity</p>
             <div class="grid grid-cols-3 gap-3 font-medium">
@@ -103,4 +110,5 @@
             </div>
         </div>
         <div></div>
+    </div>
 </div>

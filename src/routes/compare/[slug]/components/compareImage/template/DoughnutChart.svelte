@@ -5,11 +5,11 @@
 
   $: score = data
   $: rest = 100 - score
-  // afterUpdate(() => {
-  //     chart.data.datasets[0].data = [score, rest];
-  //     chart.update();
-  //   }
-  // );
+//   afterUpdate(() => {
+//       chart.data.datasets[0].data = [score, rest];
+//       chart.update();
+//     }
+//   );
 
   let chartLabels = ['Scores', 'Rest'];
 	let ctx;
@@ -17,7 +17,7 @@
 
 	onMount(async (promise) => {
 	  ctx = chartCanvas.getContext('2d');
-		var chart = new Chart(ctx, {
+		let chart = new Chart(ctx, {
 			type: 'doughnut',
 			data: {
 				labels: chartLabels,
@@ -35,7 +35,7 @@
               enabled: false
             }
           },
-          cutout: '65%',
+          cutout: '70%'
         },
 		});
 	});
@@ -43,7 +43,7 @@
 </script>
   
 <div>
-  <canvas bind:this={chartCanvas} id="myChart_3"></canvas>
+  <canvas bind:this={chartCanvas} id="myChart_4"></canvas>
 </div>
 
 <style>

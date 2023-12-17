@@ -50,7 +50,7 @@
             <!-- <Radar labels={display.labels} scores={display.scores}/> -->
             {#each dataProgressBar as item, i (i)}
                 {#if i <= 4}
-                    <ProgressBar title={item.title} score={item.score} key={i}/>
+                    <ProgressBar title={item.title} score={item.score}/>
                 {/if}
             {/each}
         </div>

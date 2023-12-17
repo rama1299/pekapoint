@@ -34,10 +34,15 @@ export class ProductController {
         try {
             const client = await pool.connect()
             const slug = req.params.slug
+            
+            let slugs = slug.split('-vs-').map((item) => item.replace('vs-', ''));
+            slugs = slugs.slice(0, Math.min(slugs.length, 4));
+
+            const placeholders = slugs.map((_, index) => `$${index + 1}`).join(", ");
 
             const response = await client.query(
-                "SELECT * FROM products WHERE slug=$1",
-                [slug]
+                `SELECT * FROM products WHERE slug IN (${placeholders})`,
+                slugs
             )
             const data = response.rows
 
@@ -54,7 +59,9 @@ export class ProductController {
 
     static async findProductSpecById(req, res) {
         try {
-            const id = parseInt(req.params.id)
+            const id = req.params.id
+            let dataId = id.split('-').map((item) => item.replace('-', ''));
+            const placeholders = dataId.map((_, index) => `$${index + 1}`).join(", ");
 
             const client = await pool.connect()
             const response = await client.query(
@@ -101,14 +108,14 @@ export class ProductController {
                     INNER JOIN attribute_groups ag ON psa.attribute_group_id=ag.id
                     LEFT JOIN attr_group_spec_score ags ON ag.id=ags.attr_group_id AND psa.product_id=ags.product_id
                 WHERE 
-                    psa.product_id=$1
+                    psa.product_id IN (${placeholders})
                 GROUP BY 
                     psa.product_id, ag.id, ags.id
             ) product_summary
             GROUP BY 
                 product_id;
             `,
-                [id]
+                dataId
             )
 
             const data = response.rows

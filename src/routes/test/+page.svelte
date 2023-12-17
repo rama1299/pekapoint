@@ -1,46 +1,32 @@
-<!-- <script>
-    import { onMount } from 'svelte';
-    import Chart from 'chart.js/auto';
+<script>
+	export let thickness = 8; // Ketebalan bar
+	let progress = 50; // Nilai progress (dalam persen)
   
-    let chart;
-  
-    onMount(() => {
-      const ctx = document.getElementById('myChart').getContext('2d');
-  
-      chart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-          labels: ['Score', 'Rest'],
-          datasets: [
-            {
-              backgroundColor:['rgb(75, 192, 192)', 'rgb(195, 195, 195, 0.5)'] ,
-              data: [75, 25],
-            },
-          ],
-        },
-        options: {
-            plugins: {
-                legend: {
-                    display: false
-                },
-                tooltip: {
-                    enabled: false
-                }
-            },
-            cutout: '60%',
-        }
-      });
-    });
-
+	  $: circumference = 2 * Math.PI * (50 - thickness / 2);
+	  $: offset = circumference - (progress / 100) * circumference;
+	  $: circleStyle = `
+		stroke-dasharray: ${circumference};
+		stroke-dashoffset: ${offset};
+		stroke: #3498db; /* Warna garis terisi */
+		stroke-width: ${thickness};
+	  `;
   </script>
   
   <style>
-    div {
-      width: 30%;
-    }
+	.progress-circle {
+	  fill: transparent;
+	  stroke: #d3d3d3; /* Warna garis belum terisi */
+	  transition: stroke-dashoffset 0.5s ease-in-out, stroke 0.5s ease-in-out;
+	}
   </style>
   
-  <div>
-    <canvas id="myChart"></canvas>
-  </div>
-   -->
+  <svg class="w-full" height="100" width="100" viewBox="0 0 100 100">
+	<circle
+	  cx="50"
+	  cy="50"
+	  r="50"
+	  class="progress-circle"
+	  style={circleStyle}
+	></circle>
+  </svg>
+  

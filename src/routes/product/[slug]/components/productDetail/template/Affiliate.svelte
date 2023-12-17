@@ -29,7 +29,7 @@
 
 <div class="w-full divide-y-2 space-y-5">
     <div class="w-full space-y-3">
-        <div class="w-full flex justify-between items-end">
+        <div class="w-full flex justify-between items-start">
             <p class="text-2xl font-semibold">Price</p>
             <div class="flex justify-center gap-3">
                 <div class="aspect-square bg-gray-200 rounded-md flex justify-center items-center cursor-pointer" on:click={goToPrevPage}>

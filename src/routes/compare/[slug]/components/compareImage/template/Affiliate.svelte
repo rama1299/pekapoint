@@ -1,0 +1,14 @@
+<div class="w-full grid grid-cols-1 lg:grid-cols-4 justify-between items-center border-2 rounded-lg hover:border-sky-500 p-2 gap-1 lg:gap-3">
+    <div class="col-1 flex justify-between lg:justify-start gap-2 items-center cursor-pointer">
+        <div class="w-10 h-10 rounded-md bg-orange-500"></div>
+        <div>
+            <p class="text-md font-medium">4.5</p>
+        </div>
+    </div>
+    <div class="col-1 lg:col-span-2 justify-center flex lg:justify-end items-center text-lg font-semibold cursor-pointer hover:underline">
+        <p>Rp. 16.500.000</p>
+    </div>
+    <div class="col-1 flex justify-center cursor-pointer">
+        <button class="bg-sky-500 hover:bg-sky-600 px-2 py-1 w-full  rounded-md text-white">Detail</button>
+    </div>
+</div>

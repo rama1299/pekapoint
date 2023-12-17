@@ -2,7 +2,6 @@
 	import RadarChart from './RadarChart.svelte';
   import { onMount } from "svelte";
   import { removeHtmlTags } from "../../../../../../helpers/removeHtmlTags";
-  import DoughnutChart from './DoughnutChart.svelte';
   export let data
 
   onMount(() => {
@@ -106,10 +105,6 @@ $: datas = datas.map(data => {
             </div>
             <div class="w-5/6 lg:w-full lg:p-5">
                 <div class=" w-full flex justify-start gap-2 item-center py-3 px-5 ">
-                    <div class="h-10 w-10 rounded-full relative">
-                        <DoughnutChart data={datas[index].score}/>
-                        <p class="absolute w-full h-full inset-0 text-center items-center flex justify-center score text-sm font-semibold">{datas[index].score}</p>
-                    </div>
                     <div class="flex items-center">
                         <p class=" text-xl font-semibold">{datas[index].title}</p>
                     </div>

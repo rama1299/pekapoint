@@ -32,7 +32,12 @@
         console.log(link)
         compareDataStore.set([])
         saveToSessionStorage('compareDataSession', $compareDataStore)
-        goto(`/compare/${link}`)
+        if (slugs.length == 1) {
+            goto(`/product/${link}`)
+        } else {
+            goto(`/compare/${link}`)
+
+        }
     }
 
     function handleSearch() {
@@ -73,17 +78,17 @@
             <div class="{$compareDataStore.length === 3 ? 'w-full' : 'w-2/3'} h-full flex justify-center items-center">
                 <button class="bg-sky-600 hover:bg-sky-500 rounded-full text-white h-8 w-32 text-sm font-medium" on:click={handleCompare}>Compare</button>
             </div>
-            <div class="w-1/3 h-full flex justify-center items-center {$compareDataStore.length === 3 ? 'hidden' : ''}">
+            <!-- <div class="w-1/3 h-full flex justify-center items-center {$compareDataStore.length === 3 ? 'hidden' : ''}">
                 <button class="bg-sky-600 hover:bg-sky-500 rounded-full w-8 h-8">
                     <i class='bx bx-plus text-white  text-lg items-center' on:keypress={handleSearch} on:click={handleSearch}></i>
                 </button>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
 {/if}
 
-{#if isToggleSearch}
+<!-- {#if isToggleSearch}
 <div class=" position z-40 _shadow rounded-t-lg">
     <div class="bg-gradient-to-r from-sky-600 to-indigo-800 flex justify-between w-64 md:w-64 h-10 items-center px-3 py-1 text-white rounded-t-lg cursor-pointer">
         <div class="flex items-center gap-1">
@@ -155,7 +160,7 @@
         </div>
     </div>
 </div>
-{/if}
+{/if} -->
 
 
 

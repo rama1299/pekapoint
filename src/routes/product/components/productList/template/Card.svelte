@@ -21,7 +21,7 @@
         try {
             const isDataExists = $compareDataStore.some(existingData => existingData.slug === data.slug);
 
-            if (!isDataExists && $compareDataStore.length < 3) {
+            if (!isDataExists && $compareDataStore.length < 4) {
                 compareDataStore.update(existingData => [...existingData, data])
                 saveToSessionStorage('compareDataSession', $compareDataStore)
 
@@ -38,7 +38,7 @@
         <div class="flex w-full justify-center cursor-pointer" on:keypress={() => {() => {goto(`/product/${data.slug}`)}}} on:click={() => {goto(`/product/${data.slug}`)}}>
             <div class="w-1/2 pr-2">
                 <img src={data.feature_image} alt="" class="h-56 m-auto cursor-pointer hover:scale-105 duration-200" >
-                <div class="h-12 w-12 rounded-full absolute top-4 left-4 bg_img border">
+                <div class="h-12 w-12 rounded-full absolute top-4 left-4 bg_img">
                     <slot/>
                     <p class="relative score font-semibold">{data.spec_score}</p>
                 </div>
