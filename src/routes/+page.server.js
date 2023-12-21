@@ -1,8 +1,16 @@
-// import { getProductList } from "./products/api/products";
+import {readablestreamToJson} from '../helpers/readablestreamToJson.js'
+import product from '../helpers/product.json'
 
-// export async function load() {
-//     const res = await getProductList(1, 15)
-//   return {
-//     res
-//   };
-// }
+/** @type {import('./$types').PageServerLoad} */
+export async function load() {
+	try {
+		let data = product
+		if (data) {
+			return {data}
+		} else {
+			return {message: 'Data not found!'}
+		}
+	} catch (error) {
+		console.log(error)
+	}
+}

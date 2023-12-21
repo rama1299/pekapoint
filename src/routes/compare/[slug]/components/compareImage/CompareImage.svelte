@@ -17,7 +17,7 @@
 
     let colorBorder = ['border-blue-500', 'border-pink-500', 'border-orange-500', 'border-teal-500']
     let colorRadar = ['rgb(52, 152, 219, 0.4)', 'rgb(233, 30, 99, 0.4)', 'rgb(255, 152, 0, 0.4)', 'rgb(0, 150, 136, 0.4)']
-    let colorBackground = ['bg-blue-100', 'bg-pink-100', 'bg-orange-100', 'bg-teal-100']
+    let colorBackground = ['blue', 'pink', 'orange', 'teal']
 
     onMount(() => {
         if (width <= 942 && datas.length == 2) {
@@ -97,7 +97,7 @@
     <div bind:this={scrollContainer} bind:offsetWidth={width} class="w-full scrollbar-hidden divide-x-2 divide-gray-300 grid grid-flow-col snap-x snap-mandatory overflow-x-scroll scroll-smooth duration-100">
         {#each datas as item, i (i)}
             <div class=" snap-start space-y-5" style="width: {widthCol}px;">
-                <ImageCard item={item} datasLength={datas.length} color={colorBorder[i]}/>
+                <ImageCard item={item} datasLength={datas.length} color={colorBorder[i]} radarColor={colorRadar[i]}/>
                 <div class="w-full px-3 lg:px-5 space-y-3">
                     {#if item.enable}
                          <div class="flex w-full justify-end gap-2 items-center cursor-pointer" on:click={() => {handleDisableCompare(i)}}>

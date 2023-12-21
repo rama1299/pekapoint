@@ -4,13 +4,14 @@
   export let item
   export let dataLength
     export let color
+    export let radarColor
 
 </script>
 
 <div class="w-full text-md lg:text-2xl space-y-3">
     <div class="flex w-full overflow-hidden h-10 lg:h-14 justify-start items-center lg:items-center gap-2 px-3 lg:px-5">
         <div class=" h-full aspect-square relative">
-            <DoughnutChart data={item.spec_score}/>
+            <DoughnutChart data={item.spec_score} color={radarColor}/>
             <div class="w-full h-full top-0 font-semibold absolute flex justify-center items-center z-10">
                 <p>{item.spec_score}</p>
             </div>

@@ -23,7 +23,6 @@
         labels: labels,
         datasets: [
           {
-            label: 'Monthly Data',
             backgroundColor: 'rgb(75, 192, 192, 0.5)',
             borderColor: 'rgb(75, 192, 192)',
             data: scores,

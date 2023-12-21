@@ -126,4 +126,25 @@ export class ProductController {
             res.status(500).json({message: 'Internal Server Error!'})
         }
     }
+
+    static async findTitleProduct (req, res) {
+        const client = await pool.connect()
+        const response = await client.query(
+            `SELECT title
+            FROM products`
+        )
+
+        const data = response.rows
+
+        if(data.length == 0) {
+            res.status(404).json({message: 'Data not found!'})
+        }
+
+        res.status(200).json(data)
+        try {
+            
+        } catch (error) {
+            
+        }
+    }
 }

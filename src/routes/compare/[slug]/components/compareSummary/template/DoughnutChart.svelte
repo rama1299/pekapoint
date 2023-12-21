@@ -1,18 +1,19 @@
 <script>
 	import Chart from 'chart.js/auto';
 	import { onMount, afterUpdate } from 'svelte';
-  export let data;
+  export let score;
   export let color
 
-  $: score = data
+  let chart
+  $: score = score
   $: rest = 100 - score
   $: color = color.replace(/, 0\.4\)/, ')');
 
-//   afterUpdate(() => {
-//       chart.data.datasets[0].data = [score, rest];
-//       chart.update();
-//     }
-//   );
+  afterUpdate(() => {
+      chart.data.datasets[0].data = [score, rest];
+      chart.update();
+    }
+  );
 
   let chartLabels = ['Scores', 'Rest'];
 	let ctx;
@@ -20,7 +21,7 @@
 
 	onMount(async (promise) => {
 	  ctx = chartCanvas.getContext('2d');
-		let chart = new Chart(ctx, {
+		chart = new Chart(ctx, {
 			type: 'doughnut',
 			data: {
 				labels: chartLabels,
@@ -46,7 +47,7 @@
 </script>
   
 <div>
-  <canvas bind:this={chartCanvas} id="myChart_4"></canvas>
+  <canvas bind:this={chartCanvas} id="myChart_5"></canvas>
 </div>
 
 <style>

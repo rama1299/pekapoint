@@ -32,7 +32,7 @@
         }
     })
 
-    $:backgroundColor = $enableDataToCompare.map((data) => {
+    $: color = $enableDataToCompare.map((data) => {
         return data.enable ? data.backgroundColor : ''
     }).filter(Boolean)
 
@@ -42,20 +42,31 @@
     $: titleAttributesUnique = new Set(titleAttributes.flat())
     $: arrayTitleUnique = Array.from(titleAttributesUnique)
 
-    $: dataTable = dataSpec.map((data) => {
-        let spec = arrayTitleUnique .map((titleSpec) => {
+    // $: dataTable = dataSpec.map((data) => {
+    //     let spec = arrayTitleUnique.map((titleSpec) => {
+    //         let findSpec = data.attributes.find((attr) => attr.title == titleSpec)
+    //         return findSpec ? {spec: findSpec.spec, score: findSpec.score} : {spec: '', score: 0};
+    //     })
+    //     return {
+    //         device: data.device,
+    //         attributes: spec
+    //     }
+    // })
+
+    $: dataTableSpec = arrayTitleUnique.map((titleSpec) => {
+        let data = dataSpec.map((data) => {
             let findSpec = data.attributes.find((attr) => attr.title == titleSpec)
-            return findSpec ? {spec: findSpec.spec, score: findSpec.score} : {spec: '', score: 0};
+            return findSpec ? {score: findSpec.score, spec: findSpec.spec, device: data.device} : {score: 0, spec: '', device: data.device}
         })
         return {
-            device: data.device,
-            attributes: spec
+            title: titleSpec,
+            attributes: data
         }
     })
 
+    $: data
     $: isExpand = false
 
-    let scrollContainer
     let widthContainer
 
     $: widthTableCol = widthContainer
@@ -76,7 +87,7 @@
             widthTableCol = widthContainer
         }
     })
-    
+
 </script>
 
 <svelte:window bind:innerWidth={widthScreen}/>
@@ -85,35 +96,34 @@
         <div>
             <p class="text-2xl font-semibold">{key}</p>
         </div>
-        <div class="{isExpand ? '' : 'max-h-[673px]'} duration-200 overflow-hidden grid grid-cols-2 lg:grid-cols-4 w-full font-medium">
-            <div class="col-span-1 w-full grid grid-flow-row bg-gray-100 divide-y-2 divide-gray-300 rounded-t-xl border-2 border-white">
-                <div class="w-full h-24 px-3 flex justify-center items-center text-center">
-                    <p class="font-semibold text-xl">Attribute</p>
-                 </div>
-                {#each arrayTitleUnique as title}
-                     <div class="w-full h-24 px-3 flex justify-center items-center text-center">
-                        <p>{title}</p>
-                     </div>
-                {/each}
-            </div>
-            <div bind:this={scrollContainer} bind:offsetWidth={widthContainer} class="col-span-1 lg:col-span-3 grid grid-flow-col snap-x overflow-x-auto snap-mandatory scrollbar-hidden">
-                {#each dataTable as data, i (i)}
-                    <div style="width: {widthTableCol}px;" class="col-1 snap-start grid grid-flow-row {backgroundColor[i]} divide-y-2 divide-gray-300 rounded-t-xl border-2 border-white">
-                        <div class="w-full h-24 flex justify-center items-center p-3">
-                            <p class="font-semibold text-center text-xl">{data.device}</p>
+        <div class="{isExpand ? '' : 'max-h-[698px]'} duration-200 w-full font-medium overflow-hidden">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                {#each dataTableSpec as data}
+                    <div class="w-full h-56 border-2 rounded-lg overflow-hidden p-3 space-y-2">
+                        <div>
+                            <p class="font-semibold">{data.title}</p>
                         </div>
-                        {#each data.attributes as item}
-                            <div class="w-full h-24 flex justify-center items-center p-3">
-                                {#if item.spec.toLowerCase() == 'yes'}
-                                    <i class='bx bx-check text-green-400 text-3xl'></i>
-                                {:else if  item.spec.toLowerCase() == 'no'}
-                                    <i class='bx bx-x text-red-600 text-3xl'></i>
-    
+                        <div class="font-medium text-sm w-full overflow-hidden space-y-3">
+                        {#each data.attributes as attribute, i}
+                                {#if attribute.spec.toLowerCase() == 'yes'}
+                                <div class="flex items-center">
+                                    <i class='bx bx-check text-green-400 text-3xl leading-7'></i>
+                                    <p>{attribute.device}</p>
+
+                                </div>
+                                {:else if  attribute.spec.toLowerCase() == 'no'}
+                                <div class="flex items-center">
+                                    <i class='bx bx-x text-red-600 text-3xl leading-7'></i>
+                                    <p>{attribute.device}</p>
+                                </div>
                                 {:else}
-                                    <p class="text-center leading-5">{item.spec == '' ? '-' : removeHtmlTags(item.spec)}</p>
+                                    <div class="">
+                                        <p class=" leading-tight">{attribute.spec ? removeHtmlTags(attribute.spec) : '-'}</p>
+                                        <ProgressBar score={attribute.score} color={color[i]}/>
+                                    </div>
                                 {/if}
+                                {/each}
                             </div>
-                        {/each}
                     </div>
                 {/each}
             </div>

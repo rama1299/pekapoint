@@ -3,6 +3,7 @@
   import { onMount, afterUpdate } from "svelte";
   import { enableDataToCompare } from '../../../../../stores';
   import { removeHtmlTags } from '../../../../../helpers/removeHtmlTags';
+  import DoughnutChart from './template/DoughnutChart.svelte';
   export let data
 
   let specTitle = JSON.parse(data[0].datas)
@@ -193,14 +194,14 @@
 <svelte:window bind:innerWidth={screenWidth}/>
 <div class="w-full space-y-5 divide-y-2">
     <div class="w-full space-y-3">
-        <p class="text-2xl font-semibold">Summary</p>
+        <p class="text-2xl font-semibold">Compare</p>
         <div class="w-full flex flex-row-reverse lg:block mx-auto gap-2 border-gray-100 border-2 rounded-lg space-y-5 pb-3">
             <div class="w-1/6 lg:w-full grid grid-rows-8 lg:grid-cols-8 divide-gray-200 lg:divide-y-0 divide-y-2 divide-x-0 lg:divide-x-2 border-gray-100 border-y-2 lg:border-y-0 border-l-0 lg:border-r-0  h-96 lg:h-auto lg:static sticky top-12">
                 {#each specTitle as item, index (index, item.title)}
                     {#each btnTabs as btn, i (i,btn.name )}
                         {#if item.title.toLocaleLowerCase() == btn.name.toLocaleLowerCase()}
                         <div class="w-full col-span-1 lg:py-2 flex justify-center items-center {btn.active ? 'bg-gray-200' : 'bg-gray-100 group'} " on:click={() => {handleTabs(btn.name)}}>
-                            <i class="{btn.className} {btn.active ? 'text-blue-600' : ''} text-2xl lg:group-hover:text-blue-600" ></i>
+                            <i class="{btn.className} {btn.active ? 'text-sky-600' : ''} text-2xl lg:group-hover:text-sky-600" ></i>
                         </div>
                         {/if}
                     {/each}
@@ -226,10 +227,16 @@
                 <RadarChart dataRadar={dataRadar} radarColor={radarColor}/>
                 </div>
                 <div bind:this={scrollContainer} bind:offsetWidth={widthContainerSpec} class="w-full lg:w-7/12 lg:h-[502px] grid grid-flow-col scrollbar-hidden scroll-smooth snap-x snap-mandatory overflow-auto lg:overflow-y-auto lg:overflow-x-hidden border-2 divide-x-2 rounded-lg">
-                    {#each dataSpec as spec}
+                    {#each dataSpec as spec, i (i)}
                          <div style={styleWidthColSpec} class="w-full h-full snap-start space-y-3 pb-3">
-                            <div class="w-full flex justify-center items-center py-2 text-lg font-medium bg-gray-100 sticky top-0">
+                            <div class="w-full h-14 flex justify-center items-center py-1 gap-1 text-lg font-medium bg-gray-100 sticky top-0">
                                 <p class="text-center">{spec.device}</p>
+                                <div class="h-full aspect-square relative">
+                                    <DoughnutChart score={spec.score} color={radarColor[i]}/>
+                                    <div class="w-full h-full flex justify-center items-center top-0 absolute">
+                                        <p>{spec.score}</p>
+                                    </div>
+                                </div>
                             </div>
                             <div class="w-full px-5 space-y-3">
                                 {#each spec.attributes as attributes}
