@@ -3,16 +3,15 @@ import {readablestreamToJson} from '../../helpers/readablestreamToJson'
 /** @type {import('./$types').PageServerLoad} */
 export async function load({url}) {
 	try {
+		const search = url.search
 		const page = url.searchParams.get('page')
-		const res = await fetch(`http://localhost:3000/api/product?page=${page}`)
-		const parseJson = await readablestreamToJson(res.body)
-		let data = []
-		if (parseJson && data.length === 0) {
-			data = parseJson
-		} else if (parseJson && data.length < 0) {
-			data = [...data, ...parseJson]
+		const res = await fetch(`http://localhost:3000/api/product${search}`)
+		if (res.ok) {
+			const dataParseJson = await readablestreamToJson(res.body)
+			return dataParseJson
+		} else {
+			return {data: [], totalPages:  0, totalProducts: 0}
 		}
-		return {data, page}
 	} catch (error) {
 		console.log(error)
 	}

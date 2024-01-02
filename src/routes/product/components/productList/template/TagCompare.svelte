@@ -2,6 +2,16 @@
 	import { goto } from '$app/navigation';
     import { saveToSessionStorage } from '../../../../../helpers/sessionStorage';
 	import { compareDataStore } from '../../../../../stores';
+    import product from '../../../../../helpers/product.json'
+  import { readablestreamToJson } from '../../../../../helpers/readablestreamToJson';
+  import { onMount } from 'svelte';
+
+    $: category = 'smartphone'
+    $: findDataCategory = product.find((item) => {
+        let findData = item.category === category
+        return findData
+    })
+    $: titleData = findDataCategory.title
 
     let isToggleBtn = false
     let isToggleSearch = false
@@ -40,8 +50,52 @@
         }
     }
 
-    function handleSearch() {
+    function handleSearchToggle() {
         isToggleSearch = !isToggleSearch
+    }
+
+    let searchValue = ''
+    $: optionTitle = []
+
+    function handleSearch() {
+        let titleInput = searchValue;
+        const filterData = titleData.filter((item) => new RegExp(titleInput, 'i').test(item.title));
+        optionTitle = filterData.length === 0 ? [{title: 'Data not found'}] : filterData 
+    }
+
+    async function fethcImage(slug) {
+        try {
+            const res = await fetch(`http://localhost:3000/api/product/image/${slug}`)
+            if (res.ok) {
+                const parseJson = await readablestreamToJson(res.body)
+                const image = parseJson[0].feature_image
+                return image
+            } else {
+                return 'https://images.versus.io/objects/xiaomi-mi-11-pro.front.medium.1646342908789.jpg'
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function handleSelect(title) {
+        try {
+            const slug = title.replace(/\s+/g, '-').toLowerCase()
+            const isDataExists = $compareDataStore.some(existingData => existingData.slug === slug);
+            if (!isDataExists) {
+                const feature_image = await fethcImage(slug)
+                const data = {title, slug, feature_image}
+                compareDataStore.update(existingData => [...existingData, data])
+                saveToSessionStorage('compareDataSession', $compareDataStore)
+                searchValue = ''
+                optionTitle = []
+                isToggleSearch = false
+            } else {
+                console.log('Data sudah ada tambahkan');
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
 
 </script>
@@ -78,18 +132,18 @@
             <div class="{$compareDataStore.length === 3 ? 'w-full' : 'w-2/3'} h-full flex justify-center items-center">
                 <button class="bg-sky-600 hover:bg-sky-500 rounded-full text-white h-8 w-32 text-sm font-medium" on:click={handleCompare}>Compare</button>
             </div>
-            <!-- <div class="w-1/3 h-full flex justify-center items-center {$compareDataStore.length === 3 ? 'hidden' : ''}">
+            <div class="w-1/3 h-full flex justify-center items-center {$compareDataStore.length === 4 ? 'hidden' : ''}">
                 <button class="bg-sky-600 hover:bg-sky-500 rounded-full w-8 h-8">
-                    <i class='bx bx-plus text-white  text-lg items-center' on:keypress={handleSearch} on:click={handleSearch}></i>
+                    <i class='bx bx-plus text-white  text-lg items-center' on:keypress={handleSearchToggle} on:click={handleSearchToggle}></i>
                 </button>
-            </div> -->
+            </div>
         </div>
     </div>
 </div>
 {/if}
 
-<!-- {#if isToggleSearch}
-<div class=" position z-40 _shadow rounded-t-lg">
+{#if isToggleSearch}
+<div class="w-64 position z-40 _shadow rounded-t-lg">
     <div class="bg-gradient-to-r from-sky-600 to-indigo-800 flex justify-between w-64 md:w-64 h-10 items-center px-3 py-1 text-white rounded-t-lg cursor-pointer">
         <div class="flex items-center gap-1">
             <i class='bx bx-search'></i>
@@ -98,69 +152,32 @@
                 <p class="ml-2">Search</p>
             </div>
         </div>
-        <i class='bx bx-x hover:text-red-600 text-xl md:block' on:keypress={handleSearch} on:click={handleSearch}></i>
+        <i class='bx bx-x hover:text-red-600 text-xl md:block' on:keypress={handleSearchToggle} on:click={handleSearchToggle}></i>
     </div>
-    <div class="w-full md:w-64 max-h-48 overflow-auto">
-        <div class="h-9 border bg-white flex justify-between w-full pr-1">
-            <div class="w-full flex justify-between px-2 py-1 items-center">
-                <div class="w-4/5 pl-2">
-                    <p class="">Xiaomi</p>
-                </div>
-                <div class="w-1/5 flex items-center justify-end">
-                        <i class='bx bx-plus text-sky-600 text-xl items-center'></i>
-                </div>
-            </div>
-        </div>
-        <div class="h-9 border bg-white flex justify-between w-full pr-1">
-            <div class="w-full flex justify-between px-2 py-1 items-center">
-                <div class="w-4/5 pl-2">
-                    <p class="">Xiaomi</p>
-                </div>
-                <div class="w-1/5 flex items-center justify-end">
-                        <i class='bx bx-plus text-sky-600 text-xl items-center'></i>
-                </div>
-            </div>
-        </div>
-        <div class="h-9 border bg-white flex justify-between w-full pr-1">
-            <div class="w-full flex justify-between px-2 py-1 items-center">
-                <div class="w-4/5 pl-2">
-                    <p class="">Xiaomi</p>
-                </div>
-                <div class="w-1/5 flex items-center justify-end">
-                        <i class='bx bx-plus text-sky-600 text-xl items-center'></i>
-                </div>
-            </div>
-        </div>
-        <div class="h-9 border bg-white flex justify-between w-full pr-1">
-            <div class="w-full flex justify-between px-2 py-1 items-center">
-                <div class="w-4/5 pl-2">
-                    <p class="">Xiaomi</p>
-                </div>
-                <div class="w-1/5 flex items-center justify-end">
-                        <i class='bx bx-plus text-sky-600 text-xl items-center'></i>
-                </div>
-            </div>
-        </div>
-        <div class="h-9 border bg-white flex justify-between w-full pr-1">
-            <div class="w-full flex justify-between px-2 py-1 items-center">
-                <div class="w-4/5 pl-2">
-                    <p class="">Xiaomi</p>
-                </div>
-                <div class="w-1/5 flex items-center justify-end">
-                        <i class='bx bx-plus text-sky-600 text-xl items-center'></i>
-                </div>
-            </div>
-        </div>
-
-    </div>
+    {#if searchValue.length >= 2}
+         <div class="w-full md:w-64 max-h-48 overflow-auto">
+             {#each optionTitle as data}
+                  <div class="h-9 overflow-hidden border bg-white flex justify-between w-full pr-1">
+                      <div class="w-full flex justify-between px-2 py-1 items-center">
+                          <div class="w-5/6 pl-2">
+                              <p class="w-full overflow-hidden truncate text-sm leading-6">{data.title}</p>
+                          </div>
+                          <div class="h-full rounded-full bg-sky-600 aspect-square flex items-center justify-end border cursor-pointer group hover:bg-white hover:border-sky-600" on:click={()=> {handleSelect(data.title)}}>
+                                  <i class='bx bx-plus group-hover:text-sky-600 text-white w-full h-full flex justify-center text-xl items-center'></i>
+                          </div>
+                      </div>
+                  </div>
+             {/each}
+         </div>
+    {/if}
     <div class="h-12 bg-white flex justify-center items-center w-full">
         <div class="border rounded-lg bg-gray-100 h-8 w-60 flex items-center pr-2">
-            <input type="text" class="bg-transparent border-none rounded-lg h-full w-full focus:ring-0 focus:border-0 text-sm" placeholder="Search item for select...">
+            <input type="text" class="bg-transparent border-none rounded-lg h-full w-full focus:ring-0 focus:border-0 text-sm" placeholder="Search item for select..." bind:value={searchValue} on:keyup={handleSearch}>
             <i class='bx bx-search'></i>
         </div>
     </div>
 </div>
-{/if} -->
+{/if}
 
 
 

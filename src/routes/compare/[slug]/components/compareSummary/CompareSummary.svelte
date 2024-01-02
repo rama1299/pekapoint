@@ -80,6 +80,19 @@
         return data.enable ? data.radarColor : ''
     }).filter(Boolean)
 
+    $:doughnutColor = $enableDataToCompare.map((data) => {
+        return data.enable ? data.radarColor : ''
+    }).filter(Boolean)
+
+    $:backgroundColor = $enableDataToCompare.map((data) => {
+        return data.enable ? `bg-${data.backgroundColor}-000` : ''
+    }).filter(Boolean)
+
+    $:borderColor = $enableDataToCompare.map((data) => {
+        return data.enable ? `border-${data.backgroundColor}-500` : ''
+    }).filter(Boolean)
+
+
     $: key = 'Performance'
     let widthContainerSpec
     let screenWidth
@@ -93,6 +106,7 @@
         }
         
     })
+
     let styleWidthColSpec
     let widthColSpec
 
@@ -180,6 +194,35 @@
             scores
         }
 
+    $: isLagend = enableData.map((data) => {return false})
+    function handleLagend(i) {
+        if (isLagend[i] == false) {
+            radarColor = radarColor.map((color, index) => {
+                if (i == index) {
+                    return color.slice(0, -2) + "8" + color.slice(-1);
+                } else {
+                    return color.slice(0, -2) + "2" + color.slice(-1);
+                }
+            })
+            backgroundColor = backgroundColor.map((color, index) => {
+                if (i == index) {
+                    return color.slice(0, -3) + "500"
+                } else {
+                    return color.slice(0, -3) + "000"
+                }
+            })
+            isLagend = isLagend.map((item, index) => {return index == i})
+        } else {
+            radarColor = radarColor.map((color) => {
+                return color.slice(0, -2) + "4" + color.slice(-1);
+            })
+            backgroundColor = backgroundColor.map((color) => {
+                return color.slice(0, -3) + "100"
+            })
+            isLagend = isLagend.map((item) => {return false})
+        }
+    }
+
         onMount(() => {
     btnTabs = btnTabs.map((btn) => {
         return {
@@ -189,6 +232,9 @@
     });
   })
 
+setTimeout(() => {
+    console.log(radarColor)
+}, 1000);
 </script>
 
 <svelte:window bind:innerWidth={screenWidth}/>
@@ -223,16 +269,25 @@
                 {/if}
             </div>
             <div class="w-5/6 lg:w-full flex justify-center pl-2 lg:pl-0 lg:px-5 flex-wrap lg:flex-nowrap">
-                <div class="w-full lg:w-5/12 aspect-square">
-                <RadarChart dataRadar={dataRadar} radarColor={radarColor}/>
+                <div class="w-full lg:w-5/12 ">
+                    <div class="w-full aspect-square ">
+                        <RadarChart dataRadar={dataRadar} radarColor={radarColor}/>
+                    </div>
+                    <div class="w-full h-8 flex justify-center gap-2 items-center lg:items-start">
+                        {#each enableData as _, i (i)}
+                            <div class="h-5 w-10 rounded-sm cursor-pointer border-2 {borderColor[i]}" on:click={() => {handleLagend(i)}} >
+                                <div class="w-full h-full {backgroundColor[i]}"></div>
+                            </div>
+                        {/each}
+                    </div>
                 </div>
                 <div bind:this={scrollContainer} bind:offsetWidth={widthContainerSpec} class="w-full lg:w-7/12 lg:h-[502px] grid grid-flow-col scrollbar-hidden scroll-smooth snap-x snap-mandatory overflow-auto lg:overflow-y-auto lg:overflow-x-hidden border-2 divide-x-2 rounded-lg">
                     {#each dataSpec as spec, i (i)}
                          <div style={styleWidthColSpec} class="w-full h-full snap-start space-y-3 pb-3">
-                            <div class="w-full h-14 flex justify-center items-center py-1 gap-1 text-lg font-medium bg-gray-100 sticky top-0">
+                            <div class="w-full h-14 flex justify-center items-center py-1 gap-1 text-lg font-medium bg-gray-100 sticky top-0 px-2">
                                 <p class="text-center">{spec.device}</p>
                                 <div class="h-full aspect-square relative">
-                                    <DoughnutChart score={spec.score} color={radarColor[i]}/>
+                                    <DoughnutChart score={spec.score} color={doughnutColor[i]}/>
                                     <div class="w-full h-full flex justify-center items-center top-0 absolute">
                                         <p>{spec.score}</p>
                                     </div>

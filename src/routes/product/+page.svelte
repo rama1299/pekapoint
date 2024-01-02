@@ -1,19 +1,42 @@
 <script>
+	import { page } from '$app/stores';
 	import LoadMoreButton from './components/loadMoreButton/LoadMoreButton.svelte';
     import ProductList from './components/productList/ProductList.svelte';
 	import FilterBar from './components/filterBar/FilterBar.svelte';
     import Layout from '../../lib/components/layout/Layout.svelte';
+    import { afterUpdate, onMount } from 'svelte';
 
     export let data
-    let productList = data.data
-    let currentPage = data.page
-    $: if (currentPage === null) {currentPage = 1}
 
-    function handleMessageLoadMore(event) {
-        const message = event.detail.data
-        productList = [...productList, ...message]
-    }
+    $: totalPages = data.totalPages
+    let productList = []
+    $: pageUrl = $page.url.searchParams.get('page')
+    $: currentPage = pageUrl === null ? 1 : pageUrl
+    let filter = $page.url.searchParams.getAll('filter')
+
+    afterUpdate(() => {
+        if ($page.url.searchParams.size === 0 || filter[0] != $page.url.searchParams.getAll('filter')[0] || data.data.length === 0) {
+            productList = data.data
+        } else {
+            productList = [...productList, ...data.data]
+                productList = Array.from(new Set(productList.map(item => item.id)))
+                    .map(id => {
+                        return productList.find(item => item.id === id);
+                });
+        }
+        filter = $page.url.searchParams.getAll('filter')
+        pageUrl = $page.url.searchParams.get('page')
+    })
+    
+    // function handleMessageLoadMore(event) {
+    //     const message = event.detail.data
+    //     productList = [...productList, ...message]
+    // }
 </script>
+
+<svelte:head>
+  <title>Product</title>
+</svelte:head>
 
 <Layout isProductPage={true}>
     <div class="w-full h-96 bg-cover bg_gradient">
@@ -25,14 +48,16 @@
         <div class="w-full px-2">
             <FilterBar/>
         </div>
-        <div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row m-auto gap-4 px-1">
-            {#each productList as item (item.id)}
-                <ProductList item={item}/>
-            {/each}
+        <div class="w-full min-h-screen grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row m-auto gap-4 px-1">
+                {#each productList as item (item.id)}
+                    <ProductList item={item}/>
+                {/each}
         </div>
-        <div class="w-full">
-            <LoadMoreButton currentPage={currentPage} on:message={handleMessageLoadMore}/>
-        </div>
+        {#if currentPage < totalPages}
+             <div class="w-full">
+                 <LoadMoreButton/>
+             </div>
+        {/if}
     </main>
 </Layout>
 

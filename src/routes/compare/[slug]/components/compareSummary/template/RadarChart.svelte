@@ -9,21 +9,26 @@
     onMount(async () => {
       const ctx = document.getElementById('myChart').getContext('2d');
     
-    chart = new Chart(ctx, {
-        type: 'radar',
-        data: {
-        labels: labelSpec,
-        datasets: datasets,
-        },
-        options: {
-        plugins: {
-            // legend: {
-            //     display: false
-            // }
-        },
-        },
-    });
+      chart = new Chart(ctx, {
+          type: 'radar',
+          data: {
+          labels: labelSpec,
+          datasets: datasets,
+          },
+          options: {
+          plugins: {
+              legend: {
+                  display: false
+              }
+          },
+          },
+      });
         
+      setTimeout(() => {
+        chart.data.labels = labelSpec;
+      chart.data.datasets = datasets;
+      chart.update('active');
+      }, 1);
     });
 
 

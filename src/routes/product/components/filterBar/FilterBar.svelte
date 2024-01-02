@@ -1,25 +1,97 @@
 <script>
-    import { onMount } from "svelte";
+	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
+    import { afterUpdate, onMount } from "svelte";
     import { isFilterProduct } from "../../../../stores";
+    import {readablestreamToJson} from "../../../../helpers/readablestreamToJson"
+    import { createEventDispatcher } from 'svelte';
+
+    const dispatch = createEventDispatcher();
+    
+    onMount(() => {
+        async function fetchBrand() {
+            const response = await fetch('http://localhost:3000/api/product/brand')
+            let data = await readablestreamToJson(response.body)
+            data = data.map((item, i) => {
+                return {
+                    id : i+1,
+                    ...item,
+                    selected: false
+                }
+            })
+            
+            dataFilterObject = dataFilter.map((filter) => {
+                let [key, value] = filter.split('=')
+                let valueArray = value.split(',')
+                return {
+                    title : key,
+                    value : valueArray
+                }
+            })
+            
+            if (dataFilterObject.length > 0) {
+                let checkSelectedBrand = data.map((dataBrand) => {
+                    let findBrand = dataFilterObject.find(data => data.title == 'brand')
+                    return {
+                        ...dataBrand,
+                        selected: findBrand.value.includes(dataBrand.brand)
+                    }
+                })
+                
+                brand = checkSelectedBrand
+                selectedBrand = dataFilterObject.find(data => data.title == 'brand').value
+            } else {
+                brand = data
+            }
+
+        }
         
+        fetchBrand()
+        
+        document.addEventListener('click', handleOutSide);
+        
+        return () => {
+            document.removeEventListener('click', handleOutSide);
+        };
+    });
+
+    $: dataFilter = $page.url.searchParams.getAll('filter')
+    
     let filterToggle = {
         isBrand: false,
         isPrice: false,
         isRam: false,
         isStorage: false
     }
+
     
-    let sortToggle = false
-    let ram = 8
-    let storage = 64
+    $: brand = []
+    $: dataFilterObject = []
+    $: selectedBrand = []
     
-    onMount(() => {
-        document.addEventListener('click', handleOutSide);
+    // let sortToggle = false
     
-        return () => {
-        document.removeEventListener('click', handleOutSide);
-        };
-    });
+    function handleOutSide(event) {
+        if (filterToggle.isBrand) {
+            const dropdown = document.getElementById('dropdownBrand')
+            const btn = document.getElementById('btn')
+            if (!btn.contains(event.target) && !dropdown.contains(event.target)) {
+                filterToggle.isBrand = false
+            }
+        }
+        // const dropdownFilter = document.getElementById('dropdownFilter')
+        
+        // if(!dropdownFilter.contains(event.target) && !btn.contains(event.target)) {
+        //     filterToggle = {
+        //         isBrand: false,
+        //         isPrice: false,
+        //         isRam: false,
+        //         isStorage: false
+        //     }
+        //     sortToggle = false
+        // }
+    }
+
     function handleToggle(filterName) {
 
         if (filterToggle[filterName]) {
@@ -35,37 +107,68 @@
         isFilterProduct.set(false)
     }
 
-    function handleSortToggle() {
-        sortToggle = !sortToggle
+    // function handleSortToggle() {
+    //     sortToggle = !sortToggle
+    // }
+
+    function eventDispatch() {
+        let isFilter = selectedBrand.length > 0 ? true : false
+
+        dispatch('eventFromFilter', {isFilter})
     }
 
-    function handleOutSide(event) {
-        const btn = document.getElementById('btn')
-        const dropdownFilter = document.getElementById('dropdownFilter')
-        
-        if(!dropdownFilter.contains(event.target) && !btn.contains(event.target)) {
-            filterToggle = {
-                isBrand: false,
-                isPrice: false,
-                isRam: false,
-                isStorage: false
-            }
-            sortToggle = false
+    function handleSelect() {
+        selectedBrand = brand.filter((item) => item.selected).map(item => item.brand)
+        if (selectedBrand.length > 0) {
+            brand = brand.map((dataBrand) => {
+                return {
+                    ...dataBrand,
+                    selected: selectedBrand.includes(dataBrand.brand)
+                }
+            })
+            let linkFilterBrand = `?filter=brand%3D${selectedBrand.join(',')}`
+            goto(`/product/${linkFilterBrand}`)
+        } else {
+            goto(`/product`)
         }
     }
 
+    function clearAll() {
+    brand = brand.map((item) => {
+        return {
+            ...item,
+            selected: false
+        }
+    })
+    selectedBrand = []
+    goto(`/product`)
+  }
 
+  function close() {
+    filterToggle.isBrand = false
+  }
+
+  afterUpdate(() => {
+    eventDispatch()
+  })
+   
 </script>
 
-<div id="btn" class="w-full hidden lg:flex justify-between">
-    <div class="flex justify-start gap-5 w-2/3 items-center font-medium text-black relative">
-        <p class="font-semibold">Filter</p>
-        <div class="" on:keypress={() => {handleToggle('isBrand')}} on:click={() => {handleToggle('isBrand')}} >
-            <button class="w-32 bg-white h-8 border rounded-md flex justify-between items-center px-2">Brand
-                <i class='bx bx-chevron-down text-lg'></i>
+<div id="btn" class="w-full hidden lg:flex justify-between h-12">
+    <div class="flex justify-start gap-5 w-2/3 h-full items-center font-medium text-black relative">
+        <p class="font-semibold text-xl">Filter</p>
+        <div class="h-full" on:keypress={() => {handleToggle('isBrand')}} on:click={() => {handleToggle('isBrand')}} >
+            <button class="w-36 bg-white h-full border rounded-md flex justify-between items-center px-2">
+                <div>Brand</div>
+                <div class="flex items-center">
+                    {#if selectedBrand.length > 0}
+                         <p class="text-gray-600">{`(${selectedBrand.length})`}</p>
+                    {/if}
+                    <i class='bx bx-chevron-{filterToggle.isBrand ? 'up' : 'down'} text-lg'></i>
+                </div>
             </button>
         </div>
-        <div class="" on:keypress={() => {handleToggle('isPrice')}} on:click={() => {handleToggle('isPrice')}}>
+        <!-- <div class="" on:keypress={() => {handleToggle('isPrice')}} on:click={() => {handleToggle('isPrice')}}>
             <button class="w-32 bg-white h-8 border rounded-md flex justify-between items-center px-2">Price
                 <i class='bx bx-chevron-down text-lg'></i>
             </button>
@@ -79,80 +182,28 @@
             <button class="w-32 bg-white h-8 border rounded-md flex justify-between items-center px-2">Storage
                 <i class='bx bx-chevron-down text-lg'></i>
             </button>
-        </div>
+        </div> -->
         
         {#if filterToggle.isBrand}
-            <div id="dropdownFilter" class="w-auto h-auto bg-white absolute top-9 left-16 rounded-md border z-10 p-6">
-                <div class="grid grid-cols-3 gap-x-6 gap-y-1">
-                    <div class="w-full h-auto flex justify-start">
-                        <div class="flex justify-center gap-x-2 items-center">
-                            <input class="ring-0 focus:ring-0 rounded-md bg-gray-100" type="checkbox" name="" id="">
-                            <label for="">Xioami</label>
-                        </div>
-                    </div>
-                    <div class="w-full h-auto flex justify-start">
-                        <div class="flex justify-center gap-x-2 items-center">
-                            <input class="ring-0 focus:ring-0 rounded-md bg-gray-100" type="checkbox" name="" id="">
-                            <label for="">Samsung</label>
-                        </div>
-                    </div>
-                    <div class="w-full h-auto flex justify-start">
-                        <div class="flex justify-center gap-x-2 items-center">
-                            <input class="ring-0 focus:ring-0 rounded-md bg-gray-100" type="checkbox" name="" id="">
-                            <label for="">Apple</label>
-                        </div>
-                    </div>
-                    <div class="w-full h-auto flex justify-start">
-                        <div class="flex justify-center gap-x-2 items-center">
-                            <input class="ring-0 focus:ring-0 rounded-md bg-gray-100" type="checkbox" name="" id="">
-                            <label for="">Oppo</label>
-                        </div>
-                    </div>
-                    <div class="w-full h-auto flex justify-start">
-                        <div class="flex justify-center gap-x-2 items-center">
-                            <input class="ring-0 focus:ring-0 rounded-md bg-gray-100" type="checkbox" name="" id="">
-                            <label for="">Vivo</label>
-                        </div>
-                    </div>
-                    <div class="w-full h-auto flex justify-start">
-                        <div class="flex justify-center gap-x-2 items-center">
-                            <input class="ring-0 focus:ring-0 rounded-md bg-gray-100" type="checkbox" name="" id="">
-                            <label for="">Microsoft</label>
-                        </div>
-                    </div>
-                    <div class="w-full h-auto flex justify-start">
-                        <div class="flex justify-center gap-x-2 items-center">
-                            <input class="ring-0 focus:ring-0 rounded-md bg-gray-100" type="checkbox" name="" id="">
-                            <label for="">Asus</label>
-                        </div>
-                    </div>
-                    <div class="w-full h-auto flex justify-start">
-                        <div class="flex justify-center gap-x-2 items-center">
-                            <input class="ring-0 focus:ring-0 rounded-md bg-gray-100" type="checkbox" name="" id="">
-                            <label for="">Sony</label>
-                        </div>
-                    </div>
-                    <div class="w-full h-auto flex justify-start">
-                        <div class="flex justify-center gap-x-2 items-center">
-                            <input class="ring-0 focus:ring-0 rounded-md bg-gray-100" type="checkbox" name="" id="">
-                            <label for="">Huawei</label>
-                        </div>
-                    </div>
-                    <div class="w-full h-auto flex justify-start">
-                        <div class="flex justify-center gap-x-2 items-center">
-                            <input class="ring-0 focus:ring-0 rounded-md bg-gray-100" type="checkbox" name="" id="">
-                            <label for="">Infinix</label>
-                        </div>
-                    </div>
+            <div id="dropdownBrand" class="w-auto h-auto bg-white absolute top-12 left-[75px] rounded-md border z-10 p-6">
+                <div class="grid grid-cols-3 gap-x-6 gap-y-1 max-h-[390px] overflow-auto">
+                    {#each brand as data (data.id)}
+                         <div class="w-full h-auto flex justify-start">
+                             <div class="flex justify-center gap-x-3 items-center">
+                                <input class="w-5 h-5 ring-0 focus:ring-0 cursor-pointer hover:bg-gray-300 rounded-md bg-gray-100" type="checkbox" bind:checked={data.selected} id={"checkbox" + data.id} on:change={handleSelect}>
+                                <label for={"checkbox" + data.id}>{data.brand}</label>
+                             </div>
+                         </div>
+                    {/each}
                 </div>
-            <div class="w-auto flex justify-center gap-4 mt-6">
-                <button class="w-28 h-8 border rounded-lg bg-gray-200">Clear All</button>
-                <button class="w-28 h-8 border rounded-lg bg-sky-600 text-white">Apply</button>
-            </div>
+                <div class="w-auto flex justify-center gap-4 mt-6">
+                    <button class="w-28 h-8 border rounded-lg bg-gray-200 hover:bg-gray-300" on:click={clearAll}>Reset</button>
+                    <button class="w-28 h-8 border rounded-lg bg-sky-500 hover:bg-sky-600 text-white" on:click={close}>Back</button>
+                </div>
             </div>
         {/if}
         
-        {#if filterToggle.isPrice}
+        <!-- {#if filterToggle.isPrice}
             <div id="dropdownFilter" class="w-auto h-auto bg-white absolute top-9 left-[13.125rem] rounded-md border z-10  p-6">
                 <div class="w-full h-auto">
                     <div class="space-y-2">
@@ -190,9 +241,9 @@
                     </div>
                 </div>
             </div>
-        {/if}
+        {/if} -->
         
-        {#if filterToggle.isRam}
+        <!-- {#if filterToggle.isRam}
             <div id="dropdownFilter" class="w-auto h-auto bg-white absolute top-9 left-[22.5rem] rounded-md border z-10 p-6 ">
                 <div class="space-y-1">
                     <div class="w-full">
@@ -215,9 +266,9 @@
                     <button class="px-2 border rounded-lg bg-sky-600 text-white">Apply</button>
                 </div>
             </div>
-        {/if}
+        {/if} -->
         
-        {#if filterToggle.isStorage}
+        <!-- {#if filterToggle.isStorage}
             <div id="dropdownFilter" class="w-auto h-auto bg-white absolute top-9 left-[31.688rem] rounded-md border z-10  p-6">
                 <div class="space-y-1">
                     <div class="w-full">
@@ -240,9 +291,9 @@
                     <button class="px-2 border rounded-lg bg-sky-600 text-white">Apply</button>
                 </div>
             </div>
-        {/if}
+        {/if} -->
     </div>
-    <div class="flex justify-end gap-5 w-1/3 items-center font-medium text-black">
+    <!-- <div class="flex justify-end gap-5 w-1/3 items-center font-medium text-black">
         <p class="font-semibold">Sort</p>
         <div class="relative w-32">
             <button class="w-32 bg-white h-8 border rounded-md flex justify-between items-center px-2" on:click={handleSortToggle}>Score
@@ -265,7 +316,7 @@
                  </div>
             {/if}
         </div>
-    </div>
+    </div> -->
 </div>
 {#if $isFilterProduct}
     <div class="w-full bg-black bg-opacity-70 h-screen fixed z-50 top-0 left-0 lg:hidden">
@@ -274,7 +325,7 @@
         </button>
         <div class="w-80 h-full bg-gray-100 z-50">
             <div class="h-5/6 overflow-y-auto scroll w-full p-4 space-y-4">
-                <div class="relative">
+                <!-- <div class="relative">
                     <div class="">
                         <p class="font-semibold">Sort by</p>
                     </div>
@@ -299,54 +350,26 @@
                             </div>
                         </div>
                     {/if}
-                </div>
+                </div> -->
                 <div>
                     <div class="">
                         <p class="font-semibold">Filter</p>
                     </div>
                     <div class="w-full h-auto bg-white rounded-lg p-2 border">
                         <p class="font-semibold">Brand</p>
-                    <div class="h-36 w-full overflow-auto scroll space-y-1">
-                        <div class="w-full h-auto flex justify-start px-2">
-                            <div class="flex justify-center gap-x-2 items-center">
-                                <input class="ring-0 focus:ring-0 rounded-md bg-gray-100" type="checkbox" name="" id="">
-                                <label for="">Xiaomi</label>
+                    <div class="h-[600px] w-full overflow-auto scroll space-y-1">
+                        {#each brand as data (data.id)}
+                            <div class="w-full h-auto flex justify-start px-2">
+                                <div class="flex justify-center gap-x-2 items-center">
+                                <input class="ring-0 focus:ring-0 rounded-md bg-gray-100" type="checkbox" bind:checked={data.selected} id={"checkbox" + data.id} on:change={handleSelect}>
+                                <label for={"checkbox" + data.id}>{data.brand}</label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="w-full h-auto flex justify-start px-2">
-                            <div class="flex justify-center gap-x-2 items-center">
-                                <input class="ring-0 focus:ring-0 rounded-md bg-gray-100" type="checkbox" name="" id="">
-                                <label for="">Samsung</label>
-                            </div>
-                        </div>
-                        <div class="w-full h-auto flex justify-start px-2">
-                            <div class="flex justify-center gap-x-2 items-center">
-                                <input class="ring-0 focus:ring-0 rounded-md bg-gray-100" type="checkbox" name="" id="">
-                                <label for="">Oppo</label>
-                            </div>
-                        </div>
-                        <div class="w-full h-auto flex justify-start px-2">
-                            <div class="flex justify-center gap-x-2 items-center">
-                                <input class="ring-0 focus:ring-0 rounded-md bg-gray-100" type="checkbox" name="" id="">
-                                <label for="">Vivo</label>
-                            </div>
-                        </div>
-                        <div class="w-full h-auto flex justify-start px-2">
-                            <div class="flex justify-center gap-x-2 items-center">
-                                <input class="ring-0 focus:ring-0 rounded-md bg-gray-100" type="checkbox" name="" id="">
-                                <label for="">Huawei</label>
-                            </div>
-                        </div>
-                        <div class="w-full h-auto flex justify-start px-2">
-                            <div class="flex justify-center gap-x-2 items-center">
-                                <input class="ring-0 focus:ring-0 rounded-md bg-gray-100" type="checkbox" name="" id="">
-                                <label for="">Microsoft</label>
-                            </div>
-                        </div>
+                        {/each}
                     </div>
                     </div>
         
-                    <div class="w-full h-auto bg-white rounded-lg p-2 mt-4 border relative">
+                    <!-- <div class="w-full h-auto bg-white rounded-lg p-2 mt-4 border relative">
                         <p class="font-semibold">Price</p>
                         <div class="h-auto w-full overflow-auto scroll space-y-1">
                             <div class="w-full h-9 border rounded-lg flex overflow-hidden">
@@ -377,9 +400,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
         
-                    <div class="w-full h-auto bg-white rounded-lg p-2 mt-4 border">
+                    <!-- <div class="w-full h-auto bg-white rounded-lg p-2 mt-4 border">
                         <p class="font-semibold">RAM</p>
                         <div class="h-auto w-full overflow-auto scroll space-y-1 px-2">
                             <div class="w-full">
@@ -397,9 +420,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
         
-                    <div class="w-full h-auto bg-white rounded-lg p-2 mt-4 border">
+                    <!-- <div class="w-full h-auto bg-white rounded-lg p-2 mt-4 border">
                         <p class="font-semibold">Storage</p>
                         <div class="h-auto w-full overflow-auto scroll space-y-1 px-2">
                             <div class="w-full">
@@ -417,13 +440,13 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="w-80 h-1/6 ">
                 <div class="h-full w-full flex justify-center gap-2 items-center">
-                    <button class="px-4 py-2 border rounded-lg bg-gray-300">Clear All</button>
-                    <button class="px-4 py-2 border rounded-lg bg-sky-600 text-white">Apply</button>
+                    <button class="px-4 py-2 border rounded-lg bg-gray-300" on:click={clearAll}>Reset</button>
+                    <button class="px-4 py-2 border rounded-lg bg-sky-500 text-white" on:click={handleToggleMobile}>Back</button>
                 </div>
             </div>
         </div>

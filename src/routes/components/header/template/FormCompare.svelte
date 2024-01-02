@@ -54,10 +54,11 @@
 
     function handleCompare() {
         let valueSelectFilter = valueSelect.filter(Boolean)
-        if (valueSelectFilter != 0) {
-            let link = valueSelectFilter.map(item => item.toLowerCase().replace(/\s+/g, '-')).join('-vs-');
+        let filterDuplicateValue = [...new Set(valueSelectFilter)];
+        if (filterDuplicateValue != 0) {
+            let link = filterDuplicateValue.map(item => item.toLowerCase().replace(/\s+/g, '-')).join('-vs-');
     
-            if (valueSelect.length <= 1) {
+            if (filterDuplicateValue.length <= 1) {
                 goto(`/product/${link}`)
             } else {
                 goto(`/compare/${link}`)

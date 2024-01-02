@@ -6,19 +6,34 @@
   import Layout from '../../../lib/components/layout/Layout.svelte';
   import CompareDetailList from './components/compareDetail/CompareDetailList.svelte';
   import { onMount, afterUpdate } from 'svelte';
+  import Lagend from './components/compareDetail/template/Lagend.svelte';
 
   onMount(() => {
-        document.addEventListener('scroll', handleLagend);
-    
-        return () => {
-        document.removeEventListener('scroll', handleLagend);
-        };
+    enableData = dataProduct.map((item, i) => {
+            return {
+                id : item.id,
+                borderColor : colorBorder[i],
+                backgroundColor : colorBackground[i],
+                radarColor: colorRadar[i],
+                enable : true
+            }
+        })
+
+        enableDataToCompare.set(enableData)
     })
 
     export let data
     let dataProduct = data.dataProduct
     let dataSpec = data.dataSpec
-    let isLagend = false
+    let enableData
+    let title = dataProduct.map(item => item.title).join(' vs ')
+
+
+    
+    let colorBorder = ['border-blue-500', 'border-pink-500', 'border-orange-500', 'border-teal-500']
+    let colorRadar = ['rgb(52, 152, 219, 0.4)', 'rgb(233, 30, 99, 0.4)', 'rgb(255, 152, 0, 0.4)', 'rgb(0, 150, 136, 0.4)']
+    let colorBackground = ['blue', 'pink', 'orange', 'teal']
+
 
     $: dataSpecWithAdd = dataSpec.map((item, i) => {
       const findProduct = dataProduct.find((product) => product.id === item.product_id)
@@ -35,32 +50,37 @@
       }
     })
 
-    function handleLagend() {
+    let widthContainerLagend
+    $: widthContainerLagend
+    let heightContainerLagend
+    $: heightContainerLagend = heightContainerLagend - 80
+    $: heightCol = heightContainerLagend / dataProduct.length
 
-      const compareDetailList = document.getElementById('compareDetailList')
-      const compareDetailListRect = compareDetailList.getBoundingClientRect()
-      const negativeHeight = Math.abs(compareDetailListRect.height - 500) * -1
-
-      if (compareDetailListRect.top < 200 && compareDetailListRect.top > negativeHeight) {
-        isLagend = true
-      } else {
-        isLagend = false
-      }
-    }
-
+    let color = ['blue', 'pink', 'orange', 'teal']
 </script>
+
+<svelte:head>
+  <title>{title}</title>
+  <meta name="description" content={`comparison ${title}`} />
+</svelte:head>
 <Layout isDetailProductPage={true} >
     <main class="w-auto h-auto mx-auto pt-14 lg:pt-20 bg-gray-50">
-        <div id="container1" class="container lg:w-wrap bg-white mx-auto px-5 py-10 space-y-10">
+        <div class="container lg:w-wrap bg-white mx-auto px-5 py-10 space-y-10">
             <CompareImage data={dataProduct}/>
-            <CompareSummary data={dataSpecWithAdd}/>
-            <div id="compareDetailList">
-              <CompareDetailList data={dataSpecWithAdd}/>
+        </div>
+            <div class="container lg:w-wrap bg-white pr-5 pl-2 lg:px-5 flex gap-2 lg:gap-5 mx-auto">
+              <div class="w-2/12 lg:w-1/12 h-screen sticky top-16 lg:top-20 divide-y-2" bind:offsetHeight={heightContainerLagend} bind:offsetWidth={widthContainerLagend}>
+                  {#each dataProduct as data, i (i)}
+                      <Lagend color={color[i]} heightCol={heightCol} widthContainerLagend={widthContainerLagend} title={data.title} lagendIndex={i}/>
+                  {/each}
+              </div>
+              <div class="w-10/12 lg:w-11/12">
+                <CompareSummary data={dataSpecWithAdd}/>
+                <CompareDetailList data={dataSpecWithAdd}/>
+              </div>
             </div>
+        <div class="container lg:w-wrap bg-white mx-auto px-5 py-10 space-y-10">
             <ComparePrice data={dataSpecWithAdd}/>
         </div>
-        <!-- <div class="w-20 h-screen bg-black hidden lg:fixed top-20 {isLagend ? 'left-0' : '-left-20'} duration-300 ease-in-out">
-
-        </div> -->
     </main>
   </Layout>

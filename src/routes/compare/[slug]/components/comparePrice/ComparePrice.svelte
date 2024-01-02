@@ -1,8 +1,16 @@
 <script>
-    import { afterUpdate } from 'svelte';
+    import { afterUpdate, onMount } from 'svelte';
 	import { enableDataToCompare } from './../../../../../stores.js';
     import CardPrice from "./template/CardPrice.svelte";
     export let data
+
+    onMount(() => {
+        if (widthScreen < 1024) {
+            widthCol = widthContainer
+        } else if (widthScreen >= 1024) {
+            widthCol = widthContainer / device.length
+        }
+    })
 
     $: enableData = $enableDataToCompare.map(({ id, enable }) => {
         const matchingItem = data.find(item => item.product_id === id && enable);
@@ -45,7 +53,7 @@
                     <div style="width: {widthCol}px;" class="snap-center grid grid-flow-row gap-2 p-1">
                         <div class={`bg-${item.backgroundColor}-100 rounded-t-lg p-2`}>
                             <div class="w-full flex justify-center items-center py-2">
-                                <p class="text-xl font-semibold">{item.title}</p>
+                                <p class="text-lg overflow-hidden h-12 flex items-center font-semibold text-center leading-6">{item.title}</p>
                             </div>
                             <div class="space-y-2">
                                 {#each Array(2) as _, i (i)}

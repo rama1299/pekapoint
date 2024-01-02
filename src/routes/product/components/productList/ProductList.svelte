@@ -22,7 +22,7 @@
 
 </script>
 
-<div class="w-full cursor-default bg-white rounded-lg overflow-hidden shadow-lg">
+<div class="w-full h-fit cursor-default bg-white rounded-lg overflow-hidden shadow-lg">
   <div>
     <Card data={item} tabControl={tabControl} specs={item.summary}>
       <ChartDonut score={item.spec_score}></ChartDonut>

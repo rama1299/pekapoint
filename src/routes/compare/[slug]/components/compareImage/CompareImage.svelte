@@ -13,11 +13,9 @@
     })
     let currentIndex = 0;
     let scrollContainer;
-    let enableData
 
     let colorBorder = ['border-blue-500', 'border-pink-500', 'border-orange-500', 'border-teal-500']
     let colorRadar = ['rgb(52, 152, 219, 0.4)', 'rgb(233, 30, 99, 0.4)', 'rgb(255, 152, 0, 0.4)', 'rgb(0, 150, 136, 0.4)']
-    let colorBackground = ['blue', 'pink', 'orange', 'teal']
 
     onMount(() => {
         if (width <= 942 && datas.length == 2) {
@@ -27,24 +25,7 @@
         } else {
             hiddenButton = ''
         }
-
-        enableData = datas.map((item, i) => {
-            return {
-                id : item.id,
-                borderColor : colorBorder[i],
-                backgroundColor : colorBackground[i],
-                radarColor: colorRadar[i],
-                enable : true
-            }
-        })
-
-        enableDataToCompare.set(enableData)
     })
-
-    $: filteredData = datas.filter(item => {
-        const matchingEnable = $enableDataToCompare.find(enabledItem => enabledItem.id === item.id && enabledItem.enable);
-        return matchingEnable !== undefined;
-    });
 
     let width
     afterUpdate(() => {
@@ -79,18 +60,6 @@
       scrollContainer.scrollLeft = newScrollPosition;
     };
 
-    function handleDisableCompare(i) {
-        datas[i].enable = false
-        enableData[i].enable = false
-        enableDataToCompare.set(enableData)
-    }
-
-    function handleEnableCompare(i) {
-        datas[i].enable = true
-        enableData[i].enable = true
-        enableDataToCompare.set(enableData)
-    }
-
   </script>
     
   <div class="space-y-3">
@@ -99,17 +68,6 @@
             <div class=" snap-start space-y-5" style="width: {widthCol}px;">
                 <ImageCard item={item} datasLength={datas.length} color={colorBorder[i]} radarColor={colorRadar[i]}/>
                 <div class="w-full px-3 lg:px-5 space-y-3">
-                    {#if item.enable}
-                         <div class="flex w-full justify-end gap-2 items-center cursor-pointer" on:click={() => {handleDisableCompare(i)}}>
-                             <p class="font-medium text-sm leading-4 lg:text-base">Enable to compare</p>
-                             <i class='bx bx-show text-3xl'></i>
-                         </div>
-                    {:else}
-                        <div class="flex w-full justify-end gap-2 items-center cursor-pointer" on:click={() => {handleEnableCompare(i)}}>
-                            <p class="font-medium text-sm leading-4 lg:text-base">Disable to compare</p>
-                            <i class='bx bx-hide text-3xl'></i>
-                        </div>
-                    {/if}
                     <Affiliate/>
                     <Affiliate/>
                 </div>

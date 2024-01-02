@@ -10,6 +10,7 @@
   $: color = color.replace(/, 0\.4\)/, ')');
 
   afterUpdate(() => {
+      chart.data.datasets[0].backgroundColor = [color, 'rgb(195, 195, 195, 0.5)']
       chart.data.datasets[0].data = [score, rest];
       chart.update();
     }

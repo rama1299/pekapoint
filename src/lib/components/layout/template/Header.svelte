@@ -1,7 +1,27 @@
 <script>
+	import { goto } from '$app/navigation';
 	import { isFilterProduct } from './../../../../stores.js';
+    import product from '../../../../helpers/product.json'
+    import { onMount } from 'svelte';
     export let isProductPage
     export let isDetailProductPage
+
+    onMount(() => {
+        document.addEventListener('click', handleOutSideSearch);
+    
+        return () => {
+        document.removeEventListener('click', handleOutSideSearch);
+        };
+    })
+
+    function handleOutSideSearch() {
+        let clicked = event.target
+        let classList = clicked.classList
+
+        if (classList[0] != 'search') {
+            optionTitle = []
+        }
+    }
 
     let toggleMenu = false
     let toggleDropdown = false
@@ -13,6 +33,34 @@
 
     function handleToggleFilterMobile() {
         isFilterProduct.set(true)
+    }
+
+    $: categoryProduct = 'smartphone'
+    $: findDataCategory = product.find((item) => {
+        let findData = item.category === categoryProduct
+        return findData
+    })
+    $: titleData = findDataCategory.title
+    let searchValue = ''
+    $: optionTitle = []
+
+    function handleChangeValue() {
+        let titleInput = searchValue;
+        const filterData = titleData.filter((item) => new RegExp(titleInput, 'i').test(item.title));
+        optionTitle = filterData.length === 0 ? [{title: 'Data not found'}] : filterData 
+    }
+
+    function handleSelectTitle(title) {
+        searchValue = title
+        optionTitle = []
+    }
+
+    function handleSearch() {
+        if (searchValue) {
+            const slug = searchValue.replace(/\s+/g, '-').toLocaleLowerCase()
+            const link = `http://localhost:5173/product/${slug}`
+            goto(link)
+        }
     }
 
 </script>
@@ -28,21 +76,30 @@
                     <i class='bx bx-{toggleMenu ? 'x rotate-180 ' : 'menu -rotate-180'} duration-300 ease-in-out text-3xl lg:hidden ' on:click={handleMenu}></i>
                     <h1 class=" text-2xl md:text-4xl font-bold italic">Specwar.</h1>
                 </div>
-                <div class="flex justify-end gap-1 items-center">
-                    {#if isProductPage}
+                {#if isProductPage}
+                <div class="search flex justify-end gap-1 items-center relative">
                     <div class="flex justify-between items-center w-auto lg:w-80 md:h-9 lg:h-12 rounded-md overflow-hidden bg-white/10 backdrop-blur-sm">
                         <div>
-                            <input type="text" class="ring-0 focus:ring-0 border-none text-sm md:text-base focus:border-none w-32 md:w-64 md:font-medium search" placeholder="Search item...">
+                            <input type="text" class="ring-0 focus:ring-0 border-none text-sm md:text-base focus:border-none w-32 md:w-64 md:font-medium search" placeholder="Search item..." bind:value={searchValue} on:keyup={handleChangeValue}>
                         </div>
-                        <div class="h-full lg:w-12 flex justify-center items-center hover:bg-[#F14D5D] duration-300 ease-in-out lg:px-0 px-1">
+                        <div class="h-full lg:w-12 flex justify-center items-center hover:bg-[#F14D5D] duration-300 ease-in-out lg:px-0 px-1" on:click={handleSearch}>
                             <i class='bx bx-search text-xl'></i>
                         </div>
                     </div>
-                        <div on:click={handleToggleFilterMobile}>
-                            <i class='bx bx-filter-alt text-2xl lg:hidden' ></i>
-                        </div>
+                    <div on:click={handleToggleFilterMobile}>
+                        <i class='bx bx-filter-alt text-2xl lg:hidden' ></i>
+                    </div>
+                    {#if searchValue.length >= 3 && optionTitle.length > 0}
+                         <div class="search w-full max-h-80 bg-white absolute top-10 lg:top-16 shadow-lg border-t-4 border-[#F14D5D] rounded-tr-lg rounded-b-lg left-0 divide-y-2 overflow-auto">
+                             {#each optionTitle as data, i (i)}
+                                  <div class="w-full h-9 flex justify-start items-center px-2 cursor-pointer hover:bg-gray-100" on:click={() => {handleSelectTitle(data.title)}}>
+                                     <p class="text-black font font-medium w-full truncate text-sm lg:text-base">{data.title}</p>
+                                  </div>
+                             {/each}
+                         </div>
                     {/if}
                 </div>
+                {/if}
             </div>
             <div class="w-1/2 lg:flex justify-between font-medium text-white items-center hidden">
                 <div class="flex justify-center gap-12 capitalize text">

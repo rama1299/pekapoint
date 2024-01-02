@@ -4,6 +4,9 @@
 	export let data
 </script>
 
+<svelte:head>
+  <title>Specwar</title>
+</svelte:head>
 <Layout>
 	<main class="w-full">
 			<Header data={data.data}></Header>

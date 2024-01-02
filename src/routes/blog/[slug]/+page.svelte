@@ -12,6 +12,7 @@
   import NotEditable from '$lib/components/NotEditable.svelte';
   import EditorToolbar from '$lib/components/tools/EditorToolbar.svelte';
   import { currentUser, isEditing } from '$lib/stores';
+  import Layout from '../../../lib/components/layout/Layout.svelte';
 
   export let data;
 
@@ -76,7 +77,7 @@
   <title>{title}</title>
   <meta name="description" content={teaser} />
 </svelte:head>
-
+<!-- 
 <EditorToolbar on:cancel={initOrReset} on:save={saveArticle} />
 <WebsiteNav bind:showUserMenu />
 {#if showUserMenu}
@@ -89,11 +90,12 @@
       </div>
     </form>
   </Modal>
-{/if}
+{/if} -->
+<Layout isDetailProductPage={true}>
+  <Article bind:title bind:content bind:published_at />
+</Layout>
 
-<Article bind:title bind:content bind:published_at />
-
-{#if data.articles.length > 0}
+<!-- {#if data.articles.length > 0}
   <NotEditable>
     <div class="border-t-2 border-gray-100">
       <div class="max-w-screen-md mx-auto px-6 pt-8 sm:pt-12">
@@ -104,10 +106,10 @@
       {/each}
     </div>
   </NotEditable>
-{/if}
+{/if} -->
 
-<NotEditable>
+<!-- <NotEditable>
   <EditableWebsiteTeaser />
 </NotEditable>
 
-<Footer counter={`/blog/${data.slug}`} />
+<Footer counter={`/blog/${data.slug}`} /> -->

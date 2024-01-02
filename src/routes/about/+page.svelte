@@ -1,22 +1,20 @@
 <script>
-	import CompareList from './components/compareList/CompareList.svelte';
     import Layout from "../../lib/components/layout/Layout.svelte";
 </script>
 
-
 <svelte:head>
-  <title>Compare</title>
+  <title>About Us</title>
 </svelte:head>
 <Layout>
   <div class="w-full h-96 bg-cover bg_gradient">
     <div class="container lg:w-wrap font-monst h-full pt-44 mx-auto">
-        <h1 class="text-5xl font-bold text-white">Compare</h1>
+        <h1 class="text-5xl font-bold text-white">About Us</h1>
     </div>
   </div>
 
   <main class="w-auto min-h-screen mx-auto pt-14 lg:pt-20 bg-gray-50">
-    <CompareList/>
-  </main>
+
+    </main>
 </Layout>
 
 <style>

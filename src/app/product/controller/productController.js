@@ -1,10 +1,25 @@
 import { pool } from "../../../config/dbConfig.js"
 
 export class ProductController {
-    static async findProduct(req, res) {
+    static async findProduct(req, res, next) {
         if (!parseInt(req.query.page)) {
             req.query.page = 1;
           }
+          const filters = req.query.filter
+          let filterObject
+          if (filters != undefined && typeof filters === 'object') {
+              filterObject = filters.map((filter) => {
+                let [key, value] = filter.split('=')
+                let arrayValue = value.split(',')
+                return {
+                    [key] : arrayValue
+                }
+              })
+            } else if (filters != undefined && typeof filters === 'string') {
+                let [key, value] = filters.split('=')
+                let arrayValue = value.split(',')
+                filterObject = {[key] : arrayValue}
+            }
         try {
             const client = await pool.connect();
             const page = req.query.page
@@ -12,25 +27,55 @@ export class ProductController {
             const limit = perPage;
             const offset = (page - 1) * perPage;
 
-            const response = await client.query(
-                `SELECT *, '[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\"},{\"store\":\"Tokopedia\",\"price\":\"20000000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\"}]' as affiliate, '21000000' as launch_price FROM products WHERE summary IS NOT NULL ORDER BY spec_score DESC, created_at DESC LIMIT $1 OFFSET $2`,
-                [limit, offset]
-            );
-            const data = response.rows
+            if (filterObject) {
+                const arrayBrand = filterObject.brand
+                const query = {
+                    text: `SELECT *, '[{"store":"Shopee","price":"19450000","link":"https://shopee.co.id/Handphone-cat.11044458.11044476"},{"store":"Tokopedia","price":"20000000","link":"https://shopee.co.id/Handphone-cat.11044458.11044476"}]' as affiliate, '21000000' as launch_price FROM public.products WHERE title ILIKE ANY($1::text[]) AND summary IS NOT NULL ORDER BY spec_score DESC, created_at DESC LIMIT $2 OFFSET $3`,
+                    values: [arrayBrand.map(brand => `%${brand}%`), limit, offset],
+                  };
 
-            if (data.length === 0) {
-                return res.status(404).json({message: 'Data Not Found!'})
+                const response = await client.query(query)
+                const totalResult = await pool.query({
+                    text: `SELECT COUNT(*) FROM public.products WHERE title ILIKE ANY($1::text[]) AND summary IS NOT NULL`,
+                    values: [arrayBrand.map(brand => `%${brand}%`)],
+                  });
+              
+                  const data = response.rows
+                  const totalProducts = parseInt(totalResult.rows[0].count);
+                  const totalPages = Math.ceil(totalProducts / limit);
+
+                  console.log(totalPages, totalProducts)
+
+                if (data.length === 0) {
+                    throw ({name: 'ErrorNotFound'})
+                }
+    
+                res.status(200).json({data, totalProducts, totalPages})
+            } else {
+                const response = await client.query(
+                    `SELECT *, '[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\"},{\"store\":\"Tokopedia\",\"price\":\"20000000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\"}]' as affiliate, '21000000' as launch_price FROM products WHERE summary IS NOT NULL ORDER BY spec_score DESC, created_at DESC LIMIT $1 OFFSET $2`,
+                    [limit, offset]
+                );
+        
+                const data = response.rows
+                const totalResult = await pool.query('SELECT COUNT(*) FROM products');
+                const totalProducts = parseInt(totalResult.rows[0].count);
+                const totalPages = Math.ceil(totalProducts / limit);
+    
+                if (data.length === 0) {
+                    throw ({name: 'ErrorNotFound'})
+                }
+                console.log(totalProducts)
+                res.status(200).json({data, totalProducts, totalPages})
             }
-
-            res.status(200).json(data)
             client.release()
         } catch (error) {
             console.log(error)
-            return res.status(505).json({message: 'Internal Server Error!'})
+            next(error)
         }
     }
 
-    static async findProductBySlug(req, res) {
+    static async findProductBySlug(req, res, next) {
         try {
             const client = await pool.connect()
             const slug = req.params.slug
@@ -47,17 +92,17 @@ export class ProductController {
             const data = response.rows
 
             if (data.length === 0) {
-                return res.status(404).json({message: 'Data Not Found!'})
+                throw ({name: 'ErrorNotFound'})
             }
 
             res.status(200).json(data)
             client.release()
         } catch (error) {
-            
+            next(error)
         }
     }
 
-    static async findProductSpecById(req, res) {
+    static async findProductSpecById(req, res, next) {
         try {
             const id = req.params.id
             let dataId = id.split('-').map((item) => item.replace('-', ''));
@@ -120,31 +165,60 @@ export class ProductController {
 
             const data = response.rows
 
+            if (data.length === 0) {
+                throw ({name: 'ErrorNotFound'})
+            }
+
             res.status(200).json(data)
             client.release()
         } catch (error) {
-            res.status(500).json({message: 'Internal Server Error!'})
+            next(error)
         }
     }
 
-    static async findTitleProduct (req, res) {
-        const client = await pool.connect()
-        const response = await client.query(
-            `SELECT title
-            FROM products`
-        )
-
-        const data = response.rows
-
-        if(data.length == 0) {
-            res.status(404).json({message: 'Data not found!'})
-        }
-
-        res.status(200).json(data)
+    static async findBrand(req, res, next) {
         try {
-            
+            const client = await pool.connect()
+            const response = await client.query(
+                `SELECT DISTINCT SPLIT_PART(title, ' ', 1) AS brand
+                FROM public.products
+                ORDER BY brand ASC;`
+            )
+
+            const data = response.rows
+
+            if(data.length === 0) {
+                throw ({name: 'ErrorNotFound'})
+            }
+
+            res.status(200).json(data)
+            client.release()
         } catch (error) {
-            
+            next(error)
+        }
+    }
+
+    static async findProductImageBySlug(req, res, next) {
+        const slug = req.params.slug
+
+        try {
+            const client = await pool.connect()
+            const response = await client.query(
+                `SELECT feature_image
+                 FROM public.products
+                 WHERE slug = $1;`,
+                [slug]
+            );
+
+            const data = response.rows
+            if (data.length === 0) {
+                throw ({name: 'ErrorNotFound'})
+            }
+
+            res.status(200).json(data)
+            client.release()
+        } catch (error) {
+            next(error)
         }
     }
 }

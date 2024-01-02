@@ -1,33 +1,63 @@
 <script>
 	import { goto } from '$app/navigation';
-    import { createEventDispatcher } from "svelte";
+    import { afterUpdate, createEventDispatcher, onMount } from "svelte";
     import { readablestreamToJson } from "../../../../helpers/readablestreamToJson";
+    import { page } from '$app/stores';
 
-    const dispatch = createEventDispatcher()
-
+    onMount(() => {
+    })
+    
     export let currentPage
-    let nextPage = parseInt(currentPage) + 1
+    export let isFilter
+    // const dispatch = createEventDispatcher()
+
+    // $: search = ''
+    // $: nextPage = parseInt(currentPage) + 1
+    // $: queryPage = isFilter ? '&page=' : '?page='
+    // const apiURL = 'http://localhost:3000/api/product'
+
+    afterUpdate(() => {
+        currentPage = $page.url.searchParams.get('page')
+        search = $page.url.search === '' ? '?page=1' : $page.url.search
+        if (!search.includes('page=')) {
+            search += '&page=1';
+        }
+    })
+    $: currentPage = null
+    $: nextPage = currentPage == null ? 2 : parseInt(currentPage) + 1
+    $: search = ''
+    $: updateSearchPage = search.replace(/page=.*/, `page=${nextPage}`)
+
+
+
+
+    
 
     async function handleLoadMore() {
-        try {
-            const res = await fetch(`http://localhost:3000/api/product?page=${nextPage}`)
-            const data = await readablestreamToJson(res.body)
-            console.log(data)
-            if(res.ok) {
-                dispatch('message', {
-                    data
-                })
-                goto(`/product?page=${nextPage}`, {noScroll: true})
-                nextPage++
-            } else {
-                    console.log('failed')
-            }  
-        } catch (error) {
-            console.log(error)
-        }
+        // try {
+        //     search = window.location.search
+        //     const res = await fetch(`${apiURL}${search}${queryPage}${nextPage}`)
+        //     const data = await readablestreamToJson(res.body)
+        //     if(res.ok) {
+        //         dispatch('message', {
+        //             data
+        //         })
+        //         goto(`/product${search}${queryPage}${nextPage}`, {noScroll: true})
+        //         nextPage++
+        //     } else {
+        //             console.log('failed')
+        //     }
+        //     console.log(search)
+
+        // } catch (error) {
+        //     console.log(error)
+        // }
+        goto(`/product${updateSearchPage}`, {noScroll: true})
     }
 
 </script>
+
+<svelte:window/>
 
 <div class="w-full flex justify-center items-center py-5">
     <div class="mx-auto w-auto">
