@@ -1,4 +1,5 @@
 <script>
+	import { error } from '@sveltejs/kit';
 	import Layout from "../lib/components/layout/Layout.svelte";
   	import Header from "./components/header/Header.svelte";
 	export let data
@@ -12,7 +13,6 @@
 			<Header data={data.data}></Header>
 	</main>
 </Layout>
-
 <style>
 
 </style>

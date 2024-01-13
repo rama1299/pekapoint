@@ -24,13 +24,11 @@
 
 <div class="w-full h-fit cursor-default bg-white rounded-lg overflow-hidden shadow-lg">
   <div>
-    <Card data={item} tabControl={tabControl} specs={item.summary}>
-      <ChartDonut score={item.spec_score}></ChartDonut>
-  </Card>
-  <Afiliate data={item.affiliate}/>
-  <Tabs data={item.summary} geekbench_score={item.geekbench_score} antutu_score={item.antutu_score} on:message={handleMessage}/>
-  </div>
-  <TagCompare/>
+    <Card data={item} tabControl={tabControl} specs={item.summary}/>
+    <Afiliate data={item.affiliate} slug={item.slug}/>
+    <Tabs data={item.summary} geekbench_score={item.geekbench_score} antutu_score={item.antutu_score} on:message={handleMessage}/>
+    </div>
+    <TagCompare/>
 </div>
 
 <style>

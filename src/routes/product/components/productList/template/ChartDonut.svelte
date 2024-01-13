@@ -24,8 +24,10 @@
             },
             alignment: "center",
             center: {
-                number: false
-            },
+                numberFontSize: (value) => {
+                    return 0
+                }
+            }
         },
         pie: {
             labels: {

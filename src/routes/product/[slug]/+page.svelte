@@ -7,7 +7,9 @@
   export let data
   let dataProduct = data.dataProduct
   let dataSpec = data.dataSpec
-  let title = dataProduct.title
+  let status = data.status
+  let dataVariant = data.dataVariant.length == 0 ? [] : data.dataVariant[0]
+  let title = dataProduct.title ?? status
 
 </script>
 
@@ -17,9 +19,15 @@
   <meta name="description" content={`Detail from ${title}`} />
 </svelte:head>
 <Layout isDetailProductPage={true} >
-  <main class="w-auto h-auto mx-auto pt-14 lg:pt-20 bg-gray-50">
-      <ProductDetail data={dataProduct} spec={dataSpec}/>
-      <SpecDetail data={dataSpec}/>
-      <PriceDetail/>
-  </main>
+  {#if status === 'success'}
+    <main class="w-auto h-auto mx-auto pt-14 lg:pt-20 bg-gray-100">
+        <ProductDetail data={dataProduct} spec={dataSpec} variant={dataVariant}/>
+        <SpecDetail data={dataSpec}/>
+        <PriceDetail/>
+    </main>
+  {:else if  status === 'error'}
+    <main class="w-full h-screen bg-gray-100 mx-auto pt-14 lg:pt-20">
+      <p class="text-lg font-medium">Data Error...</p>
+    </main>
+  {/if}
 </Layout>

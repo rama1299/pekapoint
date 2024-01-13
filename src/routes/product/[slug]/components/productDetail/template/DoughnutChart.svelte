@@ -23,7 +23,8 @@
 				labels: chartLabels,
 				datasets: [{
 					backgroundColor: ['rgb(75, 192, 192)', 'rgb(195, 195, 195, 0.5)'],
-					data: [score, rest]
+					data: [score, rest],
+          borderColor: 'transparent'
 				}]
 			},
       options: {
@@ -38,6 +39,7 @@
           cutout: '65%',
         },
 		});
+    chart.update('active')
 	});
 
 </script>

@@ -3,6 +3,7 @@
 	import { isFilterProduct } from './../../../../stores.js';
     import product from '../../../../helpers/product.json'
     import { onMount } from 'svelte';
+
     export let isProductPage
     export let isDetailProductPage
 
@@ -12,6 +13,7 @@
         return () => {
         document.removeEventListener('click', handleOutSideSearch);
         };
+
     })
 
     function handleOutSideSearch() {
@@ -69,7 +71,7 @@
 
 
 <nav class="w-full z-50 top-0 {isDetailProductPage ? 'bg-[#0A1831]' : y > 1 ? 'bg-[#0A1831]' : 'bg-transparent'} duration-200 ease-out fixed">
-    <div class="container lg:w-wrap mx-auto ">
+    <div class="container mx-auto ">
         <div class="flex w-full justify-between items-center font-monst text-white">
             <div class="w-full lg:w-1/2 flex justify-between lg:justify-start items-center lg:gap-8 lg:px-0 lg:py-0 gap-3 py-2 px-2">
                 <div class="flex justify-start gap-1 items-center">
@@ -78,7 +80,7 @@
                 </div>
                 {#if isProductPage}
                 <div class="search flex justify-end gap-1 items-center relative">
-                    <div class="flex justify-between items-center w-auto lg:w-80 md:h-9 lg:h-12 rounded-md overflow-hidden bg-white/10 backdrop-blur-sm">
+                    <div class="flex justify-between items-center w-auto xl:w-80 md:h-9 lg:h-12 rounded-md overflow-hidden bg-white/10 backdrop-blur-sm">
                         <div>
                             <input type="text" class="ring-0 focus:ring-0 border-none text-sm md:text-base focus:border-none w-32 md:w-64 md:font-medium search" placeholder="Search item..." bind:value={searchValue} on:keyup={handleChangeValue}>
                         </div>
@@ -107,7 +109,7 @@
                     <a href="/product" class="hover:text-[#F14D5D] duration-200 ease-in-out">product</a>
                     <a href="/compare" class="hover:text-[#F14D5D] duration-200 ease-in-out">compare</a>
                     <a href="/blog" class="hover:text-[#F14D5D] duration-200 ease-in-out">blog</a>
-                    <a href="/about" class="hover:text-[#F14D5D] duration-200 ease-in-out">about us</a>
+                    <a href="/about" class="hover:text-[#F14D5D] duration-200 ease-in-out">about</a>
                 </div>
                 <div class="flex justify-center items-center relative" on:mouseleave={() => {toggleDropdown = false}} on:mouseenter={() => {toggleDropdown = true}}>
                     <button class="flex justify-center items-center hover:text-[#F14D5D] h-20 w-20">
@@ -132,14 +134,14 @@
         </div>
     </div>
     <div class="w-full pb-5 h-auto absolute {toggleMenu ? 'show' : 'dropdown_hidden'}">
-        <div class="container lg:w-wrap mx-auto px-3">
+        <div class="container mx-auto px-3">
             <div class="w-full h-auto max-h-96 overflow-auto rounded-lg bg-white border-t-4 border-[#F14D5D] shadow-lg ">
                 <div class="flex flex-col w-full h-auto capitalize font-semibold gap-5 pt-5 px-5">
                     <a href="/" class="hover:text-[#F14D5D]">home</a>
                     <a href="/product" class="hover:text-[#F14D5D]">product</a>
                     <a href="/compare" class="hover:text-[#F14D5D]">compare</a>
                     <a href="/blog" class="hover:text-[#F14D5D]">blog</a>
-                    <a href="/about" class="hover:text-[#F14D5D]">about us</a>
+                    <a href="/about" class="hover:text-[#F14D5D]">about</a>
                 </div>
                 <div class="flex flex-col w-full h-auto capitalize font-semibold gap-5 p-5">
                     <button class="w-full h-full flex justify-between" on:click={() => { toggleDropdown = !toggleDropdown}}>

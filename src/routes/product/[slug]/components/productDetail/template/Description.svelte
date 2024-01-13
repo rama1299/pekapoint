@@ -1,10 +1,43 @@
 <script>
   import {removeHtmlTags} from '../../../../../../helpers/removeHtmlTags'
-  import { createEventDispatcher } from "svelte";
+  import { afterUpdate, createEventDispatcher } from "svelte";
   import DoughnutChart from './DoughnutChart.svelte';
+
   let dispatch = createEventDispatcher()
 
     export let data
+    export let variant = []
+    console.log(variant)
+
+    const variantPrices = variant.map((data) => {
+        let price = data.prices.map((item) => {
+            return {
+                ...item,
+                variant: data.variant
+            }
+        })
+        return price
+    })
+
+    $: styleButton = variant.map((data) => {
+        return {
+            active : false
+        }
+    })
+
+    function handleVariantPrice(variantRam, index) {
+        dispatch('message', {
+            ram: variantRam
+        })
+
+        styleButton = styleButton.map((data, i)=> {
+            return {
+                ...data,
+                active : i == index
+            }
+        })
+    }
+
     let dataDescription = JSON.parse(data.summary).Performance
 
     let cleanedDesc = dataDescription.map(item => {
@@ -49,14 +82,29 @@
                 
             </div>
             <div class="w-full">
-                <div class="flex justify-center items-center text-blue-500 hover:text-blue-600 gap-2 cursor-pointer lg:w-1/2 mx-auto">
-                    <p class="font-medium">Show more</p>
-                    <i class='bx bx-down-arrow-alt text-2xl'></i>
-                </div>
+                <slot/>
             </div>
         </div>
         <div></div>
     </div>
+
+    {#if variant.length > 0}
+         <div class="divide-y-2 space-y-5">
+             <div class="space-y-3 pt-3">
+                 <p class="text-2xl font-semibold">Variant</p>
+                 <div class="grid grid-cols-3 gap-3 font-medium">
+                     {#each variantPrices as data, index}
+                     <div class="text-sm lg:text-base flex justify-center items-center border-2 w-full py-2 lg:py-0 lg:h-24 flex-col cursor-pointer hover:bg-sky-100 {styleButton[index].active === true ? 'border-sky-500' : ''}" on:click={()=> {handleVariantPrice(data[0].variant, index)}}>
+                         <p>{data[0].variant}</p>
+                         <p>From {data[0].currency} {data[0].price}</p>
+                     </div>
+                     {/each}
+                 </div>
+             </div>
+             <div></div>
+         </div>
+    {/if}
+
     <div class="divide-y-2 space-y-5">
         <div class="space-y-3 pt-3">
             <p class="text-2xl font-semibold">Color</p>
@@ -79,33 +127,6 @@
                 <div class="flex justify-center items-center lg:border-2 w-full lg:h-24 flex-col">
                     <div class="w-6 h-6 lg:w-10 lg:h-10 bg-orange-500 rounded-full"></div>
                     <p class="hidden lg:block">Sunset</p>
-                </div>
-            </div>
-        </div>
-        <div></div>
-    </div>
-    <div class="divide-y-2 space-y-5">
-        <div class="space-y-3 pt-3">
-            <p class="text-2xl font-semibold">Capacity</p>
-            <div class="grid grid-cols-3 gap-3 font-medium">
-                <div class="flex justify-center items-center border-2 w-full py-2 lg:py-0 lg:h-24 flex-col">
-                    <p>4/64 GB</p>
-                </div>
-    
-                <div class="flex justify-center items-center border-2 w-full py-2 lg:py-0 lg:h-24 flex-col">
-                    <p>6/64 GB</p>
-                </div>
-    
-                <div class="flex justify-center items-center border-2 w-full py-2 lg:py-0 lg:h-24 flex-col">
-                    <p>4/128 GB</p>
-                </div>
-    
-                <div class="flex justify-center items-center border-2 w-full py-2 lg:py-0 lg:h-24 flex-col">
-                    <p>6/128 GB</p>
-                </div>
-    
-                <div class="flex justify-center items-center border-2 w-full py-2 lg:py-0 lg:h-24 flex-col">
-                    <p>8/128 GB</p>
                 </div>
             </div>
         </div>

@@ -92,7 +92,9 @@
   </Modal>
 {/if} -->
 <Layout isDetailProductPage={true}>
-  <Article bind:title bind:content bind:published_at />
+  <div class="w-full min-h-screen">
+    <Article bind:title bind:content bind:published_at />
+  </div>
 </Layout>
 
 <!-- {#if data.articles.length > 0}

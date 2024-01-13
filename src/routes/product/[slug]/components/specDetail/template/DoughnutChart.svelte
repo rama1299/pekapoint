@@ -10,7 +10,7 @@
  
     afterUpdate(() => {
       chart.data.datasets[0].data = [score, rest];
-      chart.update();
+      chart.update('active');
     });
   
     onMount(() => {
@@ -28,6 +28,7 @@
             {
               backgroundColor: ['rgb(75, 192, 192)', 'rgb(195, 195, 195, 0.5)'],
               data: [score, rest],
+              borderColor: 'transparent'
             },
           ],
         },

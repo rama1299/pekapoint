@@ -97,7 +97,7 @@ $: datas = datas.map(data => {
                     {#each btnTabs as btn, i (i,btn.name )}
                         {#if data.title.toLocaleLowerCase() == btn.name.toLocaleLowerCase()}
                         <div class="w-full col-span-1 lg:py-2 flex justify-center items-center {btn.active ? 'bg-gray-200' : 'bg-gray-100 group'} " on:click={() => {handleTabs(index, btn.name)}}>
-                            <i class="{btn.className} {btn.active ? 'text-blue-600' : ''} text-2xl lg:group-hover:text-blue-600" ></i>
+                            <i class="{btn.className} {btn.active ? 'text-sky-600' : ''} text-2xl lg:group-hover:text-sky-600" ></i>
                         </div>
                         {/if}
                     {/each}

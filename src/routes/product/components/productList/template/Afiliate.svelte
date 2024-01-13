@@ -1,6 +1,8 @@
 <script>
+	import { goto } from '$app/navigation';
     import {formatCurrencyIDR} from '../../../../../helpers/currency'
     export let data
+    export let slug
     let stores = JSON.parse(data)
 
     let isStore1 = true
@@ -24,6 +26,8 @@
         isStore2 = false
         isStore3 = true
     }
+
+    $: linkProduct = `/product/${slug}`
 </script>
 
 <main class="w-full flex justify-end gap-2 px-4 h-12">
@@ -57,7 +61,7 @@
              <a href={stores[2].link} target="_blank" class="cursor-pointer text-white font-medium {isStore3 ? '' : 'hidden'}">{formatCurrencyIDR(stores[2].price)}</a>
          </div>
     {/if}
-    <div class="h-9 cursor-pointer hover:scale-105 duration-200 bg-black flex items-center gap-1 px-1 rounded-full">
+    <div class="h-9 cursor-pointer hover:scale-105 duration-200 bg-black flex items-center gap-1 px-1 rounded-full" on:click={() => {goto(linkProduct)}}>
         <div class="w-7 h-7 rounded-full text-center">
             <i class='bx bx-dots-horizontal-rounded text-xl text-white'></i>
         </div>

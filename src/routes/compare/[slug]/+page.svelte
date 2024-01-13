@@ -25,6 +25,7 @@
     export let data
     let dataProduct = data.dataProduct
     let dataSpec = data.dataSpec
+    let status = data.status
     let enableData
     let title = dataProduct.map(item => item.title).join(' vs ')
 
@@ -64,23 +65,30 @@
   <meta name="description" content={`comparison ${title}`} />
 </svelte:head>
 <Layout isDetailProductPage={true} >
-    <main class="w-auto h-auto mx-auto pt-14 lg:pt-20 bg-gray-50">
-        <div class="container lg:w-wrap bg-white mx-auto px-5 py-10 space-y-10">
-            <CompareImage data={dataProduct}/>
-        </div>
-            <div class="container lg:w-wrap bg-white pr-5 pl-2 lg:px-5 flex gap-2 lg:gap-5 mx-auto">
-              <div class="w-2/12 lg:w-1/12 h-screen sticky top-16 lg:top-20 divide-y-2" bind:offsetHeight={heightContainerLagend} bind:offsetWidth={widthContainerLagend}>
-                  {#each dataProduct as data, i (i)}
-                      <Lagend color={color[i]} heightCol={heightCol} widthContainerLagend={widthContainerLagend} title={data.title} lagendIndex={i}/>
-                  {/each}
-              </div>
-              <div class="w-10/12 lg:w-11/12">
-                <CompareSummary data={dataSpecWithAdd}/>
-                <CompareDetailList data={dataSpecWithAdd}/>
-              </div>
+  {#if status === 'success'}
+    <main class="w-auto h-auto mx-auto pt-14 lg:pt-20 bg-gray-100">
+      <div class="container lg:w-wrap bg-white mx-auto px-5 py-10 space-y-10">
+          <CompareImage data={dataProduct}/>
+      </div>
+          <div class="container lg:w-wrap bg-white pr-5 pl-2 lg:px-5 flex gap-2 lg:gap-5 mx-auto">
+            <div class="w-2/12 lg:w-1/12 h-screen sticky top-16 lg:top-20 divide-y-2" bind:offsetHeight={heightContainerLagend} bind:offsetWidth={widthContainerLagend}>
+                {#each dataProduct as data, i (i)}
+                    <Lagend color={color[i]} heightCol={heightCol} widthContainerLagend={widthContainerLagend} title={data.title} lagendIndex={i}/>
+                {/each}
             </div>
-        <div class="container lg:w-wrap bg-white mx-auto px-5 py-10 space-y-10">
-            <ComparePrice data={dataSpecWithAdd}/>
-        </div>
-    </main>
+            <div class="w-10/12 lg:w-11/12">
+              <CompareSummary data={dataSpecWithAdd}/>
+              <CompareDetailList data={dataSpecWithAdd}/>
+            </div>
+          </div>
+      <div class="container lg:w-wrap bg-white mx-auto px-5 py-10 space-y-10">
+          <ComparePrice data={dataSpecWithAdd}/>
+      </div>
+  </main> 
+  {:else if  status === 'error'}
+  <main class="w-full h-screen mx-auto pt-14 lg:pt-20 bg-gray-100">
+    <p class="font-medium text-xl">Data Error...</p>
+  </main>
+  {/if}
+
   </Layout>

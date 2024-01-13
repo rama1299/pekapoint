@@ -1,60 +1,35 @@
-let cookieName = 'ipInfo'
-let apiKey = 'a96dd7c20cca4d3c928434af9e5de67d';
-const urlIpGeolocation = `https://api.geoapify.com/v1/ipinfo?apiKey=${apiKey}`
+import Cookies from "js-cookie";
 
-function getCookie(name) {
-    const cookies = document.cookie.split(';');
-    for (const cookie of cookies) {
-      const [cookieName, cookieValue] = cookie.trim().split('=');
-      if (cookieName === name) {
-        try {
-          const decodedValue = JSON.parse(decodeURIComponent(cookieValue));
-          return decodedValue;
-        } catch (error) {
-          return null;
-        }
-      }
-    }
-    return null;
-  }
-
-function setCookie(name, value) {
-    const expirationDate = new Date();
-    expirationDate.setTime(expirationDate.getTime() + (24 * 60 * 60 * 1000));
-    const cookieValue = encodeURIComponent(value) + `; expires=${expirationDate.toUTCString()}`;
-    document.cookie = `${name}=${cookieValue}; path=/`;
-}
-
-async function getIpInfofromApi() {
-    try {
-        const response = await fetch(urlIpGeolocation)
-        if (response) {
-            return response
-        } else {
-            return null
-        }
-    } catch (error) {
-        console.log(error)
-    }
-}
+const cookieName = 'iso_code';
+const apiKey = 'a96dd7c20cca4d3c928434af9e5de67d';
+const urlIpGeolocation = `https://api.geoapify.com/v1/ipinfo?apiKey=${apiKey}`;
 
 export async function checkIpInfo() {
+  const checkIsoCode = Cookies.get(cookieName);
+
+  if (!checkIsoCode) {
     try {
-        const ipFromCookies = await getCookie(cookieName)
-        if (ipFromCookies) {
-            console.log(ipFromCookies)
-            return ipFromCookies
+      const response = await fetch(urlIpGeolocation);
+
+      if (response.ok) {
+        const ipInfo = await response.json();
+
+        if (ipInfo && ipInfo.country && ipInfo.country.iso_code) {
+          Cookies.set(cookieName, ipInfo.country.iso_code.toLowerCase());
+          return ipInfo.country.iso_code.toLowerCase();
         } else {
-            const getIpInfo = await getIpInfofromApi()
-            const response = await getIpInfo.json()
-            if (response) {
-                setCookie(cookieName, response)
-                return response
-            } else {
-                console.log('Get IP Failed')
-            }
+          console.error('Invalid or missing data in IP information.');
+          return null;
         }
+      } else {
+        console.error('Failed to fetch IP:', response.statusText);
+        return null;
+      }
     } catch (error) {
-        console.log(error)
+      console.error('Error in checkIpInfo:', error.message);
+      return null;
     }
+  }
+
+  return checkIsoCode;
 }

@@ -1,5 +1,5 @@
 <footer class="w-full bg-[#0A1831] text-white py-24">
-    <div class="container lg:w-wrap mx-auto space-y-10 font-monst">
+    <div class="container mx-auto space-y-10 font-monst">
         <div class="text-center">
             <h1 class="text-4xl font-bold capitalize italic">specwar.</h1>
         </div>

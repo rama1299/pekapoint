@@ -1,5 +1,6 @@
 <script>
-	import { page } from '$app/stores';
+	import { FetchProduct } from './../../../../modules/fetchProduct.js';
+    import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
     import { afterUpdate, onMount } from "svelte";
     import { isFilterProduct } from "../../../../stores";
@@ -10,40 +11,48 @@
     
     onMount(() => {
         async function fetchBrand() {
-            const response = await fetch('http://localhost:3000/api/product/brand')
-            let data = await readablestreamToJson(response.body)
-            data = data.map((item, i) => {
-                return {
-                    id : i+1,
-                    ...item,
-                    selected: false
-                }
-            })
-            
-            dataFilterObject = dataFilter.map((filter) => {
-                let [key, value] = filter.split('=')
-                let valueArray = value.split(',')
-                return {
-                    title : key,
-                    value : valueArray
-                }
-            })
-            
-            if (dataFilterObject.length > 0) {
-                let checkSelectedBrand = data.map((dataBrand) => {
-                    let findBrand = dataFilterObject.find(data => data.title == 'brand')
+            const response = await FetchProduct.getBrandProducts()
+            if (response && response.status == 200) {
+
+                let data = response.data
+
+
+                data = data.map((item, i) => {
                     return {
-                        ...dataBrand,
-                        selected: findBrand.value.includes(dataBrand.brand)
+                        id : i+1,
+                        ...item,
+                        selected: false
                     }
                 })
-                
-                brand = checkSelectedBrand
-                selectedBrand = dataFilterObject.find(data => data.title == 'brand').value
-            } else {
-                brand = data
-            }
 
+                dataFilterObject = dataFilter.map((filter) => {
+                    let [key, value] = filter.split('=')
+                    let valueArray = value.split(',')
+                    return {
+                        title : key,
+                        value : valueArray
+                    }
+                })
+
+
+                if (dataFilterObject.length > 0) {
+                    let checkSelectedBrand = data.map((dataBrand) => {
+                        let findBrand = dataFilterObject.find(data => data.title == 'brand')
+                        return {
+                            ...dataBrand,
+                            selected: findBrand.value.includes(dataBrand.brand)
+                        }
+                    })
+                    
+                    brand = checkSelectedBrand
+                    selectedBrand = dataFilterObject.find(data => data.title == 'brand').value
+                } else {
+                    brand = data
+                }
+            } else {
+                console.log('fetch brand failed')
+            }
+            
         }
         
         fetchBrand()
@@ -198,7 +207,7 @@
                 </div>
                 <div class="w-auto flex justify-center gap-4 mt-6">
                     <button class="w-28 h-8 border rounded-lg bg-gray-200 hover:bg-gray-300" on:click={clearAll}>Reset</button>
-                    <button class="w-28 h-8 border rounded-lg bg-sky-500 hover:bg-sky-600 text-white" on:click={close}>Back</button>
+                    <button class="w-28 h-8 border rounded-lg bg-sky-500 hover:bg-sky-600 text-white" on:click={close}>OK</button>
                 </div>
             </div>
         {/if}
@@ -446,7 +455,7 @@
             <div class="w-80 h-1/6 ">
                 <div class="h-full w-full flex justify-center gap-2 items-center">
                     <button class="px-4 py-2 border rounded-lg bg-gray-300" on:click={clearAll}>Reset</button>
-                    <button class="px-4 py-2 border rounded-lg bg-sky-500 text-white" on:click={handleToggleMobile}>Back</button>
+                    <button class="px-4 py-2 border rounded-lg bg-sky-500 text-white" on:click={handleToggleMobile}>OK</button>
                 </div>
             </div>
         </div>

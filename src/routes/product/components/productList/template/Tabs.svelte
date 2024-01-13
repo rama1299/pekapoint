@@ -59,13 +59,13 @@
                 <div class="bg-[url('/antutu.png')] h-14 w-12 bg-no-repeat p-1 bg-contain flex justify-center">
                     <p class="text-white text-lg font-bold items-center mx-auto mt-4">{antutu_score}</p>
                 </div>
-                <p class="text-xs font-medium text-black">Antutu Score</p>
+                <p class="text-xs font-semibold text-black">Antutubench</p>
             </div>
             <div class="flex flex-col items-center">
-                <div class="bg-[url('/geekbench.jpg')] h-12 w-12 bg-no-repeat p-1 bg-contain flex justify-center rounded-lg">
+                <div class="bg-[url('/geekbench.png')] h-12 w-12 bg-no-repeat p-1 bg-contain flex justify-center rounded-lg">
                     <p class="text-black text-lg font-bold items-center mx-auto mt-2">{geekbench_score}</p>
                 </div>
-                <p class="text-xs font-medium text-black">Geekbench</p>
+                <p class="text-xs font-semibold text-black">Geekbench</p>
             </div>
         </div>
     </div>

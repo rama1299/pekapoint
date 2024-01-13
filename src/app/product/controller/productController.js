@@ -2,9 +2,11 @@ import { pool } from "../../../config/dbConfig.js"
 
 export class ProductController {
     static async findProduct(req, res, next) {
+        const client = await pool.connect();
         if (!parseInt(req.query.page)) {
             req.query.page = 1;
           }
+          console.log('masuk')
           const filters = req.query.filter
           let filterObject
           if (filters != undefined && typeof filters === 'object') {
@@ -21,9 +23,8 @@ export class ProductController {
                 filterObject = {[key] : arrayValue}
             }
         try {
-            const client = await pool.connect();
             const page = req.query.page
-            const perPage = 21
+            const perPage = 24
             const limit = perPage;
             const offset = (page - 1) * perPage;
 
@@ -32,19 +33,17 @@ export class ProductController {
                 const query = {
                     text: `SELECT *, '[{"store":"Shopee","price":"19450000","link":"https://shopee.co.id/Handphone-cat.11044458.11044476"},{"store":"Tokopedia","price":"20000000","link":"https://shopee.co.id/Handphone-cat.11044458.11044476"}]' as affiliate, '21000000' as launch_price FROM public.products WHERE title ILIKE ANY($1::text[]) AND summary IS NOT NULL ORDER BY spec_score DESC, created_at DESC LIMIT $2 OFFSET $3`,
                     values: [arrayBrand.map(brand => `%${brand}%`), limit, offset],
-                  };
+                };
 
                 const response = await client.query(query)
                 const totalResult = await pool.query({
                     text: `SELECT COUNT(*) FROM public.products WHERE title ILIKE ANY($1::text[]) AND summary IS NOT NULL`,
                     values: [arrayBrand.map(brand => `%${brand}%`)],
-                  });
+                });
               
-                  const data = response.rows
-                  const totalProducts = parseInt(totalResult.rows[0].count);
-                  const totalPages = Math.ceil(totalProducts / limit);
-
-                  console.log(totalPages, totalProducts)
+                const data = response.rows
+                const totalProducts = parseInt(totalResult.rows[0].count);
+                const totalPages = Math.ceil(totalProducts / limit);
 
                 if (data.length === 0) {
                     throw ({name: 'ErrorNotFound'})
@@ -65,50 +64,56 @@ export class ProductController {
                 if (data.length === 0) {
                     throw ({name: 'ErrorNotFound'})
                 }
-                console.log(totalProducts)
+
                 res.status(200).json({data, totalProducts, totalPages})
             }
-            client.release()
         } catch (error) {
             console.log(error)
             next(error)
+        } finally {
+            client.release();
         }
     }
 
     static async findProductBySlug(req, res, next) {
+        const client = await pool.connect();
+    
         try {
-            const client = await pool.connect()
-            const slug = req.params.slug
-            
-            let slugs = slug.split('-vs-').map((item) => item.replace('vs-', ''));
-            slugs = slugs.slice(0, Math.min(slugs.length, 4));
-
-            const placeholders = slugs.map((_, index) => `$${index + 1}`).join(", ");
-
-            const response = await client.query(
-                `SELECT * FROM products WHERE slug IN (${placeholders})`,
-                slugs
-            )
-            const data = response.rows
-
-            if (data.length === 0) {
-                throw ({name: 'ErrorNotFound'})
-            }
-
-            res.status(200).json(data)
-            client.release()
+          const slug = req.params.slug;
+    
+          if (!slug) {
+            throw { name: 'ValidationError'};
+          }
+    
+          const slugs = slug.split('-vs-').map((item) => item.replace('vs-', '')).slice(0, 4);
+    
+          const response = await client.query(
+            'SELECT * FROM products WHERE slug = ANY($1::text[])',
+            [slugs]
+          );
+    
+          const data = response.rows;
+    
+          if (data.length === 0) {
+            throw { name: 'ErrorNotFound'};
+          }
+    
+          res.status(200).json(data);
         } catch (error) {
-            next(error)
+          console.error(error);
+          next(error);
+        } finally {
+          client.release();
         }
-    }
+      }
 
     static async findProductSpecById(req, res, next) {
+        const client = await pool.connect()
         try {
             const id = req.params.id
-            let dataId = id.split('-').map((item) => item.replace('-', ''));
+            let dataId = id.split(',').map((item) => item.replace(',', ''));
             const placeholders = dataId.map((_, index) => `$${index + 1}`).join(", ");
 
-            const client = await pool.connect()
             const response = await client.query(
                 `SELECT 
                 product_id, 
@@ -170,15 +175,16 @@ export class ProductController {
             }
 
             res.status(200).json(data)
-            client.release()
         } catch (error) {
             next(error)
+        } finally {
+            client.release();
         }
     }
 
     static async findBrand(req, res, next) {
+        const client = await pool.connect()
         try {
-            const client = await pool.connect()
             const response = await client.query(
                 `SELECT DISTINCT SPLIT_PART(title, ' ', 1) AS brand
                 FROM public.products
@@ -192,17 +198,22 @@ export class ProductController {
             }
 
             res.status(200).json(data)
-            client.release()
         } catch (error) {
             next(error)
+        } finally {
+            client.release();
         }
     }
 
     static async findProductImageBySlug(req, res, next) {
+        const client = await pool.connect()
         const slug = req.params.slug
 
         try {
-            const client = await pool.connect()
+            if (!slug) {
+                throw ({name: 'ValidationError'})
+            }
+            
             const response = await client.query(
                 `SELECT feature_image
                  FROM public.products
@@ -216,9 +227,10 @@ export class ProductController {
             }
 
             res.status(200).json(data)
-            client.release()
         } catch (error) {
             next(error)
+        } finally {
+            client.release();
         }
     }
 }

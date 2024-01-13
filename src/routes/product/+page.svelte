@@ -5,6 +5,7 @@
 	import FilterBar from './components/filterBar/FilterBar.svelte';
     import Layout from '../../lib/components/layout/Layout.svelte';
     import { afterUpdate, onMount } from 'svelte';
+    import cookie from 'cookie'
 
     export let data
 
@@ -44,11 +45,11 @@
             <h1 class="text-5xl font-bold text-white">Products</h1>
         </div>
     </div>
-    <main class="container lg:w-wrap font-monst m-auto space-y-4 py-5">
+    <main class="container font-monst m-auto space-y-4 py-5">
         <div class="w-full px-2">
             <FilterBar/>
         </div>
-        <div class="w-full min-h-screen grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row m-auto gap-4 px-1">
+        <div class="w-full min-h-screen grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-flow-row m-auto gap-4 px-1">
                 {#each productList as item (item.id)}
                     <ProductList item={item}/>
                 {/each}

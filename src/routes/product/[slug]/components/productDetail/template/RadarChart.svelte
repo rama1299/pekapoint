@@ -11,7 +11,7 @@
   afterUpdate(() => {
     chart.data.labels = labels;
     chart.data.datasets[0].data = scores;
-    chart.update();
+    chart.update('active');
   });
 
   onMount(() => {
