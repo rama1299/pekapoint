@@ -12,5 +12,5 @@ vite.config.ts.timestamp-*
 fly.toml
 .tool-versions
 /sql/schema2.sql
-dataToken.txt
-dataToken.txt
+dataLogin.txt
+static/images

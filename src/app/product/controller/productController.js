@@ -1,4 +1,5 @@
 import { pool } from "../../../config/dbConfig.js"
+import { getImagesFromData } from "../../../system/services/getImagesFromData.js";
 
 export class ProductController {
     static async findProduct(req, res, next) {
@@ -6,7 +7,6 @@ export class ProductController {
         if (!parseInt(req.query.page)) {
             req.query.page = 1;
           }
-          console.log('masuk')
           const filters = req.query.filter
           let filterObject
           if (filters != undefined && typeof filters === 'object') {
@@ -92,10 +92,28 @@ export class ProductController {
             [slugs]
           );
     
-          const data = response.rows;
+          let data = response.rows;
     
           if (data.length === 0) {
             throw { name: 'ErrorNotFound'};
+          }
+          
+          if (data.length === 1) {
+            data = await Promise.all(data.map(async (obj) => {
+                let arraySlug = obj.slug.split('-');
+                let pathName = `/${arraySlug[0]}/${arraySlug[1]}`
+                let pathDir = `static/images${pathName}`;
+                let dataImages = await getImagesFromData(pathDir, obj.slug);
+
+                dataImages = dataImages.map((titleImage) => {
+                    return `${pathName}/${titleImage}`;
+                });
+            
+                return {
+                    ...obj,
+                    images: dataImages
+                };
+            }));
           }
     
           res.status(200).json(data);
@@ -210,9 +228,18 @@ export class ProductController {
         const slug = req.params.slug
 
         try {
+            
             if (!slug) {
                 throw ({name: 'ValidationError'})
             }
+
+            let arrayTitle = slug.split('-')
+            let brand = arrayTitle[0]
+            let brandType = arrayTitle[1]
+            let pathImages = `data/images/${brand}/${brandType}`
+
+            const images = await getImagesFromData(pathImages, slug)
+            console.log(images)
             
             const response = await client.query(
                 `SELECT feature_image
