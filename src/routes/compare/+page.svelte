@@ -1,6 +1,9 @@
 <script>
 	import CompareList from './components/compareList/CompareList.svelte';
     import Layout from "../../lib/components/layout/Layout.svelte";
+    export let data
+    
+    $: dataCompare = data.data
 </script>
 
 
@@ -14,8 +17,8 @@
     </div>
   </div>
 
-  <main class="w-auto min-h-screen mx-auto pt-14 lg:pt-20 bg-gray-50">
-    <CompareList/>
+  <main class="w-full mx-auto pt-14 lg:pt-20 bg-gray-100">
+    <CompareList data={dataCompare}/>
   </main>
 </Layout>
 

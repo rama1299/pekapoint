@@ -22,7 +22,7 @@
 
 </script>
 
-<div class="w-full h-fit cursor-default bg-white rounded-lg overflow-hidden shadow-lg">
+<div class="w-full h-fit cursor-default bg-white rounded-lg overflow-hidden shadow-lg border-2 hover:border-sky-500">
   <div>
     <Card data={item} tabControl={tabControl} specs={item.summary}/>
     <Afiliate data={item.affiliate} slug={item.slug}/>

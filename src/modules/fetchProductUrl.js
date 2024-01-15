@@ -3,6 +3,28 @@ import Cookies from "js-cookie";
 import { Authentication } from "./authentication";
 
 export class FetchProductUrl {
+    static async getProductUrlCompare(query) {
+        try {
+            await Authentication.login()
+
+            const response = await instance.get(`/product-url${query}`);
+
+            if (response.status === 401) {
+
+                Cookies.remove('status')
+                await Authentication.login()
+                const response = await instance.get(`/product-url${query}`);
+
+                return response
+            }
+
+            return response;
+        } catch (error) {
+            console.error("Error fetching products:", error.response.data.message || error.message);
+            throw error;
+        }
+    }
+
     static async getProductUrlByUrl(url) {
         try {
             await Authentication.login()
@@ -13,7 +35,7 @@ export class FetchProductUrl {
 
                 Cookies.remove('status')
                 await Authentication.login()
-                const response = await instance.get(`/product-url`, {url});
+                const response = await instance.post(`/product-url`, {url});
 
                 return response
             }
@@ -35,7 +57,7 @@ export class FetchProductUrl {
 
                 Cookies.remove('status')
                 await Authentication.login()
-                const response = await instance.get(`/product-url/create`, data);
+                const response = await instance.post(`/product-url/create`, data);
 
                 return response
             }

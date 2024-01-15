@@ -3,6 +3,7 @@ import { ProductUrlRewriteController } from "../controller/productUrlRewriteCont
 
 const router = Router()
 
+router.get('/product-url', ProductUrlRewriteController.getProductCompareUrl)
 router.post('/product-url', ProductUrlRewriteController.getProductUrlByUrl)
 router.post('/product-url/create', ProductUrlRewriteController.createProductUrl)
 

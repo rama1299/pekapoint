@@ -54,14 +54,14 @@ export async function load({ params, url }) {
                         const dataVariant = variantResponse.data
 
                         const variantId = dataVariant.map(data => data.id)
-                        const dataInputProductUrl = {url : pathName, idProduct : dataId, idVariant : variantId}
+                        const dataInputProductUrl = {url : pathName, idProduct : dataId, idVariant : variantId, write_type: 'compare'}
 
                         const createProductUrl = await FetchProductUrl.createProductUrl(dataInputProductUrl)
 
                         return { dataProduct: dataProduct, dataSpec: dataSpec, dataVariant: dataVariant, status: 'success' };
                     }
                     
-                    const dataInputProductUrl = {url : pathName, idProduct : dataId}
+                    const dataInputProductUrl = {url: pathName, idProduct: dataId, write_type: 'compare'}
 
                     const createProductUrl = await FetchProductUrl.createProductUrl(dataInputProductUrl)
                     
