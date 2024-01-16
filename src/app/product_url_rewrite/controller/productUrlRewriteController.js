@@ -1,13 +1,14 @@
 import {pool} from '../../../config/dbConfig.js'
 
 export class ProductUrlRewriteController {
-    static async getProductCompareUrl(req, res, next) {
+    static async getProductUrl(req, res, next) {
         const client = await pool.connect()
         let filter = req.query.filter == 'new' ? 'created_at' : 'visitor'
         if (!parseInt(req.query.page)) {
             req.query.page = 1;
           }
         try {
+            const item = req.params.item
             const page = req.query.page
             const perPage = 24
             const limit = perPage;
@@ -16,11 +17,11 @@ export class ProductUrlRewriteController {
             const urlResponse = await client.query(
                 `SELECT product_ids, url, id
                 FROM public.product_url_rewrite
-                WHERE item = 2
+                WHERE item = $1
                 ORDER BY ${filter} DESC
-                LIMIT $1
-                OFFSET $2;`,
-                [limit, offset]
+                LIMIT $2
+                OFFSET $3;`,
+                [item, limit, offset]
             )
 
             if (urlResponse.rows === 0) {

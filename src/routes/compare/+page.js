@@ -4,7 +4,7 @@ import { FetchProductUrl } from '../../modules/fetchProductUrl';
 export async function load({ url }) {
     try {
         const search = url.search;
-        const productUrlResponse = await FetchProductUrl.getProductUrlCompare(search);
+        const productUrlResponse = await FetchProductUrl.getProductUrl(2, search);
         
         if (productUrlResponse && productUrlResponse.status == 200) {
             const dataProductUrl = productUrlResponse.data
