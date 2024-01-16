@@ -4,17 +4,37 @@ export class ProductUrlRewriteController {
     static async getProductCompareUrl(req, res, next) {
         const client = await pool.connect()
         let filter = req.query.filter == 'new' ? 'created_at' : 'visitor'
+        if (!parseInt(req.query.page)) {
+            req.query.page = 1;
+          }
         try {
+            const page = req.query.page
+            const perPage = 24
+            const limit = perPage;
+            const offset = (page - 1) * perPage;
+
             const urlResponse = await client.query(
                 `SELECT product_ids, url, id
                 FROM public.product_url_rewrite
                 WHERE item = 2
-                ORDER BY ${filter} DESC;`
+                ORDER BY ${filter} DESC
+                LIMIT $1
+                OFFSET $2;`,
+                [limit, offset]
             )
 
             if (urlResponse.rows === 0) {
                 throw({name: 'ErrorNotFound'})
             } 
+
+            const urlCount = await client.query(
+                `SELECT COUNT(*)
+                FROM public.product_url_rewrite
+                WHERE item = 2`
+            )
+
+            let totalProducts = parseInt(urlCount.rows[0].count)
+            const totalPages = Math.ceil(totalProducts / limit)
 
             let urlData = urlResponse.rows.map((data) => {
                 return {
@@ -40,7 +60,7 @@ export class ProductUrlRewriteController {
 
             let dataProduct = productResponse.rows
 
-            let result = urlData.map((data) => {
+            let data = urlData.map((data) => {
                 let matchData = data.product_ids.map((ids) => {
                     let data = dataProduct.find(obj => obj.id === ids)
 
@@ -65,7 +85,7 @@ export class ProductUrlRewriteController {
                 }
             })
 
-            res.status(200).json(result)
+            res.status(200).json({data, totalProducts, totalPages})
         } catch (error) {
             console.log(error)
         } finally {

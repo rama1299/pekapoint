@@ -8,12 +8,13 @@ export async function load({ url }) {
         
         if (productUrlResponse && productUrlResponse.status == 200) {
             const dataProductUrl = productUrlResponse.data
-            return {data :dataProductUrl}
+
+            return dataProductUrl
         } else {
-            return {data: []}
+            return {data: [], totalProducts: 0, totalPage: 0}
         }
     } catch (error) {
         console.error("Error loading products:", error.message);
-        return {data: []}
+        return {data: [], totalProducts: 0, totalPage: 0}
     }
 }

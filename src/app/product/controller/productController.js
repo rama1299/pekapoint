@@ -41,13 +41,14 @@ export class ProductController {
                     values: [arrayBrand.map(brand => `%${brand}%`)],
                 });
               
+                if (response.rows.length === 0) {
+                    throw ({name: 'ErrorNotFound'})
+                }
+
                 const data = response.rows
                 const totalProducts = parseInt(totalResult.rows[0].count);
                 const totalPages = Math.ceil(totalProducts / limit);
 
-                if (data.length === 0) {
-                    throw ({name: 'ErrorNotFound'})
-                }
     
                 res.status(200).json({data, totalProducts, totalPages})
             } else {

@@ -1,15 +1,13 @@
 <script>
     export let data
-    console.log(data)
-
     $: dataProduct = data.product
 </script>
 
 <div>
-    <div class="w-full h-[268px] overflow-hidden bg-white shadow-lg p-2 space-y-2 group">
+    <div class="w-full h-72 overflow-hidden bg-white shadow-lg p-5 space-y-2 ">
         <div class="w-full h-40 flex justify-center items-center gap-1 border-b-4 border-sky-500">
             {#each dataProduct as product}
-                <div class="w-1/2 h-full overflow-hidden group-hover:scale-105 duration-100">
+                <div class="w-1/2 h-full overflow-hidden">
                     <img src={product.feature_image} class="w-full h-auto" alt="">
                 </div>
             {/each}
