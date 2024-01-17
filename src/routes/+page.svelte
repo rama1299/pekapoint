@@ -13,14 +13,18 @@
 <Layout>
 	<main class="w-full">
 			<Header data={data.dataTitleProduct}></Header>
-			<div class="container mx-auto space-y-10">
-				<div>
+			<div class="flex justify-center items-center w-full h-[600px]">
+				<div class="container mx-auto">
 					<SliderProductView data={data.dataProductMostView}/>
 				</div>
-				<div>
+			</div>
+			<div class="flex justify-center items-center bg-white w-full h-[600px]">
+				<div class="container mx-auto">
 					<SlideCompareView data={data.dataComapreMostView}/>
 				</div>
-				<div>
+			</div>
+			<div class="flex justify-center items-center w-full h-[600px]">
+				<div class="container mx-auto">
 					<SliderCompareNew data={data.dataCompareNew}/>
 				</div>
 			</div>

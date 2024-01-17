@@ -35,7 +35,7 @@
         <h1 class="text-5xl font-bold text-white">Compare</h1>
     </div>
   </div>
-  <main class="w-full min-h-screen mx-auto py-5 space-y-4 bg-gray-100">
+  <main class="w-full min-h-screen px-2 mx-auto py-5 space-y-4 bg-gray-100">
     <FilterBar/>
     <CompareList data={dataCompare}/>
     {#if currentPage < totalPages}
