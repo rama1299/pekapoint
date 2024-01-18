@@ -1,5 +1,6 @@
 <script>
     import FormCompare from "./template/FormCompare.svelte";
+    import SearchEngine from "./template/SearchEngine.svelte";
     export let data
 
     $: category = 'smartphone'
@@ -10,13 +11,14 @@
     $: titleData = findDataCategory.title
 </script>
 
-<div class="w-full h-[800px] bg-cover bg_gradient flex justify-center items-start pt-40 relative">
-    <div class="container lg:w-wrap flex flex-col justify-center items-center gap-7">
+<div class="w-full h-[700px] lg:h-[870px] bg-cover bg_gradient flex justify-center items-center relative">
+    <div class="container lg:w-wrap flex flex-col justify-center items-center gap-8 lg:gap-16">
         <div class="text-center space-y-2">
-            <p class="text-4xl lg:text-7xl font-bold text-white">Welcome to Specwar</p>
+            <p class="text-3xl lg:text-7xl font-bold text-white">Welcome to Specwar</p>
             <p class="text-xl lg:text-3xl font-medium text-white">Compare Item Specifications</p>
         </div>
-        <FormCompare data={titleData}/>
+        <!-- <FormCompare data={titleData}/> -->
+        <SearchEngine data={titleData}/>
     </div>
 </div>
 

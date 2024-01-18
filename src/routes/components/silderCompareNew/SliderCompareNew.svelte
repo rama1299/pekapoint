@@ -52,7 +52,6 @@ afterUpdate(() => {
         col = 2;
     }
 
-    console.log(currentCol)
 })
 
 </script>
