@@ -91,4 +91,29 @@ export class FetchProduct {
             throw error;
         }
     }
+
+    static async getProductSearch(search, page) {
+        try {
+            await Authentication.login()
+
+            const queryPage = page ? `?page=${page}` : ''
+            const data = {search}
+            
+            const response = await instance.post(`/product/search${queryPage}`, data);
+
+            if (response.status === 401) {
+
+                Cookies.remove('status')
+                await Authentication.login()
+                const response = await instance.post(`/product/search${queryPage}`, data);
+
+                return response
+            }
+
+            return response;
+        } catch (error) {
+            console.error(`Error fetching spec product by Search ${search}:`, error.message);
+            throw error;
+        }
+    }
 }

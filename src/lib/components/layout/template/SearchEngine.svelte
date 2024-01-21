@@ -68,10 +68,8 @@
         if (typeSearch == 'product') {
             handleProductSearch(title)
         } else if (typeSearch == 'compare') {
-            if (selectedOptionCompare.length < 4) {
-                selectedOptionCompare = [...selectedOptionCompare, title]
-                resetValue()
-            }
+            selectedOptionCompare = [...selectedOptionCompare, title]
+            resetValue()
         }
     }
 
@@ -83,19 +81,14 @@
                 let title = dataFilter[selectedOptionIndex].title
                 handleProductSearch(title)
             } else if (typeSearch == 'compare') {
-                if (selectedOptionCompare.length < 4) {
-                    selectedOptionCompare = [...selectedOptionCompare, dataFilter[selectedOptionIndex].title]
-                    resetValue()
-                }
+                selectedOptionCompare = [...selectedOptionCompare, dataFilter[selectedOptionIndex].title]
             }
         }
     }
 
     function addCompare(title) {
-        if (selectedOptionCompare.length < 4) {
-            selectedOptionCompare = [...selectedOptionCompare, title]
-            resetValue()
-        }
+        selectedOptionCompare = [...selectedOptionCompare, title]
+        resetValue()
 
     }
 
@@ -123,7 +116,7 @@
 
     function handleProductUnoptionSearch(type) {
         if (type) {
-            const slug = type.replace(/\s+/g, '-')
+            const slug = type.replace(/\s+/g, '-').toLowerCase()
             goto(`/product?search=${slug}`)
             resetValue()
         }
