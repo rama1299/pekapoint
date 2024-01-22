@@ -14,9 +14,12 @@
     $: pageUrl = $page.url.searchParams.get('page')
     $: currentPage = pageUrl === null ? 1 : pageUrl
     let filter = $page.url.searchParams.getAll('filter')
+    let search = $page.url.searchParams.get('search')
+
+    console.log(productList)
 
     afterUpdate(() => {
-        if ($page.url.searchParams.size === 0 || filter[0] != $page.url.searchParams.getAll('filter')[0] || data.data.length === 0) {
+        if ($page.url.searchParams.size === 0 || filter[0] != $page.url.searchParams.getAll('filter')[0] || data.data.length === 0 || search != $page.url.searchParams.get('search')) {
             productList = data.data
         } else {
             productList = [...productList, ...data.data]
@@ -27,6 +30,7 @@
         }
         filter = $page.url.searchParams.getAll('filter')
         pageUrl = $page.url.searchParams.get('page')
+        search = $page.url.searchParams.get('search')
     })
     
     // function handleMessageLoadMore(event) {
@@ -53,6 +57,9 @@
                 {#each productList as item (item.id)}
                     <ProductList item={item}/>
                 {/each}
+                {#if productList.length == 0}
+                    <p class="text-xl font-semibold">Data not found...</p>
+                {/if}
         </div>
         {#if currentPage < totalPages}
              <div class="w-full">

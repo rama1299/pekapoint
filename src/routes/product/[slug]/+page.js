@@ -50,20 +50,20 @@ export async function load({ params, url }) {
                     const dataSpec = specResponse.data;
 
                     const variantResponse = await FetchHpVariant.getVariantById(dataId)
+                    dataId = [dataId]
                     
                     if (variantResponse && variantResponse.status === 200) {
                         const dataVariant = variantResponse.data
 
-                        const variantId = dataVariant.map(data => data.id)
-                        const dataInputProductUrl = {url : pathName, idProduct : dataId, idVariant : variantId}
+                        const variantId = await dataVariant.map(data => data.id)
+                        const dataInputProductUrl = {url: pathName, idProduct: dataId, idVariant: variantId, write_type: "product"}
 
                         const createProductUrl = await FetchProductUrl.createProductUrl(dataInputProductUrl)
 
                         return { dataProduct: dataProduct[0], dataSpec: dataSpec[0], dataVariant: dataVariant, status: 'success' };
                     }
                     
-                    dataId = [dataId]
-                    const dataInputProductUrl = {url : pathName, idProduct : dataId}
+                    const dataInputProductUrl = {url : pathName, idProduct : dataId, write_type: "product"}
 
                     const createProductUrl = await FetchProductUrl.createProductUrl(dataInputProductUrl)
                     

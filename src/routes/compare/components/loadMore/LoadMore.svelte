@@ -1,14 +1,9 @@
 <script>
+	import { page } from '$app/stores';
+	import { afterUpdate } from 'svelte';
 	import { goto } from '$app/navigation';
-    import { afterUpdate, createEventDispatcher, onMount } from "svelte";
-    import { readablestreamToJson } from "../../../../helpers/readablestreamToJson";
-    import { page } from '$app/stores';
 
-    onMount(() => {
-    })
-    
     export let currentPage
-    export let isFilter
 
     afterUpdate(() => {
         currentPage = $page.url.searchParams.get('page')
@@ -23,12 +18,9 @@
     $: updateSearchPage = search.replace(/page=.*/, `page=${nextPage}`)
 
     async function handleLoadMore() {
-        goto(`/product${updateSearchPage}`, {noScroll: true})
+        goto(`/compare${updateSearchPage}`, {noScroll: true})
     }
-
 </script>
-
-<svelte:window/>
 
 <div class="w-full flex justify-center items-center py-5">
     <div class="mx-auto w-auto">

@@ -1,4 +1,5 @@
 import { pool } from "../../../config/dbConfig.js"
+import { getImagesFromData } from "../../../system/services/getImagesFromData.js";
 
 export class ProductController {
     static async findProduct(req, res, next) {
@@ -6,9 +7,9 @@ export class ProductController {
         if (!parseInt(req.query.page)) {
             req.query.page = 1;
           }
-          console.log('masuk')
           const filters = req.query.filter
           let filterObject
+
           if (filters != undefined && typeof filters === 'object') {
               filterObject = filters.map((filter) => {
                 let [key, value] = filter.split('=')
@@ -19,8 +20,12 @@ export class ProductController {
               })
             } else if (filters != undefined && typeof filters === 'string') {
                 let [key, value] = filters.split('=')
-                let arrayValue = value.split(',')
-                filterObject = {[key] : arrayValue}
+                if (value) {
+                    let arrayValue = value.split(',')
+                    filterObject = {[key] : arrayValue}
+                } else {
+                    filterObject == undefined
+                }
             }
         try {
             const page = req.query.page
@@ -41,13 +46,14 @@ export class ProductController {
                     values: [arrayBrand.map(brand => `%${brand}%`)],
                 });
               
+                if (response.rows.length === 0) {
+                    throw ({name: 'ErrorNotFound'})
+                }
+
                 const data = response.rows
                 const totalProducts = parseInt(totalResult.rows[0].count);
                 const totalPages = Math.ceil(totalProducts / limit);
 
-                if (data.length === 0) {
-                    throw ({name: 'ErrorNotFound'})
-                }
     
                 res.status(200).json({data, totalProducts, totalPages})
             } else {
@@ -92,10 +98,28 @@ export class ProductController {
             [slugs]
           );
     
-          const data = response.rows;
+          let data = response.rows;
     
           if (data.length === 0) {
             throw { name: 'ErrorNotFound'};
+          }
+          
+          if (data.length === 1) {
+            data = await Promise.all(data.map(async (obj) => {
+                let arraySlug = obj.slug.split('-');
+                let pathName = `/${arraySlug[0]}/${arraySlug[1]}`
+                let pathDir = `static/images${pathName}`;
+                let dataImages = await getImagesFromData(pathDir, obj.slug);
+
+                dataImages = dataImages.map((titleImage) => {
+                    return `${pathName}/${titleImage}`;
+                });
+            
+                return {
+                    ...obj,
+                    images: dataImages
+                };
+            }));
           }
     
           res.status(200).json(data);
@@ -210,9 +234,18 @@ export class ProductController {
         const slug = req.params.slug
 
         try {
+            
             if (!slug) {
                 throw ({name: 'ValidationError'})
             }
+
+            let arrayTitle = slug.split('-')
+            let brand = arrayTitle[0]
+            let brandType = arrayTitle[1]
+            let pathImages = `data/images/${brand}/${brandType}`
+
+            const images = await getImagesFromData(pathImages, slug)
+            console.log(images)
             
             const response = await client.query(
                 `SELECT feature_image
@@ -231,6 +264,63 @@ export class ProductController {
             next(error)
         } finally {
             client.release();
+        }
+    }
+
+    static async getProductBySearch(req, res, next) {
+        const client = await pool.connect()
+        if (!parseInt(req.query.page)) {
+            req.query.page = 1;
+          }
+        try {
+            const search = req.body.search.toLowerCase()
+            const page = req.query.page
+            const perPage = 24
+            const limit = perPage;
+            const offset = (page - 1) * perPage;
+            
+            if (!search) {
+                throw ({name: 'InvalidCredentials'})
+            }
+
+            const arraySearch = search.split('-').map(item => `%${item}%`);
+            const placeholders = arraySearch.map((_, i) => {
+                return `LOWER(title) LIKE $${i + 1}`;
+            }).join(' AND ');
+
+            const values = [...arraySearch, limit, offset]
+            
+            const response = await client.query(
+                `SELECT *, '[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\"},{\"store\":\"Tokopedia\",\"price\":\"20000000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\"}]' as affiliate, '21000000' as launch_price
+                FROM public.products
+                WHERE ${placeholders}
+                ORDER BY spec_score DESC, created_at DESC
+                LIMIT   $${arraySearch.length + 1}
+                OFFSET $${arraySearch.length + 2};`,
+                values
+            );
+
+            const data = response.rows
+
+            if (data.length == 0) {
+                throw ({name: 'ErrorNotFound'})
+            }
+
+            const responseTotal = await client.query(
+                `SELECT COUNT(*)
+                FROM public.products
+                WHERE ${placeholders};`,
+                arraySearch
+            )
+
+            const totalProducts = parseInt(responseTotal.rows[0].count);
+            const totalPages = Math.ceil(totalProducts / limit);
+
+            res.status(200).json({data, totalPages, totalProducts})
+        } catch (error) {
+            next(error)
+        } finally {
+            client.release()
         }
     }
 }

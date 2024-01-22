@@ -1,6 +1,28 @@
 <script>
+	import { page } from '$app/stores';
+	import LoadMore from './components/loadMore/LoadMore.svelte';
 	import CompareList from './components/compareList/CompareList.svelte';
-    import Layout from "../../lib/components/layout/Layout.svelte";
+  import FilterBar from './components/filterBar/FilterBar.svelte';
+  import {afterUpdate} from 'svelte'
+  import Layout from "../../lib/components/layout/Layout.svelte";
+
+  export let data
+    
+    let dataCompare = []
+    let filter = $page.url.searchParams.get('filter')
+    $: pageUrl = $page.url.searchParams.get('page')
+    $: currentPage = pageUrl === null ? 1 : pageUrl
+    $: totalPages = data.totalPages
+
+    afterUpdate(() => {
+      if ($page.url.searchParams.size === 0 || filter != $page.url.searchParams.get('filter') || data.data.length === 0) {
+        dataCompare = data.data
+      } else {
+        dataCompare = [...dataCompare, ...data.data]
+      }
+      filter = $page.url.searchParams.get('filter')
+      pageUrl = $page.url.searchParams.get('page')
+    })
 </script>
 
 
@@ -13,9 +35,12 @@
         <h1 class="text-5xl font-bold text-white">Compare</h1>
     </div>
   </div>
-
-  <main class="w-auto min-h-screen mx-auto pt-14 lg:pt-20 bg-gray-50">
-    <CompareList/>
+  <main class="w-full min-h-screen px-2 mx-auto py-5 space-y-4 bg-gray-100">
+    <FilterBar/>
+    <CompareList data={dataCompare}/>
+    {#if currentPage < totalPages}
+       <LoadMore/>
+    {/if}
   </main>
 </Layout>
 
