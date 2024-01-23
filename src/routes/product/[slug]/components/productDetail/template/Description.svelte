@@ -7,7 +7,6 @@
 
     export let data
     export let variant = []
-    console.log(variant)
 
     const variantPrices = variant.map((data) => {
         let price = data.prices.map((item) => {
