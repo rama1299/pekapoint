@@ -323,4 +323,28 @@ export class ProductController {
             client.release()
         }
     }
-}
+
+    static async getTopProduct(req, res, next) {
+        const client = await pool.connect()
+        try {
+            const findProduct = await client.query(
+                `SELECT title, feature_image, slug, spec_score, '[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]' as affiliate
+                FROM public.products
+                ORDER BY spec_score DESC, created_at DESC
+                LIMIT 12;`
+            )
+
+            if (findProduct.rows.length == 0) {
+                throw ({name: 'ErrorNotFound'})
+            }
+
+            const data = findProduct.rows
+
+            res.status(200).json(data)
+        } catch (error) {
+            next(error)
+        } finally {
+            client.release()
+        }
+    }
+} 

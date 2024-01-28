@@ -28,7 +28,7 @@ export class ExchangeratesController {
             
             const updateExchangerates = await client.query(
                 `UPDATE public.exchangerates
-                SET value = CASE
+                SET rate = CASE
                 ${placeholders}
                 END`,
                 flatValue
@@ -42,4 +42,31 @@ export class ExchangeratesController {
             client.release()
         }
     }
+
+    static async getExchangeByCode(req, res, next) {
+        const client = await pool.connect()
+        try {
+            const codeCurrency = req.params.code ?? 'usd'
+            
+            if (!codeCurrency) {
+                throw({name: 'InvalidCredentials'})
+            }
+
+            const findRate = await client.query(
+                `SELECT code, rate
+                FROM public.exchangerates
+                WHERE code IN ($1,'EUR');`,
+                [codeCurrency.toUpperCase()]
+            )
+
+            const data = findRate.rows
+
+            res.status(200).json(data)
+        } catch (error) {
+            next(error)
+        } finally {
+            client.release()
+        }
+    }
+
 }

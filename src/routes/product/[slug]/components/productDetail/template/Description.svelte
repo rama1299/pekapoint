@@ -1,4 +1,5 @@
 <script>
+import Cookies from "js-cookie";
   import {removeHtmlTags} from '../../../../../../helpers/removeHtmlTags'
   import { afterUpdate, createEventDispatcher } from "svelte";
   import DoughnutChart from './DoughnutChart.svelte';
@@ -46,6 +47,33 @@
             spec: removeHtmlTags(item.spec)
         };
     });
+
+    function exchangePrice(currency, price) {
+        let exchange = Cookies.get('exchange')
+        let geoInfo = Cookies.get('geoInfo')
+        
+        if (exchange && geoInfo) {
+
+            exchange = JSON.parse(exchange)
+            geoInfo = JSON.parse(geoInfo)
+
+            let codeGeoInfo = geoInfo.currency
+
+            if (codeGeoInfo.length > 3) {
+                let arrayCode = codeGeoInfo.split(',')
+                codeGeoInfo = arrayCode[0]
+            }
+
+            const rateEur = exchange.find((item) => item.code == 'EUR').rate
+            const rateUser = exchange.find((item) => item.code == codeGeoInfo.toUpperCase()).rate
+
+            const convert = Math.ceil((parseFloat(price) / rateEur) * rateUser)
+            return `${codeGeoInfo.toUpperCase()} ${convert}`
+        } else {
+            return `${currency} ${price}`
+        }
+    }
+
     
 </script>
 <div class="w-full space-y-5 pt-5 lg:pt-10">
@@ -95,7 +123,7 @@
                      {#each variantPrices as data, index}
                      <div class="text-sm lg:text-base flex justify-center items-center border-2 w-full py-2 lg:py-0 lg:h-24 flex-col cursor-pointer hover:bg-sky-100 {styleButton[index].active === true ? 'border-sky-500' : ''}" on:click={()=> {handleVariantPrice(data[0].variant, index)}}>
                          <p>{data[0].variant}</p>
-                         <p>From {data[0].currency} {data[0].price}</p>
+                         <p>From {exchangePrice(data[0].currency, data[0].price)}</p>
                      </div>
                      {/each}
                  </div>
