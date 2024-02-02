@@ -15,7 +15,6 @@
     $: currentPage = pageUrl === null ? 1 : pageUrl
     let filter = $page.url.searchParams.getAll('filter')
     let search = $page.url.searchParams.get('search')
-<<<<<<< HEAD
     let text = ['Products']
     $: status = data.status
 
@@ -23,10 +22,6 @@
         let translate = await Translate.client(text)
         text = translate
     })
-=======
-
-    console.log(productList)
->>>>>>> master
 
     afterUpdate(() => {
         if ($page.url.searchParams.size === 0 || filter[0] != $page.url.searchParams.getAll('filter')[0] || data.data.length === 0 || search != $page.url.searchParams.get('search')) {
@@ -68,18 +63,12 @@
                 {#each productList as item (item.id)}
                     <ProductList item={item}/>
                 {/each}
-<<<<<<< HEAD
             </div>
         {/if}
 
         {#if productList.length == 0 && status == 'error'}
         <div class="w-full h-[500px]">
             <ProductNotFound/>
-=======
-                {#if productList.length == 0}
-                    <p class="text-xl font-semibold">Data not found...</p>
-                {/if}
->>>>>>> master
         </div>
         {/if}
         {#if productList.length > 0 && currentPage < totalPages}
