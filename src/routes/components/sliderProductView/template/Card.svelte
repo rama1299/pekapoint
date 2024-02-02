@@ -1,6 +1,14 @@
 <script>
     export let data
+    import { onMount } from "svelte";
+  import { Translate } from "../../../../helpers/translate";
     $: dataProduct = data.product
+
+    let text = ['Start']
+    onMount(async () => {
+        let textTranslate = await Translate.client(text)
+        text = textTranslate
+    })
 </script>
 
 <!-- <div>
@@ -29,12 +37,12 @@
                 <div class="space-y-1 w-full">
                     <div class="flex gap-2 items-center">
                         <i class='bx bxs-star text-sky-500'></i>
-                        <p class="font-semibold">4.5</p>
+                        <p class="font-semibold">{dataProduct[0].affiliate[0].rating}</p>
                     </div>
                     <div class="flex w-full justify-between items-end">
                         <div class="leading-3">
-                            <p class="font-medium text-sm">From</p>
-                            <p class="font-semibold text-xl">$ 724</p>
+                            <p class="font-medium text-sm">{text[0]}</p>
+                            <p class="font-semibold text-xl">$ {dataProduct[0].affiliate[0].price}</p>
                         </div>
                         <button class="w-7 md:w-9 rounded-md bg-sky-500 hover:bg-white aspect-square border border-sky-500 duration-100 text-white hover:text-sky-500 flex items-center justify-center">
                             <i class='bx bx-right-arrow-alt text-xl' ></i>

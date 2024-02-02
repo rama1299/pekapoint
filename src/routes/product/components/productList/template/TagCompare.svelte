@@ -5,6 +5,14 @@
     import product from '../../../../../helpers/product.json'
   import { readablestreamToJson } from '../../../../../helpers/readablestreamToJson';
   import { onMount } from 'svelte';
+  import { Translate } from '../../../../../helpers/translate';
+
+  let text = ['item selected', 'Compare', 'Search']
+
+  onMount(async () => {
+    let translate = await Translate.client(text)
+    text = translate
+  })
 
     $: category = 'smartphone'
     $: findDataCategory = product.find((item) => {
@@ -104,12 +112,12 @@
 <div class=" position z-40 border rounded-t-lg">
     <div class="bg-gradient-to-r from-sky-600 to-indigo-800 flex justify-between {isToggleBtn ? 'w-60' :'w-auto'} md:w-64 h-10 items-center px-3 py-1 text-white rounded-t-lg cursor-pointer" on:keypress={handleToggelBtn} on:click={handleToggelBtn}>
         <div class="flex items-center gap-1">
-            <p class="{isToggleBtn ? 'hidden' : ''} md:hidden">Compare</p>
-            <i class='bx bx-git-compare {isToggleBtn ? '' : 'hidden md:block'}'></i>
+            <!-- <p class="{isToggleBtn ? 'hidden' : ''} md:hidden">Compare</p> -->
+            <i class='bx bx-git-compare'></i>
             <p class="md:hidden {isToggleBtn ? 'hidden' : ''}">({$compareDataStore.length})</p>
             <div class="{isToggleBtn ? 'flex' : 'hidden'} md:flex">
                 <p>|</p>
-                <p class="ml-2">{$compareDataStore.length} item selected</p>
+                <p class="ml-2 capitalize">{$compareDataStore.length} {text[0]}</p>
             </div>
         </div>
         <i class='bx bx-chevron-{isToggleBtn ? 'down block' : 'up hidden'} text-xl md:block'></i>
@@ -130,7 +138,7 @@
         {/each}
         <div class="h-12 bg-white flex justify-center items-center w-full">
             <div class="{$compareDataStore.length === 3 ? 'w-full' : 'w-2/3'} h-full flex justify-center items-center">
-                <button class="bg-sky-600 hover:bg-sky-500 rounded-full text-white h-8 w-32 text-sm font-medium" on:click={handleCompare}>Compare</button>
+                <button class="bg-sky-600 hover:bg-sky-500 rounded-full text-white h-8 px-2 text-sm font-medium" on:click={handleCompare}>{text[1]}</button>
             </div>
             <div class="w-1/3 h-full flex justify-center items-center {$compareDataStore.length === 4 ? 'hidden' : ''}">
                 <button class="bg-sky-600 hover:bg-sky-500 rounded-full w-8 h-8">
@@ -149,7 +157,7 @@
             <i class='bx bx-search'></i>
             <div class="flex">
                 <p>|</p>
-                <p class="ml-2">Search</p>
+                <p class="ml-2">{text[2]}</p>
             </div>
         </div>
         <i class='bx bx-x hover:text-red-600 text-xl md:block' on:keypress={handleSearchToggle} on:click={handleSearchToggle}></i>

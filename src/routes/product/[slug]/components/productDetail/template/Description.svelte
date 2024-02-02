@@ -1,10 +1,16 @@
 <script>
 import Cookies from "js-cookie";
   import {removeHtmlTags} from '../../../../../../helpers/removeHtmlTags'
-  import { afterUpdate, createEventDispatcher } from "svelte";
+  import { afterUpdate, createEventDispatcher, onMount } from "svelte";
   import DoughnutChart from './DoughnutChart.svelte';
+  import { Translate } from "../../../../../../helpers/translate";
 
   let dispatch = createEventDispatcher()
+    let text = ['Variant', 'Color']
+  onMount(async () => {
+    let translate = await Translate.client(text, true)
+    text = translate
+  })
 
     export let data
     export let variant = []
@@ -38,7 +44,9 @@ import Cookies from "js-cookie";
         })
     }
 
-    let dataDescription = JSON.parse(data.summary).Performance
+    let summaryJson = JSON.parse(data.summary)
+    let summaryKey = Object.keys(summaryJson)[0]
+    let dataDescription = summaryJson[summaryKey]
 
     let cleanedDesc = dataDescription.map(item => {
         return {
@@ -118,12 +126,12 @@ import Cookies from "js-cookie";
     {#if variant.length > 0}
          <div class="divide-y-2 space-y-5">
              <div class="space-y-3 pt-3">
-                 <p class="text-2xl font-semibold">Variant</p>
+                 <p class="text-2xl font-semibold">{text[0]}</p>
                  <div class="grid grid-cols-3 gap-3 font-medium">
                      {#each variantPrices as data, index}
                      <div class="text-sm lg:text-base flex justify-center items-center border-2 w-full py-2 lg:py-0 lg:h-24 flex-col cursor-pointer hover:bg-sky-100 {styleButton[index].active === true ? 'border-sky-500' : ''}" on:click={()=> {handleVariantPrice(data[0].variant, index)}}>
                          <p>{data[0].variant}</p>
-                         <p>From {exchangePrice(data[0].currency, data[0].price)}</p>
+                         <!-- <p>From {exchangePrice(data[0].currency, data[0].price)}</p> -->
                      </div>
                      {/each}
                  </div>
@@ -134,7 +142,7 @@ import Cookies from "js-cookie";
 
     <div class="divide-y-2 space-y-5">
         <div class="space-y-3 pt-3">
-            <p class="text-2xl font-semibold">Color</p>
+            <p class="text-2xl font-semibold">{text[1]}</p>
             <div class="grid grid-cols-6 lg:grid-cols-3 gap-3 text-sm">
                 <div class="flex justify-center items-center lg:border-2 w-full lg:h-24 flex-col">
                     <div class="w-6 h-6 lg:w-10 lg:h-10 bg-sky-500 rounded-full"></div>

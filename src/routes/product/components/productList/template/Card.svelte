@@ -6,12 +6,18 @@
     import { saveToSessionStorage, getFromSessionStorage} from '../../../../../helpers/sessionStorage'
     import { formatCurrencyIDR } from '../../../../../helpers/currency';
   import ChartDonut from './ChartDonut.svelte';
+  import { Translate } from '../../../../../helpers/translate';
 
     export let data;
     export let tabControl
     export let specs
 
-    onMount(()=> {
+    let text = ['Add to comparison']
+
+    onMount(async ()=> {
+        let translate = await Translate.client(text)
+        text = translate
+        
         const initialValue = getFromSessionStorage('compareDataSession')
 
         initialValue ? compareDataStore.set(initialValue) : compareDataStore.set([])
@@ -57,15 +63,24 @@
             </div>
             <div class="flex justify-between justify-items-center items-start mt-2 relative overflow-hidden">
                 <p class="text-xl font-semibold cursor-pointer hover:underline underline-offset-1" on:keypress={() => {goto(`/product/${data.slug}`)}}  on:click={() => {goto(`/product/${data.slug}`)}}>{data.title}</p>
-                <div class="flex items-center gap-2 bg-gradient-to-r from-sky-600 to-indigo-800 px-2 text-white rounded-tl-lg absolute cursor-pointer compare_btn">
+                <div class="flex items-center gap-2 bg-gradient-to-r from-sky-600 to-indigo-800 px-2 group text-white rounded-tl-lg absolute right-0 cursor-pointer">
                     <i class='bx bx-git-compare text-xl compare_btn'></i>
-                    <p class="font-medium" on:keypress={()=> {handleCompare(data.title, data.slug, data.feature_image)}} on:click={()=> {handleCompare(data.title, data.slug, data.feature_image)}}>| Add to comparison</p>
+                    <p class="font-medium close" on:keypress={()=> {handleCompare(data.title, data.slug, data.feature_image)}} on:click={()=> {handleCompare(data.title, data.slug, data.feature_image)}}>| {text[0]}</p>
                 </div>
             </div>
         </div>
     </div>
 
     <style>
+        .close{
+            clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+            position: absolute;
+        }
+        .group:hover .close{
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            transition: 0.3s;
+            position: static;
+        }
         .compare_btn:hover {
             right: 0;
             transition: 0.3s ease;

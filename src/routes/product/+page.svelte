@@ -5,9 +5,9 @@
 	import FilterBar from './components/filterBar/FilterBar.svelte';
     import Layout from '../../lib/components/layout/Layout.svelte';
     import { afterUpdate, onMount } from 'svelte';
-    import cookie from 'cookie'
-
+    import { Translate } from '../../helpers/translate';
     export let data
+    import ProductNotFound from './components/ProductNotFound.svelte';
 
     $: totalPages = data.totalPages
     let productList = []
@@ -15,6 +15,13 @@
     $: currentPage = pageUrl === null ? 1 : pageUrl
     let filter = $page.url.searchParams.getAll('filter')
     let search = $page.url.searchParams.get('search')
+    let text = ['Products']
+    $: status = data.status
+
+    onMount(async() => {
+        let translate = await Translate.client(text)
+        text = translate
+    })
 
     afterUpdate(() => {
         if ($page.url.searchParams.size === 0 || filter[0] != $page.url.searchParams.getAll('filter')[0] || data.data.length === 0 || search != $page.url.searchParams.get('search')) {
@@ -38,28 +45,33 @@
 </script>
 
 <svelte:head>
-  <title>Product</title>
+  <title>{text[0]}</title>
 </svelte:head>
 
 <Layout isProductPage={true}>
     <div class="w-full h-96 bg-cover bg_gradient">
         <div class="container lg:w-wrap font-monst h-full pt-44 mx-auto">
-            <h1 class="text-5xl font-bold text-white">Products</h1>
+            <h1 class="text-5xl font-bold text-white">{text[0]}</h1>
         </div>
     </div>
-    <main class="container font-monst m-auto space-y-4 py-5">
+    <main class="container min-h-[600px] font-monst m-auto space-y-4 py-5">
         <div class="w-full px-2">
             <FilterBar/>
         </div>
-        <div class="w-full min-h-screen grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-flow-row m-auto gap-4 px-1">
+        {#if productList.length > 0}
+            <div class="w-full min-h-[600px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-flow-row m-auto gap-4 px-1">
                 {#each productList as item (item.id)}
                     <ProductList item={item}/>
                 {/each}
-                {#if productList.length == 0}
-                    <p class="text-xl font-semibold">Data not found...</p>
-                {/if}
+            </div>
+        {/if}
+
+        {#if productList.length == 0 && status == 'error'}
+        <div class="w-full h-[500px]">
+            <ProductNotFound/>
         </div>
-        {#if currentPage < totalPages}
+        {/if}
+        {#if productList.length > 0 && currentPage < totalPages}
              <div class="w-full">
                  <LoadMoreButton/>
              </div>

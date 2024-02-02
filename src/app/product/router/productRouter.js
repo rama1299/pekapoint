@@ -14,5 +14,4 @@ router.get('/product/:slug', ProductController.findProductBySlug);
 router.get('/product/image/:slug', ProductController.findProductImageBySlug);
 router.get('/product/spec/:id', ProductController.findProductSpecById);
 
-
 export default router

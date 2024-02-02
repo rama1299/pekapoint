@@ -3,10 +3,14 @@
     import { goto } from '$app/navigation';
     import {afterUpdate, onMount} from 'svelte'
     export let data
+    import { Translate } from '../../../helpers/translate';
 
-    $: data = data.slice(0,10)
+    let text = ['Most Viewed Products', "This product captures customer attention. Don't miss the chance to own this highly coveted item!", 'Slide', 'See All']
 
-onMount(() => {
+    onMount(async() => {
+    const textTranslate = await Translate.client(text)
+    text = textTranslate
+
     containerScroll.scrollTo({
         left: 0,
         behavior: 'smooth'
@@ -59,8 +63,8 @@ afterUpdate(() => {
 <div class="space-y-10 w-full px-2">
 <div class="w-full flex justify-center">
     <div class="w-full text-center space-y-3">
-        <p class="text-2xl font-bold">Most Viewed Products</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, nostrum laudantium dicta dignissimos cum velit.</p>
+        <p class="text-2xl font-bold">{text[0]}</p>
+        <p>{text[1]}</p>
     </div>
 </div>
 <div class="w-full hidden lg:flex justify-end">
@@ -83,13 +87,13 @@ afterUpdate(() => {
     </div>
     <div class="w-full lg:hidden flex justify-center gap-2 text-sky-500 items-center">
         <i class='bx bx-chevrons-left'></i>
-        <p>Slide</p>
+        <p>{text[2]}</p>
         <i class='bx bx-chevrons-right'></i>
     </div>
 </div>
 <div class="pt-4 md:pt-0 w-full flex justify-center">
     <div class="h-11 w-52 bg-sky-500 hover:bg-white border-2 border-sky-500 text-white hover:text-sky-500 duration-100 rounded-md flex justify-center items-center cursor-pointer" on:click={() => {goto(`/product`)}}>
-        <p class="text-lg font-medium">See All</p>
+        <p class="text-lg font-medium">{text[3]}</p>
     </div>
 </div>
 </div>

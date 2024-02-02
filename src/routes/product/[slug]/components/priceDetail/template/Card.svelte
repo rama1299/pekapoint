@@ -1,4 +1,4 @@
-<div class="w-full border-2 p-3 rounded-lg hover:lg:scale-105 hover:border-sky-600 duration-100">
+<div class="w-full border-2 p-3 rounded-lg hover:border-sky-500">
     <div class=" grid w-full grid-cols-1 lg:grid-cols-5 gap-3 lg-gap-0">
         <div class="w-full h-full flex justify-between lg:justify-start items-center col-1">
             <div class="flex gap-3 items-center justify-start">
@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="w-full h-full col-1 lg:py-2">
-                <button class="w-full h-full py-2 rounded-lg bg-sky-600 text-md font-semibold text-white">Checkout</button>
+                <button class="w-full h-full py-2 rounded-lg bg-sky-500 text-md font-semibold text-white">Checkout</button>
         </div>
     </div>
 </div>

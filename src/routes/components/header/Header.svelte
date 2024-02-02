@@ -1,7 +1,17 @@
 <script>
+	import { page } from '$app/stores';
     import FormCompare from "./template/FormCompare.svelte";
     import SearchEngine from "./template/SearchEngine.svelte";
+    import { Translate } from '../../../helpers/translate';
+  import { onMount } from 'svelte';
     export let data
+
+    let text = ['Welcome to Specwar', 'Discover the best mobile phones with the optimal balance of price and quality!']
+
+    onMount(async () => {
+        const translateText = await Translate.client(text)
+        text = translateText
+    })
 
     $: category = 'smartphone'
     $: findDataCategory = data.find((item) => {
@@ -64,8 +74,8 @@
 	</svg>
     <div class="container flex flex-col justify-center items-center gap-8 lg:gap-16 z-10">
         <div class="text-center space-y-2">
-            <p class="text-3xl lg:text-7xl font-bold text-white">Welcome to Specwar</p>
-            <p class="text-xl lg:text-3xl font-medium text-white">Compare Item Specifications</p>
+            <p class="text-3xl lg:text-7xl font-bold text-white">{text[0]}</p>
+            <p class="text-xl lg:text-3xl font-medium text-white">{text[1]}</p>
         </div>
         <!-- <FormCompare data={titleData}/> -->
         <SearchEngine data={titleData}/>

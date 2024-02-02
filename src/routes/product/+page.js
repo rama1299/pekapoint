@@ -1,6 +1,5 @@
 import {readablestreamToJson} from '../../helpers/readablestreamToJson'
 import { FetchProduct } from '../../modules/fetchProduct';
-import Cookies from 'js-cookie';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ url }) {
@@ -13,18 +12,18 @@ export async function load({ url }) {
             const searchResponse = await FetchProduct.getProductSearch(searchQuery, pageQuery)
 
             if (searchResponse && searchResponse.status == 200) {
-                return searchResponse.data
+                return {...searchResponse.data, status: 'success'}
             } else {
-                return {data: [], totalPages: 0, totalProducts: 0}
+                return {data: [], totalPages: 0, totalProducts: 0, status: 'error'}
             }
 
         } else {
             const productResponse = await FetchProduct.getProducts(query);
     
             if (productResponse && productResponse.status === 200) {
-                return productResponse.data;
+                return {...productResponse.data, status: 'success'};
             } else {
-                return { data: [], totalPages: 0, totalProducts: 0 };
+                return { data: [], totalPages: 0, totalProducts: 0, status: 'error'};
             }
         }
     } catch (error) {

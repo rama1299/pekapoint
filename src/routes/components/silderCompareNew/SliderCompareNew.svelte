@@ -3,10 +3,14 @@
     import { goto } from '$app/navigation';
     import {afterUpdate, onMount} from 'svelte'
     export let data
+    import { Translate } from '../../../helpers/translate';
 
-    $: data = data.slice(0,10)
+    let text = ['Latest Comparison', 'Explore the latest in our comparison lineup, featuring the best products.', 'Slide', 'See All']
+    
+    onMount(async() => {
+    const textTranslate = await Translate.client(text)
+    text = textTranslate
 
-onMount(() => {
     containerScroll.scrollTo({
         left: 0,
         behavior: 'smooth'
@@ -47,9 +51,9 @@ afterUpdate(() => {
     if (widthContainerScroll > 1023) {
         col = 4;
     } else if (widthContainerScroll > 638) {
-        col = 3;
-    } else {
         col = 2;
+    } else {
+        col = 1;
     }
 
 })
@@ -59,8 +63,8 @@ afterUpdate(() => {
 <div class="space-y-10 w-full px-2">
     <div class="w-full flex justify-center">
         <div class="w-full text-center space-y-3">
-            <p class="text-2xl font-bold">Latest Comparison</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, nostrum laudantium dicta dignissimos cum velit.</p>
+            <p class="text-2xl font-bold">{text[0]}</p>
+            <p>{text[1]}</p>
         </div>
     </div>
     <div class="w-full hidden lg:flex justify-end">
@@ -83,13 +87,13 @@ afterUpdate(() => {
         </div>
         <div class="w-full lg:hidden flex justify-center gap-2 text-sky-500 items-center">
             <i class='bx bx-chevrons-left'></i>
-            <p>Slide</p>
+            <p>{text[2]}</p>
             <i class='bx bx-chevrons-right'></i>
         </div>
     </div>
     <div class="pt-4 md:pt-0 w-full flex justify-center">
         <div class="h-11 w-52 bg-sky-500 hover:bg-white border-2 border-sky-500 text-white hover:text-sky-500 duration-100 rounded-md flex justify-center items-center cursor-pointer" on:click={() => {goto(`/product`)}}>
-            <p class="text-lg font-medium">See All</p>
+            <p class="text-lg font-medium">{text[3]}</p>
         </div>
     </div>
     </div>

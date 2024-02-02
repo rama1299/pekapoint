@@ -2,12 +2,18 @@
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+  import { Translate } from '../../../../helpers/translate';
 
-    onMount(()=> {
+  let text = ['Viewed', 'New']
+
+    onMount(async ()=> {
+        let translate = await Translate.client(text, true)
+        text = translate
+
         if ($page.url.searchParams.get('filter') == 'new') {
-            filter = 'New'
+            filter = text[1]
         } else {
-            filter = 'Most Viewed'
+            filter = text[0]
         }
 
         document.addEventListener('click', handleOutSide);
@@ -17,15 +23,20 @@
         };
     })
 
-    let filter = ''
+    $: filter = ''
     let dropdownFilter = false
 
     function handleFilter(type) {
-        filter = type
         dropdownFilter = false
 
+        if (type == 'New') {
+            filter = text[1]
+        } else {
+            filter = text[0]
+        }
 
         goto(`/compare?filter=${type.toLowerCase().replace(/\s/g, '_')}`)
+
     }
 
     function handleOutSide(event) {
@@ -50,8 +61,8 @@
             </div>
             <div class=" {dropdownFilter ? '' : 'hidden'} absolute w-34 bg-white rounded-md border shadow-lg p-3 top-12 right-0">
                 <div class="w-full text-end space-y-1 font-medium">
-                    <p class="w-full hover:text-sky-500 cursor-pointer" on:click={()=> {handleFilter('Most Viewed')}}>Most Viewed</p>
-                    <p class="w-full hover:text-sky-500 cursor-pointer" on:click={()=> {handleFilter('New')}}>New</p>
+                    <p class="w-full hover:text-sky-500 cursor-pointer" on:click={()=> {handleFilter('Most Viewed')}}>{text[0]}</p>
+                    <p class="w-full hover:text-sky-500 cursor-pointer" on:click={()=> {handleFilter('New')}}>{text[1]}</p>
                 </div>
             </div>
         </div>

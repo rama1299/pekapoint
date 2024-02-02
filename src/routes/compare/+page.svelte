@@ -3,10 +3,17 @@
 	import LoadMore from './components/loadMore/LoadMore.svelte';
 	import CompareList from './components/compareList/CompareList.svelte';
   import FilterBar from './components/filterBar/FilterBar.svelte';
-  import {afterUpdate} from 'svelte'
+  import {afterUpdate, onMount} from 'svelte'
   import Layout from "../../lib/components/layout/Layout.svelte";
+  import { Translate } from '../../helpers/translate';
 
   export let data
+  let text = ['Compare']
+
+  onMount(async () => {
+    let translate = await Translate.client(text)
+    text = translate
+  })
     
     let dataCompare = []
     let filter = $page.url.searchParams.get('filter')
@@ -32,11 +39,13 @@
 <Layout>
   <div class="w-full h-96 bg-cover bg_gradient">
     <div class="container lg:w-wrap font-monst h-full pt-44 mx-auto">
-        <h1 class="text-5xl font-bold text-white">Compare</h1>
+        <h1 class="text-5xl font-bold text-white">{text[0]}</h1>
     </div>
   </div>
   <main class="w-full min-h-screen px-2 mx-auto py-5 space-y-4 bg-gray-100">
-    <FilterBar/>
+    <div class="relative z-20">
+      <FilterBar/>
+    </div>
     <CompareList data={dataCompare}/>
     {#if currentPage < totalPages}
        <LoadMore/>

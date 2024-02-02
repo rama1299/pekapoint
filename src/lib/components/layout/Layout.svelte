@@ -9,8 +9,8 @@
     await checkIpInfo()
   })
 
-  export let isProductPage
-  export let isDetailProductPage
+  export let isProductPage = false
+  export let isDetailProductPage = false
 
   $: category = 'smartphone'
   $: findDataCategory = product.find((item) => {

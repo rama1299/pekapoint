@@ -1,13 +1,20 @@
 <script>
-  import { afterUpdate } from 'svelte';
+  import { afterUpdate, onMount } from 'svelte';
 	import Affiliate from './template/Affiliate.svelte';
   import Description from "./template/Description.svelte";
   import Image from "./template/Image.svelte";
   import SpecSummary from "./template/SpecSummary.svelte";
+  import { Translate } from '../../../../../helpers/translate';
 
   export let data
   export let spec
   export let variant = []
+  let text = ['Show More']
+
+  onMount(async () => {
+    let translate = await Translate.client(text, true)
+    text = translate
+  })
   
   let dataVariant = variant.length != [] ? variant.data : []
 
@@ -52,7 +59,7 @@
             <div class="w-full lg:w-1/2 px-5">
                 <Description data={data} variant={dataVariant} on:message={handleMessageDesc}>
                     <div class="flex justify-center items-center text-blue-500 hover:text-blue-600 gap-2 cursor-pointer lg:w-1/2 mx-auto" on:click={showMore}>
-                        <p class="font-medium">Show more</p>
+                        <p class="font-medium">{text[0]}</p>
                         <i class='bx bx-down-arrow-alt text-2xl'></i>
                     </div>
                 </Description>

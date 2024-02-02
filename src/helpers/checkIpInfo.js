@@ -15,9 +15,9 @@ export async function checkIpInfo() {
         const ipInfo = await response.json();
 
         if (ipInfo && ipInfo.country && ipInfo.country.iso_code) {
-          let dataCookie = {iso_code: ipInfo.country.iso_code.toLowerCase(), currency: ipInfo.country.currency.toLowerCase()}
+          let dataCookie = {iso_code: ipInfo.country.iso_code.toLowerCase(), currency: ipInfo.country.currency.toLowerCase(), language: ipInfo.country.languages[0].iso_code.toLowerCase()}
           Cookies.set(cookieName, JSON.stringify(dataCookie));
-          return {iso_code: ipInfo.country.iso_code.toLowerCase(), currency: ipInfo.country.currency.toLowerCase()};
+          return dataCookie;
         } else {
           console.error('Invalid or missing data in IP information.');
           return null;

@@ -1,0 +1,284 @@
+en,id
+Weight,Berat
+Thickness,Ketebalan
+Width,Lebar
+Height,Tinggi
+Weather-Sealed (Splashproof),Sekat cuaca (tahan percikan)
+Ingress Protection (IP) Rating,Peringkat Perlindungan Ingress (IP)
+Waterproof Depth Rating,Peringkat Kedalaman Tahan Air
+Volume,Volume
+Lowest Potential Operating Temperature,Suhu Operasi Potensial Terendah
+Maximum Operating Temperature,Suhu Pengoperasian Maksimum
+Is Dustproof and Water Resistant,tahan debu dan tahan air
+Can be Folded,Bisa Dilipat
+Has a Physical QWERTY Keyboard,Memiliki keyboard QWERTY fisik
+Screen Size,Ukuran Layar
+Display Type,Jenis Tampilan
+Pixel Density,Kerapatan piksel
+Resolution,Resolusi
+Refresh Rate,Kecepatan refresh
+Touch Sampling Rate,Tingkat Pengambilan Sampel Sentuh
+Brightness (Typical),Kecerahan (Khas)
+Has Branded Damage-Resistant Glass,Memiliki kaca antipecah bermerek
+Gorilla Glass Version,Versi Kaca Gorila
+Supports HDR10,Mendukung HDR10
+Always-On Display,Layar Selalu Aktif
+Supports Dolby Vision,Mendukung Dolby Vision
+Contrast Ratio,Rasio Kontras
+Resolution (Secondary Screen),Resolusi (Layar Sekunder)
+Has Sapphire Glass Display,Memiliki layar kaca safir
+Has a Curved Display,Memiliki layar melengkung
+Has a Touch Screen,Mempunyai layar sentuh
+Has an E-Paper Display,Mempunyai tampilan e-paper
+Displays 3D,Menampilkan 3D
+Has a Secondary Screen,Memiliki layar sekunder
+Build Quality,Membangun Kualitas
+Display Quality,Kualitas Tampilan
+Battery Life,Daya Tahan Baterai
+Photography,Fotografi
+Performance,Performa
+Internal Storage,Penyimpanan Internal
+RAM,RAM
+Android Version,Versi Android
+CPU Speed,Kecepatan CPU
+Has an External Memory Slot,Memiliki slot memori eksternal
+GPU Clock Speed,Kecepatan Jam GPU
+Has Integrated LTE,Memiliki LTE terintegrasi
+RAM Speed,Kecepatan RAM
+Semiconductor Size,Ukuran Semikonduktor
+Supports 64 Bit,Mendukung 64 bit
+Has integrated Graphics,Memiliki Grafis terintegrasi
+DirectX Version,Versi DirectX
+OpenGL Version,Versi OpenGL
+OpenGL ES Version,Versi OpenGL ES
+Uses Big.LITTLE Technology,Menggunakan Teknologi Big.LITTLE
+CPU Threads,Thread CPU
+Floating Point Performance,Kinerja Titik Mengambang
+Has NX Bit,Memiliki NX Bit
+Uses HMP,Menggunakan HMP
+Has TrustZone,Memiliki TrustZone
+Maximum Memory Bandwidth,Bandwidth Memori Maksimum
+Front-end Width,Lebar Front-end
+Pixel Rate,Tingkat Piksel
+OpenVG Version,Versi OpenVG
+Memory Bandwidth,Bandwidth Memori
+OpenCL Version,Versi OpenCL
+Bits Executed at a Time,Bit dieksekusi pada suatu waktu
+Memory Channels,Saluran Memori
+VFP Version,Versi VFP
+L2 Cache,Cache L2
+eMMC Version,Versi eMMC
+Supports ECC Memory,Mendukung memori ECC
+L1 Cache,L1 Cache
+Maximum Memory Amount,Jumlah memori maksimum
+Uses Multithreading,Menggunakan Multithreading
+CPU Temperature,Suhu CPU
+GPU Execution Units,Unit Eksekusi GPU
+GPU Turbo,GPU Turbo
+L2 Core,L2 Core
+Number of Transistors,Jumlah Transistor
+Bus Speed,Kecepatan Bus
+Bus Transfer Rate,Tarif Transfer Bus
+Clock Multiplier,Pengganda Jam
+Thermal Design Power (TDP),Daya Desain Termal (TDP)
+DDR Memory Version,Versi Memori DDR
+Included SD Card (Memory Size),Termasuk Kartu SD (Ukuran Memori)
+L3 Core,L3 Core
+PCI Express (PCIe) Version,Versi PCI Express (PCIe)
+Render Output Units (ROPs),Render Unit Output (ROP)
+Shading Units,Unit Shading
+Texture Mapping Units (TMUs),Unit Pemetaan Tekstur (TMU)
+Turbo Clock Speed,Kecepatan Jam Turbo
+Turbo Boost Version,Versi Turbo Boost
+Turbo Core Version,Versi Turbo Core
+Has an Unlocked Multiplier,Mempunyai unlocked Multiplier
+Supported Displays,Tampilan yang Didukung
+L3 Cache,Cache L3
+EGL Version,Versi EGL
+Megapixels (Main Camera),Megapiksel (Kamera Utama)
+Weather-sealed (splashproof),Sekat cuaca (tahan percikan)
+Ingress Protection (IP) rating,Peringkat Ingress Protection (IP)
+Waterproof depth rating,Peringkat kedalaman tahan air
+Lowest potential operating temperature,Suhu operasi potensial terendah
+Maximum operating temperature,Suhu pengoperasian maksimum
+Is dustproof and water-resistant,Tahan debu dan tahan air
+Has a physical QWERTY keyboard,Memiliki keyboard QWERTY fisik
+Brightness (typical),Kecerahan (umum)
+Has branded damage-resistant glass,Memiliki kaca antipecah bermerek
+Supports HDR10+,Mendukung HDR10+
+Always-On Display,Layar Selalu Aktif
+Supports Dolby Vision,Mendukung Dolby Vision
+Resolution (secondary screen),Resolusi (layar sekunder)
+Has sapphire glass display,Memiliki layar kaca safir
+Has a curved display,Memiliki layar melengkung
+Has a touch screen,Mempunyai layar sentuh
+Has an e-paper display,Mempunyai layar e-paper
+Displays 3D,Menampilkan 3D
+Has a secondary screen,Memiliki layar sekunder
+AnTuTu benchmark score,Skor benchmark AnTuTu
+3DMark Wild Life benchmark,Tolok ukur Kehidupan Liar 3DMark
+3DMark Wild Life Unlimited benchmark,Tolok ukur 3DMark Wild Life Unlimited
+3DMark Wild Life Extreme benchmark,Patokan 3DMark Wild Life Extreme
+Geekbench 5 result (multi),Hasil Geekbench 5 (multi)
+Geekbench 5 result (single),Hasil Geekbench 5 (tunggal)
+Geekbench result,Hasil Geekbench
+Uses big.LITTLE technology,Menggunakan besar. Teknologi KECIL
+PassMark result,Hasil PassMark
+Thermal Design Power (TDP),Daya Desain Termal (TDP)
+Included SD card (memory size),Termasuk kartu SD (ukuran memori)
+PassMark result (overclocked),Hasil PassMark (di-overclock)
+PassMark result (single),Hasil PassMark (tunggal)
+PCI Express (PCIe) version,Versi PCI Express (PCIe)
+Render output units (ROPs),Render unit output (ROP)
+Texture mapping units (TMUs),Unit pemetaan tekstur (TMU)
+Megapixels (main camera),Megapiksel (kamera utama)
+Megapixels (front camera),Megapiksel (kamera depan)
+Has built-in optical image stabilization,Memiliki stabilisasi gambar optik built-in
+Video recording (main camera),Perekaman video (kamera utama)
+Wide aperture (main camera),Bukaan lebar (kamera utama)
+Has a dual-tone LED flash,Memiliki lampu kilat LED ganda
+Has a BSI sensor,Memiliki sensor BSI
+Has continuous autofocus when recording movies,Mempunyai autofokus kontinu saat merekam film
+Has phase-detection autofocus for photos,Memiliki autofokus deteksi fasa untuk foto
+Supports slow-motion video recording,Mendukung perekaman video gerak lambat
+Has a built-in HDR mode,Mempunyai mode HDR bawaan
+Has a flash,Mempunyai lampu kilat
+Has manual exposure,Mempunyai pencahayaan manual
+Has a dual-lens (or multi-lens) main camera,Memiliki kamera utama lensa ganda (atau multi-lensa)
+Optical zoom,Zoom optik
+Number of flash LEDs,Jumlah LED lampu kilat
+Has a CMOS sensor,Mempunyai sensor CMOS
+Has manual ISO,Memiliki ISO manual
+Has a serial shot mode,Mempunyai mode pemotretan beruntun
+Has manual focus,Mempunyai fokus manual
+Pixel size (main camera),Ukuran piksel (kamera utama)
+Has a front camera,Mempunyai kamera depan
+Has laser autofocus,Memiliki fokus otomatis laser
+Shoots 360° panorama,Tunas panorama 360� �
+Has manual white balance,Mempunyai keseimbangan putih manual
+Shoots raw,Tunas mentah
+Has touch autofocus,Memiliki autofokus sentuh
+Has manual shutter speed,Mempunyai kecepatan rana manual
+Can create panoramas in-camera,Dapat membuat panorama dalam kamera
+Wide aperture (front camera),Bukaan lebar (kamera depan)
+Maximum ISO,ISO Maksimum
+Has timelapse function,Memiliki fungsi timelapse
+Fastest shutter speed,Kecepatan rana tercepat
+Minimum focal length,Panjang fokus minimum
+Maximum focal length,Panjang fokus maksimum
+Has a front-facing LED flash,Memiliki lampu kilat LED hadap depan
+Continuous shooting at high resolution,Pemotretan beruntun pada resolusi tinggi
+Has a dual-lens (or multi-lens) front camera,Memiliki kamera depan lensa ganda (atau multi-lensa)
+DxOMark Mobile score,Skor DxOMark Mobile
+Sensor size,Ukuran sensor
+Supports HDR10 recording,Mendukung perekaman HDR10
+Megapixels for 3D photos,Megapiksel untuk foto 3D
+Supports Dolby Vision recording,Mendukung perekaman Dolby Vision
+Has a front-facing camera under the display,Memiliki kamera depan di bawah layar
+3D video recording resolution,Resolusi perekaman video 3D
+Shutter lag,Jeda rana
+Has a RGB LED flash,Memiliki lampu kilat LED RGB
+Has 3D photo/video recording capabilities,Memiliki kemampuan merekam foto/video 3D
+Has clipboard warnings,Mempunyai peringatan papan klip
+Has location privacy options,Memiliki opsi privasi lokasi
+Has camera/microphone privacy options,Memiliki opsi privasi kamera/mikrofon
+Has Mail Privacy Protection,Memiliki Perlindungan Privasi Mail
+Has theme customization,Memiliki kustomisasi tema
+Can block app tracking,Dapat memblokir pelacakan aplikasi
+Blocks cross-site tracking,Memblokir pelacakan lintas situs
+Has on-device machine learning,Memiliki pembelajaran mesin pada perangkat
+Can play games while they download,Dapat bermain game saat mengunduh
+Has dark mode,Memiliki mode gelap
+Has Wi-Fi password sharing,Mempunyai berbagi kata sandi Wi-Fi
+Has battery health check,Mempunyai pemeriksaan kesehatan baterai
+Has an extra dim mode,Mempunyai mode redup ekstra
+Has focus modes,Memiliki mode fokus
+Has dynamic theming,Memiliki tema dinamis
+Can offload apps,Dapat membongkar aplikasi
+Has customizable notifications,Memiliki notifikasi yang dapat disesuaikan
+Has Live Text,Mempunyai Teks Langsung
+Has scrolling screenshots,Mempunyai tangkapan layar bergulir
+Has SharePlay,Memiliki SharePlay
+Supports split screen,Mendukung layar terpisah
+Supports instant markup,Mendukung markup instan
+Supports PiP and PaP,Mendukung PiP dan PaP
+Has AirPlay,Memiliki AirPlay
+ more languages supported, lebih banyak bahasa yang didukung
+Can be used as a PC,Dapat digunakan sebagai PC
+Has sharing intents,Memiliki maksud berbagi
+Has a child lock,Mempunyai child lock
+Supports widgets,Mendukung widget
+Is free and open source,Gratis dan open source
+Has offline voice recognition,Mempunyai pengenalan suara offline
+The browser has word wrap,Browser memiliki word wrap
+Has voice commands,Mempunyai perintah suara
+Tracks the current position of a mobile device,Melacak posisi perangkat seluler saat ini
+Is a multi-user system,Adalah sistem multi-pengguna
+Has Quick Start,Memiliki Mulai Cepat
+Battery power,Daya baterai
+Has wireless charging,Memiliki pengisian daya nirkabel
+Supports fast charging,Mendukung pengisian cepat
+Charging speed,Kecepatan pengisian
+Wireless charging speed,Kecepatan pengisian nirkabel
+Has reverse wireless charging,Memiliki pengisian daya nirkabel terbalik
+Reverse wireless charging speed,Kecepatan pengisian nirkabel terbalik
+Has a removable battery,Mempunyai baterai yang dapat dilepas
+Has an ultra power-saving mode,Memiliki mode hemat daya ultra
+Has a battery level indicator,Mempunyai indikator level baterai
+Has a rechargeable battery,Mempunyai baterai isi ulang
+Has a socket for a 3.5 mm audio jack,Memiliki soket untuk konektor audio 3 5mm
+Has stereo speakers,Memiliki pengeras suara stereo
+Has aptX,Memiliki aptX
+Has LDAC,Memiliki LDAC
+Has aptX HD,Memiliki aptX HD
+Has aptX Adaptive,Memiliki aptX Adaptive
+Has aptX Lossless,Memiliki aptX Lossless
+Has a radio,Mempunyai radio
+Number of microphones,Jumlah mikrofon
+Has dedicated media keys,Memiliki tombol media khusus
+Has 5G support,Memiliki dukungan 5G
+Wi-Fi version,Versi Wi-Fi
+Download speed,Kecepatan unduh
+Upload speed,Kecepatan unggah
+Has USB Type-C,Memiliki USB Tipe-C
+USB version,Versi USB
+Has NFC,Memiliki NFC
+SIM cards,Kartu SIM
+Has a fingerprint scanner,Memiliki pemindai sidik jari
+Has emergency SOS via satellite,Memiliki SOS darurat melalui satelit
+Has crash detection,Memiliki deteksi kerusakan
+Is DLNA-certified,Bersertifikat DLNA
+Bluetooth version,Versi Bluetooth
+Has a gyroscope,Mempunyai giroskop
+Supports ANT+,Mendukung ANT+
+Has a heart rate monitor,Mempunyai monitor detak jantung
+Has GPS,Memiliki GPS
+Has a compass,Mempunyai kompas
+Supports Wi-Fi,Mendukung Wi-Fi
+Has an infrared sensor,Memiliki sensor inframerah
+Body SAR (US),Body SAR (AS)
+Has an accelerometer,Mempunyai akselerometer
+Head SAR (US),Kepala SAR (AS)
+Has a cellular module,Mempunyai modul seluler
+Has a barometer,Mempunyai barometer
+Has an HDMI output,Memiliki output HDMI
+Uses 3D facial recognition,Menggunakan pengenalan wajah 3D
+Head SAR (EU),Kepala SAR (UE)
+Has an iris scanner,Mempunyai pemindai iris
+Stylus included,Termasuk stylus
+Supports Galileo,Mendukung Galileo
+Body SAR (EU),Badan SAR (UE)
+Has motion tracking,Mempunyai pelacakan gerakan
+Has optical tracking,Mempunyai pelacakan optik
+Has a built-in projector,Mempunyai proyektor internal
+Has a video light,Mempunyai lampu video
+Maximum amount of external memory supported,Jumlah maksimum memori eksternal yang didukung
+Design,Desain
+Display,Tampilan
+Performance,Performa
+Cameras,Kamera
+Operating System,Sistem operasi
+Battery,Baterai
+Audio,Audio
+Features,Fitur
+Miscellaneous,Lain-lain

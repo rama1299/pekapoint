@@ -53,7 +53,7 @@ export class ExchangeratesController {
             }
 
             const findRate = await client.query(
-                `SELECT code, rate
+                `SELECT code, rate, symbol
                 FROM public.exchangerates
                 WHERE code IN ($1,'EUR');`,
                 [codeCurrency.toUpperCase()]

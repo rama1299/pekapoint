@@ -1,14 +1,27 @@
 <script>
+	import { page } from '$app/stores';
+	import Cookies from 'js-cookie';
 	import { goto } from '$app/navigation';
 	import { isFilterProduct } from './../../../../stores.js';
     import { onMount } from 'svelte';
+    import { checkIpInfo } from '../../../../helpers/checkIpInfo.js';
+	import { Translate } from '../../../../helpers/translate.js';
+
+	let text = ['home', 'products', 'compare', 'blog', 'about us']
 
     export let isProductPage
     export let isDetailProductPage
     export let titleData
 
-    onMount(() => {
+    onMount(async () => {
+        let route = $page.route.id ??'/'
+        const arrayRoute = route.split('/')
+        const textTranslate = await Translate.client(text, arrayRoute.length < 3 ? false : true)
+		text = textTranslate
+
         document.addEventListener('click', handleOutSideSearch);
+
+        languageTitle = JSON.parse(Cookies.get('geoInfo')).language
     
         return () => {
         document.removeEventListener('click', handleOutSideSearch);
@@ -19,7 +32,7 @@
     function handleOutSideSearch(event) {
         let search = document.getElementById('search')
 
-        if (!search.contains(event.target)) {
+        if (search || !search.contains(event.target)) {
             resetValue()
         }
     }
@@ -28,12 +41,27 @@
     let toggleDropdown = false
     let y
 
+    let languageTitle = ''
+
     function handleMenu() {
         toggleMenu = !toggleMenu
     }
 
     function handleToggleFilterMobile() {
         isFilterProduct.set(true)
+    }
+
+    async function handleLanguage(name) {
+        let geoInfo = await checkIpInfo()
+        geoInfo = {
+            ...geoInfo,
+            language: name
+        }
+
+        await Cookies.remove('geoInfo')
+        await Cookies.set('geoInfo', JSON.stringify(geoInfo))
+
+        window.location.reload()
     }
 
 
@@ -174,8 +202,8 @@
                     <i class='bx bx-{toggleMenu ? 'x rotate-180 ' : 'menu -rotate-180'} duration-300 ease-in-out text-3xl lg:hidden ' on:click={handleMenu}></i>
                     <h1 class=" text-2xl md:text-4xl font-bold italic">Specwar.</h1>
                 </div>
-                {#if isProductPage}
                 <div id="search" class="w-full flex justify-end lg:justify-start gap-1 items-center">
+                    {#if isProductPage}
                     <div class="max-w-80 flex justify-between items-center h-8 lg:h-10 bg-white/20 text-white rounded-lg relative">
                         <div class="h-full aspect-square flex justify-center items-center rounded-l-lg">
                             <i class='bx bx-search text-xl'></i>
@@ -210,32 +238,29 @@
                     <div class="w-auto" on:click={handleToggleFilterMobile}>
                         <i class='bx bx-filter-alt text-2xl lg:hidden' ></i>
                     </div>
+                    {/if}
                 </div>
-                {/if}
             </div>
             <div class="w-1/2 lg:flex justify-between font-medium text-white items-center hidden">
-                <div class="flex justify-center gap-12 capitalize text">
-                    <a href="/" class="hover:text-[#F14D5D] duration-200 ease-in-out">home</a>
-                    <a href="/product" class="hover:text-[#F14D5D] duration-200 ease-in-out">product</a>
-                    <a href="/compare" class="hover:text-[#F14D5D] duration-200 ease-in-out">compare</a>
-                    <a href="/blog" class="hover:text-[#F14D5D] duration-200 ease-in-out">blog</a>
-                    <a href="/about" class="hover:text-[#F14D5D] duration-200 ease-in-out">about</a>
+                <div class="flex justify-center items-center gap-12 capitalize text">
+                    <a href="/" class="hover:text-[#F14D5D] duration-200 ease-in-out">{text[0]}</a>
+                    <a href="/product" class="hover:text-[#F14D5D] duration-200 ease-in-out">{text[1]}</a>
+                    <a href="/compare" class="hover:text-[#F14D5D] duration-200 ease-in-out">{text[2]}</a>
+                    <a href="/blog" class="hover:text-[#F14D5D] duration-200 ease-in-out">{text[3]}</a>
+                    <a href="/about" class="hover:text-[#F14D5D] duration-200 ease-in-out">{text[4]}</a>
                 </div>
                 <div class="flex justify-center items-center relative" on:mouseleave={() => {toggleDropdown = false}} on:mouseenter={() => {toggleDropdown = true}}>
-                    <button class="flex justify-center items-center hover:text-[#F14D5D] h-20 w-20">
-                        EN
+                    <button class="flex justify-center items-center hover:text-[#F14D5D] h-20 w-20 uppercase">
+                        {languageTitle}
                         <i class='bx bx-chevron-{toggleDropdown ? 'up' : 'down'} text-lg' ></i>
                     </button>
                         <div class="asbolute absolute top-20 right-0 px-4 pb-4 {toggleDropdown ? 'show' : 'dropdown_hidden'} ">
                             <div class="w-auto h-auto rounded-b-lg rounded-l-lg overflow-hidden bg-white shadow-lg border-t-[#F14D5D] border-t-4 z-50 duration-300 ease-in transition">
-                                <div class="w-full h-8 border-b flex justify-end items-center px-2 group">
-                                    <a href="" class="text-black group-hover:text-[#F14D5D]">Indonesia</a>
+                                <div class="w-full h-8 border-b flex justify-end items-center px-2 group cursor-pointer" on:click={() => {handleLanguage('id')}}>
+                                    <p class="text-black group-hover:text-[#F14D5D]">Indonesia</p>
                                 </div>
-                                <div class="w-full h-8 border-b flex justify-end items-center px-2 group">
-                                    <a href="" class="text-black group-hover:text-[#F14D5D]">Arabic</a>
-                                </div>
-                                <div class="w-full h-8 border-b flex justify-end items-center px-2 group">
-                                    <a href="" class="text-black group-hover:text-[#F14D5D]">Japanese</a>
+                                <div class="w-full h-8 border-b flex justify-end items-center px-2 group cursor-pointer" on:click={() => {handleLanguage('en')}}>
+                                    <a href="" class="text-black group-hover:text-[#F14D5D]">English</a>
                                 </div>
                             </div>
                         </div>
@@ -247,11 +272,11 @@
         <div class="container mx-auto px-3">
             <div class="w-full h-auto max-h-96 overflow-auto rounded-lg bg-white border-t-4 border-[#F14D5D] shadow-lg ">
                 <div class="flex flex-col w-full h-auto capitalize font-semibold gap-5 pt-5 px-5">
-                    <a href="/" class="hover:text-[#F14D5D]">home</a>
-                    <a href="/product" class="hover:text-[#F14D5D]">product</a>
-                    <a href="/compare" class="hover:text-[#F14D5D]">compare</a>
-                    <a href="/blog" class="hover:text-[#F14D5D]">blog</a>
-                    <a href="/about" class="hover:text-[#F14D5D]">about</a>
+                    <a href="/" class="hover:text-[#F14D5D]">{text[0]}</a>
+                    <a href="/product" class="hover:text-[#F14D5D]">{text[1]}</a>
+                    <a href="/compare" class="hover:text-[#F14D5D]">{text[2]}</a>
+                    <a href="/blog" class="hover:text-[#F14D5D]">{text[3]}</a>
+                    <a href="/about" class="hover:text-[#F14D5D]">{text[4]}</a>
                 </div>
                 <div class="flex flex-col w-full h-auto capitalize font-semibold gap-5 p-5">
                     <button class="w-full h-full flex justify-between" on:click={() => { toggleDropdown = !toggleDropdown}}>
@@ -259,10 +284,12 @@
                         <i class='bx bx-chevron-{toggleDropdown ? 'up' : 'down'} text-lg' ></i>
                     </button>
                     <div class="flex flex-col w-full h-auto capitalize font-semibold gap-5 px-7 {toggleDropdown ? '' : 'hidden'}">
-                        <a href="" class="hover:text-[#F14D5D]">Indonesia</a>
-                        <a href="" class="hover:text-[#F14D5D]">Arabic</a>
-                        <a href="" class="hover:text-[#F14D5D]">Japanese</a>
-                        <a href="" class="hover:text-[#F14D5D]">German</a>
+                        <div on:click={() => {handleLanguage('id')}}>
+                            <p class="hover:text-[#F14D5D]" >Indonesia</p>
+                        </div>
+                        <div on:click={() => {handleLanguage('en')}}>
+                            <p class="hover:text-[#F14D5D]">English</p>
+                        </div>
                     </div>
                 </div>
             </div>

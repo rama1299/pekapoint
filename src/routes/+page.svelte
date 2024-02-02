@@ -6,6 +6,15 @@
 	import Layout from "../lib/components/layout/Layout.svelte";
   	import Header from "./components/header/Header.svelte";
 	export let data
+	import {onMount} from 'svelte'
+	import { Translate } from './../helpers/translate.js';
+
+	let text = ['Easy Price and Quality Comparison!', 'Compare Now!']
+	onMount(async () => {
+		const textTranslate = await Translate.client(text)
+		text = textTranslate
+	})
+
 </script>
 
 <svelte:head>
@@ -16,7 +25,7 @@
 			<Header data={data.dataTitleProduct}></Header>
 			<div class="bg-white w-full">
 				<div class="container mx-auto">
-					<TopProduct/>
+					<TopProduct data={data.dataTopProduct}/>
 				</div>
 			</div>
 			<div class="flex justify-center items-center w-full bg-white h-[900px]">
@@ -25,10 +34,10 @@
 				</div>
 			</div>
 			<div class="flex justify-center items-center w-full py-10 bg-sky-500 h-[550px]">
-				<div class="container flex justify-center flex-col items-center gap-5">
-					<di class="text-center font-bold text-5xl text-white ">
+				<div class="container flex px-5 justify-center flex-col items-center gap-10">
+					<di class="text-center font-bold text-3xl lg:text-5xl text-white ">
 						<p>Specwar,</p>
-						<p>Easy Price and Quality Comparison!</p>
+						<p>{text[0]}</p>
 					</di>
 					<div>
 						<button class="w-52 h-12 border-2 border-white flex justify-center items-center rounded-lg group hover:bg-white duration-100" on:click={()=> {
@@ -37,7 +46,7 @@
 								behavior: 'smooth'
 							})
 						}}>
-							<p class="text-white font-semibold group-hover:text-sky-500">Compare Now!</p>
+							<p class="text-white font-semibold group-hover:text-sky-500">{text[1]}</p>
 						</button>
 					</div>
 				</div>
