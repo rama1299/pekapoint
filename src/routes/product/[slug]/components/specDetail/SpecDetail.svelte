@@ -2,12 +2,13 @@
     import { onMount } from "svelte";
       import Table from "./template/Table.svelte";
     import DoughnutChart from "./template/DoughnutChart.svelte";
+  import { Translate } from "../../../../../helpers/translate";
       export let data
       
       let datas = JSON.parse(data.datas)
       //hapus data miscellaneous
       $: datas = datas.map(data => {
-          if (data.title.toLocaleLowerCase() != 'miscellaneous') {
+          if (data.code.toLocaleLowerCase() != 'miscellaneous') {
               return {
                   ...data
               }
@@ -27,15 +28,30 @@
               active: btn.name === btnName,
               };
           });
+
+          const container = document.getElementById('containerSpec')
+          if (container) {
+            container.scrollIntoView()
+            window.scrollTo({
+                top: window.scrollY - 100
+            })
+          }
       }
+
+      let text = ['Detailed Specifications']
   
-      onMount(()=> {
+      onMount(async()=> {
+          let translate = await Translate.client(text, true)
+          console.log(translate)
+          text = translate
+
           btnTabs = btnTabs.map((btn) => {
               return {
               ...btn,
               active: btn.name === datas[showIndex].title,
               };
           });
+
       })
   
       $: btnTabs = [
@@ -82,23 +98,23 @@
       ]
   </script>
   
-  <section class="w-full bg-gray-100">
+  <section id="containerSpec" class="w-full bg-gray-100">
       <div class="container pb-5 lg:w-wrap mx-auto bg-white px-5 lg:px-10 space-y-5 divide-y-2">
           <div class="space-y-3">
               <div>
-                  <p class="text-2xl font-semibold">Detailed Specifications</p>
+                  <p class="text-2xl font-semibold">{text[0]}</p>
               </div>
               <div class="flex justify-center items-start gap-3 lg:gap-5   ">
                   <div class="w-1/6 lg:w-1/4 space-y-3 py-1 sticky top-16 lg:top-24">
                       {#each datas as data, index (data.title)}
                           {#each btnTabs as btn, i (btn.name)}
-                              {#if data.title.toLocaleLowerCase() == btn.name.toLocaleLowerCase()}
-                                  <div class="bg-white lg:px-8 cursor-pointer hover:scale-105 w-full h-12 lg:h-[75px] lg:h-20 {btn.active ? 'border-sky-600 scale-105' : ''} rounded-md flex gap-2 justify-center lg:justify-between items-center text-md font-medium border-2 duration-100 hover:border-sky-600" key={i} on:click={() => {handleShowIndex(index, btn.name)}}>
+                              {#if data.code.toLocaleLowerCase() == btn.name.toLocaleLowerCase()}
+                                  <div class="bg-white lg:px-8 cursor-pointer w-full h-12 lg:h-[75px] lg:h-20 {btn.active ? 'border-sky-500' : ''} rounded-md flex gap-2 justify-center lg:justify-between items-center text-md font-medium border-2 duration-100 hover:border-sky-500" key={i} on:click={() => {handleShowIndex(index, btn.name)}}>
                                       <div class="flex justify-start items-center gap-5">
-                                          <i class="{btn.className} {btn.active ? 'text-sky-600' : ''} text-3xl lg:group-hover:text-sky-600" ></i>
-                                          <p class="hidden lg:block {btn.active ? 'text-sky-600' : ''}">{data.title}</p>
+                                          <i class="{btn.className} {btn.active ? 'text-sky-500' : ''} text-3xl lg:group-hover:text-sky-500" ></i>
+                                          <p class="hidden lg:block {btn.active ? 'text-sky-500' : ''}">{data.title}</p>
                                       </div>
-                                      <i class='bx bx-chevron-right text-3xl hidden lg:block {btn.active ? 'text-sky-600' : ''}' ></i>
+                                      <i class='bx bx-chevron-right text-3xl hidden lg:block {btn.active ? 'text-sky-500' : ''}' ></i>
                                   </div>
                               {/if}
                           {/each}

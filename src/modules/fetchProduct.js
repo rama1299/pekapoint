@@ -1,12 +1,13 @@
 import { instance } from "./axios";
 import { Authentication } from "./authentication";
 import Cookies from "js-cookie";
+import { checkIpInfo } from "../helpers/checkIpInfo";
 
 export class FetchProduct {
     static async getProducts(query) {
         try {
             await Authentication.login() // Sebelum fetch login dulu
-
+            
             const response = await instance.get(`/product${query}`); //fetch data
             
             if (response.status === 401) { // jika status 401
@@ -37,6 +38,28 @@ export class FetchProduct {
                 Cookies.remove('status')
                 await Authentication.login()
                 const response = await instance.get(`/product/brand`);
+
+                return response
+            }
+
+            return response;
+        } catch (error) {
+            console.error("Error fetching products:", error.message);
+            throw error;
+        }
+    }
+
+    static async getTopProducts() {
+        try {
+            await Authentication.login()
+            
+            const response = await instance.get(`/product/top`);
+
+            if (response.status === 401) {
+
+                Cookies.remove('status')
+                await Authentication.login()
+                const response = await instance.get(`/product/top`);
 
                 return response
             }
@@ -97,6 +120,7 @@ export class FetchProduct {
             await Authentication.login()
 
             const queryPage = page ? `?page=${page}` : ''
+
             const data = {search}
             
             const response = await instance.post(`/product/search${queryPage}`, data);

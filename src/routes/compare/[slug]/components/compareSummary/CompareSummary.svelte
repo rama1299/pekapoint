@@ -4,7 +4,11 @@
   import { enableDataToCompare } from '../../../../../stores';
   import { removeHtmlTags } from '../../../../../helpers/removeHtmlTags';
   import DoughnutChart from './template/DoughnutChart.svelte';
+  import { Translate } from '../../../../../helpers/translate';
   export let data
+
+  $: data = data
+  let text = ['Summary']
 
   let specTitle = JSON.parse(data[0].datas)
 
@@ -68,13 +72,14 @@
     }).filter(Boolean);
     $: dataSpec = enableData.map((data) => {
         const datas = JSON.parse(data.datas)
-        const findSpec = datas.find((spec) => spec.title === key)
+        const findSpec = datas.find((spec) => spec.code === key)
         return {
             ...findSpec,
             device : data.title,
             radarColor : data.radarColor
         }
     })
+
 
     $:radarColor = $enableDataToCompare.map((data) => {
         return data.enable ? data.radarColor : ''
@@ -148,7 +153,7 @@
     $: dataAttributes = dataSpec.map((data) => {
         const dataAttributes = data.attributes
         const attributesFilter = selectedTitlesSpec[key].map((selectedTitle) => {
-            const attribute = dataAttributes.find((attr) => attr.title === selectedTitle);
+            const attribute = dataAttributes.find((attr) => attr.code === selectedTitle);
 
                 if (attribute) {
                     return attribute;
@@ -223,29 +228,28 @@
         }
     }
 
-        onMount(() => {
-    btnTabs = btnTabs.map((btn) => {
-        return {
-        ...btn,
-        active: btn.name === key,
-        };
-    });
-  })
+    onMount(async() => {
+        let translate = await Translate.client(text, true)
+        text = translate
+        btnTabs = btnTabs.map((btn) => {
+            return {
+            ...btn,
+            active: btn.name === key,
+            };
+        });
+    })
 
-setTimeout(() => {
-    console.log(radarColor)
-}, 1000);
 </script>
 
 <svelte:window bind:innerWidth={screenWidth}/>
 <div class="w-full space-y-5 divide-y-2">
     <div class="w-full space-y-3">
-        <p class="text-2xl font-semibold">Compare</p>
+        <p class="text-2xl font-semibold">{text[0]}</p>
         <div class="w-full flex flex-row-reverse lg:block mx-auto gap-2 border-gray-100 border-2 rounded-lg space-y-5 pb-3">
             <div class="w-1/6 lg:w-full grid grid-rows-8 lg:grid-cols-8 divide-gray-200 lg:divide-y-0 divide-y-2 divide-x-0 lg:divide-x-2 border-gray-100 border-y-2 lg:border-y-0 border-l-0 lg:border-r-0  h-96 lg:h-auto lg:static sticky top-12">
-                {#each specTitle as item, index (index, item.title)}
+                {#each specTitle as item, index (index, item.code)}
                     {#each btnTabs as btn, i (i,btn.name )}
-                        {#if item.title.toLocaleLowerCase() == btn.name.toLocaleLowerCase()}
+                        {#if item.code.toLocaleLowerCase() == btn.name.toLocaleLowerCase()}
                         <div class="w-full col-span-1 lg:py-2 flex justify-center items-center {btn.active ? 'bg-gray-200' : 'bg-gray-100 group'} " on:click={() => {handleTabs(btn.name)}}>
                             <i class="{btn.className} {btn.active ? 'text-sky-600' : ''} text-2xl lg:group-hover:text-sky-600" ></i>
                         </div>
@@ -255,7 +259,7 @@ setTimeout(() => {
             </div>
             <div class="hidden lg:flex w-full px-5 justify-between">
                 <div>
-                    <p class="text-xl font-semibold">{key}</p>
+                    <p class="text-xl font-semibold">{specTitle.find((data) => data.code == key).title}</p>
                 </div>
                 {#if enableData.length > 2}
                      <div class="flex justify-center gap-3 items-center">

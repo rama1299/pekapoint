@@ -1,12 +1,34 @@
 import { instance } from "./axios";
 import { getCookie, setCookie } from "../helpers/cookies";
 import Cookies from "js-cookie";
+import { checkIpInfo } from "../helpers/checkIpInfo";
 
 const data = JSON.parse(import.meta.env.VITE_USER)
 
 export class Authentication {
     static async login() {
             try {
+
+                const checkExchange = Cookies.get('exchange')
+                if (!checkExchange) {
+                    const geoInfo = await checkIpInfo()
+                    let {currency} = geoInfo
+    
+                    if (currency.length > 3) {
+                        const arrayCurrency = currency.split(",")
+                        currency = arrayCurrency[0]
+                    }
+    
+                    const getExchange = await instance.get(`http://localhost:3000/api/exchangerates/update/${currency}`)
+                    
+                    if (getExchange.status == 200) {
+                        const dataExchange = getExchange.data
+                        Cookies.set('exchange', JSON.stringify(dataExchange))
+                    } else {
+                        Cookies.set('exchange', "")
+                    }
+    
+                }
 
                 const status = Cookies.get('status') // cek status di cookie
 

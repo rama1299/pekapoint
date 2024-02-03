@@ -18,6 +18,8 @@ const errorHandler = (error, req, res, next) => {
         res.status(400).json({message: 'Login failed'})
     } else if (error.name === 'CreateFailed') {
         res.status(400).json({message: 'Create failed'})
+    } else if (error.name === 'UpdateExchangeFailed') {
+        res.status(400).json({message: 'Update exchangerates failed'})
     } else if (error.name === 'DataAlreadyExist') {
         res.status(400).json({message: 'Data already exist'})
     } else {

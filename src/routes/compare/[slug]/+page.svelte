@@ -1,4 +1,5 @@
 <script>
+	import { goto } from '$app/navigation';
 	import ComparePrice from './components/comparePrice/ComparePrice.svelte';
   import { enableDataToCompare } from './../../../stores.js';
 	import CompareSummary from './components/compareSummary/CompareSummary.svelte';
@@ -7,8 +8,12 @@
   import CompareDetailList from './components/compareDetail/CompareDetailList.svelte';
   import { onMount, afterUpdate } from 'svelte';
   import Lagend from './components/compareDetail/template/Lagend.svelte';
+  import { Translate } from '../../../helpers/translate';
 
-  onMount(() => {
+  onMount(async () => {
+    if (data.status == 'error') {
+      goto(`/error`)
+    }
     enableData = dataProduct.map((item, i) => {
             return {
                 id : item.id,
@@ -20,14 +25,19 @@
         })
 
         enableDataToCompare.set(enableData)
+
+        let translateSpec = await Translate.compareSpec(data.dataSpec)
+        dataSpec = translateSpec
     })
 
     export let data
+
     let dataProduct = data.dataProduct
     let dataSpec = data.dataSpec
     let status = data.status
     let enableData
     let title = dataProduct.map(item => item.title).join(' vs ')
+    console.log(dataSpec)
 
 
     
@@ -58,13 +68,15 @@
     $: heightCol = heightContainerLagend / dataProduct.length
 
     let color = ['blue', 'pink', 'orange', 'teal']
+
 </script>
 
 <svelte:head>
   <title>{title}</title>
   <meta name="description" content={`comparison ${title}`} />
 </svelte:head>
-<Layout isDetailProductPage={true} >
+{#if data.status != 'error'}
+  <Layout isDetailProductPage={true} >
   {#if status === 'success'}
     <main class="w-auto h-auto mx-auto pt-14 lg:pt-20 bg-gray-100">
       <div class="container lg:w-wrap bg-white mx-auto px-5 py-10 space-y-10">
@@ -76,7 +88,7 @@
                     <Lagend color={color[i]} heightCol={heightCol} widthContainerLagend={widthContainerLagend} title={data.title} lagendIndex={i}/>
                 {/each}
             </div>
-            <div class="w-10/12 lg:w-11/12">
+            <div class="w-10/12 lg:w-11/12 space-y-10">
               <CompareSummary data={dataSpecWithAdd}/>
               <CompareDetailList data={dataSpecWithAdd}/>
             </div>
@@ -85,10 +97,7 @@
           <ComparePrice data={dataSpecWithAdd}/>
       </div>
   </main> 
-  {:else if  status === 'error'}
-  <main class="w-full h-screen mx-auto pt-14 lg:pt-20 bg-gray-100">
-    <p class="font-medium text-xl">Data Error...</p>
-  </main>
   {/if}
 
   </Layout>
+{/if}

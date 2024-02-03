@@ -6,10 +6,15 @@
     import { isFilterProduct } from "../../../../stores";
     import {readablestreamToJson} from "../../../../helpers/readablestreamToJson"
     import { createEventDispatcher } from 'svelte';
+  import { Translate } from '../../../../helpers/translate.js';
 
     const dispatch = createEventDispatcher();
+    let text = ['Brand', 'Filter', 'Reset', 'OK']
     
-    onMount(() => {
+    onMount(async () => {
+        let translate = await Translate.client(text)
+        text = translate
+
         async function fetchBrand() {
             const response = await FetchProduct.getBrandProducts()
             if (response && response.status == 200) {
@@ -168,7 +173,7 @@
         <p class="font-semibold text-xl">Filter</p>
         <div class="h-full" on:keypress={() => {handleToggle('isBrand')}} on:click={() => {handleToggle('isBrand')}} >
             <button class="w-36 bg-white h-full border rounded-md flex justify-between items-center px-2">
-                <div>Brand</div>
+                <div>{text[0]}</div>
                 <div class="flex items-center">
                     {#if selectedBrand.length > 0}
                          <p class="text-gray-600">{`(${selectedBrand.length})`}</p>
@@ -195,7 +200,7 @@
         
         {#if filterToggle.isBrand}
             <div id="dropdownBrand" class="w-auto h-auto bg-white absolute top-12 left-[75px] rounded-md border z-10 p-6">
-                <div class="grid grid-cols-3 gap-x-6 gap-y-1 max-h-[390px] overflow-auto">
+                <div class="grid grid-cols-3 gap-x-6 gap-y-1 max-h-[310px] overflow-auto">
                     {#each brand as data (data.id)}
                          <div class="w-full h-auto flex justify-start">
                              <div class="flex justify-center gap-x-3 items-center">
@@ -206,8 +211,8 @@
                     {/each}
                 </div>
                 <div class="w-auto flex justify-center gap-4 mt-6">
-                    <button class="w-28 h-8 border rounded-lg bg-gray-200 hover:bg-gray-300" on:click={clearAll}>Reset</button>
-                    <button class="w-28 h-8 border rounded-lg bg-sky-500 hover:bg-sky-600 text-white" on:click={close}>OK</button>
+                    <button class="w-28 h-8 border rounded-lg bg-gray-200 hover:bg-gray-300" on:click={clearAll}>{text[2]}</button>
+                    <button class="w-28 h-8 border rounded-lg bg-sky-500 hover:bg-sky-600 text-white" on:click={close}>{text[3]}</button>
                 </div>
             </div>
         {/if}
@@ -362,10 +367,10 @@
                 </div> -->
                 <div>
                     <div class="">
-                        <p class="font-semibold">Filter</p>
+                        <p class="font-semibold">{text[1]}</p>
                     </div>
                     <div class="w-full h-auto bg-white rounded-lg p-2 border">
-                        <p class="font-semibold">Brand</p>
+                        <p class="font-semibold">{text[0]}</p>
                     <div class="h-[600px] w-full overflow-auto scroll space-y-1">
                         {#each brand as data (data.id)}
                             <div class="w-full h-auto flex justify-start px-2">
@@ -454,8 +459,8 @@
             </div>
             <div class="w-80 h-1/6 ">
                 <div class="h-full w-full flex justify-center gap-2 items-center">
-                    <button class="px-4 py-2 border rounded-lg bg-gray-300" on:click={clearAll}>Reset</button>
-                    <button class="px-4 py-2 border rounded-lg bg-sky-500 text-white" on:click={handleToggleMobile}>OK</button>
+                    <button class="px-4 py-2 border rounded-lg bg-gray-300" on:click={clearAll}>{text[2]}</button>
+                    <button class="px-4 py-2 border rounded-lg bg-sky-500 text-white" on:click={handleToggleMobile}>{text[3]}</button>
                 </div>
             </div>
         </div>

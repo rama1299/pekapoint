@@ -1,33 +1,57 @@
 <script>
+	import { goto } from '$app/navigation';
+	import TagCompare from './components/tagCompare/TagCompare.svelte';
 	import PriceDetail from './components/priceDetail/PriceDetail.svelte';
 	import SpecDetail from './components/specDetail/SpecDetail.svelte';
 	import ProductDetail from './components/productDetail/ProductDetail.svelte';
   import Layout from '../../../lib/components/layout/Layout.svelte';
+  import { onMount } from 'svelte';
+  import { Translate } from '../../../helpers/translate';
 
   export let data
-  let dataProduct = data.dataProduct
-  let dataSpec = data.dataSpec
+
+  onMount(async () => {
+    if (data.status == 'error') {
+      goto('/error')
+    }
+    let translate = await Translate.product(data.dataProduct, true)
+    dataProduct = translate
+    let translateSpec = await Translate.productSpec(data.dataSpec, true)
+    dataSpec = translateSpec
+    dataTagCompare = [{title: dataProduct.title, slug: dataProduct.slug, feature_image: dataProduct.feature_image}]
+    title = dataProduct.title
+    window.scrollTo({
+      top: 0
+    })
+  })
+  let dataProduct = ''
+  let dataSpec = ''
   let status = data.status
   let dataVariant = data.dataVariant.length == 0 ? [] : data.dataVariant[0]
-  let title = dataProduct.title ?? status
-
+  let title = ''
+  let dataTagCompare = []
 </script>
 
 
 <svelte:head>
-  <title>{title}</title>
-  <meta name="description" content={`Detail from ${title}`} />
-</svelte:head>
-<Layout isDetailProductPage={true} >
-  {#if status === 'success'}
-    <main class="w-auto h-auto mx-auto pt-14 lg:pt-20 bg-gray-100">
-        <ProductDetail data={dataProduct} spec={dataSpec} variant={dataVariant}/>
-        <SpecDetail data={dataSpec}/>
-        <PriceDetail/>
-    </main>
-  {:else if  status === 'error'}
-    <main class="w-full h-screen bg-gray-100 mx-auto pt-14 lg:pt-20">
-      <p class="text-lg font-medium">Data Error...</p>
-    </main>
+  {#if title != ''}
+     <title>{title}</title>
+     <meta name="description" content={`Detail from ${title}`} />
   {/if}
-</Layout>
+</svelte:head>
+{#if status === 'success'}
+<Layout isDetailProductPage={true} >
+    <main class="w-auto h-auto mx-auto pt-14 lg:pt-20 bg-gray-100">
+      {#if dataProduct != '' && dataSpec != ''}
+         <ProductDetail data={dataProduct} spec={dataSpec} variant={dataVariant}/>
+      {/if}
+      {#if dataSpec != ''}
+         <SpecDetail data={dataSpec}/>
+      {/if}
+        <PriceDetail/>
+      {#if dataTagCompare != []}
+         <TagCompare data={dataTagCompare}/>
+      {/if}
+    </main>
+  </Layout>
+  {/if}

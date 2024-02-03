@@ -1,13 +1,13 @@
 import Cookies from "js-cookie";
 
-const cookieName = 'iso_code';
+const cookieName = 'geoInfo';
 const apiKey = 'a96dd7c20cca4d3c928434af9e5de67d';
 const urlIpGeolocation = `https://api.geoapify.com/v1/ipinfo?apiKey=${apiKey}`;
 
 export async function checkIpInfo() {
-  const checkIsoCode = Cookies.get(cookieName);
+  const checkGeoInfo = Cookies.get(cookieName);
 
-  if (!checkIsoCode) {
+  if (!checkGeoInfo) {
     try {
       const response = await fetch(urlIpGeolocation);
 
@@ -15,8 +15,9 @@ export async function checkIpInfo() {
         const ipInfo = await response.json();
 
         if (ipInfo && ipInfo.country && ipInfo.country.iso_code) {
-          Cookies.set(cookieName, ipInfo.country.iso_code.toLowerCase());
-          return ipInfo.country.iso_code.toLowerCase();
+          let dataCookie = {iso_code: ipInfo.country.iso_code.toLowerCase(), currency: ipInfo.country.currency.toLowerCase(), language: ipInfo.country.languages[0].iso_code.toLowerCase()}
+          Cookies.set(cookieName, JSON.stringify(dataCookie));
+          return dataCookie;
         } else {
           console.error('Invalid or missing data in IP information.');
           return null;
@@ -31,5 +32,5 @@ export async function checkIpInfo() {
     }
   }
 
-  return checkIsoCode;
+  return JSON.parse(checkGeoInfo);
 }

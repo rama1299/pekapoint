@@ -1,12 +1,23 @@
 <script>
+	import { Translate } from './../../../../../helpers/translate.js';
   import Card from "./template/Card.svelte";
+  import { onMount } from "svelte";
+
+  let text = ['Price Variant']
+
+  onMount(async () => {
+    let translate = await Translate.client(text, true)
+    text = translate
+  })
 </script>
+
+
 
 <section class="w-full bg-gray-100">
     <div class="container pb-10 lg:w-wrap mx-auto bg-white px-5 lg:px-10 space-y-3">
         <div class="w-full space-y-3">
             <div class="w-full">
-                <p class="text-2xl font-semibold">Price Details</p>
+                <p class="text-2xl font-semibold">{text[0]}</p>
             </div>
             <div class="w-full space-y-3">
                 {#each Array(5) as _, i (i)}

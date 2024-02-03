@@ -2,9 +2,15 @@
 	import RadarChart from './RadarChart.svelte';
   import { onMount } from "svelte";
   import { removeHtmlTags } from "../../../../../../helpers/removeHtmlTags";
+  import { Translate } from '../../../../../../helpers/translate';
   export let data
 
-  onMount(() => {
+  let text = ['Summary']
+
+  onMount(async () => {
+    let translate = await Translate.client(text, true)
+    text = translate
+
     btnTabs = btnTabs.map((btn) => {
         return {
         ...btn,
@@ -23,6 +29,19 @@
       active: btn.name === btnName,
     };
   });
+
+  toTopContainer()
+  }
+
+  function toTopContainer() {
+    const container = document.getElementById('containerSummary')
+
+    if (container) {
+        container.scrollIntoView()
+        window.scrollTo({
+            top: window.scrollY - 100
+        })
+    }
   }
 
 $: index = 0
@@ -37,7 +56,7 @@ $: dataRadar = datas[index].attributes.map(data => {
 $: dataRadarLimit = dataRadar.slice(0, 8)
 
 $: datas = datas.map(data => {
-    if (data.title.toLocaleLowerCase() != 'miscellaneous') {
+    if (data.code.toLocaleLowerCase() != 'miscellaneous') {
         return {
             ...data
         }
@@ -88,15 +107,15 @@ $: datas = datas.map(data => {
         },
     ]
 </script>
-<div class="w-full space-y-5 divide-y-2">
+<div id=containerSummary class="w-full space-y-5 divide-y-2">
     <div class="w-full space-y-3">
-        <p class="text-2xl font-semibold">Summary</p>
+        <p class="text-2xl font-semibold">{text[0]}</p>
         <div class="w-full flex flex-row-reverse lg:block mx-auto gap-2 border-gray-100 border-2 rounded-lg pb-5">
             <div class="w-1/6 lg:w-full grid grid-rows-8 lg:grid-cols-8 divide-gray-200 lg:divide-y-0 divide-y-2 divide-x-0 lg:divide-x-2 border-gray-100 border-y-2 lg:border-y-0 border-l-0 lg:border-r-0  h-96 lg:h-auto lg:static sticky top-12">
                 {#each datas as data, index (index, data.title)}
                     {#each btnTabs as btn, i (i,btn.name )}
-                        {#if data.title.toLocaleLowerCase() == btn.name.toLocaleLowerCase()}
-                        <div class="w-full col-span-1 lg:py-2 flex justify-center items-center {btn.active ? 'bg-gray-200' : 'bg-gray-100 group'} " on:click={() => {handleTabs(index, btn.name)}}>
+                        {#if data.code.toLocaleLowerCase() == btn.name.toLocaleLowerCase()}
+                        <div class="w-full col-span-1 lg:py-2 flex justify-center items-center cursor-pointer {btn.active ? 'bg-gray-200' : 'bg-gray-100 group'} " on:click={() => {handleTabs(index, btn.name)}}>
                             <i class="{btn.className} {btn.active ? 'text-sky-600' : ''} text-2xl lg:group-hover:text-sky-600" ></i>
                         </div>
                         {/if}

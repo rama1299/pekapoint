@@ -1,5 +1,7 @@
 import { pool } from "../../../config/dbConfig.js"
 import { getImagesFromData } from "../../../system/services/getImagesFromData.js";
+import { Translate } from "../../../system/services/translate.js";
+
 
 export class ProductController {
     static async findProduct(req, res, next) {
@@ -27,6 +29,7 @@ export class ProductController {
                     filterObject == undefined
                 }
             }
+            let language = req.query.language ?? 'en'
         try {
             const page = req.query.page
             const perPage = 24
@@ -50,10 +53,25 @@ export class ProductController {
                     throw ({name: 'ErrorNotFound'})
                 }
 
-                const data = response.rows
+                let data = response.rows
+
                 const totalProducts = parseInt(totalResult.rows[0].count);
                 const totalPages = Math.ceil(totalProducts / limit);
 
+                data = await Promise.all(data.map(async (item) => {
+                    let summaryJson = JSON.parse(item.summary)
+                    let titleGroup = Object.keys(summaryJson)[0]
+                    let attribute = await Promise.all(summaryJson[titleGroup].map(async (obj) => {
+                        return {
+                            ...obj,
+                            code: obj.title
+                        }
+                    }))
+                    return {
+                        ...item,
+                        summary: JSON.stringify({[titleGroup]: attribute})
+                    }
+                }))
     
                 res.status(200).json({data, totalProducts, totalPages})
             } else {
@@ -62,7 +80,7 @@ export class ProductController {
                     [limit, offset]
                 );
         
-                const data = response.rows
+                let data = response.rows
                 const totalResult = await pool.query('SELECT COUNT(*) FROM products');
                 const totalProducts = parseInt(totalResult.rows[0].count);
                 const totalPages = Math.ceil(totalProducts / limit);
@@ -70,6 +88,21 @@ export class ProductController {
                 if (data.length === 0) {
                     throw ({name: 'ErrorNotFound'})
                 }
+
+                data = await Promise.all(data.map(async (item) => {
+                    let summaryJson = JSON.parse(item.summary)
+                    let titleGroup = Object.keys(summaryJson)[0]
+                    let attribute = await Promise.all(summaryJson[titleGroup].map(async (obj) => {
+                        return {
+                            ...obj,
+                            code: obj.title
+                        }
+                    }))
+                    return {
+                        ...item,
+                        summary: JSON.stringify({[titleGroup]: attribute})
+                    }
+                }))
 
                 res.status(200).json({data, totalProducts, totalPages})
             }
@@ -83,7 +116,6 @@ export class ProductController {
 
     static async findProductBySlug(req, res, next) {
         const client = await pool.connect();
-    
         try {
           const slug = req.params.slug;
     
@@ -103,26 +135,42 @@ export class ProductController {
           if (data.length === 0) {
             throw { name: 'ErrorNotFound'};
           }
+
           
           if (data.length === 1) {
-            data = await Promise.all(data.map(async (obj) => {
-                let arraySlug = obj.slug.split('-');
+              data = await Promise.all(data.map(async (obj) => {
+                  let arraySlug = obj.slug.split('-');
                 let pathName = `/${arraySlug[0]}/${arraySlug[1]}`
                 let pathDir = `static/images${pathName}`;
                 let dataImages = await getImagesFromData(pathDir, obj.slug);
-
+                
                 dataImages = dataImages.map((titleImage) => {
                     return `${pathName}/${titleImage}`;
                 });
-            
+                
                 return {
                     ...obj,
                     images: dataImages
                 };
             }));
-          }
-    
-          res.status(200).json(data);
+        }
+
+        data = await Promise.all(data.map(async (item) => {
+            let summaryJson = JSON.parse(item.summary)
+            let titleGroup = Object.keys(summaryJson)[0]
+            let attribute = await Promise.all(summaryJson[titleGroup].map(async (obj) => {
+                return {
+                    ...obj,
+                    code: obj.title
+                }
+            }))
+            return {
+                ...item,
+                summary: JSON.stringify({[titleGroup]: attribute})
+            }
+        }))
+        
+        res.status(200).json(data);
         } catch (error) {
           console.error(error);
           next(error);
@@ -133,6 +181,7 @@ export class ProductController {
 
     static async findProductSpecById(req, res, next) {
         const client = await pool.connect()
+        let language = req.query.language ?? 'en'
         try {
             const id = req.params.id
             let dataId = id.split(',').map((item) => item.replace(',', ''));
@@ -192,11 +241,32 @@ export class ProductController {
                 dataId
             )
 
-            const data = response.rows
+            let data = response.rows
 
             if (data.length === 0) {
                 throw ({name: 'ErrorNotFound'})
             }
+
+            data = await Promise.all(data.map(async (item) => {
+                let dataSpecJson = JSON.parse(item.datas)
+                const dataSpec = await Promise.all(dataSpecJson.map(async (data) => {
+                    let attributes = await Promise.all(data.attributes.map(async (item) => {
+                        return {
+                            ...item,
+                            code: item.title
+                        }
+                    }))
+                    return {
+                      ...data,
+                      attributes: attributes,
+                      code: data.title
+                    };
+                }));
+                return {
+                    ...item,
+                    datas: JSON.stringify(dataSpec)
+                }
+            }))
 
             res.status(200).json(data)
         } catch (error) {
@@ -271,7 +341,7 @@ export class ProductController {
         const client = await pool.connect()
         if (!parseInt(req.query.page)) {
             req.query.page = 1;
-          }
+        }
         try {
             const search = req.body.search.toLowerCase()
             const page = req.query.page
@@ -300,7 +370,7 @@ export class ProductController {
                 values
             );
 
-            const data = response.rows
+            let data = response.rows
 
             if (data.length == 0) {
                 throw ({name: 'ErrorNotFound'})
@@ -316,6 +386,21 @@ export class ProductController {
             const totalProducts = parseInt(responseTotal.rows[0].count);
             const totalPages = Math.ceil(totalProducts / limit);
 
+            data = await Promise.all(data.map(async (item) => {
+                let summaryJson = JSON.parse(item.summary)
+                let titleGroup = Object.keys(summaryJson)[0]
+                let attribute = await Promise.all(summaryJson[titleGroup].map(async (obj) => {
+                    return {
+                        ...obj,
+                        code: obj.title
+                    }
+                }))
+                return {
+                    ...item,
+                    summary: JSON.stringify({[titleGroup]: attribute})
+                }
+            }))
+
             res.status(200).json({data, totalPages, totalProducts})
         } catch (error) {
             next(error)
@@ -323,4 +408,28 @@ export class ProductController {
             client.release()
         }
     }
-}
+
+    static async getTopProduct(req, res, next) {
+        const client = await pool.connect()
+        try {
+            const findProduct = await client.query(
+                `SELECT title, feature_image, slug, spec_score, '[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]' as affiliate
+                FROM public.products
+                ORDER BY spec_score DESC, created_at DESC
+                LIMIT 12;`
+            )
+
+            if (findProduct.rows.length == 0) {
+                throw ({name: 'ErrorNotFound'})
+            }
+
+            const data = findProduct.rows
+
+            res.status(200).json(data)
+        } catch (error) {
+            next(error)
+        } finally {
+            client.release()
+        }
+    }
+} 

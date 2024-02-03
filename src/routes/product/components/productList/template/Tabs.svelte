@@ -43,7 +43,7 @@
 
 </script>
 <!-- display -->
-<div class="bg-white w-full relative px-4 h-40 m-auto {tabControl.isPerformance ? '' : 'hidden'}">
+<div class="bg-white w-full relative px-4 pb-4 m-auto {tabControl.isPerformance ? '' : 'hidden'}">
     <p class="text-center text-md font-medium absolute left-4 -top-5 text-gray-700">{titleTab}</p>
     <div class="flex justify-center md:justify-between justify-items-center items-center gap-6 mt-3 pt-1 ">
         <div class="w-3/4 h-36 space-y-[6px]">
@@ -167,30 +167,30 @@
     </div>
 </div> -->
 
-<div class="text-sm font-medium text-center text-gray-500 border-t divide-x divide-gray-200 shadow flex dark:divide-gray-700 dark:text-gray-400">
-    <div class="w-full" on:keypress={()=> {setActiveTab('isDisplay')}} on:click={()=> {setActiveTab('isDisplay')}}>
-        <div class="inline-block w-full p-3 focus:bg-gray-100 focus:text-black bg-white hover:text-gray-700 hover:bg-gray-50 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">
+<!-- <div class="text-sm font-medium text-center text-gray-500 border-t divide-x divide-gray-200 shadow flex dark:divide-gray-700 dark:text-gray-400">
+    <div class="w-full cursor-pointer" on:keypress={()=> {setActiveTab('isDisplay')}} on:click={()=> {setActiveTab('isDisplay')}}>
+        <div class="inline-block w-full p-3 focus:bg-gray-100 focus:text-black bg-white hover:text-gray-700 hover:bg-gray-100 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">
             <i class='bx bx-mobile-alt text-xl'></i>
         </div>
     </div>
-    <div class="w-full" on:keypress={()=> {setActiveTab('isPerformance')}} on:click={()=> {setActiveTab('isPerformance')}}>
-        <div  class="inline-block w-full p-3 focus:bg-gray-100 focus:text-black bg-white hover:text-gray-700 hover:bg-gray-50 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">
+    <div class="w-full cursor-pointer" on:keypress={()=> {setActiveTab('isPerformance')}} on:click={()=> {setActiveTab('isPerformance')}}>
+        <div  class="inline-block w-full p-3 focus:bg-gray-100 focus:text-black bg-white hover:text-gray-700 hover:bg-gray-100 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">
             <i class='bx bx-microchip text-xl'></i>
         </div>
     </div>
-    <div class="w-full" on:keypress={()=> {setActiveTab('isCamera')}} on:click={()=> {setActiveTab('isCamera')}}>
-        <div  class="inline-block w-full p-3 focus:bg-gray-100 focus:text-black bg-white hover:text-gray-700 hover:bg-gray-50 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">
+    <div class="w-full cursor-pointer" on:keypress={()=> {setActiveTab('isCamera')}} on:click={()=> {setActiveTab('isCamera')}}>
+        <div  class="inline-block w-full p-3 focus:bg-gray-100 focus:text-black bg-white hover:text-gray-700 hover:bg-gray-100 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">
             <i class='bx bx-camera text-xl' ></i>
         </div>
     </div>
-    <div class="w-full" on:keypress={()=> {setActiveTab('isBattery')}} on:click={()=> {setActiveTab('isBattery')}}>
-        <div  class="inline-block w-full p-3 focus:bg-gray-100 focus:text-black bg-white hover:text-gray-700 hover:bg-gray-50 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">
+    <div class="w-full cursor-pointer" on:keypress={()=> {setActiveTab('isBattery')}} on:click={()=> {setActiveTab('isBattery')}}>
+        <div  class="inline-block w-full p-3 focus:bg-gray-100 focus:text-black bg-white hover:text-gray-700 hover:bg-gray-100 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">
             <i class='bx bx-battery text-xl' ></i>
         </div>
     </div>
-    <div class="w-full" on:keypress={()=> {setActiveTab('isAudio')}} on:click={()=> {setActiveTab('isAudio')}}>
-        <div  class="inline-block w-full p-3 focus:bg-gray-100 focus:text-black bg-white hover:text-gray-700 hover:bg-gray-50 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">
+    <div class="w-full cursor-pointer" on:keypress={()=> {setActiveTab('isAudio')}} on:click={()=> {setActiveTab('isAudio')}}>
+        <div  class="inline-block w-full p-3 focus:bg-gray-100 focus:text-black bg-white hover:text-gray-700 hover:bg-gray-100 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">
             <i class='bx bx-music text-xl' ></i>
         </div>
     </div>
-</div>
+</div> -->

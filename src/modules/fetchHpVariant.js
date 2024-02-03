@@ -6,8 +6,8 @@ import { checkIpInfo } from "../helpers/checkIpInfo";
 export class FetchHpVariant {
     static async getVariantById(id) {
 
-        let country = await checkIpInfo()
-        let query = country ? `?country=${country}` : ''
+        let geoInfo = await checkIpInfo()
+        let query = geoInfo ? `?country=${geoInfo.iso_code}` : ''
         try {
             await Authentication.login()
 
@@ -24,7 +24,7 @@ export class FetchHpVariant {
 
             return response
         } catch (error) {
-            console.error("Error fetching brand products:", error.response.data.message || error.message);
+            console.error("Error fetching:", error.response.data.message || error.message);
             throw error;
         }
     }

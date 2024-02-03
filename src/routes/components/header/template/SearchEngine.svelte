@@ -1,6 +1,23 @@
 <script>
 	import { goto } from '$app/navigation';
-  import { afterUpdate } from "svelte";
+    import { afterUpdate, onMount } from "svelte";
+
+  onMount(() => {
+        document.addEventListener('click', handleOutSideSearch);
+    
+        return () => {
+        document.removeEventListener('click', handleOutSideSearch);
+        };
+
+    })
+
+    function handleOutSideSearch(event) {
+        let search = document.getElementById('search')
+
+        if (!search.contains(event.target)) {
+            resetValue()
+        }
+    }
 
     export let data
 
@@ -139,7 +156,7 @@
     })
 </script>
 
-<div class="w-full h-40">
+<div id="search" class="w-full h-40">
     <div class="mx-auto flex justify-center items-center">
         <div class="w-5/6 lg:w-1/2 h-9 lg:h-12 bg-white rounded-lg relative">
             <div class="w-full h-full flex justify-between items-center">

@@ -6,16 +6,19 @@ export class ProductUrlRewriteController {
         let filter = req.query.filter == 'new' ? 'created_at' : 'visitor'
         if (!parseInt(req.query.page)) {
             req.query.page = 1;
-          }
+        }
+        if (!parseInt(req.query.limit)) {
+            req.query.limit = 24
+        }
         try {
             const item = req.params.item
             const page = req.query.page
-            const perPage = 24
+            const perPage = req.query.limit
             const limit = perPage;
             const offset = (page - 1) * perPage;
 
             const urlResponse = await client.query(
-                `SELECT product_ids, url, id
+                `SELECT product_ids, url, id, created_at
                 FROM public.product_url_rewrite
                 WHERE item = $1
                 ORDER BY ${filter} DESC
@@ -49,7 +52,7 @@ export class ProductUrlRewriteController {
             let placeholders = flatAndUniqueIds.map((_, i) => { return `$${i + 1}`})
 
             const productResponse = await client.query(
-                `SELECT id, feature_image, title
+                `SELECT id, feature_image, title, '[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.5\"}]' as affiliate
                 FROM public.products
                 WHERE id IN (${placeholders})`,
                 flatAndUniqueIds
@@ -69,20 +72,23 @@ export class ProductUrlRewriteController {
                         return {
                             product_id : data.id,
                             feature_image: data.feature_image,
-                            title: data.title
+                            title: data.title,
+                            affiliate : JSON.parse(data.affiliate)
                         }
                     } else {
                         return {
                             product_id : '',
                             feature_image: '',
-                            title: ''
+                            title: '',
+                            affiliate: [],
                         }
                     }
                 })
                 return {
                     id : data.id,
                     url : data.url,
-                    product: matchData
+                    product: matchData,
+                    created_at: data.created_at
                 }
             })
 

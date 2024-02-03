@@ -3,11 +3,16 @@
     import {removeHtmlTags} from "../../../../../helpers/removeHtmlTags.js"
     import ProgressBar from "./template/ProgressBar.svelte";
     import { afterUpdate, onMount } from "svelte";
+  import { Translate } from "../../../../../helpers/translate";
 
     export let data
     export let key = 'Performance'
+    let text = ['Hidden', 'See All']
 
-    onMount(() => {
+    onMount(async () => {
+        let translate = await Translate.client(text, true)
+        text = translate
+
         if (widthScreen < 1024) {
             widthTableCol = widthContainer
         } else if (widthScreen >= 1024 && enableData.length === 2 && enableData.length < 3) {
@@ -129,7 +134,7 @@
             </div>
         </div>
         <div class="w-full flex justify-center items-center">
-            <p class="font-medium text-sky-500 cursor-pointer" on:click={handleExpand}>{isExpand ? 'Hidden' :'Show all'}</p>
+            <p class="font-medium text-sky-500 cursor-pointer" on:click={handleExpand}>{isExpand ? text[0] : text[1]}</p>
         </div>
     </div>
     <div></div>

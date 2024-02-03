@@ -4,6 +4,8 @@ import morgan from 'morgan';
 import {indexRouter} from './router/index.js'
 import errorHandler from './system/middlewares/errorHandler.js';
 import cookieParser from 'cookie-parser';
+import { cronJobUpdateProductHome } from './system/services/cronUpdateProductHome.js'
+import { cronJobUpdateExchangerates } from './system/services/cronExchangeRates.js'
 
 const app = express()
 const port = 3000
@@ -23,4 +25,16 @@ app.use(errorHandler)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
+  cronJobUpdateExchangerates.start()
+  cronJobUpdateProductHome.start()
+})
+
+process.on('SIGTERM', () => {
+  console.log('Received SIGTERM, stopping cronjob and server...');
+  cronJobUpdateExchangerates.stop()
+  cronJobUpdateProductHome.stop()
+  server.close(() => {
+    console.log('Server and cronjob stopped.');
+    process.exit(0);
+  });
 })

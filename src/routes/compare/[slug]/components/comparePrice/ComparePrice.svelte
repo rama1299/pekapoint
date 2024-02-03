@@ -2,9 +2,13 @@
     import { afterUpdate, onMount } from 'svelte';
 	import { enableDataToCompare } from './../../../../../stores.js';
     import CardPrice from "./template/CardPrice.svelte";
+  import { Translate } from '../../../../../helpers/translate.js';
     export let data
 
-    onMount(() => {
+    let text = ['Price']
+    onMount(async () => {
+        let translate = await Translate.client(text, true)
+        text = translate
         if (widthScreen < 1024) {
             widthCol = widthContainer
         } else if (widthScreen >= 1024) {
@@ -46,7 +50,7 @@
 <div class="w-full">
     <div class="w-full h-full space-y-3">
         <div class="w-full">
-            <p class="text-2xl font-semibold">Price</p>
+            <p class="text-2xl font-semibold">{text[0]}</p>
         </div>
         <div bind:this={scrollContainer} bind:offsetWidth={widthContainer} class="w-full grid grid-flow-col overflow-x-auto snap-x snap-mandatory scrollbar-hidden">
                 {#each device as item, i (i)}
