@@ -34,7 +34,7 @@
 
 
 <svelte:head>
-  <title>Compare</title>
+  <title>{text[0]}</title>
 </svelte:head>
 <Layout>
   <div class="w-full h-96 bg-cover bg_gradient">

@@ -10,7 +10,7 @@
     let text = ['Hidden', 'See All']
 
     onMount(async () => {
-        let translate = await Translate.client(text, true)
+        let translate = await Translate.client(text)
         text = translate
 
         if (widthScreen < 1024) {

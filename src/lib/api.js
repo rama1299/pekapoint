@@ -4,7 +4,8 @@ import Database from 'better-sqlite3';
 import { nanoid } from '$lib/util';
 import { ADMIN_PASSWORD, POSTGRES_DB, POSTGRES_HOST, POSTGRES_PASSWORD, POSTGRES_PORT, POSTGRES_USER } from '$env/static/private';
 import { Blob } from 'node:buffer';
-import { Pool } from 'pg'
+import pkg from 'pg';
+const { Pool } = pkg;
 
 const pool = new Pool({
   host: POSTGRES_HOST,

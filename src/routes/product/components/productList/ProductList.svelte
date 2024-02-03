@@ -8,12 +8,7 @@
   import {onMount} from 'svelte'
 
   export let item
-  let spec = ''
-
-  onMount(async () => {
-    let trans = await Translate.product(item)
-    spec = trans.summary
-  })
+  let spec = item.summary
 
   let tabControl = {
         isDisplay: false,
@@ -30,7 +25,6 @@
 
 </script>
 
-{#if spec != ''}
 <div class="w-full h-fit cursor-default bg-white rounded-lg overflow-hidden border-2">
   <div>
     <Card data={item} tabControl={tabControl} specs={spec}/>
@@ -39,7 +33,6 @@
     </div>
     <TagCompare/>
 </div>
-{/if}
 
 
 <style>

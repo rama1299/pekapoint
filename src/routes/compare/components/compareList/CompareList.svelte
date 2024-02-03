@@ -7,7 +7,7 @@
 <div class="container h-auto mx-auto">
     <div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4">
         {#each data as item}
-            <div class="w-full col-span-1 rounded-lg overflow-hidden cursor-pointer" on:click={() => {goto(`http://localhost:5173${item.url}`)}}>
+            <div class="w-full col-span-1 rounded-lg overflow-hidden cursor-pointer" on:click={() => {goto(`${item.url}`)}}>
                 <Card data={item}/>
             </div>
         {/each}

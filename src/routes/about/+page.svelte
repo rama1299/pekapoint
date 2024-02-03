@@ -1,18 +1,26 @@
 <script>
+  import { onMount } from "svelte";
     import Layout from "../../lib/components/layout/Layout.svelte";
+  import { Translate } from "../../helpers/translate";
+
+  let text = ['About Us']
+    onMount(async() => {
+      let translate = await Translate.client(text)
+      text = translate
+    })
 </script>
 
 <svelte:head>
-  <title>About Us</title>
+  <title>{text[0]}</title>
 </svelte:head>
 <Layout>
   <div class="w-full h-96 bg-cover bg_gradient">
     <div class="container lg:w-wrap font-monst h-full pt-44 mx-auto">
-        <h1 class="text-5xl font-bold text-white">About Us</h1>
+        <h1 class="text-5xl font-bold text-white">{text[0]}</h1>
     </div>
   </div>
 
-  <main class="w-auto min-h-screen mx-auto pt-14 lg:pt-20 bg-gray-50">
+  <main class="w-auto min-h-[600px] mx-auto pt-14 lg:pt-20 bg-gray-50">
 
     </main>
 </Layout>

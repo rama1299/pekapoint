@@ -7,7 +7,7 @@
 
     let text = ['Price']
     onMount(async () => {
-        let translate = await Translate.client(text, true)
+        let translate = await Translate.client(text)
         text = translate
         if (widthScreen < 1024) {
             widthCol = widthContainer

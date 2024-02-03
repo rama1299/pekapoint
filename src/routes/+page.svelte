@@ -9,6 +9,8 @@
 	import {onMount} from 'svelte'
 	import { Translate } from './../helpers/translate.js';
 
+	const brand = import.meta.env.VITE_BRAND
+
 	let text = ['Easy Price and Quality Comparison!', 'Compare Now!']
 	onMount(async () => {
 		const textTranslate = await Translate.client(text)
@@ -18,7 +20,7 @@
 </script>
 
 <svelte:head>
-  <title>Specwar</title>
+  <title>{brand}</title>
 </svelte:head>
 <Layout>
 	<main class="w-full">
@@ -36,7 +38,7 @@
 			<div class="flex justify-center items-center w-full py-10 bg-sky-500 h-[550px]">
 				<div class="container flex px-5 justify-center flex-col items-center gap-10">
 					<di class="text-center font-bold text-3xl lg:text-5xl text-white ">
-						<p>Specwar,</p>
+						<p>{brand},</p>
 						<p>{text[0]}</p>
 					</di>
 					<div>

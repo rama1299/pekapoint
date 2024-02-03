@@ -14,9 +14,9 @@
     if (data.status == 'error') {
       goto('/error')
     }
-    let translate = await Translate.product(data.dataProduct, true)
+    let translate = await Translate.product(data.dataProduct)
     dataProduct = translate
-    let translateSpec = await Translate.productSpec(data.dataSpec, true)
+    let translateSpec = await Translate.productSpec(data.dataSpec)
     dataSpec = translateSpec
     dataTagCompare = [{title: dataProduct.title, slug: dataProduct.slug, feature_image: dataProduct.feature_image}]
     title = dataProduct.title

@@ -1,12 +1,12 @@
 import axios from "axios"
 import * as d3 from 'd3'
-import Cookies from "js-cookie"
+import { FetchCsv } from "../modules/fetchCsv"
 import { checkIpInfo } from "./checkIpInfo"
 import { saveToSessionStorage, getFromSessionStorage } from "./sessionStorage"
+import translateServer from './translateServer.json'
 
 export class Translate {
-    static async client(array, routeSlug) {
-      const path = routeSlug ? `../src/csv/client.csv` : `src/csv/client.csv`
+    static async client(array) {
         try {
           let language = 'en'
           let geoInfo = await checkIpInfo()
@@ -23,8 +23,12 @@ export class Translate {
 
           if (!getDataCsvFromSession || getDataCsvFromSession == undefined) {
                 
-            const response = await axios.get(path)
+            const response = await FetchCsv.getCsvClient()
             const csvData = await response.data
+
+            if (csvData == '') {
+              return array
+            }
 
             await saveToSessionStorage('csvClient', csvData)
 
@@ -50,8 +54,8 @@ export class Translate {
 		}
     }
 
-  static async product(item, routeSlug) {
-    const path = routeSlug ? `../src/csv/server.csv` : `src/csv/server.csv`
+  static async product(data) {
+    let dataTranslate
     try {
       let language = 'en'
       let geoInfo = await checkIpInfo()
@@ -61,55 +65,60 @@ export class Translate {
       }
 
       if (language == 'en') {
-        return item
+        return data
       }
 
-      let getDataCsvFromSession = await getFromSessionStorage('csvServer')
+      let jsonTranslate = translateServer
 
-      if (!getDataCsvFromSession || getDataCsvFromSession == undefined) {
+      if (!jsonTranslate || jsonTranslate == undefined || jsonTranslate.length == 0) {
             
-        const response = await axios.get(path)
+        const response = await FetchCsv.getCsvServer()
         const csvData = await response.data
+
+        if (csvData == '') {
+          return data
+        }
 
         await saveToSessionStorage('csvServer', csvData)
 
-        getDataCsvFromSession = csvData
+        let csvParse = await d3.csvParse(csvData)
+
+        jsonTranslate = csvParse
       }
         
-      let csvParse = await d3.csvParse(getDataCsvFromSession)
-      
-        let summaryJson = JSON.parse(item.summary);
-        let titleGroup = Object.keys(summaryJson)[0];
-        let titleGroupTranslate = csvParse.find((itemCsv) => itemCsv.en.toLowerCase() == titleGroup.toLowerCase())[language];
-        let titleAttributeTranslate = await Promise.all(summaryJson[titleGroup].map(async (itemAttribute) => {
-          let findCsv = csvParse.find((itemCsv) => itemCsv.en.toLowerCase() === itemAttribute.title.toLowerCase());
-          if (findCsv) {
+        dataTranslate = await Promise.all(data.map(async(item) => {
+          let summaryJson = JSON.parse(item.summary);
+          let titleGroup = Object.keys(summaryJson)[0];
+          let titleGroupTranslate = jsonTranslate.find((itemCsv) => itemCsv.en.toLowerCase() == titleGroup.toLowerCase())[language];
+          let titleAttributeTranslate = await Promise.all(summaryJson[titleGroup].map(async (itemAttribute) => {
+            let findCsv = jsonTranslate.find((itemCsv) => itemCsv.en.toLowerCase() === itemAttribute.title.toLowerCase());
+            if (findCsv) {
+              return {
+                ...itemAttribute,
+                title: findCsv[language],
+                code: itemAttribute.title
+              };
+            }
             return {
               ...itemAttribute,
-              title: findCsv[language],
               code: itemAttribute.title
-            };
-          }
+            }; // Return original itemAttribute if not found in csvParse
+          }));
+          
           return {
-            ...itemAttribute,
-            code: itemAttribute.title
-          }; // Return original itemAttribute if not found in csvParse
-        }));
+            ...item,
+            summary: JSON.stringify({ [titleGroupTranslate]: titleAttributeTranslate })
+          };
+        }))
         
-        return {
-          ...item,
-          summary: JSON.stringify({ [titleGroupTranslate]: titleAttributeTranslate })
-        };
-        
-        
+        return dataTranslate
       } catch (error) {
       console.log(error)
-      return item
+      return data
     }
   }
 
-  static async productSpec(item, routeSlug) {
-    const path = routeSlug ? `../src/csv/server.csv` : `src/csv/server.csv`
+  static async productSpec(item) {
     try {
       let language = 'en'
       let geoInfo = await checkIpInfo()
@@ -126,8 +135,12 @@ export class Translate {
 
       if (!getDataCsvFromSession || getDataCsvFromSession == undefined) {
             
-        const response = await axios.get(path)
+        const response = await FetchCsv.getCsvServer()
         const csvData = await response.data
+
+        if (csvData == '') {
+          return item
+        }
 
         await saveToSessionStorage('csvServer', csvData)
 
@@ -164,8 +177,7 @@ export class Translate {
   }
   
 
-  static async compareSpec(data, routeSlug) {
-    const path = routeSlug ? `../src/csv/server.csv` : `src/csv/server.csv`
+  static async compareSpec(data) {
     try {
       let language = 'en'
       let geoInfo = await checkIpInfo()
@@ -175,15 +187,19 @@ export class Translate {
       }
 
       if (language == 'en') {
-        return item
+        return data
       }
 
       let getDataCsvFromSession = await getFromSessionStorage('csvServer')
 
       if (!getDataCsvFromSession || getDataCsvFromSession == undefined) {
             
-        const response = await axios.get(path)
+        const response = await FetchCsv.getCsvServer()
         const csvData = await response.data
+
+        if (csvData == '') {
+          return data
+        }
 
         await saveToSessionStorage('csvServer', csvData)
 
@@ -220,7 +236,7 @@ export class Translate {
       
       } catch (error) {
       console.log(error)
-      return item
+      return data
     }
   }
 }

@@ -1,0 +1,1134 @@
+[
+    {
+        "en": "Weight",
+        "id": "Berat"
+    },
+    {
+        "en": "Thickness",
+        "id": "Ketebalan"
+    },
+    {
+        "en": "Width",
+        "id": "Lebar"
+    },
+    {
+        "en": "Height",
+        "id": "Tinggi"
+    },
+    {
+        "en": "Weather-Sealed (Splashproof)",
+        "id": "Sekat cuaca (tahan percikan)"
+    },
+    {
+        "en": "Ingress Protection (IP) Rating",
+        "id": "Peringkat Perlindungan Ingress (IP)"
+    },
+    {
+        "en": "Waterproof Depth Rating",
+        "id": "Peringkat Kedalaman Tahan Air"
+    },
+    {
+        "en": "Volume",
+        "id": "Volume"
+    },
+    {
+        "en": "Lowest Potential Operating Temperature",
+        "id": "Suhu Operasi Potensial Terendah"
+    },
+    {
+        "en": "Maximum Operating Temperature",
+        "id": "Suhu Pengoperasian Maksimum"
+    },
+    {
+        "en": "Is Dustproof and Water Resistant",
+        "id": "tahan debu dan tahan air"
+    },
+    {
+        "en": "Can be Folded",
+        "id": "Bisa Dilipat"
+    },
+    {
+        "en": "Has a Physical QWERTY Keyboard",
+        "id": "Memiliki keyboard QWERTY fisik"
+    },
+    {
+        "en": "Screen Size",
+        "id": "Ukuran Layar"
+    },
+    {
+        "en": "Display Type",
+        "id": "Jenis Tampilan"
+    },
+    {
+        "en": "Pixel Density",
+        "id": "Kerapatan piksel"
+    },
+    {
+        "en": "Resolution",
+        "id": "Resolusi"
+    },
+    {
+        "en": "Refresh Rate",
+        "id": "Kecepatan refresh"
+    },
+    {
+        "en": "Touch Sampling Rate",
+        "id": "Tingkat Pengambilan Sampel Sentuh"
+    },
+    {
+        "en": "Brightness (Typical)",
+        "id": "Kecerahan (Khas)"
+    },
+    {
+        "en": "Has Branded Damage-Resistant Glass",
+        "id": "Memiliki kaca antipecah bermerek"
+    },
+    {
+        "en": "Gorilla Glass Version",
+        "id": "Versi Kaca Gorila"
+    },
+    {
+        "en": "Supports HDR10",
+        "id": "Mendukung HDR10"
+    },
+    {
+        "en": "Always-On Display",
+        "id": "Layar Selalu Aktif"
+    },
+    {
+        "en": "Supports Dolby Vision",
+        "id": "Mendukung Dolby Vision"
+    },
+    {
+        "en": "Contrast Ratio",
+        "id": "Rasio Kontras"
+    },
+    {
+        "en": "Resolution (Secondary Screen)",
+        "id": "Resolusi (Layar Sekunder)"
+    },
+    {
+        "en": "Has Sapphire Glass Display",
+        "id": "Memiliki layar kaca safir"
+    },
+    {
+        "en": "Has a Curved Display",
+        "id": "Memiliki layar melengkung"
+    },
+    {
+        "en": "Has a Touch Screen",
+        "id": "Mempunyai layar sentuh"
+    },
+    {
+        "en": "Has an E-Paper Display",
+        "id": "Mempunyai tampilan e-paper"
+    },
+    {
+        "en": "Displays 3D",
+        "id": "Menampilkan 3D"
+    },
+    {
+        "en": "Has a Secondary Screen",
+        "id": "Memiliki layar sekunder"
+    },
+    {
+        "en": "Build Quality",
+        "id": "Membangun Kualitas"
+    },
+    {
+        "en": "Display Quality",
+        "id": "Kualitas Tampilan"
+    },
+    {
+        "en": "Battery Life",
+        "id": "Daya Tahan Baterai"
+    },
+    {
+        "en": "Photography",
+        "id": "Fotografi"
+    },
+    {
+        "en": "Performance",
+        "id": "Performa"
+    },
+    {
+        "en": "Internal Storage",
+        "id": "Penyimpanan Internal"
+    },
+    {
+        "en": "RAM",
+        "id": "RAM"
+    },
+    {
+        "en": "Android Version",
+        "id": "Versi Android"
+    },
+    {
+        "en": "CPU Speed",
+        "id": "Kecepatan CPU"
+    },
+    {
+        "en": "Has an External Memory Slot",
+        "id": "Memiliki slot memori eksternal"
+    },
+    {
+        "en": "GPU Clock Speed",
+        "id": "Kecepatan Jam GPU"
+    },
+    {
+        "en": "Has Integrated LTE",
+        "id": "Memiliki LTE terintegrasi"
+    },
+    {
+        "en": "RAM Speed",
+        "id": "Kecepatan RAM"
+    },
+    {
+        "en": "Semiconductor Size",
+        "id": "Ukuran Semikonduktor"
+    },
+    {
+        "en": "Supports 64 Bit",
+        "id": "Mendukung 64 bit"
+    },
+    {
+        "en": "Has integrated Graphics",
+        "id": "Memiliki Grafis terintegrasi"
+    },
+    {
+        "en": "DirectX Version",
+        "id": "Versi DirectX"
+    },
+    {
+        "en": "OpenGL Version",
+        "id": "Versi OpenGL"
+    },
+    {
+        "en": "OpenGL ES Version",
+        "id": "Versi OpenGL ES"
+    },
+    {
+        "en": "Uses Big.LITTLE Technology",
+        "id": "Menggunakan Teknologi Big.LITTLE"
+    },
+    {
+        "en": "CPU Threads",
+        "id": "Thread CPU"
+    },
+    {
+        "en": "Floating Point Performance",
+        "id": "Kinerja Titik Mengambang"
+    },
+    {
+        "en": "Has NX Bit",
+        "id": "Memiliki NX Bit"
+    },
+    {
+        "en": "Uses HMP",
+        "id": "Menggunakan HMP"
+    },
+    {
+        "en": "Has TrustZone",
+        "id": "Memiliki TrustZone"
+    },
+    {
+        "en": "Maximum Memory Bandwidth",
+        "id": "Bandwidth Memori Maksimum"
+    },
+    {
+        "en": "Front-end Width",
+        "id": "Lebar Front-end"
+    },
+    {
+        "en": "Pixel Rate",
+        "id": "Tingkat Piksel"
+    },
+    {
+        "en": "OpenVG Version",
+        "id": "Versi OpenVG"
+    },
+    {
+        "en": "Memory Bandwidth",
+        "id": "Bandwidth Memori"
+    },
+    {
+        "en": "OpenCL Version",
+        "id": "Versi OpenCL"
+    },
+    {
+        "en": "Bits Executed at a Time",
+        "id": "Bit dieksekusi pada suatu waktu"
+    },
+    {
+        "en": "Memory Channels",
+        "id": "Saluran Memori"
+    },
+    {
+        "en": "VFP Version",
+        "id": "Versi VFP"
+    },
+    {
+        "en": "L2 Cache",
+        "id": "Cache L2"
+    },
+    {
+        "en": "eMMC Version",
+        "id": "Versi eMMC"
+    },
+    {
+        "en": "Supports ECC Memory",
+        "id": "Mendukung memori ECC"
+    },
+    {
+        "en": "L1 Cache",
+        "id": "L1 Cache"
+    },
+    {
+        "en": "Maximum Memory Amount",
+        "id": "Jumlah memori maksimum"
+    },
+    {
+        "en": "Uses Multithreading",
+        "id": "Menggunakan Multithreading"
+    },
+    {
+        "en": "CPU Temperature",
+        "id": "Suhu CPU"
+    },
+    {
+        "en": "GPU Execution Units",
+        "id": "Unit Eksekusi GPU"
+    },
+    {
+        "en": "GPU Turbo",
+        "id": "GPU Turbo"
+    },
+    {
+        "en": "L2 Core",
+        "id": "L2 Core"
+    },
+    {
+        "en": "Number of Transistors",
+        "id": "Jumlah Transistor"
+    },
+    {
+        "en": "Bus Speed",
+        "id": "Kecepatan Bus"
+    },
+    {
+        "en": "Bus Transfer Rate",
+        "id": "Tarif Transfer Bus"
+    },
+    {
+        "en": "Clock Multiplier",
+        "id": "Pengganda Jam"
+    },
+    {
+        "en": "Thermal Design Power (TDP)",
+        "id": "Daya Desain Termal (TDP)"
+    },
+    {
+        "en": "DDR Memory Version",
+        "id": "Versi Memori DDR"
+    },
+    {
+        "en": "Included SD Card (Memory Size)",
+        "id": "Termasuk Kartu SD (Ukuran Memori)"
+    },
+    {
+        "en": "L3 Core",
+        "id": "L3 Core"
+    },
+    {
+        "en": "PCI Express (PCIe) Version",
+        "id": "Versi PCI Express (PCIe)"
+    },
+    {
+        "en": "Render Output Units (ROPs)",
+        "id": "Render Unit Output (ROP)"
+    },
+    {
+        "en": "Shading Units",
+        "id": "Unit Shading"
+    },
+    {
+        "en": "Texture Mapping Units (TMUs)",
+        "id": "Unit Pemetaan Tekstur (TMU)"
+    },
+    {
+        "en": "Turbo Clock Speed",
+        "id": "Kecepatan Jam Turbo"
+    },
+    {
+        "en": "Turbo Boost Version",
+        "id": "Versi Turbo Boost"
+    },
+    {
+        "en": "Turbo Core Version",
+        "id": "Versi Turbo Core"
+    },
+    {
+        "en": "Has an Unlocked Multiplier",
+        "id": "Mempunyai unlocked Multiplier"
+    },
+    {
+        "en": "Supported Displays",
+        "id": "Tampilan yang Didukung"
+    },
+    {
+        "en": "L3 Cache",
+        "id": "Cache L3"
+    },
+    {
+        "en": "EGL Version",
+        "id": "Versi EGL"
+    },
+    {
+        "en": "Megapixels (Main Camera)",
+        "id": "Megapiksel (Kamera Utama)"
+    },
+    {
+        "en": "Weather-sealed (splashproof)",
+        "id": "Sekat cuaca (tahan percikan)"
+    },
+    {
+        "en": "Ingress Protection (IP) rating",
+        "id": "Peringkat Ingress Protection (IP)"
+    },
+    {
+        "en": "Waterproof depth rating",
+        "id": "Peringkat kedalaman tahan air"
+    },
+    {
+        "en": "Lowest potential operating temperature",
+        "id": "Suhu operasi potensial terendah"
+    },
+    {
+        "en": "Maximum operating temperature",
+        "id": "Suhu pengoperasian maksimum"
+    },
+    {
+        "en": "Is dustproof and water-resistant",
+        "id": "Tahan debu dan tahan air"
+    },
+    {
+        "en": "Has a physical QWERTY keyboard",
+        "id": "Memiliki keyboard QWERTY fisik"
+    },
+    {
+        "en": "Brightness (typical)",
+        "id": "Kecerahan (umum)"
+    },
+    {
+        "en": "Has branded damage-resistant glass",
+        "id": "Memiliki kaca antipecah bermerek"
+    },
+    {
+        "en": "Supports HDR10+",
+        "id": "Mendukung HDR10+"
+    },
+    {
+        "en": "Always-On Display",
+        "id": "Layar Selalu Aktif"
+    },
+    {
+        "en": "Supports Dolby Vision",
+        "id": "Mendukung Dolby Vision"
+    },
+    {
+        "en": "Resolution (secondary screen)",
+        "id": "Resolusi (layar sekunder)"
+    },
+    {
+        "en": "Has sapphire glass display",
+        "id": "Memiliki layar kaca safir"
+    },
+    {
+        "en": "Has a curved display",
+        "id": "Memiliki layar melengkung"
+    },
+    {
+        "en": "Has a touch screen",
+        "id": "Mempunyai layar sentuh"
+    },
+    {
+        "en": "Has an e-paper display",
+        "id": "Mempunyai layar e-paper"
+    },
+    {
+        "en": "Displays 3D",
+        "id": "Menampilkan 3D"
+    },
+    {
+        "en": "Has a secondary screen",
+        "id": "Memiliki layar sekunder"
+    },
+    {
+        "en": "AnTuTu benchmark score",
+        "id": "Skor benchmark AnTuTu"
+    },
+    {
+        "en": "3DMark Wild Life benchmark",
+        "id": "Tolok ukur Kehidupan Liar 3DMark"
+    },
+    {
+        "en": "3DMark Wild Life Unlimited benchmark",
+        "id": "Tolok ukur 3DMark Wild Life Unlimited"
+    },
+    {
+        "en": "3DMark Wild Life Extreme benchmark",
+        "id": "Patokan 3DMark Wild Life Extreme"
+    },
+    {
+        "en": "Geekbench 5 result (multi)",
+        "id": "Hasil Geekbench 5 (multi)"
+    },
+    {
+        "en": "Geekbench 5 result (single)",
+        "id": "Hasil Geekbench 5 (tunggal)"
+    },
+    {
+        "en": "Geekbench result",
+        "id": "Hasil Geekbench"
+    },
+    {
+        "en": "Uses big.LITTLE technology",
+        "id": "Menggunakan besar. Teknologi KECIL"
+    },
+    {
+        "en": "PassMark result",
+        "id": "Hasil PassMark"
+    },
+    {
+        "en": "Thermal Design Power (TDP)",
+        "id": "Daya Desain Termal (TDP)"
+    },
+    {
+        "en": "Included SD card (memory size)",
+        "id": "Termasuk kartu SD (ukuran memori)"
+    },
+    {
+        "en": "PassMark result (overclocked)",
+        "id": "Hasil PassMark (di-overclock)"
+    },
+    {
+        "en": "PassMark result (single)",
+        "id": "Hasil PassMark (tunggal)"
+    },
+    {
+        "en": "PCI Express (PCIe) version",
+        "id": "Versi PCI Express (PCIe)"
+    },
+    {
+        "en": "Render output units (ROPs)",
+        "id": "Render unit output (ROP)"
+    },
+    {
+        "en": "Texture mapping units (TMUs)",
+        "id": "Unit pemetaan tekstur (TMU)"
+    },
+    {
+        "en": "Megapixels (main camera)",
+        "id": "Megapiksel (kamera utama)"
+    },
+    {
+        "en": "Megapixels (front camera)",
+        "id": "Megapiksel (kamera depan)"
+    },
+    {
+        "en": "Has built-in optical image stabilization",
+        "id": "Memiliki stabilisasi gambar optik built-in"
+    },
+    {
+        "en": "Video recording (main camera)",
+        "id": "Perekaman video (kamera utama)"
+    },
+    {
+        "en": "Wide aperture (main camera)",
+        "id": "Bukaan lebar (kamera utama)"
+    },
+    {
+        "en": "Has a dual-tone LED flash",
+        "id": "Memiliki lampu kilat LED ganda"
+    },
+    {
+        "en": "Has a BSI sensor",
+        "id": "Memiliki sensor BSI"
+    },
+    {
+        "en": "Has continuous autofocus when recording movies",
+        "id": "Mempunyai autofokus kontinu saat merekam film"
+    },
+    {
+        "en": "Has phase-detection autofocus for photos",
+        "id": "Memiliki autofokus deteksi fasa untuk foto"
+    },
+    {
+        "en": "Supports slow-motion video recording",
+        "id": "Mendukung perekaman video gerak lambat"
+    },
+    {
+        "en": "Has a built-in HDR mode",
+        "id": "Mempunyai mode HDR bawaan"
+    },
+    {
+        "en": "Has a flash",
+        "id": "Mempunyai lampu kilat"
+    },
+    {
+        "en": "Has manual exposure",
+        "id": "Mempunyai pencahayaan manual"
+    },
+    {
+        "en": "Has a dual-lens (or multi-lens) main camera",
+        "id": "Memiliki kamera utama lensa ganda (atau multi-lensa)"
+    },
+    {
+        "en": "Optical zoom",
+        "id": "Zoom optik"
+    },
+    {
+        "en": "Number of flash LEDs",
+        "id": "Jumlah LED lampu kilat"
+    },
+    {
+        "en": "Has a CMOS sensor",
+        "id": "Mempunyai sensor CMOS"
+    },
+    {
+        "en": "Has manual ISO",
+        "id": "Memiliki ISO manual"
+    },
+    {
+        "en": "Has a serial shot mode",
+        "id": "Mempunyai mode pemotretan beruntun"
+    },
+    {
+        "en": "Has manual focus",
+        "id": "Mempunyai fokus manual"
+    },
+    {
+        "en": "Pixel size (main camera)",
+        "id": "Ukuran piksel (kamera utama)"
+    },
+    {
+        "en": "Has a front camera",
+        "id": "Mempunyai kamera depan"
+    },
+    {
+        "en": "Has laser autofocus",
+        "id": "Memiliki fokus otomatis laser"
+    },
+    {
+        "en": "Shoots 360° panorama",
+        "id": "Tunas panorama 360� �"
+    },
+    {
+        "en": "Has manual white balance",
+        "id": "Mempunyai keseimbangan putih manual"
+    },
+    {
+        "en": "Shoots raw",
+        "id": "Tunas mentah"
+    },
+    {
+        "en": "Has touch autofocus",
+        "id": "Memiliki autofokus sentuh"
+    },
+    {
+        "en": "Has manual shutter speed",
+        "id": "Mempunyai kecepatan rana manual"
+    },
+    {
+        "en": "Can create panoramas in-camera",
+        "id": "Dapat membuat panorama dalam kamera"
+    },
+    {
+        "en": "Wide aperture (front camera)",
+        "id": "Bukaan lebar (kamera depan)"
+    },
+    {
+        "en": "Maximum ISO",
+        "id": "ISO Maksimum"
+    },
+    {
+        "en": "Has timelapse function",
+        "id": "Memiliki fungsi timelapse"
+    },
+    {
+        "en": "Fastest shutter speed",
+        "id": "Kecepatan rana tercepat"
+    },
+    {
+        "en": "Minimum focal length",
+        "id": "Panjang fokus minimum"
+    },
+    {
+        "en": "Maximum focal length",
+        "id": "Panjang fokus maksimum"
+    },
+    {
+        "en": "Has a front-facing LED flash",
+        "id": "Memiliki lampu kilat LED hadap depan"
+    },
+    {
+        "en": "Continuous shooting at high resolution",
+        "id": "Pemotretan beruntun pada resolusi tinggi"
+    },
+    {
+        "en": "Has a dual-lens (or multi-lens) front camera",
+        "id": "Memiliki kamera depan lensa ganda (atau multi-lensa)"
+    },
+    {
+        "en": "DxOMark Mobile score",
+        "id": "Skor DxOMark Mobile"
+    },
+    {
+        "en": "Sensor size",
+        "id": "Ukuran sensor"
+    },
+    {
+        "en": "Supports HDR10 recording",
+        "id": "Mendukung perekaman HDR10"
+    },
+    {
+        "en": "Megapixels for 3D photos",
+        "id": "Megapiksel untuk foto 3D"
+    },
+    {
+        "en": "Supports Dolby Vision recording",
+        "id": "Mendukung perekaman Dolby Vision"
+    },
+    {
+        "en": "Has a front-facing camera under the display",
+        "id": "Memiliki kamera depan di bawah layar"
+    },
+    {
+        "en": "3D video recording resolution",
+        "id": "Resolusi perekaman video 3D"
+    },
+    {
+        "en": "Shutter lag",
+        "id": "Jeda rana"
+    },
+    {
+        "en": "Has a RGB LED flash",
+        "id": "Memiliki lampu kilat LED RGB"
+    },
+    {
+        "en": "Has 3D photo/video recording capabilities",
+        "id": "Memiliki kemampuan merekam foto/video 3D"
+    },
+    {
+        "en": "Has clipboard warnings",
+        "id": "Mempunyai peringatan papan klip"
+    },
+    {
+        "en": "Has location privacy options",
+        "id": "Memiliki opsi privasi lokasi"
+    },
+    {
+        "en": "Has camera/microphone privacy options",
+        "id": "Memiliki opsi privasi kamera/mikrofon"
+    },
+    {
+        "en": "Has Mail Privacy Protection",
+        "id": "Memiliki Perlindungan Privasi Mail"
+    },
+    {
+        "en": "Has theme customization",
+        "id": "Memiliki kustomisasi tema"
+    },
+    {
+        "en": "Can block app tracking",
+        "id": "Dapat memblokir pelacakan aplikasi"
+    },
+    {
+        "en": "Blocks cross-site tracking",
+        "id": "Memblokir pelacakan lintas situs"
+    },
+    {
+        "en": "Has on-device machine learning",
+        "id": "Memiliki pembelajaran mesin pada perangkat"
+    },
+    {
+        "en": "Can play games while they download",
+        "id": "Dapat bermain game saat mengunduh"
+    },
+    {
+        "en": "Has dark mode",
+        "id": "Memiliki mode gelap"
+    },
+    {
+        "en": "Has Wi-Fi password sharing",
+        "id": "Mempunyai berbagi kata sandi Wi-Fi"
+    },
+    {
+        "en": "Has battery health check",
+        "id": "Mempunyai pemeriksaan kesehatan baterai"
+    },
+    {
+        "en": "Has an extra dim mode",
+        "id": "Mempunyai mode redup ekstra"
+    },
+    {
+        "en": "Has focus modes",
+        "id": "Memiliki mode fokus"
+    },
+    {
+        "en": "Has dynamic theming",
+        "id": "Memiliki tema dinamis"
+    },
+    {
+        "en": "Can offload apps",
+        "id": "Dapat membongkar aplikasi"
+    },
+    {
+        "en": "Has customizable notifications",
+        "id": "Memiliki notifikasi yang dapat disesuaikan"
+    },
+    {
+        "en": "Has Live Text",
+        "id": "Mempunyai Teks Langsung"
+    },
+    {
+        "en": "Has scrolling screenshots",
+        "id": "Mempunyai tangkapan layar bergulir"
+    },
+    {
+        "en": "Has SharePlay",
+        "id": "Memiliki SharePlay"
+    },
+    {
+        "en": "Supports split screen",
+        "id": "Mendukung layar terpisah"
+    },
+    {
+        "en": "Supports instant markup",
+        "id": "Mendukung markup instan"
+    },
+    {
+        "en": "Supports PiP and PaP",
+        "id": "Mendukung PiP dan PaP"
+    },
+    {
+        "en": "Has AirPlay",
+        "id": "Memiliki AirPlay"
+    },
+    {
+        "en": " more languages supported",
+        "id": " lebih banyak bahasa yang didukung"
+    },
+    {
+        "en": "Can be used as a PC",
+        "id": "Dapat digunakan sebagai PC"
+    },
+    {
+        "en": "Has sharing intents",
+        "id": "Memiliki maksud berbagi"
+    },
+    {
+        "en": "Has a child lock",
+        "id": "Mempunyai child lock"
+    },
+    {
+        "en": "Supports widgets",
+        "id": "Mendukung widget"
+    },
+    {
+        "en": "Is free and open source",
+        "id": "Gratis dan open source"
+    },
+    {
+        "en": "Has offline voice recognition",
+        "id": "Mempunyai pengenalan suara offline"
+    },
+    {
+        "en": "The browser has word wrap",
+        "id": "Browser memiliki word wrap"
+    },
+    {
+        "en": "Has voice commands",
+        "id": "Mempunyai perintah suara"
+    },
+    {
+        "en": "Tracks the current position of a mobile device",
+        "id": "Melacak posisi perangkat seluler saat ini"
+    },
+    {
+        "en": "Is a multi-user system",
+        "id": "Adalah sistem multi-pengguna"
+    },
+    {
+        "en": "Has Quick Start",
+        "id": "Memiliki Mulai Cepat"
+    },
+    {
+        "en": "Battery power",
+        "id": "Daya baterai"
+    },
+    {
+        "en": "Has wireless charging",
+        "id": "Memiliki pengisian daya nirkabel"
+    },
+    {
+        "en": "Supports fast charging",
+        "id": "Mendukung pengisian cepat"
+    },
+    {
+        "en": "Charging speed",
+        "id": "Kecepatan pengisian"
+    },
+    {
+        "en": "Wireless charging speed",
+        "id": "Kecepatan pengisian nirkabel"
+    },
+    {
+        "en": "Has reverse wireless charging",
+        "id": "Memiliki pengisian daya nirkabel terbalik"
+    },
+    {
+        "en": "Reverse wireless charging speed",
+        "id": "Kecepatan pengisian nirkabel terbalik"
+    },
+    {
+        "en": "Has a removable battery",
+        "id": "Mempunyai baterai yang dapat dilepas"
+    },
+    {
+        "en": "Has an ultra power-saving mode",
+        "id": "Memiliki mode hemat daya ultra"
+    },
+    {
+        "en": "Has a battery level indicator",
+        "id": "Mempunyai indikator level baterai"
+    },
+    {
+        "en": "Has a rechargeable battery",
+        "id": "Mempunyai baterai isi ulang"
+    },
+    {
+        "en": "Has a socket for a 3.5 mm audio jack",
+        "id": "Memiliki soket untuk konektor audio 3 5mm"
+    },
+    {
+        "en": "Has stereo speakers",
+        "id": "Memiliki pengeras suara stereo"
+    },
+    {
+        "en": "Has aptX",
+        "id": "Memiliki aptX"
+    },
+    {
+        "en": "Has LDAC",
+        "id": "Memiliki LDAC"
+    },
+    {
+        "en": "Has aptX HD",
+        "id": "Memiliki aptX HD"
+    },
+    {
+        "en": "Has aptX Adaptive",
+        "id": "Memiliki aptX Adaptive"
+    },
+    {
+        "en": "Has aptX Lossless",
+        "id": "Memiliki aptX Lossless"
+    },
+    {
+        "en": "Has a radio",
+        "id": "Mempunyai radio"
+    },
+    {
+        "en": "Number of microphones",
+        "id": "Jumlah mikrofon"
+    },
+    {
+        "en": "Has dedicated media keys",
+        "id": "Memiliki tombol media khusus"
+    },
+    {
+        "en": "Has 5G support",
+        "id": "Memiliki dukungan 5G"
+    },
+    {
+        "en": "Wi-Fi version",
+        "id": "Versi Wi-Fi"
+    },
+    {
+        "en": "Download speed",
+        "id": "Kecepatan unduh"
+    },
+    {
+        "en": "Upload speed",
+        "id": "Kecepatan unggah"
+    },
+    {
+        "en": "Has USB Type-C",
+        "id": "Memiliki USB Tipe-C"
+    },
+    {
+        "en": "USB version",
+        "id": "Versi USB"
+    },
+    {
+        "en": "Has NFC",
+        "id": "Memiliki NFC"
+    },
+    {
+        "en": "SIM cards",
+        "id": "Kartu SIM"
+    },
+    {
+        "en": "Has a fingerprint scanner",
+        "id": "Memiliki pemindai sidik jari"
+    },
+    {
+        "en": "Has emergency SOS via satellite",
+        "id": "Memiliki SOS darurat melalui satelit"
+    },
+    {
+        "en": "Has crash detection",
+        "id": "Memiliki deteksi kerusakan"
+    },
+    {
+        "en": "Is DLNA-certified",
+        "id": "Bersertifikat DLNA"
+    },
+    {
+        "en": "Bluetooth version",
+        "id": "Versi Bluetooth"
+    },
+    {
+        "en": "Has a gyroscope",
+        "id": "Mempunyai giroskop"
+    },
+    {
+        "en": "Supports ANT+",
+        "id": "Mendukung ANT+"
+    },
+    {
+        "en": "Has a heart rate monitor",
+        "id": "Mempunyai monitor detak jantung"
+    },
+    {
+        "en": "Has GPS",
+        "id": "Memiliki GPS"
+    },
+    {
+        "en": "Has a compass",
+        "id": "Mempunyai kompas"
+    },
+    {
+        "en": "Supports Wi-Fi",
+        "id": "Mendukung Wi-Fi"
+    },
+    {
+        "en": "Has an infrared sensor",
+        "id": "Memiliki sensor inframerah"
+    },
+    {
+        "en": "Body SAR (US)",
+        "id": "Body SAR (AS)"
+    },
+    {
+        "en": "Has an accelerometer",
+        "id": "Mempunyai akselerometer"
+    },
+    {
+        "en": "Head SAR (US)",
+        "id": "Kepala SAR (AS)"
+    },
+    {
+        "en": "Has a cellular module",
+        "id": "Mempunyai modul seluler"
+    },
+    {
+        "en": "Has a barometer",
+        "id": "Mempunyai barometer"
+    },
+    {
+        "en": "Has an HDMI output",
+        "id": "Memiliki output HDMI"
+    },
+    {
+        "en": "Uses 3D facial recognition",
+        "id": "Menggunakan pengenalan wajah 3D"
+    },
+    {
+        "en": "Head SAR (EU)",
+        "id": "Kepala SAR (UE)"
+    },
+    {
+        "en": "Has an iris scanner",
+        "id": "Mempunyai pemindai iris"
+    },
+    {
+        "en": "Stylus included",
+        "id": "Termasuk stylus"
+    },
+    {
+        "en": "Supports Galileo",
+        "id": "Mendukung Galileo"
+    },
+    {
+        "en": "Body SAR (EU)",
+        "id": "Badan SAR (UE)"
+    },
+    {
+        "en": "Has motion tracking",
+        "id": "Mempunyai pelacakan gerakan"
+    },
+    {
+        "en": "Has optical tracking",
+        "id": "Mempunyai pelacakan optik"
+    },
+    {
+        "en": "Has a built-in projector",
+        "id": "Mempunyai proyektor internal"
+    },
+    {
+        "en": "Has a video light",
+        "id": "Mempunyai lampu video"
+    },
+    {
+        "en": "Maximum amount of external memory supported",
+        "id": "Jumlah maksimum memori eksternal yang didukung"
+    },
+    {
+        "en": "Design",
+        "id": "Desain"
+    },
+    {
+        "en": "Display",
+        "id": "Tampilan"
+    },
+    {
+        "en": "Performance",
+        "id": "Performa"
+    },
+    {
+        "en": "Cameras",
+        "id": "Kamera"
+    },
+    {
+        "en": "Operating System",
+        "id": "Sistem operasi"
+    },
+    {
+        "en": "Battery",
+        "id": "Baterai"
+    },
+    {
+        "en": "Audio",
+        "id": "Audio"
+    },
+    {
+        "en": "Features",
+        "id": "Fitur"
+    },
+    {
+        "en": "Miscellaneous",
+        "id": "Lain-lain"
+    }
+]

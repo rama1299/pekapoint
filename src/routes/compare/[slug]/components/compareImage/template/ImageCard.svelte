@@ -1,11 +1,10 @@
 <script>
   import DoughnutChart from "./DoughnutChart.svelte";
 
-  export let item
-  export let dataLength
+    export let item
+    export let datasLength
     export let color
     export let radarColor
-
 </script>
 
 <div class="w-full text-md lg:text-2xl space-y-3">
@@ -21,6 +20,6 @@
         </div>
     </div>
     <div class="w-full lg:h-72 h-44 flex justify-center relative overflow-hidden border-b-4 {color}">
-        <img class="absolute w-full {dataLength == 2 ? 'lg:w-80' : 'lg:w-full'} px-3 lg:px-5" src={item.feature_image} alt="">
+        <img class="absolute w-full {datasLength == 2 ? 'lg:w-80' : 'lg:w-full'} px-3 lg:px-5" src={item.feature_image} alt="">
     </div>
 </div>

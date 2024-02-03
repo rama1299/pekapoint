@@ -8,7 +8,7 @@ import Cookies from "js-cookie";
   let dispatch = createEventDispatcher()
     let text = ['Variant', 'Color']
   onMount(async () => {
-    let translate = await Translate.client(text, true)
+    let translate = await Translate.client(text)
     text = translate
   })
 

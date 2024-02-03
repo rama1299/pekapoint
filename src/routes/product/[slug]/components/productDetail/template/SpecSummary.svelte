@@ -8,7 +8,7 @@
   let text = ['Summary']
 
   onMount(async () => {
-    let translate = await Translate.client(text, true)
+    let translate = await Translate.client(text)
     text = translate
 
     btnTabs = btnTabs.map((btn) => {
@@ -37,10 +37,13 @@
     const container = document.getElementById('containerSummary')
 
     if (container) {
-        container.scrollIntoView()
-        window.scrollTo({
-            top: window.scrollY - 100
-        })
+        const rect = container.getBoundingClientRect();
+            const scrollY = window.scrollY + rect.top - 100;
+
+            window.scrollTo({
+                top: scrollY,
+                behavior: 'smooth'
+            });
     }
   }
 

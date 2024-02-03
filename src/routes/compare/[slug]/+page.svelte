@@ -37,9 +37,6 @@
     let status = data.status
     let enableData
     let title = dataProduct.map(item => item.title).join(' vs ')
-    console.log(dataSpec)
-
-
     
     let colorBorder = ['border-blue-500', 'border-pink-500', 'border-orange-500', 'border-teal-500']
     let colorRadar = ['rgb(52, 152, 219, 0.4)', 'rgb(233, 30, 99, 0.4)', 'rgb(255, 152, 0, 0.4)', 'rgb(0, 150, 136, 0.4)']

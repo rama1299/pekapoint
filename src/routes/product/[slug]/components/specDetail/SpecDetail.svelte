@@ -31,17 +31,20 @@
 
           const container = document.getElementById('containerSpec')
           if (container) {
-            container.scrollIntoView()
+            const rect = container.getBoundingClientRect();
+            const scrollY = window.scrollY + rect.top - 100;
+
             window.scrollTo({
-                top: window.scrollY - 100
-            })
+                top: scrollY,
+                behavior: 'smooth'
+            });
           }
       }
 
       let text = ['Detailed Specifications']
   
       onMount(async()=> {
-          let translate = await Translate.client(text, true)
+          let translate = await Translate.client(text)
           console.log(translate)
           text = translate
 

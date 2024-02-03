@@ -39,7 +39,7 @@
                                         <p class="font-medium text-sm">{text[2]}</p>
                                         <p class="font-semibold text-xl">$ {JSON.parse(item.affiliate)[0].price}</p>
                                     </div>
-                                    <button class="w-7 md:w-9 rounded-md bg-sky-500 hover:bg-white aspect-square border border-sky-500 duration-100 text-white hover:text-sky-500 flex items-center justify-center">
+                                    <button class="w-7 md:w-9 rounded-md bg-sky-500 hover:bg-white aspect-square border border-sky-500 duration-100 text-white hover:text-sky-500 flex items-center justify-center" on:click={() => {goto(`/product/${item.slug}`)}}>
                                         <i class='bx bx-right-arrow-alt text-xl' ></i>
                                     </button>
                                 </div>

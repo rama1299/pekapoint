@@ -7,7 +7,6 @@
   let text = ['Go Back', 'Oops! The page you are looking for might be in another galaxy..']
   onMount(async () => {
     let translate = await Translate.client(text)
-    console.log(translate)
     text = translate
   })
 </script>

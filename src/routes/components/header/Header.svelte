@@ -6,7 +6,9 @@
   import { onMount } from 'svelte';
     export let data
 
-    let text = ['Welcome to Specwar', 'Discover the best mobile phones with the optimal balance of price and quality!']
+    const brand = import.meta.env.VITE_BRAND
+
+    let text = ['Welcome to', 'Discover the best mobile phones with the optimal balance of price and quality!']
 
     onMount(async () => {
         const translateText = await Translate.client(text)
@@ -74,7 +76,7 @@
 	</svg>
     <div class="container flex flex-col justify-center items-center gap-8 lg:gap-16 z-10">
         <div class="text-center space-y-2">
-            <p class="text-3xl lg:text-7xl font-bold text-white">{text[0]}</p>
+            <p class="text-3xl lg:text-7xl font-bold text-white">{text[0] +' '+ brand}</p>
             <p class="text-xl lg:text-3xl font-medium text-white">{text[1]}</p>
         </div>
         <!-- <FormCompare data={titleData}/> -->

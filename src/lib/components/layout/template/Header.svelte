@@ -12,6 +12,7 @@
     export let isProductPage
     export let isDetailProductPage
     export let titleData
+    const brand = import.meta.env.VITE_BRAND
 
     onMount(async () => {
         let route = $page.route.id ??'/'
@@ -200,7 +201,7 @@
             <div class="w-full lg:w-1/2 flex justify-between lg:justify-start items-center lg:gap-8 lg:px-0 lg:py-0 gap-3 py-2 px-2">
                 <div class="flex justify-start gap-1 items-center">
                     <i class='bx bx-{toggleMenu ? 'x rotate-180 ' : 'menu -rotate-180'} duration-300 ease-in-out text-3xl lg:hidden ' on:click={handleMenu}></i>
-                    <h1 class=" text-2xl md:text-4xl font-bold italic">Specwar.</h1>
+                    <h1 class=" text-2xl md:text-4xl font-bold italic">{brand}</h1>
                 </div>
                 <div id="search" class="w-full flex justify-end lg:justify-start gap-1 items-center">
                     {#if isProductPage}

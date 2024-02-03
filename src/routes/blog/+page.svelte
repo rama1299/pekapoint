@@ -8,16 +8,25 @@
   import EditableWebsiteTeaser from '$lib/components/EditableWebsiteTeaser.svelte';
   import { currentUser } from '$lib/stores.js';
   import WebsiteHeader from '$lib/components/WebsiteHeader.svelte';
+  import { onMount } from 'svelte';
+  import { Translate } from '../../helpers/translate';
 
   export let data;
   let showUserMenu;
   $: {
     $currentUser = data.currentUser;
   }
+
+  let text = ['Blog']
+
+  onMount(async() => {
+    let translate = await Translate.client(text)
+    text = translate
+  })
 </script>
 
 <svelte:head>
-  <title>Blog</title>
+  <title>{text[0]}</title>
 </svelte:head>
 
 <!-- <WebsiteHeader bind:showUserMenu>
@@ -34,7 +43,7 @@
     </div>
   </div>
 
-  <div class="p-10 min-h-screen">
+  <div class="p-10 min-h-[600px]">
     <div class="max-w-screen-md mx-auto px-6 pt-12 sm:pt-24">
       <div class="font-bold text-sm">LATEST ARTICLES</div>
       {#if data.articles.length === 0}
