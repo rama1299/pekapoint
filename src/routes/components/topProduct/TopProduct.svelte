@@ -19,14 +19,14 @@
     </div>
     <div class="w-full grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-5">
         {#each data as item, i}
-            <div class="w-full col-span-1 border-2 rounded-lg p-5" on:click={() => {goto(`/product/${item.slug}`)}}>
+            <div class="w-full col-span-1 border-2 rounded-lg p-5">
                 <div class="w-full h-full flex md:flex-col justify-between gap-3 cursor-pointer group">
-                    <div class="w-full h-32 lg:h-52 flex justify-center">
+                    <div class="w-full h-32 lg:h-52 flex justify-center" on:click={() => {goto(`/product/${item.slug}`)}}>
                         <img src={item.feature_image} alt="" class="h-full group-hover:scale-105 duration-200">
                     </div>
                     <div class="w-full space-y-3">
                         <div>
-                            <p class="w-full text-start font-semibold leading-5 h-10 overflow-hidden group-hover:text-sky-500 duration-100">{item.title}</p>
+                            <a href={`/product/${item.slug}`} class="w-full text-start font-semibold leading-5 h-10 overflow-hidden group-hover:text-sky-500 duration-100">{item.title}</a>
                         </div>
                         <div class="w-full flex flex-col-reverse gap-1 md:flex-row md:justify-between items-start">
                             <div class="space-y-1 w-full">

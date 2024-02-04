@@ -3,7 +3,8 @@ import { getCookie, setCookie } from "../helpers/cookies";
 import Cookies from "js-cookie";
 import { checkIpInfo } from "../helpers/checkIpInfo";
 
-const data = JSON.parse(import.meta.env.VITE_USER)
+let data = import.meta.env.VITE_USER
+data = JSON.parse(data)
 
 export class Authentication {
     static async login() {

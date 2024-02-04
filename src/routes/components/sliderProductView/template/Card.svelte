@@ -1,8 +1,10 @@
 <script>
+	import { goto } from '$app/navigation';
     export let data
     import { onMount } from "svelte";
   import { Translate } from "../../../../helpers/translate";
-    $: dataProduct = data.product
+
+  $: dataProduct = data.product
 
     let text = ['Start']
     onMount(async () => {
@@ -26,12 +28,12 @@
 
 <div class="w-full col-span-1 border-2 rounded-lg p-5 bg-white">
     <div class="w-full h-full flex md:flex-col justify-between gap-3 cursor-pointer group">
-        <div class="w-full h-32 lg:h-52 flex justify-center">
+        <div class="w-full h-32 lg:h-52 flex justify-center" on:click={() => {goto(`${data.url}`)}}>
             <img src={dataProduct[0].feature_image} alt="" class="h-full group-hover:scale-105 duration-200">
         </div>
         <div class="w-full space-y-3">
             <div>
-                <p class="w-full text-start font-semibold leading-5 h-10 overflow-hidden group-hover:text-sky-500 duration-100">{dataProduct[0].title}</p>
+                <a href={data.url} class="w-full text-start font-semibold leading-5 h-10 overflow-hidden group-hover:text-sky-500 duration-100">{dataProduct[0].title}</a>
             </div>
             <div class="w-full flex flex-col-reverse gap-1 md:flex-row md:justify-between items-start">
                 <div class="space-y-1 w-full">
@@ -44,7 +46,7 @@
                             <p class="font-medium text-sm">{text[0]}</p>
                             <p class="font-semibold text-xl">$ {dataProduct[0].affiliate[0].price}</p>
                         </div>
-                        <button class="w-7 md:w-9 rounded-md bg-sky-500 hover:bg-white aspect-square border border-sky-500 duration-100 text-white hover:text-sky-500 flex items-center justify-center">
+                        <button class="w-7 md:w-9 rounded-md bg-sky-500 hover:bg-white aspect-square border border-sky-500 duration-100 text-white hover:text-sky-500 flex items-center justify-center" on:click={() => {goto(`${data.url}`)}}>
                             <i class='bx bx-right-arrow-alt text-xl' ></i>
                         </button>
                     </div>

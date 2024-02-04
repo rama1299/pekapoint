@@ -19,7 +19,7 @@
         }
       ],
       "created_at": "2024-01-15T02:25:37.095Z",
-      "visitor": 377
+      "visitor": 607
     },
     {
       "id": 70,
@@ -40,7 +40,7 @@
         }
       ],
       "created_at": "2024-01-15T02:25:37.095Z",
-      "visitor": 284
+      "visitor": 287
     },
     {
       "id": 68,
@@ -61,7 +61,7 @@
         }
       ],
       "created_at": "2024-01-15T02:25:37.095Z",
-      "visitor": 59
+      "visitor": 64
     },
     {
       "id": 71,
@@ -124,7 +124,7 @@
         }
       ],
       "created_at": "2024-01-15T02:25:37.095Z",
-      "visitor": 5
+      "visitor": 7
     },
     {
       "id": 85,
@@ -202,7 +202,7 @@
         }
       ],
       "created_at": "2024-01-29T13:30:30.754Z",
-      "visitor": 58
+      "visitor": 100
     },
     {
       "id": 113,
@@ -236,7 +236,7 @@
         }
       ],
       "created_at": "2024-01-29T10:47:44.027Z",
-      "visitor": 39
+      "visitor": 56
     },
     {
       "id": 72,
@@ -270,7 +270,75 @@
         }
       ],
       "created_at": "2024-01-15T02:25:37.095Z",
-      "visitor": 18
+      "visitor": 20
+    },
+    {
+      "id": 79,
+      "url": "/compare/xiaomi-mi-11-ultra-vs-google-pixel-7",
+      "product": [
+        {
+          "product_id": 5589,
+          "feature_image": "https://images.versus.io/objects/google-pixel-7.front.medium.1665073166297.jpg",
+          "title": "Google Pixel 7",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        },
+        {
+          "product_id": 9,
+          "feature_image": "https://images.versus.io/objects/xiaomi-mi-11-ultra.front.medium.1617056012430.jpg",
+          "title": "Xiaomi Mi 11 Ultra",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        }
+      ],
+      "created_at": "2024-01-15T02:26:45.322Z",
+      "visitor": 19
+    },
+    {
+      "id": 118,
+      "url": "/compare/xiaomi-14-vs-xiaomi-13-ultra",
+      "product": [
+        {
+          "product_id": 3,
+          "feature_image": "https://images.versus.io/objects/xiaomi-13-ultra.front.medium.1681827673875.jpg",
+          "title": "Xiaomi 13 Ultra",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        },
+        {
+          "product_id": 1,
+          "feature_image": "https://images.versus.io/objects/xiaomi-14.front.medium.1698408371952.jpg",
+          "title": "Xiaomi 14",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        }
+      ],
+      "created_at": "2024-02-02T13:30:29.545Z",
+      "visitor": 15
     },
     {
       "id": 76,
@@ -373,77 +441,43 @@
       ],
       "created_at": "2024-01-29T14:06:35.639Z",
       "visitor": 7
-    },
-    {
-      "id": 101,
-      "url": "/compare/xiaomi-14-pro-vs-xiaomi-12",
-      "product": [
-        {
-          "product_id": 8,
-          "feature_image": "https://images.versus.io/objects/xiaomi-12.front.medium.1640705737933.jpg",
-          "title": "Xiaomi 12",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        },
-        {
-          "product_id": 2,
-          "feature_image": "https://images.versus.io/objects/xiaomi-14-pro.front.medium.1698408985975.jpg",
-          "title": "Xiaomi 14 Pro",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        }
-      ],
-      "created_at": "2024-01-15T07:16:42.627Z",
-      "visitor": 6
-    },
-    {
-      "id": 79,
-      "url": "/compare/xiaomi-mi-11-ultra-vs-google-pixel-7",
-      "product": [
-        {
-          "product_id": 5589,
-          "feature_image": "https://images.versus.io/objects/google-pixel-7.front.medium.1665073166297.jpg",
-          "title": "Google Pixel 7",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        },
-        {
-          "product_id": 9,
-          "feature_image": "https://images.versus.io/objects/xiaomi-mi-11-ultra.front.medium.1617056012430.jpg",
-          "title": "Xiaomi Mi 11 Ultra",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        }
-      ],
-      "created_at": "2024-01-15T02:26:45.322Z",
-      "visitor": 4
     }
   ],
   [
+    {
+      "id": 118,
+      "url": "/compare/xiaomi-14-vs-xiaomi-13-ultra",
+      "product": [
+        {
+          "product_id": 3,
+          "feature_image": "https://images.versus.io/objects/xiaomi-13-ultra.front.medium.1681827673875.jpg",
+          "title": "Xiaomi 13 Ultra",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        },
+        {
+          "product_id": 1,
+          "feature_image": "https://images.versus.io/objects/xiaomi-14.front.medium.1698408371952.jpg",
+          "title": "Xiaomi 14",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        }
+      ],
+      "created_at": "2024-02-02T13:30:29.545Z",
+      "visitor": 15
+    },
     {
       "id": 116,
       "url": "/compare/xiaomi-13-pro-vs-xiaomi-12s-ultra",
@@ -544,7 +578,7 @@
         }
       ],
       "created_at": "2024-01-29T13:30:30.754Z",
-      "visitor": 58
+      "visitor": 100
     },
     {
       "id": 113,
@@ -578,7 +612,7 @@
         }
       ],
       "created_at": "2024-01-29T10:47:44.027Z",
-      "visitor": 39
+      "visitor": 56
     },
     {
       "id": 110,
@@ -680,40 +714,6 @@
         }
       ],
       "created_at": "2024-01-16T01:45:49.755Z",
-      "visitor": 1
-    },
-    {
-      "id": 104,
-      "url": "/compare/xiaomi-13-ultra-vs-xiaomi-14-pro",
-      "product": [
-        {
-          "product_id": 3,
-          "feature_image": "https://images.versus.io/objects/xiaomi-13-ultra.front.medium.1681827673875.jpg",
-          "title": "Xiaomi 13 Ultra",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        },
-        {
-          "product_id": 2,
-          "feature_image": "https://images.versus.io/objects/xiaomi-14-pro.front.medium.1698408985975.jpg",
-          "title": "Xiaomi 14 Pro",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        }
-      ],
-      "created_at": "2024-01-15T07:17:57.316Z",
       "visitor": 1
     }
   ],

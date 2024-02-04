@@ -80,7 +80,7 @@ afterUpdate(() => {
     <div class="space-y-2">
         <div bind:this={containerScroll} bind:offsetWidth={widthContainerScroll} class="hidden-scroll w-full grid grid-flow-col overflow-scroll lg:overflow-hidden snap-x snap-mandatory">
             {#each data as item}
-                <div style="width: {widthCol}px;" class="snap-start px-2 col-span-1 cursor-pointer" on:click={() => {goto(`http://localhost:5173${item.url}`)}}>
+                <div style="width: {widthCol}px;" class="snap-start px-2 col-span-1 cursor-pointer" on:click={() => {goto(`${item.url}`)}}>
                     <Card data={item}/>
                 </div>
             {/each}
