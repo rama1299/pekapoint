@@ -12,8 +12,8 @@ dotenv.config()
 
 
 const app = express()
-const port = process.env.PORT
-const portClient = process.env.PORT_CLIENT
+const port = process.env.VITE_PORT
+const portClient = process.env.VITE_PORT_CLIENT
 
 app.use(cors({
   origin: `http://localhost:${portClient}`,

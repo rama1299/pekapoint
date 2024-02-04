@@ -54,8 +54,9 @@ export class Translate {
 		}
     }
 
-  static async product(data) {
+  static async product(data, isProductSlug) {
     let dataTranslate
+
     try {
       let language = 'en'
       let geoInfo = await checkIpInfo()
@@ -86,8 +87,8 @@ export class Translate {
         jsonTranslate = csvParse
       }
         
-        dataTranslate = await Promise.all(data.map(async(item) => {
-          let summaryJson = JSON.parse(item.summary);
+        if (isProductSlug) {
+          let summaryJson = JSON.parse(data.summary);
           let titleGroup = Object.keys(summaryJson)[0];
           let titleGroupTranslate = jsonTranslate.find((itemCsv) => itemCsv.en.toLowerCase() == titleGroup.toLowerCase())[language];
           let titleAttributeTranslate = await Promise.all(summaryJson[titleGroup].map(async (itemAttribute) => {
@@ -102,16 +103,41 @@ export class Translate {
             return {
               ...itemAttribute,
               code: itemAttribute.title
-            }; // Return original itemAttribute if not found in csvParse
+            };
           }));
           
           return {
-            ...item,
+            ...data,
             summary: JSON.stringify({ [titleGroupTranslate]: titleAttributeTranslate })
           };
-        }))
-        
-        return dataTranslate
+        } else {
+          dataTranslate = await Promise.all(data.map(async(item) => {
+            let summaryJson = JSON.parse(item.summary);
+            let titleGroup = Object.keys(summaryJson)[0];
+            let titleGroupTranslate = jsonTranslate.find((itemCsv) => itemCsv.en.toLowerCase() == titleGroup.toLowerCase())[language];
+            let titleAttributeTranslate = await Promise.all(summaryJson[titleGroup].map(async (itemAttribute) => {
+              let findCsv = jsonTranslate.find((itemCsv) => itemCsv.en.toLowerCase() === itemAttribute.title.toLowerCase());
+              if (findCsv) {
+                return {
+                  ...itemAttribute,
+                  title: findCsv[language],
+                  code: itemAttribute.title
+                };
+              }
+              return {
+                ...itemAttribute,
+                code: itemAttribute.title
+              };
+            }));
+            
+            return {
+              ...item,
+              summary: JSON.stringify({ [titleGroupTranslate]: titleAttributeTranslate })
+            };
+          }))
+          
+          return dataTranslate
+        }
       } catch (error) {
       console.log(error)
       return data

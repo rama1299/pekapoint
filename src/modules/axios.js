@@ -1,8 +1,10 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
+const port = import.meta.env.VITE_PORT
+
 const instance = axios.create({
-    baseURL: 'http://localhost:3000/api',
+    baseURL: `http://localhost:${port}/api`,
     validateStatus: false,
 })
 

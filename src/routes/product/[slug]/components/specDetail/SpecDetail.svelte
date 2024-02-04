@@ -45,7 +45,6 @@
   
       onMount(async()=> {
           let translate = await Translate.client(text)
-          console.log(translate)
           text = translate
 
           btnTabs = btnTabs.map((btn) => {

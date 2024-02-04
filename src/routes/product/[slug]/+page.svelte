@@ -14,7 +14,7 @@
     if (data.status == 'error') {
       goto('/error')
     }
-    let translate = await Translate.product(data.dataProduct)
+    let translate = await Translate.product(data.dataProduct, true)
     dataProduct = translate
     let translateSpec = await Translate.productSpec(data.dataSpec)
     dataSpec = translateSpec
