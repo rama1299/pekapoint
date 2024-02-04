@@ -6,12 +6,17 @@ import errorHandler from './system/middlewares/errorHandler.js';
 import cookieParser from 'cookie-parser';
 import { cronJobUpdateProductHome } from './system/services/cronUpdateProductHome.js'
 import { cronJobUpdateExchangerates } from './system/services/cronExchangeRates.js'
+import dotenv from 'dotenv'
+
+dotenv.config()
+
 
 const app = express()
-const port = 3000
+const port = process.env.PORT
+const portClient = process.env.PORT_CLIENT
 
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: `http://localhost:${portClient}`,
   credentials: true
 }))
 app.use(cookieParser())
