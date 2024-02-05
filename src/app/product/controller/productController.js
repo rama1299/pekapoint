@@ -39,7 +39,7 @@ export class ProductController {
             if (filterObject) {
                 const arrayBrand = filterObject.brand
                 const query = {
-                    text: `SELECT *, '[{"store":"Shopee","price":"19450000","link":"https://shopee.co.id/Handphone-cat.11044458.11044476"},{"store":"Tokopedia","price":"20000000","link":"https://shopee.co.id/Handphone-cat.11044458.11044476"}]' as affiliate, '21000000' as launch_price FROM public.products WHERE title ILIKE ANY($1::text[]) AND summary IS NOT NULL ORDER BY spec_score DESC, created_at DESC LIMIT $2 OFFSET $3`,
+                    text: `SELECT *, '[{"store":"Shopee","price":"19450000","link":"https://shopee.co.id/Handphone-cat.11044458.11044476"},{"store":"Tokopedia","price":"20000000","link":"https://shopee.co.id/Handphone-cat.11044458.11044476"}]' as affiliate, '21000000' as launch_price FROM public.products WHERE title ILIKE ANY($1::text[]) AND summary IS NOT NULL ORDER BY spec_score DESC, release_date DESC LIMIT $2 OFFSET $3`,
                     values: [arrayBrand.map(brand => `%${brand}%`), limit, offset],
                 };
 
@@ -76,7 +76,7 @@ export class ProductController {
                 res.status(200).json({data, totalProducts, totalPages})
             } else {
                 const response = await client.query(
-                    `SELECT *, '[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\"},{\"store\":\"Tokopedia\",\"price\":\"20000000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\"}]' as affiliate, '21000000' as launch_price FROM products WHERE summary IS NOT NULL ORDER BY spec_score DESC, created_at DESC LIMIT $1 OFFSET $2`,
+                    `SELECT *, '[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\"},{\"store\":\"Tokopedia\",\"price\":\"20000000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\"}]' as affiliate, '21000000' as launch_price FROM products WHERE summary IS NOT NULL ORDER BY spec_score DESC, release_date DESC LIMIT $1 OFFSET $2`,
                     [limit, offset]
                 );
         
@@ -146,13 +146,15 @@ export class ProductController {
                 
                 dataImages = dataImages.map((titleImage) => {
                     return `${pathName}/${titleImage}`;
-                });
-                
+                }).slice(0,8);
+                console.log(dataImages)
                 return {
                     ...obj,
-                    images: dataImages
+                    images: dataImages,
+                    feature_image: ''
                 };
             }));
+
         }
 
         data = await Promise.all(data.map(async (item) => {
@@ -169,6 +171,7 @@ export class ProductController {
                 summary: JSON.stringify({[titleGroup]: attribute})
             }
         }))
+        console.log(data)
         
         res.status(200).json(data);
         } catch (error) {
@@ -214,7 +217,7 @@ export class ProductController {
                                     CASE
                                         WHEN psa.value = 'Yes' THEN 100
                                         WHEN psa.value = 'No' THEN 0
-                                        ELSE psa.score
+                                        ELSE coalesce(psa.score,0)
                                     END,
                                     ',"spec":"', 
                                     replace(psa.value, '"', ''''), 
@@ -282,6 +285,7 @@ export class ProductController {
             const response = await client.query(
                 `SELECT DISTINCT SPLIT_PART(title, ' ', 1) AS brand
                 FROM public.products
+                WHERE summary IS NOT NULL
                 ORDER BY brand ASC;`
             )
 

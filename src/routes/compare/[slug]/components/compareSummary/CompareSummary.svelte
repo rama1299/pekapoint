@@ -10,7 +10,7 @@
   $: data = data
   let text = ['Summary']
 
-  let specTitle = JSON.parse(data[0].datas)
+  $: specTitle = JSON.parse(data[0].datas)
 
   function handleTabs(btnName) {
     key = btnName
@@ -239,6 +239,9 @@
         });
     })
 
+setTimeout(() => {
+    console.log(specTitle.find((data) => data.code == key).title)
+}, 1000);
 </script>
 
 <svelte:window bind:innerWidth={screenWidth}/>

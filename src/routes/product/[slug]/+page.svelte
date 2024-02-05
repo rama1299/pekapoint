@@ -9,7 +9,7 @@
   import { Translate } from '../../../helpers/translate';
 
   export let data
-
+  
   onMount(async () => {
     if (data.status == 'error') {
       goto('/error')
@@ -18,6 +18,7 @@
     dataProduct = translate
     let translateSpec = await Translate.productSpec(data.dataSpec)
     dataSpec = translateSpec
+
     dataTagCompare = [{title: dataProduct.title, slug: dataProduct.slug, feature_image: dataProduct.feature_image}]
     title = dataProduct.title
     window.scrollTo({
@@ -30,6 +31,7 @@
   let dataVariant = data.dataVariant.length == 0 ? [] : data.dataVariant[0]
   let title = ''
   let dataTagCompare = []
+
 </script>
 
 

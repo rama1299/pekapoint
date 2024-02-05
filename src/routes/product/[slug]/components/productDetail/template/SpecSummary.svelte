@@ -59,13 +59,14 @@ $: dataRadar = datas[index].attributes.map(data => {
 $: dataRadarLimit = dataRadar.slice(0, 8)
 
 $: datas = datas.map(data => {
-    if (data.code.toLocaleLowerCase() != 'miscellaneous') {
+    if (data.code.toLocaleLowerCase() !== 'miscellaneous' && data.code.toLocaleLowerCase() !== 'connectivity') {
         return {
             ...data
-        }
+        };
     }
-    return undefined
-}).filter(Boolean)
+    return undefined;
+}).filter(Boolean);
+
 
     $: btnTabs = [
         {

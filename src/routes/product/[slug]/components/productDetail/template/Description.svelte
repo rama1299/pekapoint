@@ -10,10 +10,19 @@ import Cookies from "js-cookie";
   onMount(async () => {
     let translate = await Translate.client(text)
     text = translate
+    if (data.colors) {
+        colors = JSON.parse(data.colors).map((color) => {
+        return {
+            name: color,
+            class: color.toLowerCase() == 'black' || color.toLowerCase() == 'white' ? `bg-${color.toLowerCase()}` : `bg-${color.toLowerCase()}-500`
+        }
+    })
+    }
   })
 
     export let data
     export let variant = []
+    let colors = []
 
     const variantPrices = variant.map((data) => {
         let price = data.prices.map((item) => {
@@ -52,7 +61,7 @@ import Cookies from "js-cookie";
         return {
             title: item.title,
             score: item.score,
-            spec: removeHtmlTags(item.spec)
+            spec: item.spec
         };
     });
 
@@ -97,24 +106,10 @@ import Cookies from "js-cookie";
                 </div>
             </div>
             <div>
-                {#if data.summary}
-                    {#each cleanedDesc as desc}
-                        <p class="text-start font-medium">{desc.title}</p>
-                        <p class="italic">{desc.spec}</p>
-                    {/each}
-                {:else}
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-                        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-                        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-                        optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
-                        obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
-                        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
-                        tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,
-                        quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos 
-                        sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam
-                        recusandae alias error harum maxime adipisci amet laborum.</p>
-                {/if}
-                
+                {#each cleanedDesc as desc}
+                    <p class="text-start font-medium">{desc.title}</p>
+                    <p class="italic">{@html desc.spec}</p>
+                {/each}
             </div>
             <div class="w-full">
                 <slot/>
@@ -140,31 +135,20 @@ import Cookies from "js-cookie";
          </div>
     {/if}
 
-    <div class="divide-y-2 space-y-5">
-        <div class="space-y-3 pt-3">
-            <p class="text-2xl font-semibold">{text[1]}</p>
-            <div class="grid grid-cols-6 lg:grid-cols-3 gap-3 text-sm">
-                <div class="flex justify-center items-center lg:border-2 w-full lg:h-24 flex-col">
-                    <div class="w-6 h-6 lg:w-10 lg:h-10 bg-sky-500 rounded-full"></div>
-                    <p class="hidden lg:block">Sky Blue</p>
-                </div>
-    
-                <div class="flex justify-center items-center lg:border-2 w-full lg:h-24 flex-col">
-                    <div class="w-6 h-6 lg:w-10 lg:h-10 bg-indigo-500 rounded-full"></div>
-                    <p class="hidden lg:block">Galaxy Purple</p>
-                </div>
-    
-                <div class="flex justify-center items-center lg:border-2 w-full lg:h-24 flex-col">
-                    <div class="w-6 h-6 lg:w-10 lg:h-10 bg-gray-100 rounded-full"></div>
-                    <p class="hidden lg:block">White Pearl</p>
-                </div>
-    
-                <div class="flex justify-center items-center lg:border-2 w-full lg:h-24 flex-col">
-                    <div class="w-6 h-6 lg:w-10 lg:h-10 bg-orange-500 rounded-full"></div>
-                    <p class="hidden lg:block">Sunset</p>
+    {#if colors.length > 0}
+        <div class="divide-y-2 space-y-5">
+            <div class="space-y-3 pt-3">
+                <p class="text-2xl font-semibold">{text[1]}</p>
+                <div class="grid grid-cols-6 lg:grid-cols-3 gap-3 text-sm">
+                {#each colors as color}
+                        <div class="flex justify-center items-center lg:border-2 w-full lg:h-24 flex-col">
+                            <div class="w-6 h-6 lg:w-10 lg:h-10 {color.class} rounded-full border"></div>
+                            <p class="hidden lg:block">{color.name}</p>
+                        </div>
+                {/each}
                 </div>
             </div>
+            <div></div>
         </div>
-        <div></div>
-    </div>
+    {/if}
 </div>

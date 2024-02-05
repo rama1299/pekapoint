@@ -8,7 +8,7 @@
       let datas = JSON.parse(data.datas)
       //hapus data miscellaneous
       $: datas = datas.map(data => {
-          if (data.code.toLocaleLowerCase() != 'miscellaneous') {
+          if (data.code.toLocaleLowerCase() != 'miscellaneous' && data.code.toLocaleLowerCase() != 'connectivity') {
               return {
                   ...data
               }
