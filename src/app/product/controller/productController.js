@@ -151,7 +151,6 @@ export class ProductController {
                 return {
                     ...obj,
                     images: dataImages,
-                    feature_image: ''
                 };
             }));
 

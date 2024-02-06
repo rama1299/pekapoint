@@ -38,7 +38,7 @@
 
     if (container) {
         const rect = container.getBoundingClientRect();
-            const scrollY = window.scrollY + rect.top - 100;
+            const scrollY = window.scrollY + rect.top - 300;
 
             window.scrollTo({
                 top: scrollY,
@@ -111,11 +111,11 @@ $: datas = datas.map(data => {
         },
     ]
 </script>
-<div id=containerSummary class="w-full space-y-5 divide-y-2">
+<div id=containerSummary class="w-full space-y-5">
     <div class="w-full space-y-3">
         <p class="text-2xl font-semibold">{text[0]}</p>
         <div class="w-full flex flex-row-reverse lg:block mx-auto gap-2 border-gray-100 border-2 rounded-lg pb-5">
-            <div class="w-1/6 lg:w-full grid grid-rows-8 lg:grid-cols-8 divide-gray-200 lg:divide-y-0 divide-y-2 divide-x-0 lg:divide-x-2 border-gray-100 border-y-2 lg:border-y-0 border-l-0 lg:border-r-0  h-96 lg:h-auto lg:static sticky top-12">
+            <div class="w-1/6 lg:w-full grid grid-rows-8 lg:grid-cols-8 divide-gray-200 lg:divide-y-0 divide-x-0 lg:divide-x-2 border-gray-100 border-y-2 lg:border-y-0 border-l-0 lg:border-r-0  h-96 lg:h-auto lg:static sticky top-12">
                 {#each datas as data, index (index, data.title)}
                     {#each btnTabs as btn, i (i,btn.name )}
                         {#if data.code.toLocaleLowerCase() == btn.name.toLocaleLowerCase()}
@@ -156,5 +156,4 @@ $: datas = datas.map(data => {
             </div>
         </div>
     </div>
-    <div></div>
 </div>

@@ -94,7 +94,7 @@ import Cookies from "js-cookie";
     
 </script>
 <div class="w-full space-y-5 pt-5 lg:pt-10">
-    <div class="divide-y-2 space-y-5">
+    <div class="space-y-5">
         <div class="w-full space-y-3"> 
             <div class=" w-full flex justify-between">
                 <div class="flex items-center w-5/6">
@@ -119,7 +119,7 @@ import Cookies from "js-cookie";
     </div>
 
     {#if variant.length > 0}
-         <div class="divide-y-2 space-y-5">
+         <div class="space-y-5">
              <div class="space-y-3 pt-3">
                  <p class="text-2xl font-semibold">{text[0]}</p>
                  <div class="grid grid-cols-3 gap-3 font-medium">
@@ -136,7 +136,7 @@ import Cookies from "js-cookie";
     {/if}
 
     {#if colors.length > 0}
-        <div class="divide-y-2 space-y-5">
+        <div class="space-y-5">
             <div class="space-y-3 pt-3">
                 <p class="text-2xl font-semibold">{text[1]}</p>
                 <div class="grid grid-cols-6 lg:grid-cols-3 gap-3 text-sm">

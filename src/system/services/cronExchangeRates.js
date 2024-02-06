@@ -2,7 +2,7 @@ import { CronJob } from "cron";
 import axios from "axios";
 import { pool } from '../../config/dbConfig.js'
 
-async function updateExchangerates() {
+export async function updateExchangerates() {
     const client = await pool.connect();
 
     try {

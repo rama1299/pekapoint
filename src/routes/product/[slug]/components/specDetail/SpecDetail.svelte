@@ -100,8 +100,8 @@
       ]
   </script>
   
-  <section id="containerSpec" class="w-full bg-gray-100">
-      <div class="container pb-5 lg:w-wrap mx-auto bg-white px-5 lg:px-10 space-y-5 divide-y-2">
+  <section id="containerSpec" class="w-full">
+      <div class="container lg:w-wrap mx-auto px-5 lg:px-10 space-y-5">
           <div class="space-y-3">
               <div>
                   <p class="text-2xl font-semibold">{text[0]}</p>
@@ -138,6 +138,5 @@
               </div>
               </div>
           </div>
-          <div></div>
       </div>
   </section>
