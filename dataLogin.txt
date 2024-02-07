@@ -1,22 +1,7 @@
 [
   {
     "ip": "::1",
-    "UserAgent": "axios/1.6.4",
-    "expired": "2024-02-06T00:42:07.320Z"
-  },
-  {
-    "ip": "::1",
-    "UserAgent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Mobile Safari/537.36",
-    "expired": "2024-02-06T00:42:10.674Z"
-  },
-  {
-    "ip": "::ffff:127.0.0.1",
-    "UserAgent": "Thunder Client (https://www.thunderclient.com)",
-    "expired": "2024-02-06T00:44:47.642Z"
-  },
-  {
-    "ip": "::1",
-    "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
-    "expired": "2024-02-06T01:11:46.578Z"
+    "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36 Edg/121.0.0.0",
+    "expired": "2024-02-07T08:21:48.182Z"
   }
 ]

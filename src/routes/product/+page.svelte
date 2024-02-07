@@ -24,7 +24,7 @@
     })
 
     afterUpdate(async() => {
-        if ($page.url.searchParams.size === 0 || filter[0] != $page.url.searchParams.getAll('filter')[0] || data.data.length === 0 || search != $page.url.searchParams.get('search')) {
+        if ($page.url.searchParams.size === 0 || filter != $page.url.searchParams.getAll('filter') || data.data.length === 0 || search != $page.url.searchParams.get('search')) {
             productList = data.data
         } else {
             productList = [...productList, ...data.data]

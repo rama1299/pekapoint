@@ -244,24 +244,24 @@
             </div>
             <div class="w-1/2 lg:flex justify-between font-medium text-white items-center hidden">
                 <div class="flex justify-center items-center gap-12 capitalize text">
-                    <a href="/" class="hover:text-[#F14D5D] duration-200 ease-in-out">{text[0]}</a>
-                    <a href="/product" class="hover:text-[#F14D5D] duration-200 ease-in-out">{text[1]}</a>
-                    <a href="/compare" class="hover:text-[#F14D5D] duration-200 ease-in-out">{text[2]}</a>
-                    <a href="/blog" class="hover:text-[#F14D5D] duration-200 ease-in-out">{text[3]}</a>
-                    <a href="/about" class="hover:text-[#F14D5D] duration-200 ease-in-out">{text[4]}</a>
+                    <a href="/" class="hover:text-sky-500 duration-200 ease-in-out">{text[0]}</a>
+                    <a href="/product" class="hover:text-sky-500 duration-200 ease-in-out">{text[1]}</a>
+                    <a href="/compare" class="hover:text-sky-500 duration-200 ease-in-out">{text[2]}</a>
+                    <a href="/blog" class="hover:text-sky-500 duration-200 ease-in-out">{text[3]}</a>
+                    <a href="/about" class="hover:text-sky-500 duration-200 ease-in-out">{text[4]}</a>
                 </div>
                 <div class="flex justify-center items-center relative" on:mouseleave={() => {toggleDropdown = false}} on:mouseenter={() => {toggleDropdown = true}}>
-                    <button class="flex justify-center items-center hover:text-[#F14D5D] h-20 w-20 uppercase">
+                    <button class="flex justify-center items-center hover:text-sky-500 h-20 w-20 uppercase">
                         {languageTitle}
                         <i class='bx bx-chevron-{toggleDropdown ? 'up' : 'down'} text-lg' ></i>
                     </button>
                         <div class="asbolute absolute top-20 right-0 px-4 pb-4 {toggleDropdown ? 'show' : 'dropdown_hidden'} ">
-                            <div class="w-auto h-auto rounded-b-lg rounded-l-lg overflow-hidden bg-white shadow-lg border-t-[#F14D5D] border-t-4 z-50 duration-300 ease-in transition">
+                            <div class="w-auto h-auto rounded-b-lg rounded-l-lg overflow-hidden bg-white shadow-lg border-t-sky-500 border-t-4 z-50 duration-300 ease-in transition">
                                 <div class="w-full h-8 border-b flex justify-end items-center px-2 group cursor-pointer" on:click={() => {handleLanguage('id')}}>
-                                    <p class="text-black group-hover:text-[#F14D5D]">Indonesia</p>
+                                    <p class="text-black group-hover:text-sky-500">Indonesia</p>
                                 </div>
                                 <div class="w-full h-8 border-b flex justify-end items-center px-2 group cursor-pointer" on:click={() => {handleLanguage('en')}}>
-                                    <a href="" class="text-black group-hover:text-[#F14D5D]">English</a>
+                                    <a href="" class="text-black group-hover:text-sky-500">English</a>
                                 </div>
                             </div>
                         </div>
@@ -271,13 +271,13 @@
     </div>
     <div class="w-full pb-5 h-auto absolute {toggleMenu ? 'show' : 'dropdown_hidden'}">
         <div class="container mx-auto px-3">
-            <div class="w-full h-auto max-h-96 overflow-auto rounded-lg bg-white border-t-4 border-[#F14D5D] shadow-lg ">
+            <div class="w-full h-auto max-h-96 overflow-auto rounded-lg bg-white border-t-4 border-sky-500 shadow-lg ">
                 <div class="flex flex-col w-full h-auto capitalize font-semibold gap-5 pt-5 px-5">
-                    <a href="/" class="hover:text-[#F14D5D]">{text[0]}</a>
-                    <a href="/product" class="hover:text-[#F14D5D]">{text[1]}</a>
-                    <a href="/compare" class="hover:text-[#F14D5D]">{text[2]}</a>
-                    <a href="/blog" class="hover:text-[#F14D5D]">{text[3]}</a>
-                    <a href="/about" class="hover:text-[#F14D5D]">{text[4]}</a>
+                    <a href="/" class="hover:text-sky-500">{text[0]}</a>
+                    <a href="/product" class="hover:text-sky-500">{text[1]}</a>
+                    <a href="/compare" class="hover:text-sky-500">{text[2]}</a>
+                    <a href="/blog" class="hover:text-sky-500">{text[3]}</a>
+                    <a href="/about" class="hover:text-sky-500">{text[4]}</a>
                 </div>
                 <div class="flex flex-col w-full h-auto capitalize font-semibold gap-5 p-5">
                     <button class="w-full h-full flex justify-between" on:click={() => { toggleDropdown = !toggleDropdown}}>
@@ -286,10 +286,10 @@
                     </button>
                     <div class="flex flex-col w-full h-auto capitalize font-semibold gap-5 px-7 {toggleDropdown ? '' : 'hidden'}">
                         <div on:click={() => {handleLanguage('id')}}>
-                            <p class="hover:text-[#F14D5D]" >Indonesia</p>
+                            <p class="hover:text-sky-500" >Indonesia</p>
                         </div>
                         <div on:click={() => {handleLanguage('en')}}>
-                            <p class="hover:text-[#F14D5D]">English</p>
+                            <p class="hover:text-sky-500">English</p>
                         </div>
                     </div>
                 </div>
