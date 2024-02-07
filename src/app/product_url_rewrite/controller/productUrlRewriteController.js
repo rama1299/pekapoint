@@ -144,7 +144,6 @@ export class ProductUrlRewriteController {
         const client = await pool.connect()
         try {
             let {url, idProduct, idVariant, write_type} = req.body
-            console.log(req.body)
 
             if (!url) {
                 throw ({name: 'InvalidCredentials'})

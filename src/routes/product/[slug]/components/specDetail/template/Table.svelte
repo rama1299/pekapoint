@@ -10,7 +10,7 @@
           <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-2">
               {#each data as item, i (i)}
                   <!-- {#if item.spec} -->
-                      <div class="col-1 p-5 flex items-start w-full border-2 rounded-lg h-32 overflow-hidden" key={i} >
+                      <div class="col-1 p-5 flex items-start w-full border-2 rounded-lg h-32 overflow-hidden bg-white" key={i} >
                            <div class="font-semibold space-y-3 w-full">
                               {#if item.spec.toLowerCase() == 'yes'}
                               <div class="flex gap-2 items-center">

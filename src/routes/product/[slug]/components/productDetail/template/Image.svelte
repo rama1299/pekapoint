@@ -1,19 +1,24 @@
 <script>
     import Carousel from 'svelte-carousel'
     import {onMount} from 'svelte'
-    export let image = [
-        'https://images.versus.io/objects/xiaomi-13t-pro.front.medium.1695764048871.jpg',
-        'https://images.versus.io/objects/xiaomi-12s-ultra.front.medium.1657118136892.jpg',
-        'https://images.versus.io/objects/xiaomi-mi-11-ultra.front.medium.1617056012430.jpg',
-        'https://images.versus.io/objects/xiaomi-13t-pro.front.medium.1695764048871.jpg',]
+    export let image
 
     onMount(() => {
         containerScroll.scrollTo({
             left: 0
         })
+
+        if (image.length > 0) {
+            images = image.slice(0, 8)
+        }
+
     })
 
-    let images = image.slice(0, 8)
+    let images = [
+        '/placeholder.png',
+        '/placeholder.png',
+        '/placeholder.png',
+        '/placeholder.png',]
 
     let carousel;
     function goToStartPage(index) {
@@ -55,9 +60,9 @@ function prevSlide() {
             <i class='bx bx-chevron-right z-10 lg:hidden absolute inset-y-0 right-0 text-5xl text-gray-500  cursor-pointer flex items-center h-full' on:click={goToNextPage}></i>
             <Carousel arrows={false} dots={false} swiping={true} bind:this={carousel}>
                 {#each images as image, i (i)}
-                <div class="w-full aspect-square flex justify-center mx-auto py-5 lg:py-10 relative bg-white overflow-hidden">
-                    <img src={`/images${image}`} alt="" class="h-full w-auto">
-                </div>
+                    <div class="w-full aspect-square flex justify-center mx-auto py-5 lg:py-10 relative bg-white overflow-hidden">
+                        <img src={`/images${image}`} alt="" class="h-full w-auto">
+                    </div>
                 {/each}
             </Carousel>          
         </div>

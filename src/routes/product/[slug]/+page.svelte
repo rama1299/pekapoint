@@ -9,7 +9,7 @@
   import { Translate } from '../../../helpers/translate';
 
   export let data
-
+  
   onMount(async () => {
     if (data.status == 'error') {
       goto('/error')
@@ -18,6 +18,7 @@
     dataProduct = translate
     let translateSpec = await Translate.productSpec(data.dataSpec)
     dataSpec = translateSpec
+
     dataTagCompare = [{title: dataProduct.title, slug: dataProduct.slug, feature_image: dataProduct.feature_image}]
     title = dataProduct.title
     window.scrollTo({
@@ -30,6 +31,7 @@
   let dataVariant = data.dataVariant.length == 0 ? [] : data.dataVariant[0]
   let title = ''
   let dataTagCompare = []
+
 </script>
 
 
@@ -41,17 +43,21 @@
 </svelte:head>
 {#if status === 'success'}
 <Layout isDetailProductPage={true} >
-    <main class="w-auto h-auto mx-auto pt-14 lg:pt-20 bg-gray-100">
+    <div class="w-auto h-auto mx-auto py-20 bg-white">
       {#if dataProduct != '' && dataSpec != ''}
          <ProductDetail data={dataProduct} spec={dataSpec} variant={dataVariant}/>
       {/if}
+    </div>
+    <div class="w-auto h-auto mx-auto py-20 bg-gray-100">
       {#if dataSpec != ''}
          <SpecDetail data={dataSpec}/>
       {/if}
+    </div>
+    <div class="w-auto h-auto mx-auto py-20 bg-white">
         <PriceDetail/>
+    </div>
       {#if dataTagCompare != []}
          <TagCompare data={dataTagCompare}/>
       {/if}
-    </main>
   </Layout>
   {/if}

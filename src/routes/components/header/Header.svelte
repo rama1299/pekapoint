@@ -77,7 +77,7 @@
     <div class="container flex flex-col justify-center items-center gap-8 lg:gap-16 z-10">
         <div class="text-center space-y-2">
             <p class="text-3xl lg:text-7xl font-bold text-white">{text[0] +' '+ brand}</p>
-            <p class="text-xl lg:text-3xl font-medium text-white">{text[1]}</p>
+            <p class="text-lg lg:text-3xl font-medium text-white">{text[1]}</p>
         </div>
         <!-- <FormCompare data={titleData}/> -->
         <SearchEngine data={titleData}/>

@@ -39,6 +39,7 @@
                     }
                 })
 
+                console.log(dataFilterObject)
 
                 if (dataFilterObject.length > 0) {
                     let checkSelectedBrand = data.map((dataBrand) => {
@@ -50,7 +51,14 @@
                     })
                     
                     brand = checkSelectedBrand
-                    selectedBrand = dataFilterObject.find(data => data.title == 'brand').value
+                    let findDataBrand = dataFilterObject.find(data => data.title == 'brand')
+                    if (findDataBrand) {
+                        selectedBrand = findDataBrand.value
+                    }
+                    let findDataRam = dataFilterObject.find(data => data.title == 'ram')
+                    if(findDataRam) {
+                        selectedRam = findDataRam.value
+                    }
                 } else {
                     brand = data
                 }
@@ -83,27 +91,80 @@
     $: dataFilterObject = []
     $: selectedBrand = []
     
-    // let sortToggle = false
+    let listRam = ['1', '1.5', '2', '3', '4', '6', '8', '10', '12', '16', '18', '24']
+    $: selectedRam = []
     
     function handleOutSide(event) {
-        if (filterToggle.isBrand) {
-            const dropdown = document.getElementById('dropdownBrand')
-            const btn = document.getElementById('btn')
-            if (!btn.contains(event.target) && !dropdown.contains(event.target)) {
-                filterToggle.isBrand = false
+        const container = document.getElementById('containerFilter')
+        if (container && !container.contains(event.target)) {
+            close()
+        }
+    }
+
+    function parsingQueryUrlFilter() {
+        let queryFilter = $page.url.searchParams.getAll('filter')
+        if (queryFilter.length > 0) {
+            return queryFilter.map((filter) => {
+                let [key, value] = filter.split('=')
+                        if (value) {
+                            let arrayValue = value.split(',')
+                            return {
+                                title: key,
+                                value : arrayValue,}
+                        } else {
+                            return undefined
+                        }
+            }).filter(Boolean)
+        } else {
+            return []
+        }
+    }
+
+    function handleSelectRam(ram) {
+        let queryFilterObj = parsingQueryUrlFilter()
+        let arrayFilterBrand = queryFilterObj.find((filter) => filter.title == 'brand')
+        let queryFilterBrand
+
+        if (arrayFilterBrand) {
+            queryFilterBrand = `filter=brand%3D${arrayFilterBrand.value.join(',')}`
+        } else {
+            queryFilterBrand = ''
+        }
+
+        let arrayFilterRam = queryFilterObj.find((filter) => filter.title == 'ram')
+        let queryFilterRam
+
+        if (arrayFilterRam) {
+            queryFilterRam = `filter=ram%3D${arrayFilterRam.value.join(',')}`
+        } else {
+            queryFilterRam = ''
+        }
+
+        if (!selectedRam.includes(ram)) {
+            selectedRam = [...selectedRam, ram]
+            if (queryFilterBrand) {
+                    goto(`/product?${queryFilterBrand}&filter=ram%3D${selectedRam.join(',')}`)
+                } else {
+                    goto(`/product?filter=ram%3D${selectedRam.join(',')}`)
+                }
+        } else {
+            selectedRam = selectedRam.filter((selectRam) => selectRam != ram )
+            if (selectedRam.length > 0) {
+                if (queryFilterBrand) {
+                    goto(`/product?${queryFilterBrand}&filter=ram%3D${selectedRam.join(',')}`)
+                } else {
+                    goto(`/product?filter=ram%3D${selectedRam.join(',')}`)
+                }
+            } else {
+                if (queryFilterBrand) {
+                    goto(`/product?${queryFilterBrand}`)
+                } else {
+                    goto(`/product`)
+                }
             }
         }
-        // const dropdownFilter = document.getElementById('dropdownFilter')
-        
-        // if(!dropdownFilter.contains(event.target) && !btn.contains(event.target)) {
-        //     filterToggle = {
-        //         isBrand: false,
-        //         isPrice: false,
-        //         isRam: false,
-        //         isStorage: false
-        //     }
-        //     sortToggle = false
-        // }
+
+        close()
     }
 
     function handleToggle(filterName) {
@@ -133,18 +194,56 @@
 
     function handleSelect() {
         selectedBrand = brand.filter((item) => item.selected).map(item => item.brand)
-        if (selectedBrand.length > 0) {
-            brand = brand.map((dataBrand) => {
-                return {
-                    ...dataBrand,
-                    selected: selectedBrand.includes(dataBrand.brand)
-                }
-            })
-            let linkFilterBrand = `?filter=brand%3D${selectedBrand.join(',')}`
-            goto(`/product/${linkFilterBrand}`)
+        brand = brand.map((dataBrand) => {
+            return {
+                ...dataBrand,
+                selected: selectedBrand.includes(dataBrand.brand)
+            }
+        })
+
+        let queryFilterObj = parsingQueryUrlFilter()
+        let arrayFilterBrand = queryFilterObj.find((filter) => filter.title == 'brand')
+        let queryFilterBrand
+
+        if (arrayFilterBrand) {
+            queryFilterBrand = `filter=brand%3D${arrayFilterBrand.value.join(',')}`
         } else {
-            goto(`/product`)
+            queryFilterBrand = ''
         }
+
+        let arrayFilterRam = queryFilterObj.find((filter) => filter.title == 'ram')
+        let queryFilterRam
+
+        if (arrayFilterRam) {
+            queryFilterRam = `filter=ram%3D${arrayFilterRam.value.join(',')}`
+        } else {
+            queryFilterRam = ''
+        }
+
+        if (selectedBrand.length > 0) {
+            if (queryFilterRam) {
+                goto(`/product?filter=brand%3D${selectedBrand.join(',')}&${queryFilterRam}`)
+            } else {
+                goto(`/product?filter=brand%3D${selectedBrand.join(',')}`)
+            }
+        } else {
+            if (queryFilterRam) {
+                goto(`/product?${queryFilterRam}`)
+            } else {
+                goto(`/product`)
+            }
+        }
+    }
+
+    function removeBrandTag(title) {
+        selectedBrand = selectedBrand.filter((titleSelect) => titleSelect != title)
+        brand = brand.map((dataBrand) => {
+            return {
+                ...dataBrand,
+                selected: selectedBrand.includes(dataBrand.brand)
+            }
+        })
+        handleSelect()
     }
 
     function clearAll() {
@@ -155,11 +254,17 @@
         }
     })
     selectedBrand = []
+    selectedRam = []
     goto(`/product`)
   }
 
   function close() {
-    filterToggle.isBrand = false
+    filterToggle = {
+        isBrand: false,
+        isPrice: false,
+        isRam: false,
+        isStorage: false
+    }
   }
 
   afterUpdate(() => {
@@ -167,171 +272,99 @@
   })
    
 </script>
-
-<div id="btn" class="w-full hidden lg:flex justify-between h-12">
-    <div class="flex justify-start gap-5 w-2/3 h-full items-center font-medium text-black relative">
+<!-- dekstop -->
+<div class="space-y-2">
+    <div id="containerFilter" class="w-full hidden lg:flex justify-between items-center h-12">
+        <div class="flex items-center gap-5 h-full">
         <p class="font-semibold text-xl">Filter</p>
-        <div class="h-full" on:keypress={() => {handleToggle('isBrand')}} on:click={() => {handleToggle('isBrand')}} >
-            <button class="w-36 bg-white h-full border rounded-md flex justify-between items-center px-2">
-                <div>{text[0]}</div>
-                <div class="flex items-center">
-                    {#if selectedBrand.length > 0}
-                         <p class="text-gray-600">{`(${selectedBrand.length})`}</p>
-                    {/if}
-                    <i class='bx bx-chevron-{filterToggle.isBrand ? 'up' : 'down'} text-lg'></i>
-                </div>
-            </button>
-        </div>
-        <!-- <div class="" on:keypress={() => {handleToggle('isPrice')}} on:click={() => {handleToggle('isPrice')}}>
-            <button class="w-32 bg-white h-8 border rounded-md flex justify-between items-center px-2">Price
-                <i class='bx bx-chevron-down text-lg'></i>
-            </button>
-        </div>
-        <div class="" on:keypress={() => {handleToggle('isRam')}} on:click={() => {handleToggle('isRam')}}>
-            <button  class="w-32 bg-white h-8 border rounded-md flex justify-between items-center px-2">RAM
-                <i class='bx bx-chevron-down text-lg'></i>
-            </button>
-        </div>
-        <div class="" on:keypress={() => {handleToggle('isStorage')}} on:click={() => {handleToggle('isStorage')}}>
-            <button class="w-32 bg-white h-8 border rounded-md flex justify-between items-center px-2">Storage
-                <i class='bx bx-chevron-down text-lg'></i>
-            </button>
-        </div> -->
-        
-        {#if filterToggle.isBrand}
-            <div id="dropdownBrand" class="w-auto h-auto bg-white absolute top-12 left-[75px] rounded-md border z-10 p-6">
-                <div class="grid grid-cols-3 gap-x-6 gap-y-1 max-h-[310px] overflow-auto">
-                    {#each brand as data (data.id)}
-                         <div class="w-full h-auto flex justify-start">
-                             <div class="flex justify-center gap-x-3 items-center">
-                                <input class="w-5 h-5 ring-0 focus:ring-0 cursor-pointer hover:bg-gray-300 rounded-md bg-gray-100" type="checkbox" bind:checked={data.selected} id={"checkbox" + data.id} on:change={handleSelect}>
-                                <label for={"checkbox" + data.id}>{data.brand}</label>
+        <div class="flex justify-start gap-5 h-full items-center font-medium text-black relative ">
+            <div class="h-full" on:keypress={() => {handleToggle('isBrand')}} on:click={() => {handleToggle('isBrand')}} >
+                <button class="w-36 bg-white h-full border rounded-md flex justify-between items-center px-2">
+                    <div>{text[0]}</div>
+                    <div class="flex items-center">
+                        {#if selectedBrand.length > 0}
+                             <p class="text-gray-600">{`(${selectedBrand.length})`}</p>
+                        {/if}
+                        <i class='bx bx-chevron-{filterToggle.isBrand ? 'up' : 'down'} text-lg'></i>
+                    </div>
+                </button>
+            </div>
+    
+            {#if filterToggle.isBrand}
+                <div id="dropdownBrand" class="w-[400px] h-auto bg-white absolute top-12 left-0 rounded-md border z-10 p-6">
+                    <div class="grid grid-cols-3 gap-x-6 gap-y-1 max-h-[310px] overflow-auto">
+                        {#each brand as data (data.id)}
+                             <div class="w-full h-auto flex justify-start">
+                                 <div class="flex justify-center gap-x-3 items-center">
+                                    <input class="w-5 h-5 ring-0 focus:ring-0 cursor-pointer hover:bg-gray-300 rounded-md bg-gray-100" type="checkbox" bind:checked={data.selected} id={"checkbox" + data.id} on:change={handleSelect}>
+                                    <label for={"checkbox" + data.id}>{data.brand}</label>
+                                 </div>
                              </div>
-                         </div>
-                    {/each}
-                </div>
-                <div class="w-auto flex justify-center gap-4 mt-6">
-                    <button class="w-28 h-8 border rounded-lg bg-gray-200 hover:bg-gray-300" on:click={clearAll}>{text[2]}</button>
-                    <button class="w-28 h-8 border rounded-lg bg-sky-500 hover:bg-sky-600 text-white" on:click={close}>{text[3]}</button>
-                </div>
-            </div>
-        {/if}
-        
-        <!-- {#if filterToggle.isPrice}
-            <div id="dropdownFilter" class="w-auto h-auto bg-white absolute top-9 left-[13.125rem] rounded-md border z-10  p-6">
-                <div class="w-full h-auto">
-                    <div class="space-y-2">
-                        <div class="w-full h-9 border rounded-lg flex overflow-hidden">
-                            <div class="h-9 w-9 bg-gray-200 flex justify-center items-center">
-                                <p class="text-md font-semibold text-gray-500">$</p>
-                            </div>
-                            <div class="w-full h-full border">
-                                <input class="bg-transparent focus:ring-0 ring-0 border-none focus:border-none w-full h-full" placeholder="Min Price" type="number">
-                            </div>
-                        </div>
-                        <div class="w-full h-9 border rounded-lg flex overflow-hidden">
-                            <div class="h-9 w-9 bg-gray-200 flex justify-center items-center">
-                                <p class="text-md font-semibold text-gray-500">$</p>
-                            </div>
-                            <div class="w-full h-full border">
-                                <input class="bg-transparent focus:ring-0 ring-0 border-none focus:border-none w-full h-full" placeholder="Max Price" type="number">
-                            </div>
-                        </div>
-                        <div class="w-full h-auto flex justify-end relative">
-                            <button class=" flex items-center justify-between gap-1 pl-1 h-7 bg-gray-200 rounded-lg">
-                                <p>$ US</p>
-                                <i class='bx bx-chevron-down text-lg'></i>
-                            </button>
-                            <div class="absolute w-20 h-20 bg-white border rounded-lg top-9 right-0 shadow-lg py-1 px-2 hidden">
-                                    <p class="border-b">$ SGP</p>
-                                    <p>y JPY</p>
-                                    <p>e EUR</p>
-                            </div>
-                        </div>
+                        {/each}
                     </div>
-                    <div class="w-full h-9 flex justify-center gap-2 mt-6">
-                        <button class="px-2 border rounded-lg bg-gray-200">Clear All</button>
-                        <button class="px-2 border rounded-lg bg-sky-600 text-white">Apply</button>
-                    </div>
+                    <!-- <div class="w-auto flex justify-center gap-4 mt-6">
+                        <button class="w-28 h-8 border rounded-lg bg-gray-200 hover:bg-gray-300" on:click={clearAll}>{text[2]}</button>
+                        <button class="w-28 h-8 border rounded-lg bg-sky-500 hover:bg-sky-600 text-white" on:click={close}>{text[3]}</button>
+                    </div> -->
                 </div>
-            </div>
-        {/if} -->
-        
-        <!-- {#if filterToggle.isRam}
-            <div id="dropdownFilter" class="w-auto h-auto bg-white absolute top-9 left-[22.5rem] rounded-md border z-10 p-6 ">
-                <div class="space-y-1">
-                    <div class="w-full">
-                        <input type="range" name="" id="" min="1" max="20" bind:value={ram} class="w-full">
-                    </div>
-                    <div class="w-full flex justify-between items-center">
-                        <div>
-                            <p class="text-gray-500">1</p>
-                        </div>
-                        <div>
-                            <p class="font-semibold">{ram}</p>
-                        </div>
-                        <div>
-                            <p class="text-gray-500">20</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-full h-9 flex justify-center gap-2 mt-6">
-                    <button class="px-2 border rounded-lg bg-gray-200">Clear All</button>
-                    <button class="px-2 border rounded-lg bg-sky-600 text-white">Apply</button>
-                </div>
-            </div>
-        {/if} -->
-        
-        <!-- {#if filterToggle.isStorage}
-            <div id="dropdownFilter" class="w-auto h-auto bg-white absolute top-9 left-[31.688rem] rounded-md border z-10  p-6">
-                <div class="space-y-1">
-                    <div class="w-full">
-                        <input type="range" name="" id="" min="16" max="256" bind:value={storage} class="w-full">
-                    </div>
-                    <div class="w-full flex justify-between items-center">
-                        <div>
-                            <p class="text-gray-500">16</p>
-                        </div>
-                        <div>
-                            <p class="font-semibold">{storage}</p>
-                        </div>
-                        <div>
-                            <p class="text-gray-500">20</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-full h-9 flex justify-center gap-2 mt-6">
-                    <button class="px-2 border rounded-lg bg-gray-200">Clear All</button>
-                    <button class="px-2 border rounded-lg bg-sky-600 text-white">Apply</button>
-                </div>
-            </div>
-        {/if} -->
-    </div>
-    <!-- <div class="flex justify-end gap-5 w-1/3 items-center font-medium text-black">
-        <p class="font-semibold">Sort</p>
-        <div class="relative w-32">
-            <button class="w-32 bg-white h-8 border rounded-md flex justify-between items-center px-2" on:click={handleSortToggle}>Score
-                <i class='bx bx-chevron-down text-lg'></i>
-            </button>
-            {#if sortToggle}
-                 <div id="dropdownSort" class="absolute z-50 w-auto top-9 right-0 bg-white border rounded-lg shadow-lg">
-                     <div class=" border-t flex items-center w-full h-8 px-2 justify-end cursor-pointer hover:bg-gray-100">
-                         <p class>Score</p>
-                     </div>
-                     <div class=" border-t flex items-center w-full h-8 px-2 justify-end cursor-pointer hover:bg-gray-100">
-                         <p class>Price</p>
-                     </div>
-                     <div class=" border-t flex items-center w-full h-8 px-2 justify-end cursor-pointer hover:bg-gray-100">
-                         <p class>A - Z</p>
-                     </div>
-                     <div class=" border-t flex items-center w-full h-8 px-2 justify-end cursor-pointer hover:bg-gray-100">
-                         <p class>Z - A</p>
-                     </div>
-                 </div>
             {/if}
         </div>
-    </div> -->
+    
+        <div class="flex justify-start gap-5 h-full items-center font-medium text-black relative">
+            <div class="h-full" on:keypress={() => {handleToggle('isRam')}} on:click={() => {handleToggle('isRam')}} >
+                <button class="w-36 bg-white h-full border rounded-md flex justify-between items-center px-2">
+                    <div>RAM</div>
+                    <div class="flex items-center">
+                        {#if selectedRam.length > 0}
+                             <p class="text-gray-600">{`(${selectedRam.length})`}</p>
+                        {/if}
+                        <i class='bx bx-chevron-{filterToggle.isRam ? 'up' : 'down'} text-lg'></i>
+                    </div>
+                </button>
+            </div>
+    
+            {#if filterToggle.isRam}
+                <div id="dropdownBrand" class="w-36 h-auto bg-white absolute top-12 left-0 rounded-md border z-10">
+                    <div class="grid grid-flow-row overflow-auto h-[250px]">
+                        {#each listRam as data}
+                            <div class="w-full flex justify-end items-center h-9 px-3 {selectedRam.includes(data) ? 'text-sky-500' : ''} hover:bg-gray-100 cursor-pointer" on:click={() => {handleSelectRam(data)}}>
+                                <p>{data + ' GB'}</p>
+                            </div>
+                        {/each}
+                    </div>
+                </div>
+            {/if}
+        </div>
+        </div>
+        
+        <div class="flex justify-start h-full items-center font-medium">
+            <div class="h-full" on:click={clearAll}>
+                <button class="w-36 bg-white h-full border rounded-md flex justify-center items-center px-2 ">
+                    <p class="text-lg ">Reset</p>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    {#if selectedBrand.length > 0 || selectedRam.length > 0}
+        <div class="w-full flex flex-wrap gap-3">
+            {#each selectedBrand as brand}
+                <div class="justify-between flex items-center px-3 h-8 lg:h-10 bg-sky-500/50 border-2 gap-5 border-sky-500 font medium text-white rounded-md" on:click={() => {removeBrandTag(brand)}}>
+                    <p class="captalize">{brand}</p>
+                    <i class='bx bx-x text-2xl hover:text-red-500 cursor-pointer'></i>
+                </div>
+            {/each}
+            {#each selectedRam as ram}
+                <div class="justify-between flex items-center px-3 h-8 lg:h-10 bg-pink-500/50 border-2 gap-5 border-pink-500 font medium text-white rounded-md" on:click={() => {handleSelectRam(ram)}}>
+                    <p class="captalize">{ram} GB</p>
+                    <i class='bx bx-x text-2xl hover:text-red-500 cursor-pointer'></i>
+                </div>
+            {/each}
+        </div>
+    {/if}
 </div>
+
+<!-- mobile -->
 {#if $isFilterProduct}
     <div class="w-full bg-black bg-opacity-70 h-screen fixed z-50 top-0 left-0 lg:hidden">
         <button class="fixed top-3 right-3 flex justify-center items-center w-8 h-8" on:click={handleToggleMobile}>
@@ -339,122 +372,35 @@
         </button>
         <div class="w-80 h-full bg-gray-100 z-50">
             <div class="h-5/6 overflow-y-auto scroll w-full p-4 space-y-4">
-                <!-- <div class="relative">
-                    <div class="">
-                        <p class="font-semibold">Sort by</p>
-                    </div>
-                    <div>
-                        <button class="w-full bg-white h-10 border rounded-lg flex justify-between items-center px-2 font-semibold" on:click={handleSortToggle}>Score
-                            <i class='bx bx-chevron-down text-lg'></i>
-                        </button>
-                    </div>
-                    {#if sortToggle}
-                        <div class=" w-11/12 bg-white border-pink-600 overflow-hidden absolute top-16 right-0 rounded-b-lg rounded-l-lg border-t-4 shadow-lg">
-                            <div class=" border flex items-center w-full h-8 px-2">
-                                <p>Score</p>
-                            </div>
-                            <div class=" border flex items-center w-full h-8 px-2">
-                                <p>Price</p>
-                            </div>
-                            <div class=" border flex items-center w-full h-8 px-2">
-                                <p>A - Z</p>
-                            </div>
-                            <div class=" border flex items-center w-full h-8 px-2">
-                                <p>Z - A</p>
-                            </div>
-                        </div>
-                    {/if}
-                </div> -->
                 <div>
                     <div class="">
                         <p class="font-semibold">{text[1]}</p>
                     </div>
-                    <div class="w-full h-auto bg-white rounded-lg p-2 border">
-                        <p class="font-semibold">{text[0]}</p>
-                    <div class="h-[600px] w-full overflow-auto scroll space-y-1">
-                        {#each brand as data (data.id)}
-                            <div class="w-full h-auto flex justify-start px-2">
-                                <div class="flex justify-center gap-x-2 items-center">
-                                <input class="ring-0 focus:ring-0 rounded-md bg-gray-100" type="checkbox" bind:checked={data.selected} id={"checkbox" + data.id} on:change={handleSelect}>
-                                <label for={"checkbox" + data.id}>{data.brand}</label>
-                                </div>
+                    <div class="w-full space-y-3">
+                        <div class="w-full h-auto bg-white rounded-lg p-2 border">
+                            <p class="font-semibold">{text[0]}</p>
+                            <div class="max-h-48 w-full overflow-auto scroll space-y-1">
+                                {#each brand as data (data.id)}
+                                    <div class="w-full h-auto flex justify-start px-2">
+                                        <div class="flex justify-center gap-x-2 items-center">
+                                        <input class="ring-0 focus:ring-0 rounded-md bg-gray-100" type="checkbox" bind:checked={data.selected} id={"checkbox" + data.id} on:change={handleSelect}>
+                                        <label for={"checkbox" + data.id}>{data.brand}</label>
+                                        </div>
+                                    </div>
+                                {/each}
                             </div>
-                        {/each}
+                        </div>
+                        <div class="w-full h-auto bg-white rounded-lg p-2 border">
+                            <p class="font-semibold">RAM</p>
+                            <div class="max-h-48 w-full overflow-auto scroll">
+                                {#each listRam as data}
+                                    <div class="w-full h-8 border-b flex justify-start items-center px-2 {selectedRam.includes(data) ? 'text-sky-500' : ''}" on:click={() => {handleSelectRam(data)}}>
+                                        <p>{data + ' GB'}</p>
+                                    </div>
+                                {/each}
+                            </div>
+                        </div>
                     </div>
-                    </div>
-        
-                    <!-- <div class="w-full h-auto bg-white rounded-lg p-2 mt-4 border relative">
-                        <p class="font-semibold">Price</p>
-                        <div class="h-auto w-full overflow-auto scroll space-y-1">
-                            <div class="w-full h-9 border rounded-lg flex overflow-hidden">
-                                <div class="h-9 w-9 bg-gray-200 flex justify-center items-center">
-                                    <p class="text-md font-semibold text-gray-500">$</p>
-                                </div>
-                                <div class="w-full h-full border">
-                                    <input class="bg-transparent focus:ring-0 ring-0 border-none focus:border-none w-full h-full" placeholder="Min Price" type="number">
-                                </div>
-                            </div>
-                            <div class="w-full h-9 border rounded-lg flex overflow-hidden">
-                                <div class="h-9 w-9 bg-gray-200 flex justify-center items-center">
-                                    <p class="text-md font-semibold text-gray-500">$</p>
-                                </div>
-                                <div class="w-full h-full border">
-                                    <input class="bg-transparent focus:ring-0 ring-0 border-none focus:border-none w-full h-full" placeholder="Max Price" type="number">
-                                </div>
-                            </div>
-                            <div class="w-full h-auto flex justify-end">
-                                <button class=" flex items-center justify-between gap-1 pl-1 h-7 bg-gray-200 rounded-lg">
-                                    <p>$ US</p>
-                                    <i class='bx bx-chevron-down text-lg'></i>
-                                </button>
-                                <div class="absolute w-20 h-20 bg-white border rounded-lg -bottom-20 right-0 shadow-lg py-1 px-2 hidden">
-                                        <p class="border-b">$ SGP</p>
-                                        <p>y JPY</p>
-                                        <p>e EUR</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-        
-                    <!-- <div class="w-full h-auto bg-white rounded-lg p-2 mt-4 border">
-                        <p class="font-semibold">RAM</p>
-                        <div class="h-auto w-full overflow-auto scroll space-y-1 px-2">
-                            <div class="w-full">
-                                <input type="range" name="" id="" min="0" max="20" bind:value={ram} class="w-full">
-                            </div>
-                            <div class="w-full flex justify-between items-center">
-                                <div>
-                                    <p class="text-gray-500">0</p>
-                                </div>
-                                <div>
-                                    <p class="font-semibold">{ram}</p>
-                                </div>
-                                <div>
-                                    <p class="text-gray-500">20</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-        
-                    <!-- <div class="w-full h-auto bg-white rounded-lg p-2 mt-4 border">
-                        <p class="font-semibold">Storage</p>
-                        <div class="h-auto w-full overflow-auto scroll space-y-1 px-2">
-                            <div class="w-full">
-                                <input type="range" name="" id="" min="0" max="256" bind:value={storage} class="w-full slider">
-                            </div>
-                            <div class="w-full flex justify-between items-center">
-                                <div>
-                                    <p class="text-gray-500">0</p>
-                                </div>
-                                <div>
-                                    <p class="font-semibold">{storage}</p>
-                                </div>
-                                <div>
-                                    <p class="text-gray-500">256</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
             </div>
             <div class="w-80 h-1/6 ">
@@ -466,13 +412,6 @@
         </div>
     </div>
 {/if}
-
-<!-- <div class=" _shadow h-10 w-20 fixed left-0 bottom-0 lg:hidden z-30" on:click={handleToggleMobile}>
-    <div class="bg-gradient-to-r from-sky-600 to-indigo-800 flex justify-center gap-1 w-20 h-10 items-center px-1 py-1 text-white rounded-t-lg cursor-pointer _shadow">
-        <p>Filter</p>
-        <p>(1)</p>
-    </div>
-</div> -->
 
 
 

@@ -4,8 +4,8 @@ import { pool } from '../../config/dbConfig.js'
 
 
 async function updateProductHomeJson() {
+    const client = await pool.connect();
     try {
-        const client = await pool.connect();
 
         const filter = [[1, 8], [2, 8], [2, 8]];
         let dataResult = [];

@@ -14,3 +14,4 @@ fly.toml
 /sql/schema2.sql
 dataLogin.txt
 static/images
+dataLogin.txt

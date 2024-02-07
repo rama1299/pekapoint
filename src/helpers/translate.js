@@ -173,28 +173,39 @@ export class Translate {
         getDataCsvFromSession = csvData
       }
         
-      let csvParse = await d3.csvParse(getDataCsvFromSession)
+      let csvParse = await d3.csvParse(getDataCsvFromSession);
 
       let specJson = JSON.parse(item.datas);
       let specTranslate = await Promise.all(specJson.map(async (spec) => {
-        let titleTranslate = csvParse.find((itemCsv) => itemCsv.en.toLowerCase() === spec.title.toLowerCase())[language];
-        let attributesTranslate = await Promise.all(spec.attributes.map(async (attribute) => {
-          let findCsv = csvParse.find((itemCsv) => itemCsv.en.toLowerCase() === attribute.title.toLowerCase());
+          let titleTranslate = csvParse.find((itemCsv) => itemCsv.en.toLowerCase() === spec.title.toLowerCase());
+          let attributesTranslate = await Promise.all(spec.attributes.map(async (attribute) => {
+              let findCsv = csvParse.find((itemCsv) => itemCsv.en.toLowerCase() === attribute.title.toLowerCase());
+              if (findCsv) {
+                  return {
+                      ...attribute,
+                      title: findCsv[language]
+                  };
+              }
+              return {
+                  ...attribute
+              }
+          }));
+          if (titleTranslate) {
+              return {
+                  ...spec,
+                  attributes: attributesTranslate,
+                  title: titleTranslate[language]
+              };
+          }
           return {
-            ...attribute,
-            title: findCsv[language]
-          };
-        }));
-        return {
-          ...spec,
-          attributes: attributesTranslate,
-          title: titleTranslate
-        };
+              ...spec,
+              attributes: attributesTranslate
+          }
       }));
-      
+  
       return {
-        ...item,
-        datas: JSON.stringify(specTranslate)
+          ...item,
+          datas: JSON.stringify(specTranslate)
       };
       } catch (error) {
       console.log(error)
@@ -237,19 +248,30 @@ export class Translate {
       let dataTranslate = await Promise.all(data.map(async (item) => {
         let specJson = JSON.parse(item.datas);
         let specTranslate = await Promise.all(specJson.map(async (spec) => {
-          let titleTranslate = csvParse.find((itemCsv) => itemCsv.en.toLowerCase() === spec.title.toLowerCase())[language];
+          let titleTranslate = csvParse.find((itemCsv) => itemCsv.en.toLowerCase() === spec.title.toLowerCase());
           let attributesTranslate = await Promise.all(spec.attributes.map(async (attribute) => {
             let findCsv = csvParse.find((itemCsv) => itemCsv.en.toLowerCase() === attribute.title.toLowerCase());
+            if (findCsv) {
+              return {
+                  ...attribute,
+                  title: findCsv[language]
+              };
+            }
             return {
-              ...attribute,
-              title: findCsv[language]
-            };
+                ...attribute
+            }
           }));
-          return {
+          if (titleTranslate) {
+            return {
+                ...spec,
+                attributes: attributesTranslate,
+                title: titleTranslate[language]
+            };
+        }
+        return {
             ...spec,
-            attributes: attributesTranslate,
-            title: titleTranslate
-          };
+            attributes: attributesTranslate
+        }
         }));
         
         return {

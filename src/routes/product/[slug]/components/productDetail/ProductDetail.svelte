@@ -51,7 +51,7 @@
 
 <svelte:window bind:scrollY={windowScroll}/>
 <section class="w-full">
-    <div class="container lg:w-wrap bg-white mx-auto space-y-5 pb-5">
+    <div class="container lg:w-wrap bg-white mx-auto space-y-5">
         <div class=" flex-wrap lg:flex-nowrap lg:flex mx-auto justify-center items-start lg:px-10 gap-5" bind:offsetHeight={sectionDescription}>
             <div class="w-full lg:w-1/2 lg:sticky top-[120px] static space-y-5">
                 <Image  image={data.images}/>

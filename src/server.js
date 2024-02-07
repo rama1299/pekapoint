@@ -8,7 +8,7 @@ import { cronJobUpdateProductHome } from './system/services/cronUpdateProductHom
 import { cronJobUpdateExchangerates } from './system/services/cronExchangeRates.js'
 import dotenv from 'dotenv'
 
-dotenv.config()
+dotenv.config() 
 
 
 const app = express()
