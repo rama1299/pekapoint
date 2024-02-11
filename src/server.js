@@ -13,10 +13,10 @@ dotenv.config()
 
 const app = express()
 const port = process.env.VITE_PORT
-const portClient = process.env.VITE_PORT_CLIENT
+const corsOrigin = process.env.VITE_CORS_ORIGIN
 
 app.use(cors({
-  origin: `http://localhost:${portClient}`,
+  origin: corsOrigin,
   credentials: true
 }))
 app.use(cookieParser())

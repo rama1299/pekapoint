@@ -61,7 +61,7 @@
         }
       ],
       "created_at": null,
-      "visitor": 28
+      "visitor": 32
     },
     {
       "id": 131,
@@ -82,28 +82,7 @@
         }
       ],
       "created_at": "2024-02-05T00:46:08.448Z",
-      "visitor": 16
-    },
-    {
-      "id": 128,
-      "url": "/product/xiaomi-12",
-      "product": [
-        {
-          "product_id": 8,
-          "feature_image": "images/xiaomi/12/xiaomi-1249d5fd26471cbed9f987bb48519d9cc5.jpg",
-          "title": "Xiaomi 12",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        }
-      ],
-      "created_at": "2024-02-04T22:32:35.029Z",
-      "visitor": 11
+      "visitor": 17
     },
     {
       "id": 129,
@@ -124,7 +103,28 @@
         }
       ],
       "created_at": "2024-02-04T22:36:54.454Z",
-      "visitor": 10
+      "visitor": 12
+    },
+    {
+      "id": 128,
+      "url": "/product/xiaomi-12",
+      "product": [
+        {
+          "product_id": 8,
+          "feature_image": "images/xiaomi/12/xiaomi-1249d5fd26471cbed9f987bb48519d9cc5.jpg",
+          "title": "Xiaomi 12",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        }
+      ],
+      "created_at": "2024-02-04T22:32:35.029Z",
+      "visitor": 12
     },
     {
       "id": 135,
@@ -236,7 +236,7 @@
         }
       ],
       "created_at": "2024-02-04T22:25:56.221Z",
-      "visitor": 11
+      "visitor": 12
     },
     {
       "id": 138,
@@ -270,7 +270,7 @@
         }
       ],
       "created_at": "2024-02-05T02:11:56.017Z",
-      "visitor": 7
+      "visitor": 10
     },
     {
       "id": 130,
@@ -307,40 +307,6 @@
       "visitor": 4
     },
     {
-      "id": 145,
-      "url": "/compare/xiaomi-13-ultra-vs-xiaomi-13-pro",
-      "product": [
-        {
-          "product_id": 4,
-          "feature_image": "images/xiaomi/13/xiaomi-13-proaa197f5e7ae648c33e6575288fbc1cce.jpg",
-          "title": "Xiaomi 13 Pro",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        },
-        {
-          "product_id": 3,
-          "feature_image": "images/xiaomi/13/xiaomi-13-ultrafeeff34b21bd09b200a2c2bd01be3463.jpg",
-          "title": "Xiaomi 13 Ultra",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        }
-      ],
-      "created_at": "2024-02-05T06:39:48.940Z",
-      "visitor": 2
-    },
-    {
       "id": 127,
       "url": "/compare/xiaomi-12s-ultra-vs-xiaomi-mi-11-ultra",
       "product": [
@@ -372,6 +338,40 @@
         }
       ],
       "created_at": "2024-02-04T22:31:00.723Z",
+      "visitor": 3
+    },
+    {
+      "id": 145,
+      "url": "/compare/xiaomi-13-ultra-vs-xiaomi-13-pro",
+      "product": [
+        {
+          "product_id": 4,
+          "feature_image": "images/xiaomi/13/xiaomi-13-proaa197f5e7ae648c33e6575288fbc1cce.jpg",
+          "title": "Xiaomi 13 Pro",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        },
+        {
+          "product_id": 3,
+          "feature_image": "images/xiaomi/13/xiaomi-13-ultrafeeff34b21bd09b200a2c2bd01be3463.jpg",
+          "title": "Xiaomi 13 Ultra",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        }
+      ],
+      "created_at": "2024-02-05T06:39:48.940Z",
       "visitor": 2
     }
   ],
@@ -442,7 +442,7 @@
         }
       ],
       "created_at": "2024-02-05T02:11:56.017Z",
-      "visitor": 7
+      "visitor": 10
     },
     {
       "id": 130,
@@ -510,7 +510,7 @@
         }
       ],
       "created_at": "2024-02-04T22:31:00.723Z",
-      "visitor": 2
+      "visitor": 3
     },
     {
       "id": 126,
@@ -544,7 +544,7 @@
         }
       ],
       "created_at": "2024-02-04T22:25:56.221Z",
-      "visitor": 11
+      "visitor": 12
     },
     {
       "id": 125,

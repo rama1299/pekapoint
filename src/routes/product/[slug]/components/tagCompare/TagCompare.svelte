@@ -8,6 +8,9 @@
   export let data
   let text = ['Compare', 'item selected', 'Search']
 
+  const domainApi = import.meta.events.VITE_DOMAIN_API
+
+
   onMount(async () => {
     let translate = await Translate.client(text)
     text = translate
@@ -59,7 +62,7 @@
 
     async function fethcImage(slug) {
         try {
-            const res = await fetch(`http://localhost:3000/api/product/image/${slug}`)
+            const res = await fetch(`${domainApi}/api/product/image/${slug}`)
             if (res.ok) {
                 const parseJson = await readablestreamToJson(res.body)
                 const image = parseJson[0].feature_image
