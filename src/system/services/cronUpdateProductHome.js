@@ -3,7 +3,7 @@ import fs from 'fs'
 import { pool } from '../../config/dbConfig.js'
 
 
-async function updateProductHomeJson() {
+export async function updateProductHomeJson() {
     const client = await pool.connect();
     try {
 
@@ -90,6 +90,7 @@ async function updateProductHomeJson() {
         const findProduct = await client.query(
             `SELECT title, feature_image, slug, spec_score, '[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]' as affiliate
             FROM public.products
+            WHERE summary IS NOT NULL
             ORDER BY spec_score DESC, created_at DESC
             LIMIT 12;`
         )
@@ -100,14 +101,16 @@ async function updateProductHomeJson() {
 
         dataResult.push(findProduct.rows);
 
-        const fileName = 'src/helpers/productHome.json';
+        const fileName = 'src/system/services/productHome.json';
 
         // Update atau buat file productHome.json
         fs.writeFileSync(fileName, JSON.stringify(dataResult, null, 2), 'utf8');
 
         console.log('productHome.json updated successfully.');
+        return dataResult
     } catch (error) {
         console.error('Error updating productHome.json:', error);
+        return ""
     } finally {
         client.release();
     }

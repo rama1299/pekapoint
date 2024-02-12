@@ -7,13 +7,13 @@ export class FetchExchange {
         try {
             await Authentication.login()
 
-            const response = await instance.get(`http://localhost:3000/api/exchangerates/update/${code}`)
+            const response = await instance.get(`/exchangerates/update/${code}`)
 
             if (response.status === 401) { 
 
                 Cookies.remove('status')
                 await Authentication.login() 
-                const response = await instance.get(`http://localhost:3000/api/exchangerates/update/${code}`);
+                const response = await instance.get(`/exchangerates/update/${code}`);
 
                 return response
             }

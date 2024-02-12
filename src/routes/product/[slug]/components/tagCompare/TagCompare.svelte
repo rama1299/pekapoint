@@ -8,7 +8,7 @@
   export let data
   let text = ['Compare', 'item selected', 'Search']
 
-  const domainApi = import.meta.events.VITE_DOMAIN_API
+  let domainApi = import.meta.env.VITE_DOMAIN_API
 
 
   onMount(async () => {

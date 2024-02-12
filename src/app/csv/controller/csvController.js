@@ -6,7 +6,7 @@ export class CsvController {
             let dataCsv = ''
 
             try {
-                const csvFilePath = 'src/csv/client.csv';
+                const csvFilePath = 'src/system/services/csv/client.csv';
                 dataCsv = await fs.promises.readFile(csvFilePath, 'utf-8');
             } catch (error) {
                 dataCsv = ''
@@ -23,7 +23,7 @@ export class CsvController {
             let dataCsv = ''
             
             try {
-                const csvFilePath = 'src/csv/server.csv';
+                const csvFilePath = 'src/system/services/csv/server.csv';
                 dataCsv = await fs.promises.readFile(csvFilePath, 'utf-8');
             } catch (error) {
                 dataCsv = ''

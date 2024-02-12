@@ -25,16 +25,20 @@
 <Layout>
 	<main class="w-full">
 			<Header data={data.dataTitleProduct}></Header>
-			<div class="bg-white w-full">
-				<div class="container mx-auto">
-					<TopProduct data={data.dataTopProduct}/>
-				</div>
-			</div>
-			<div class="flex justify-center items-center w-full bg-white h-[900px]">
-				<div class="container mx-auto">
-					<SliderProductView data={data.dataProductMostView}/>
-				</div>
-			</div>
+			{#if data.dataTopProduct.length > 0}
+				 <div class="bg-white w-full">
+					 <div class="container mx-auto">
+						 <TopProduct data={data.dataTopProduct}/>
+					 </div>
+				 </div>
+			{/if}
+			{#if data.dataProductMostView.length > 0}
+				 <div class="flex justify-center items-center w-full bg-white h-[900px]">
+					 <div class="container mx-auto">
+						 <SliderProductView data={data.dataProductMostView}/>
+					 </div>
+				 </div>
+			{/if}
 			<div class="flex justify-center items-center w-full py-10 bg-sky-500 h-[550px]">
 				<div class="container flex px-5 justify-center flex-col items-center gap-10">
 					<di class="text-center font-bold text-3xl lg:text-5xl text-white ">
@@ -53,16 +57,20 @@
 					</div>
 				</div>
 			</div>
-			<div class="flex justify-center items-center w-full h-[900px]">
-				<div class="container mx-auto">
-					<SlideCompareView data={data.dataComapreMostView}/>
-				</div>
-			</div>
-			<div class="flex justify-center items-center bg-white w-full h-[900px]">
-				<div class="container mx-auto">
-					<SliderCompareNew data={data.dataCompareNew}/>
-				</div>
-			</div>
+			{#if data.dataComapreMostView.length > 0}
+				 <div class="flex justify-center items-center w-full h-[900px]">
+					 <div class="container mx-auto">
+						 <SlideCompareView data={data.dataComapreMostView}/>
+					 </div>
+				 </div>
+			{/if}
+			{#if data.dataCompareNew.length > 0}
+				 <div class="flex justify-center items-center bg-white w-full h-[900px]">
+					 <div class="container mx-auto">
+						 <SliderCompareNew data={data.dataCompareNew}/>
+					 </div>
+				 </div>
+			{/if}
 	</main>
 </Layout>
 <style>

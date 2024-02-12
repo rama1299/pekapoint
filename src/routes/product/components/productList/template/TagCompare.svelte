@@ -9,7 +9,7 @@
 
   let text = ['item selected', 'Compare', 'Search']
 
-  const domainApi = import.meta.events.VITE_DOMAIN_API
+  let domainApi = import.meta.env.VITE_DOMAIN_API
 
   onMount(async () => {
     let translate = await Translate.client(text)

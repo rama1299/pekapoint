@@ -540,6 +540,7 @@ export class ProductController {
             const findProduct = await client.query(
                 `SELECT title, feature_image, slug, spec_score, '[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]' as affiliate
                 FROM public.products
+                WHERE summary IS NOT NULL
                 ORDER BY spec_score DESC, created_at DESC
                 LIMIT 12;`
             )

@@ -39,8 +39,6 @@
                     }
                 })
 
-                console.log(dataFilterObject)
-
                 if (dataFilterObject.length > 0) {
                     let checkSelectedBrand = data.map((dataBrand) => {
                         let findBrand = dataFilterObject.find(data => data.title == 'brand')

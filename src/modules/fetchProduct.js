@@ -140,4 +140,26 @@ export class FetchProduct {
             throw error;
         }
     }
+
+    static async getHomeProducts() {
+        try {
+            await Authentication.login()
+            
+            const response = await instance.get(`/home-product`);
+
+            if (response.status === 401) {
+
+                Cookies.remove('status')
+                await Authentication.login()
+                const response = await instance.get(`/home-product`);
+
+                return response
+            }
+
+            return response;
+        } catch (error) {
+            console.error("Error fetching products:", error.message);
+            throw error;
+        }
+    }
 }

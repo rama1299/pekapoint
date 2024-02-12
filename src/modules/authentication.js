@@ -6,6 +6,8 @@ import { checkIpInfo } from "../helpers/checkIpInfo";
 let data = import.meta.env.VITE_USER
 data = JSON.parse(data)
 
+let domainApi = import.meta.env.VITE_DOMAIN_API
+
 export class Authentication {
     static async login() {
             try {
@@ -20,7 +22,7 @@ export class Authentication {
                         currency = arrayCurrency[0]
                     }
     
-                    const getExchange = await instance.get(`http://localhost:3000/api/exchangerates/update/${currency}`)
+                    const getExchange = await instance.get(`${domainApi}/api/exchangerates/update/${currency}`)
                     
                     if (getExchange.status == 200) {
                         const dataExchange = getExchange.data

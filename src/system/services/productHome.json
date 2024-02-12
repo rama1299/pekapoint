@@ -19,7 +19,7 @@
         }
       ],
       "created_at": null,
-      "visitor": 49
+      "visitor": 51
     },
     {
       "id": 123,
@@ -85,27 +85,6 @@
       "visitor": 17
     },
     {
-      "id": 129,
-      "url": "/product/xiaomi-13-pro",
-      "product": [
-        {
-          "product_id": 4,
-          "feature_image": "images/xiaomi/13/xiaomi-13-proaa197f5e7ae648c33e6575288fbc1cce.jpg",
-          "title": "Xiaomi 13 Pro",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        }
-      ],
-      "created_at": "2024-02-04T22:36:54.454Z",
-      "visitor": 12
-    },
-    {
       "id": 128,
       "url": "/product/xiaomi-12",
       "product": [
@@ -124,6 +103,27 @@
         }
       ],
       "created_at": "2024-02-04T22:32:35.029Z",
+      "visitor": 12
+    },
+    {
+      "id": 129,
+      "url": "/product/xiaomi-13-pro",
+      "product": [
+        {
+          "product_id": 4,
+          "feature_image": "images/xiaomi/13/xiaomi-13-proaa197f5e7ae648c33e6575288fbc1cce.jpg",
+          "title": "Xiaomi 13 Pro",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        }
+      ],
+      "created_at": "2024-02-04T22:36:54.454Z",
       "visitor": 12
     },
     {
@@ -236,7 +236,7 @@
         }
       ],
       "created_at": "2024-02-04T22:25:56.221Z",
-      "visitor": 12
+      "visitor": 13
     },
     {
       "id": 138,
@@ -544,7 +544,7 @@
         }
       ],
       "created_at": "2024-02-04T22:25:56.221Z",
-      "visitor": 12
+      "visitor": 13
     },
     {
       "id": 125,
@@ -611,38 +611,10 @@
       "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
     },
     {
-      "title": "Vivo iQOO 12 Pro",
-      "feature_image": "https://images.versus.io/objects/vivo-iqoo-12-pro.front.medium.1699448248003.jpg",
-      "slug": "vivo-iqoo-12-pro",
-      "spec_score": 95,
-      "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
-    },
-    {
-      "title": "Samsung Galaxy S23 Ultra",
-      "feature_image": "images/samsung/galaxy/samsung-galaxy-s23-ultrac1137e5ef328bccdcbbfa94bd8de92c5.jpg",
-      "slug": "samsung-galaxy-s23-ultra",
-      "spec_score": 95,
-      "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
-    },
-    {
-      "title": "Oppo Find X6 Pro",
-      "feature_image": "images/oppo/find/oppo-find-x6-pro0a95923d768f27382c8ac0eb73c69979.jpg",
-      "slug": "oppo-find-x6-pro",
-      "spec_score": 95,
-      "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
-    },
-    {
       "title": "Xiaomi 12S Ultra",
       "feature_image": "images/xiaomi/12s/xiaomi-12s-ultra23076557ac622abce58622d522f76e2b.jpg",
       "slug": "xiaomi-12s-ultra",
       "spec_score": 95,
-      "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
-    },
-    {
-      "title": "Vivo iQOO 12",
-      "feature_image": "https://images.versus.io/objects/vivo-iqoo-12.front.medium.1699449172433.jpg",
-      "slug": "vivo-iqoo-12",
-      "spec_score": 94,
       "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
     },
     {
@@ -653,17 +625,45 @@
       "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
     },
     {
-      "title": "Google Pixel 8 Pro",
-      "feature_image": "https://images.versus.io/objects/google-pixel-8-pro.front.medium.1696502540011.jpg",
-      "slug": "google-pixel-8-pro",
-      "spec_score": 93,
-      "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
-    },
-    {
       "title": "Xiaomi 13",
       "feature_image": "images/xiaomi/13/xiaomi-1314977655f4c5ff9b87211edc06f9e1a5.jpg",
       "slug": "xiaomi-13",
       "spec_score": 93,
+      "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
+    },
+    {
+      "title": "Xiaomi 12",
+      "feature_image": "images/xiaomi/12/xiaomi-1249d5fd26471cbed9f987bb48519d9cc5.jpg",
+      "slug": "xiaomi-12",
+      "spec_score": 90,
+      "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
+    },
+    {
+      "title": "Xiaomi 12 Pro",
+      "feature_image": "images/xiaomi/12/xiaomi-12-proa40978398f47cd55ba7cd6833aa1ea79.jpg",
+      "slug": "xiaomi-12-pro",
+      "spec_score": 88,
+      "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
+    },
+    {
+      "title": "Xiaomi 12S Pro",
+      "feature_image": "images/xiaomi/12s/xiaomi-12s-prob4b08098821fbc3cd06bbc379aa7dc70.jpg",
+      "slug": "xiaomi-12s-pro",
+      "spec_score": 85,
+      "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
+    },
+    {
+      "title": "Xiaomi Mi 11 Pro",
+      "feature_image": "images/xiaomi/mi/xiaomi-mi-11-pro8db4934db15ac23261cb3b57135ba4f3.jpg",
+      "slug": "xiaomi-mi-11-pro",
+      "spec_score": 84,
+      "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
+    },
+    {
+      "title": "Xiaomi 12S",
+      "feature_image": "images/xiaomi/12s/xiaomi-12sa29e934bc0b18c1350032f1d0ae22767.jpg",
+      "slug": "xiaomi-12s",
+      "spec_score": 83,
       "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
     }
   ]

@@ -3,7 +3,6 @@ import * as d3 from 'd3'
 import { FetchCsv } from "../modules/fetchCsv"
 import { checkIpInfo } from "./checkIpInfo"
 import { saveToSessionStorage, getFromSessionStorage } from "./sessionStorage"
-import translateServer from './translateServer.json'
 
 export class Translate {
     static async client(array) {
@@ -69,7 +68,7 @@ export class Translate {
         return data
       }
 
-      let jsonTranslate = translateServer
+      let jsonTranslate = await getFromSessionStorage('csvServer')
 
       if (!jsonTranslate || jsonTranslate == undefined || jsonTranslate.length == 0) {
             
@@ -82,11 +81,12 @@ export class Translate {
 
         await saveToSessionStorage('csvServer', csvData)
 
-        let csvParse = await d3.csvParse(csvData)
+        jsonTranslate = csvData
 
-        jsonTranslate = csvParse
       }
-        
+
+      jsonTranslate = await d3.csvParse(jsonTranslate)
+
         if (isProductSlug) {
           let summaryJson = JSON.parse(data.summary);
           let titleGroup = Object.keys(summaryJson)[0];

@@ -11,13 +11,13 @@ export class FetchHpVariant {
         try {
             await Authentication.login()
 
-            const response = await instance.get(`http://localhost:3000/api/variant/${id}${query}`)
+            const response = await instance.get(`/variant/${id}${query}`)
 
             if (response.status === 401) { 
 
                 Cookies.remove('status')
                 await Authentication.login() 
-                const response = await instance.get(`http://localhost:3000/api/variant/${id}${query}`);
+                const response = await instance.get(`/variant/${id}${query}`);
 
                 return response
             }
