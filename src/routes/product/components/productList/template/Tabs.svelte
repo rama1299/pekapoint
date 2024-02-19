@@ -45,8 +45,8 @@
 <!-- display -->
 <div class="bg-white w-full relative px-4 pb-4 m-auto {tabControl.isPerformance ? '' : 'hidden'}">
     <p class="text-center text-md font-medium absolute left-4 -top-5 text-gray-700">{titleTab}</p>
-    <div class="flex justify-center md:justify-between justify-items-center items-center gap-6 mt-3 pt-1 ">
-        <div class="w-3/4 h-36 space-y-[6px]">
+    <div class="flex justify-center md:justify-between justify-items-center items-center gap-2 mt-3 pt-1 ">
+        <div class="w-full h-36 space-y-[6px]">
             <!-- <Radar labels={display.labels} scores={display.scores}/> -->
             {#each dataProgressBar as item, i (i)}
                 {#if i <= 4}
@@ -54,9 +54,9 @@
                 {/if}
             {/each}
         </div>
-        <div class="space-y-1 w-1/4 text-center">
+        <!-- <div class="space-y-1 w-1/4 border text-center">
             <div class="flex flex-col items-center">
-                <div class="bg-[url('/antutu.png')] h-14 w-12 bg-no-repeat p-1 bg-contain flex justify-center">
+                <div class="bg-[url('/antutu.png')] h-10 w-12 bg-no-repeat p-1 bg-contain flex justify-center">
                     <p class="text-white text-lg font-bold items-center mx-auto mt-4">{antutu_score}</p>
                 </div>
                 <p class="text-xs font-semibold text-black">Antutubench</p>
@@ -67,7 +67,7 @@
                 </div>
                 <p class="text-xs font-semibold text-black">Geekbench</p>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 

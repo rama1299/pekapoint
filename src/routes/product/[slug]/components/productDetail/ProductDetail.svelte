@@ -47,22 +47,28 @@
             price,
             store: 'Arkana Store'
         }
+
 </script>
 
 <svelte:window bind:scrollY={windowScroll}/>
 <section class="w-full">
-    <div class="container lg:w-wrap bg-white mx-auto space-y-5">
+    <div class="w-full bg-white mx-auto space-y-5">
         <div class=" flex-wrap lg:flex-nowrap lg:flex mx-auto justify-center items-start lg:px-10 gap-5" bind:offsetHeight={sectionDescription}>
             <div class="w-full lg:w-1/2 lg:sticky top-[120px] static space-y-5">
                 <Image  image={data.images}/>
             </div>
             <div class="w-full lg:w-1/2 px-5">
-                <Description data={data} variant={dataVariant} on:message={handleMessageDesc}>
+                <Description data={data} variant={data.variant} on:message={handleMessageDesc}>
                     <div class="flex justify-center items-center text-blue-500 hover:text-blue-600 gap-2 cursor-pointer lg:w-1/2 mx-auto" on:click={showMore}>
-                        <p class="font-medium">{text[0]}</p>
-                        <i class='bx bx-down-arrow-alt text-2xl'></i>
+                        <p class="font-medium text-sm">{text[0]}</p>
+                        <i class='bx bx-down-arrow-alt text-xl'></i>
                     </div>
                 </Description>
+            </div>
+        </div>
+        <div class="w-full px-5 lg:px-10">
+            <div class=" w-full h-24 flex justify-center items-center">
+                <p>[Iklan]</p>
             </div>
         </div>
         <div class=" w-full mx-auto lg:px-10 px-5">

@@ -44,7 +44,25 @@ export class Authentication {
                     }
                 }
             } catch (error) {
-                console.log(error)
+                console.log('login error')
             }
+    }
+
+    static async authAdmin() {
+        try {
+            const response = await instance.post(`/login/admin`, data)
+            return response
+        } catch (error) {
+            console.log('auth admin error')
+        }
+    }
+
+    static async loginAdmin(dataAdmin) {
+        try {
+            const response = await instance.post(`/login/admin`, dataAdmin)
+            return response
+        } catch (error) {
+            console.log('login admin error')
+        }
     }
 }

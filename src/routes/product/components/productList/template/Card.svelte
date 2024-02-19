@@ -13,6 +13,7 @@
     export let specs
 
     let text = ['Add to comparison']
+    let feature_image =''
 
     onMount(async ()=> {
         let translate = await Translate.client(text)
@@ -21,6 +22,15 @@
         const initialValue = getFromSessionStorage('compareDataSession')
 
         initialValue ? compareDataStore.set(initialValue) : compareDataStore.set([])
+        
+        const regex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i
+
+        if (!regex.test(data.feature_image)) {
+            feature_image = `../${data.feature_image}`
+        } else {
+            feature_image = data.feature_image
+        }
+
     })
 
     async function handleCompare(title, slug, feature_image) {
@@ -39,21 +49,23 @@
             console.log(error)
         }
     }
+
+
 </script>
 
-    <div class="m-auto bg-white px-4 pt-6 w-full relative h-[330px] overflow-hidden">
-        <div class="relative w-full h-[290px]">
+    <div class="m-auto bg-white px-4 pt-6 w-full relative overflow-hidden">
+        <div class="relative w-full">
             <div class="flex w-full justify-center cursor-pointer" on:keypress={() => {() => {goto(`/product/${data.slug}`)}}} on:click={() => {goto(`/product/${data.slug}`)}}>
                 <div class="w-1/2 pr-2">
-                    <img src={data.feature_image} alt="" class="h-56 m-auto cursor-pointer hover:scale-105 duration-200" >
-                    <div class="h-12 w-12 rounded-full absolute left-0 -top-2 bg_img">
+                    <img src={feature_image} alt="" class="h-44 m-auto cursor-pointer hover:scale-105 duration-200" >
+                    <div class="h-10 w-10 rounded-full absolute left-0 -top-2 bg_img">
                         <ChartDonut score={data.spec_score}/>
                         <div class="absolute w-full h-full flex justify-center items-center top-0">
                             <p class="score font-semibold">{data.spec_score}</p>
                         </div>
                     </div>
                 </div>
-                <div class="w-1/2 h-60 overflow-hidden relative">
+                <div class="w-1/2 h-44 overflow-hidden relative">
                     <div class="w-full h-full gradient absolute top-0 left-0"></div>
                     <SpecDetail data={specs} tabControl={tabControl}/>
                 </div>
@@ -61,11 +73,11 @@
             <!-- <div class="flex w-full justify-end mt-3 absolute bottom-16">
                 <p class="rounded-tl-lg py-1 px-2 font-medium bg-gradient-to-l from-yellow-300 to-orange-500 text-white text-end cursor-pointer hover:scale-105 duration-200">{formatCurrencyIDR(data.launch_price)}</p>
             </div> -->
-            <div class="flex justify-between justify-items-center items-start mt-2 relative overflow-hidden">
-                <a href={`/product/${data.slug}`} class="text-xl font-semibold cursor-pointer hover:underline underline-offset-1">{data.title}</a>
+            <div class="flex w-full h-11 justify-between justify-items-center items-start mt-2 relative overflow-hidden">
+                <a href={`/product/${data.slug}`} class="font-semibold cursor-pointer hover:underline underline-offset-1 leading-5">{data.title}</a>
                 <div class="flex items-center justify-end gap-2 bg-gradient-to-r from-sky-600 to-indigo-800 px-2 group text-white rounded-tl-lg absolute right-0 cursor-pointer">
-                    <i class='bx bx-git-compare text-xl compare_btn'></i>
-                    <p class="font-medium close truncate w-full" on:keypress={()=> {handleCompare(data.title, data.slug, data.feature_image)}} on:click={()=> {handleCompare(data.title, data.slug, data.feature_image)}}>| {text[0]}</p>
+                    <i class='bx bx-git-compare text-lg compare_btn'></i>
+                    <p class="font-medium close truncate w-full text-sm" on:keypress={()=> {handleCompare(data.title, data.slug, feature_image)}} on:click={()=> {handleCompare(data.title, data.slug, feature_image)}}>| {text[0]}</p>
                 </div>
             </div>
         </div>

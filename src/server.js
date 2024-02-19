@@ -16,15 +16,22 @@ const port = process.env.VITE_PORT
 const corsOrigin = process.env.VITE_CORS_ORIGIN
 
 app.use(cors({
-  origin: corsOrigin,
-  credentials: true
-}))
+  origin: function (origin, callback) {
+    if (!origin || corsOrigin.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+}));
+
 app.use(cookieParser())
 
 app.use(morgan('tiny'))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use('/static', express.static("src/uploads"))
 app.use(indexRouter)
 app.use(errorHandler)
 

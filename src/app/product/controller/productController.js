@@ -259,24 +259,24 @@ export class ProductController {
           }
 
           
-          if (data.length === 1) {
-              data = await Promise.all(data.map(async (obj) => {
-                  let arraySlug = obj.slug.split('-');
-                let pathName = `/${arraySlug[0]}/${arraySlug[1]}`
-                let pathDir = `static/images${pathName}`;
-                let dataImages = await getImagesFromData(pathDir, obj.slug);
+        //   if (data.length === 1) {
+        //       data = await Promise.all(data.map(async (obj) => {
+        //           let arraySlug = obj.slug.split('-');
+        //         let pathName = `/${arraySlug[0]}/${arraySlug[1]}`
+        //         let pathDir = `static/images${pathName}`;
+        //         let dataImages = await getImagesFromData(pathDir, obj.slug);
                 
-                dataImages = dataImages.map((titleImage) => {
-                    return `${pathName}/${titleImage}`;
-                }).slice(0,8);
-                console.log(dataImages)
-                return {
-                    ...obj,
-                    images: dataImages,
-                };
-            }));
+        //         dataImages = dataImages.map((titleImage) => {
+        //             return `${pathName}/${titleImage}`;
+        //         }).slice(0,8);
+        //         console.log(dataImages)
+        //         return {
+        //             ...obj,
+        //             images: dataImages,
+        //         };
+        //     }));
 
-        }
+        // }
 
         data = await Promise.all(data.map(async (item) => {
             let summaryJson = JSON.parse(item.summary)

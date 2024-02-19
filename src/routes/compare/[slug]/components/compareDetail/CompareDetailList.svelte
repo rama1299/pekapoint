@@ -14,7 +14,7 @@
     // }).filter(Boolean)
 
     $:datas = JSON.parse(data[0].datas)
-    $: key = datas.filter(data => data.code !== 'Miscellaneous').map(data => data.title);
+    $: key = datas.filter(data => data.code !== 'Miscellaneous' && data.code !== 'Connectivity').map(data => data.title);
 
     // let widthContainerLagend
     // $: widthContainerLagend

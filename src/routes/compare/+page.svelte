@@ -37,12 +37,12 @@
   <title>{text[0]}</title>
 </svelte:head>
 <Layout>
-  <div class="w-full h-96 bg-cover bg_gradient">
-    <div class="container lg:w-wrap font-monst h-full pt-44 mx-auto">
-        <h1 class="text-5xl font-bold text-white">{text[0]}</h1>
+  <div class="w-full h-52 lg:h-80 bg-cover bg_gradient">
+    <div class="w-full lg:w-[90%] font-monst h-full pt-24 px-3 lg:px-0 lg:pt-40 mx-auto">
+        <h1 class="text-2xl lg:text-3xl font-bold text-white">{text[0]}</h1>
     </div>
   </div>
-  <main class="w-full min-h-screen px-2 mx-auto py-5 space-y-4 bg-gray-100">
+  <main class="w-full lg:w-[80%] min-h-screen px-2 mx-auto py-5 space-y-4 bg-gray-100">
     <div class="relative z-20">
       <FilterBar/>
     </div>

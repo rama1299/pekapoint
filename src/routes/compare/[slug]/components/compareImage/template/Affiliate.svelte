@@ -5,7 +5,7 @@
             <p class="text-md font-medium">4.5</p>
         </div>
     </div>
-    <div class="col-1 lg:col-span-2 justify-center flex lg:justify-end items-center text-lg font-semibold cursor-pointer hover:underline">
+    <div class="col-1 lg:col-span-2 justify-center flex lg:justify-end items-center font-semibold cursor-pointer hover:underline">
         <p>Rp. 16.500.000</p>
     </div>
     <div class="col-1 flex justify-center cursor-pointer">

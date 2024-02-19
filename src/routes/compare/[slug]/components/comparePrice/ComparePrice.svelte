@@ -38,8 +38,10 @@
     $: widthCol = widthContainer
 
     afterUpdate(() => {
-        if (widthScreen < 1024) {
+        if (widthScreen < 772) {
             widthCol = widthContainer
+        } else if (widthScreen > 772 && widthScreen < 1024) {
+            widthCol = widthContainer / 2
         } else if (widthScreen >= 1024) {
             widthCol = widthContainer / device.length
         }

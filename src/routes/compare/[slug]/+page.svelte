@@ -75,22 +75,22 @@
 {#if data.status != 'error'}
   <Layout isDetailProductPage={true} >
   {#if status === 'success'}
-    <main class="w-auto h-auto mx-auto pt-14 lg:pt-20 bg-white">
-      <div class="container lg:w-wrap mx-auto px-5 py-10 space-y-10">
+    <main class="w-full h-auto mx-auto pt-14 lg:pt-20 bg-white">
+      <div class="w-full lg:w-[80%] mx-auto px-5 py-10 space-y-10">
           <CompareImage data={dataProduct}/>
       </div>
-          <div class="container lg:w-wrap pr-5 pl-2 lg:px-5 flex gap-2 lg:gap-5 mx-auto">
-            <div class="w-2/12 lg:w-1/12 h-screen sticky top-16 lg:top-20 divide-y-2" bind:offsetHeight={heightContainerLagend} bind:offsetWidth={widthContainerLagend}>
+      <div class="w-full lg:w-[80%] pr-5 pl-2 lg:px-5 flex gap-2 lg:gap-5 mx-auto">
+            <div class="w-1/12 h-screen sticky top-16 lg:top-20 divide-y-2" bind:offsetHeight={heightContainerLagend} bind:offsetWidth={widthContainerLagend}>
                 {#each dataProduct as data, i (i)}
                     <Lagend color={color[i]} heightCol={heightCol} widthContainerLagend={widthContainerLagend} title={data.title} lagendIndex={i}/>
                 {/each}
             </div>
-            <div class="w-10/12 lg:w-11/12 space-y-10">
+            <div class="w-11/12 space-y-10">
               <CompareSummary data={dataSpecWithAdd}/>
               <CompareDetailList data={dataSpecWithAdd}/>
             </div>
           </div>
-      <div class="container lg:w-wrap mx-auto px-5 py-10 space-y-10">
+      <div class="w-full lg:w-[80%] mx-auto px-5 py-10 space-y-10">
           <ComparePrice data={dataSpecWithAdd}/>
       </div>
   </main> 
