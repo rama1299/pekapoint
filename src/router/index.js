@@ -6,6 +6,8 @@ import productUrlRewriteRouter from '../app/product_url_rewrite/router/productUr
 import exchangeratesRouter from '../app/exchangerates/router/exchangeratesRouter.js'
 import homeProductRouter from '../app/home_product/router/homeProductRouter.js'
 import csvRouter from '../app/csv/router/csvRouter.js'
+import adsManagementRouter from '../app/ads_management/router/adsManagementRouter.js'
+
 
 const router = express.Router()
 
@@ -16,5 +18,6 @@ router.use('/api', productUrlRewriteRouter)
 router.use('/api', exchangeratesRouter)
 router.use('/api', homeProductRouter)
 router.use('/api', csvRouter)
+router.use('/api', adsManagementRouter)
 
 export {router as indexRouter}

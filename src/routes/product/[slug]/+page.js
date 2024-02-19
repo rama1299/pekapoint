@@ -25,12 +25,12 @@ export async function load({ params, url }) {
                 const dataProduct = productResponse.data
                 const dataSpec = specResponse.data
 
-                const responseVariant = await FetchHpVariant.getVariantById(JSON.parse(product_ids))
+                // const responseVariant = await FetchHpVariant.getVariantById(JSON.parse(product_ids))
 
-                if (responseVariant && responseVariant.status == 200) {
-                    const dataVariant = responseVariant.data
-                    return { dataProduct: dataProduct[0], dataSpec: dataSpec[0], dataVariant: dataVariant, status: 'success' };
-                }
+                // if (responseVariant && responseVariant.status == 200) {
+                //     const dataVariant = responseVariant.data
+                //     return { dataProduct: dataProduct[0], dataSpec: dataSpec[0], dataVariant: dataVariant, status: 'success' };
+                // }
 
                 return { dataProduct: dataProduct[0], dataSpec: dataSpec[0], dataVariant: [], status: 'success' };
             }
@@ -52,16 +52,16 @@ export async function load({ params, url }) {
                     const variantResponse = await FetchHpVariant.getVariantById(dataId)
                     dataId = [dataId]
                     
-                    if (variantResponse && variantResponse.status === 200) {
-                        const dataVariant = variantResponse.data
+                    // if (variantResponse && variantResponse.status === 200) {
+                    //     const dataVariant = variantResponse.data
 
-                        const variantId = await dataVariant.map(data => data.id)
-                        const dataInputProductUrl = {url: pathName, idProduct: dataId, idVariant: variantId, write_type: "product"}
+                    //     const variantId = await dataVariant.map(data => data.id)
+                    //     const dataInputProductUrl = {url: pathName, idProduct: dataId, idVariant: variantId, write_type: "product"}
 
-                        const createProductUrl = await FetchProductUrl.createProductUrl(dataInputProductUrl)
+                    //     const createProductUrl = await FetchProductUrl.createProductUrl(dataInputProductUrl)
 
-                        return { dataProduct: dataProduct[0], dataSpec: dataSpec[0], dataVariant: dataVariant, status: 'success' };
-                    }
+                    //     return { dataProduct: dataProduct[0], dataSpec: dataSpec[0], dataVariant: dataVariant, status: 'success' };
+                    // }
                     
                     const dataInputProductUrl = {url : pathName, idProduct : dataId, write_type: "product"}
 

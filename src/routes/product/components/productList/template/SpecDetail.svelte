@@ -27,7 +27,7 @@
 
 {#if tabControl.isPerformance && specs}
     {#each cleanedSpecs as spec, i (i)}
-    <div class="leading-tight w-full" key={i}>
+    <div class="leading-tight w-full text-sm" key={i}>
         <div class="w-full">
             <p class="text-start font-medium">{spec.title}</p>
         </div>

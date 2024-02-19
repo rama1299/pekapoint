@@ -48,7 +48,7 @@ function handlePrev() {
 
 afterUpdate(() => {
     
-    if (widthContainerScroll > 1023) {
+    if (widthContainerScroll > 872) {
         col = 4;
     } else if (widthContainerScroll > 638) {
         col = 3;

@@ -17,7 +17,7 @@
         <p class="text-2xl font-bold">{text[0]}</p>
         <p>{text[1]}</p>
     </div>
-    <div class="w-full grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-5">
+    <div class="w-full grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-3">
         {#each data as item, i}
             <div class="w-full col-span-1 border-2 rounded-lg p-5">
                 <div class="w-full h-full flex md:flex-col justify-between gap-3 cursor-pointer group">

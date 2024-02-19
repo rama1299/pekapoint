@@ -24,15 +24,15 @@ import Cookies from "js-cookie";
     export let variant = []
     let colors = []
 
-    const variantPrices = variant.map((data) => {
-        let price = data.prices.map((item) => {
-            return {
-                ...item,
-                variant: data.variant
-            }
-        })
-        return price
-    })
+    // const variantPrices = variant.map((data) => {
+    //     let price = data.prices.map((item) => {
+    //         return {
+    //             ...item,
+    //             variant: data.variant
+    //         }
+    //     })
+    //     return price
+    // })
 
     $: styleButton = variant.map((data) => {
         return {
@@ -122,10 +122,11 @@ import Cookies from "js-cookie";
          <div class="space-y-5">
              <div class="space-y-3 pt-3">
                  <p class="text-2xl font-semibold">{text[0]}</p>
-                 <div class="grid grid-cols-3 gap-3 font-medium">
-                     {#each variantPrices as data, index}
-                     <div class="text-sm lg:text-base flex justify-center items-center border-2 w-full py-2 lg:py-0 lg:h-24 flex-col cursor-pointer hover:bg-sky-100 {styleButton[index].active === true ? 'border-sky-500' : ''}" on:click={()=> {handleVariantPrice(data[0].variant, index)}}>
-                         <p>{data[0].variant}</p>
+                 <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 font-medium">
+                     {#each variant as data, index}
+                     <!-- <div class="text-sm flex justify-center items-center border-2 w-full py-2 lg:py-0 lg:h-24 flex-col cursor-pointer hover:bg-sky-100 {styleButton[index].active === true ? 'border-sky-500' : ''}" on:click={()=> {handleVariantPrice(data[0].variant, index)}}> -->
+                        <div class="text-sm flex justify-center items-center border-2 w-full py-2 lg:py-0 lg:h-24 flex-col {styleButton[index].active === true ? 'border-sky-500' : ''}">
+                        <p class="w-full flex justify-center items-center">{`${data.ram} GB / ${data.storage} GB`}</p>
                          <!-- <p>From {exchangePrice(data[0].currency, data[0].price)}</p> -->
                      </div>
                      {/each}

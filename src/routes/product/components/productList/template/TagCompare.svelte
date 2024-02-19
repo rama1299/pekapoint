@@ -128,7 +128,11 @@
         {#each $compareDataStore as item (item.title)}
         <div class="h-12 bg-white border flex justify-between w-full pr-1">
             <div class="h-full w-1/6 p-2 flex justify-center">
-                <img src={item.feature_image} alt="" class="h-full w-auto">
+                {#if item.feature_image.includes('https')}
+                    <img src={`${item.feature_image}`} alt="" class="h-full w-auto">
+                {:else}
+                    <img src={`../${item.feature_image}`} alt="" class="h-full w-auto">
+                {/if}
             </div>
             <div class="h-full w-4/6 text-sm flex items-center overflow-hidden">
                 <p class="text-start font-medium leading-4">{item.title}</p>

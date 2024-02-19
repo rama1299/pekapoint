@@ -3,22 +3,24 @@
     import {onMount} from 'svelte'
     export let image
 
-    onMount(() => {
+    onMount(async() => {
         containerScroll.scrollTo({
             left: 0
         })
 
-        if (image.length > 0) {
-            images = image.slice(0, 8)
+        try {
+            if (image.length > 0) {
+                images = JSON.parse(image)
+            } else {
+                images = ['images/placeholder.png', 'images/placeholder.png', 'images/placeholder.png', 'images/placeholder.png',]
+            }
+        } catch (error) {
+            images = ['images/placeholder.png', 'images/placeholder.png', 'images/placeholder.png', 'images/placeholder.png',]
         }
 
     })
 
-    let images = [
-        '/placeholder.png',
-        '/placeholder.png',
-        '/placeholder.png',
-        '/placeholder.png',]
+    let images = []
 
     let carousel;
     function goToStartPage(index) {
@@ -60,8 +62,8 @@ function prevSlide() {
             <i class='bx bx-chevron-right z-10 lg:hidden absolute inset-y-0 right-0 text-5xl text-gray-500  cursor-pointer flex items-center h-full' on:click={goToNextPage}></i>
             <Carousel arrows={false} dots={false} swiping={true} bind:this={carousel}>
                 {#each images as image, i (i)}
-                    <div class="w-full aspect-square flex justify-center mx-auto py-5 lg:py-10 relative bg-white overflow-hidden">
-                        <img src={`/images${image}`} alt="" class="h-full w-auto">
+                    <div class="w-full aspect-square flex justify-center mx-auto py-5 lg:py-10 md:px-10 lg:px-0 relative bg-white overflow-hidden">
+                        <img src={`../${image}`} alt="" class="h-full w-auto">
                     </div>
                 {/each}
             </Carousel>          
@@ -74,7 +76,7 @@ function prevSlide() {
                 {#each images as image, i (i)}
                     <div key={i} style="width: {widthColImage}px;" class=" col-span-1 w-full aspect-square snap-start rounded-lg p-2 flex justify-center images-center" on:click={() => { goToStartPage(i)}}>
                         <div class="border bg-gray-100 border-2 border-gray-200 hover:border-sky-500 w-full h-full rounded-xl flex justify-center items-center overflow-hidden">
-                            <img src={`/images${image}`} alt="" class="h-full w-auto ">
+                            <img src={`../${image}`} alt="" class="h-full w-auto ">
                         </div>
                     </div>
                 {/each}

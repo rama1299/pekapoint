@@ -6,7 +6,7 @@ const domainApi = import.meta.env.VITE_DOMAIN_API
 
 
 const instance = axios.create({
-    baseURL: `${domainApi}/api`,
+    baseURL: `${domainApi}`,
     validateStatus: false,
 })
 

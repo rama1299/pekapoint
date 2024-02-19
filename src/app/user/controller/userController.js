@@ -4,6 +4,7 @@ import { generateHashPassword, compareHashPassword } from "../../../system/servi
 import { generateJwtToken } from "../../../system/services/jwt.js"
 import { saveDataToFile } from "../../../system/services/saveDataToFile.js"
 import fs from 'fs'
+import jwt from 'jsonwebtoken'
 
 dotenv.config()
 
@@ -12,9 +13,9 @@ export class UserController {
         const client = await pool.connect();
     
         try {
-          const { username, password, email } = req.body;
+          const { username, password, email, role } = req.body;
     
-          if (!username || !password || !email) {
+          if (!username || !password || !email, role) {
             throw { name: 'InvalidCredentials'};
           }
     
@@ -35,8 +36,8 @@ export class UserController {
           const hashedPassword = await generateHashPassword(password, 10);
     
           const query = {
-            text: `INSERT INTO public.app_user (username, password, email) VALUES ($1, $2, $3);`,
-            values: [username, hashedPassword, email],
+            text: `INSERT INTO public.app_user (username, password, email, role) VALUES ($1, $2, $3, $4);`,
+            values: [username, hashedPassword, email, role],
           };
     
           const response = await client.query(query);
@@ -106,20 +107,56 @@ export class UserController {
         }
     }
 
-    static async setCookie(req, res, next) {
+    static async adminLogin(req, res, next) {
+      const client = await pool.connect()
       try {
-        res.cookie('coba', '123')
-        res.status(200).json({message: 'berhasil'})
-      } catch (error) {
-        console.log(error)
-      }
-    }
+        const { username, password } = req.body
 
-    static async getCookie(req, res, next) {
-      try {
-        res.status(200).json(req.cookies.coba)
+      if (!username || !password) {
+        res.status(200).json({ message : 'unauthorized'})
+        return
+      }
+
+      const findUser = await client.query(
+        `SELECT * FROM public.app_user
+        WHERE username = $1;`,
+        [username]
+      )
+
+      if (findUser.rows.length === 0) {
+        res.status(200).json({ message : 'unauthorized'})
+        return
+      }
+
+      const existUser = findUser.rows[0]
+
+      const comparePassword = await compareHashPassword(password, existUser.password)
+
+      if (!comparePassword) {
+        res.status(200).json({ message : 'unauthorized'})
+        return
+      }
+
+      if (existUser.role != 'admin') {
+        res.status(200).json({ message : 'unauthorized'})
+        return
+      }
+
+      const token = jwt.sign(
+        {
+          username: existUser.username,
+          role: existUser.role
+        },
+        process.env.JWT_SECRET,
+        {expiresIn: '12h'}
+      )
+
+      res.status(200).json({token})
       } catch (error) {
-        
+        res.status(200).json({ message : 'unauthorized'})
+        return
+      } finally {
+        client.release()
       }
     }
 }

@@ -99,7 +99,7 @@
 <div class="w-full divide-y-2">
     <div class="space-y-3 pb-3">
         <div>
-            <p class="text-2xl font-semibold">{key}</p>
+            <p class="text-xl font-semibold">{key}</p>
         </div>
         <div class="{isExpand ? '' : 'max-h-[698px]'} duration-200 w-full font-medium overflow-hidden">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">

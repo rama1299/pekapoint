@@ -49,34 +49,42 @@
 </svelte:head>
 
 <Layout isProductPage={true}>
-    <div class="w-full h-96 bg-cover bg_gradient">
-        <div class="container lg:w-wrap font-monst h-full pt-44 mx-auto">
-            <h1 class="text-5xl font-bold text-white">{text[0]}</h1>
+    <div class="w-full h-52 lg:h-80 bg-cover bg_gradient">
+        <div class="w-full lg:w-[90%] font-monst h-full pt-24 px-3 lg:px-0 lg:pt-40 mx-auto">
+            <h1 class="text-2xl lg:text-3xl font-bold text-white">{text[0]}</h1>
         </div>
     </div>
-    <main class="container min-h-[600px] font-monst m-auto space-y-4 py-5">
-        <div class="w-full px-2">
-            <FilterBar/>
+    <div class="w-full flex">
+        <div class="w-[10%] h-screen hidden lg:flex justify-center items-center p-1 mt-24">
+            <p>[iklan]</p>
         </div>
-        {#if productList.length > 0}
-            <div class="w-full min-h-[600px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-flow-row m-auto gap-4 px-1">
-                {#each productList as item (item.id)}
-                    <ProductList item={item}/>
-                {/each}
+        <div class="w-full lg:w-[80%] min-h-[600px] font-monst m-auto space-y-4 py-5">
+            <div class="w-full px-2">
+                <FilterBar/>
             </div>
-        {/if}
-
-        {#if productList.length == 0 && status == 'error'}
-        <div class="w-full h-[500px]">
-            <ProductNotFound/>
+            {#if productList.length > 0}
+                <div class="w-full min-h-[600px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-flow-row m-auto gap-4 px-5 lg:px-0">
+                    {#each productList as item (item.id)}
+                        <ProductList item={item}/>
+                    {/each}
+                </div>
+            {/if}
+    
+            {#if productList.length == 0 && status == 'error'}
+            <div class="w-full h-[500px]">
+                <ProductNotFound/>
+            </div>
+            {/if}
+            {#if productList.length > 0 && currentPage < totalPages}
+                 <div class="w-full">
+                     <LoadMoreButton/>
+                 </div>
+            {/if}
         </div>
-        {/if}
-        {#if productList.length > 0 && currentPage < totalPages}
-             <div class="w-full">
-                 <LoadMoreButton/>
-             </div>
-        {/if}
-    </main>
+        <div class="w-[10%] h-screen hidden lg:flex justify-center items-center p-1 mt-24">
+            <p>[iklan]</p>
+        </div>
+    </div>
 </Layout>
 
 <style>

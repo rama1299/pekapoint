@@ -43,18 +43,30 @@
 </svelte:head>
 {#if status === 'success'}
 <Layout isDetailProductPage={true} >
-    <div class="w-auto h-auto mx-auto py-20 bg-white">
+    <div class="w-full h-auto bg-white">
       {#if dataProduct != '' && dataSpec != ''}
-         <ProductDetail data={dataProduct} spec={dataSpec} variant={dataVariant}/>
+        <div class="w-full lg:w-[80%] mx-auto py-20">
+          <ProductDetail data={dataProduct} spec={dataSpec} variant={dataVariant}/>
+        </div>
       {/if}
     </div>
-    <div class="w-auto h-auto mx-auto py-20 bg-gray-100">
+    <div class="w-full h-auto bg-gray-100 flex">
+      <div class="w-[10%] hidden lg:flex h-[700px] mt-20 justify-center items-center">
+        <p>[Iklan]</p>
+      </div>
       {#if dataSpec != ''}
-         <SpecDetail data={dataSpec}/>
+      <div class="w-full lg:w-[80%] mx-auto py-20">
+        <SpecDetail data={dataSpec}/>
+      </div>
       {/if}
+      <div class="w-[10%] hidden lg:flex h-[700px] mt-20 justify-center items-center">
+        <p>[Iklan]</p>
+      </div>
     </div>
-    <div class="w-auto h-auto mx-auto py-20 bg-white">
+    <div class="w-full h-auto bg-white">
+      <div class="w-full lg:w-[80%] mx-auto py-20">
         <PriceDetail/>
+      </div>
     </div>
       {#if dataTagCompare != []}
          <TagCompare data={dataTagCompare}/>
