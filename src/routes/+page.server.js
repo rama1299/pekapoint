@@ -2,6 +2,7 @@ import {readablestreamToJson} from '../helpers/readablestreamToJson.js'
 import product from '../helpers/product.json'
 import { FetchProduct } from '../modules/fetchProduct.js'
 import axios from 'axios'
+import { FetchAds } from '../modules/fetchAdsManagement.js'
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
@@ -14,7 +15,7 @@ export async function load() {
 		let dataTitleProduct = product
 
 		let response = await FetchProduct.getHomeProducts()
-		let ads = await axios.get(`http://localhost:3002/api/ads`)
+		let ads = await FetchAds.getAllAds('home')
 
 		if (response.status == 200) {
 			let productHome = response.data
@@ -26,12 +27,11 @@ export async function load() {
 		}
 
 		if (ads.status == 200) {
-			dataAds = ads.data.data
+			dataAds = ads.data
 		}
-				
+
 		return {dataTitleProduct, dataProductMostView, dataComapreMostView, dataCompareNew, dataTopProduct, dataAds}
 	} catch (error) {
-		console.log(error)
 		return {dataTitleProduct: [], dataProductMostView: [], dataComapreMostView: [], dataCompareNew: [], dataTopProduct: []}
 	}
 }

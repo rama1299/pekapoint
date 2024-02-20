@@ -42,6 +42,8 @@
     //     const message = event.detail.data
     //     productList = [...productList, ...message]
     // }
+
+    let dataAds = data.dataAds
 </script>
 
 <svelte:head>
@@ -55,9 +57,17 @@
         </div>
     </div>
     <div class="w-full flex">
-        <div class="w-[10%] h-screen hidden lg:flex justify-center items-center p-1 mt-24">
-            <p>[iklan]</p>
-        </div>
+        {#if dataAds.length > 0}
+            {#each dataAds as item}
+                {#if item.content_position == 'left'}
+                     <div class="w-[10%] h-screen hidden lg:flex justify-center items-center p-2 mt-24">
+                        <div class="w-full h-[80%] flex justify-center items-center">
+                            {@html item.content}
+                        </div>
+                     </div>
+                {/if} 
+            {/each}
+        {/if}
         <div class="w-full lg:w-[80%] min-h-[600px] font-monst m-auto space-y-4 py-5">
             <div class="w-full px-2">
                 <FilterBar/>
@@ -81,9 +91,17 @@
                  </div>
             {/if}
         </div>
-        <div class="w-[10%] h-screen hidden lg:flex justify-center items-center p-1 mt-24">
-            <p>[iklan]</p>
-        </div>
+        {#if dataAds.length > 0}
+            {#each dataAds as item}
+                {#if item.content_position == 'right'}
+                     <div class="w-[10%] h-screen hidden lg:flex justify-center items-center p-2 mt-24">
+                        <div class="w-full h-[80%] flex justify-center items-center">
+                            {@html item.content}
+                        </div>
+                     </div>
+                {/if} 
+            {/each}
+        {/if}
     </div>
 </Layout>
 

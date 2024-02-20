@@ -42,20 +42,20 @@
             </div>
             <div class="w-full flex justify-between">
                 <div>
-                    <div class=" w-72 h-40 border-2 hidden lg:flex items-center justify-center gap-5 rounded-lg">
-                        <div class="w-20 aspect-square rounded-full bg-sky-950 flex justify-center items-center">
-                            <i class='bx bx-file-blank text-3xl text-white'></i>
+                    <div class="flex items-start justify-center gap-3">
+                        <div class="h-7 lg:h-12 aspect-square flex justify-center items-center rounded-full border-2 border-sky-950 bg-sky-950">
+                            <i class='bx bx-file-blank text-xl lg:text-3xl text-white'></i>
                         </div>
                         <div>
-                            <p class="text-xl font-medium">Total Adsense</p>
-                            <p class="text-2xl font-semibold">{totalData}</p>
+                            <p class="lg:text-xl font-medium">Add Adsense</p>
+                            <p class="lg:text-xl font-medium">{totalData}</p>
                         </div>
                     </div>
                 </div>
                 <div>
                     <div class="flex items-center justify-center gap-3" on:click={() => {goto(`/admin/adsense/create`)}}>
                         <p class="lg:text-xl font-medium">Add Adsense</p>
-                        <div class="w-7 lg:w-12 aspect-square flex justify-center items-center rounded-full border-2 border-sky-950 hover:bg-white bg-sky-950 cursor-pointer group duration-100">
+                        <div class="h-7 lg:h-12 aspect-square flex justify-center items-center rounded-full border-2 border-sky-950 hover:bg-white bg-sky-950 cursor-pointer group duration-100">
                             <i class='bx bx-plus text-xl lg:text-3xl group-hover:text-sky-950 text-white'></i>
                         </div>
                     </div>
@@ -88,7 +88,7 @@
                 </div>
                 {#if data != []}
                     {#each data as item, i}
-                        <div class="w-full h-12 grid grid-cols-11 {i % 2 == 0 ? 'bg-gray-200' : 'bg-gray-300'} items-center gap-3 px-2">
+                        <div class="w-full h-12 grid grid-cols-11 {i % 2 == 0 ? 'bg-gray-200' : 'bg-gray-300'} items-center gap-3 px-2 cursor-pointer hover:bg-white" on:click={() => {goto(`/admin/adsense/${item.id}`)}}>
                             <div class=" col-span-1 flex justify-center items-start">
                                 <p class="w-full truncate flex justify-center">{item.id}</p>
                             </div>
@@ -106,6 +106,11 @@
                             </div>
                         </div>
                     {/each}
+                {/if}
+                {#if data.length == 0}
+                <div class="w-full h-12 bg-gray-200 flex justify-center items-center">
+                    <p class="font-medium">Data Not Found!</p>
+                </div>
                 {/if}
             </div>
         </div>

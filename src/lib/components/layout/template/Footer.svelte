@@ -5,7 +5,7 @@
         let translate = await Translate.client(text)
         text = translate
     })
-    let text = ['home', 'product', 'compare', 'blog', 'about us']
+    let text = ['home', 'product', 'compare', 'blog', 'about us', 'office', 'link']
     const brand = import.meta.env.VITE_BRAND
 </script>
 
@@ -21,7 +21,7 @@
         </div>
         <div class="w-full col-span-1 space-y-5">
             <div class="w-full flex justify-start">
-                <p class="text-xl font-medium border-b-2 flex justify-start">Office</p>
+                <p class="text-xl font-medium border-b-2 flex justify-start">{text[5]}</p>
             </div>
             <div class="w-full">
                 <p class="text-md leading-6 font-light">Sukawati</p>
@@ -31,7 +31,7 @@
         </div>
         <div class="w-full col-span-1 space-y-5">
             <div class="w-full flex justify-start">
-                <p class="text-xl font-medium border-b-2 flex justify-start">Link</p>
+                <p class="text-xl font-medium border-b-2 flex justify-start">{text[6]}</p>
             </div>
             <div class="text-md font-light flex flex-col gap-2 capitalize">
                 <a href="/">{text[0]}</a>

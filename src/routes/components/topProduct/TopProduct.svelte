@@ -22,7 +22,7 @@
             <div class="w-full col-span-1 border-2 rounded-lg p-5">
                 <div class="w-full h-full flex md:flex-col justify-between gap-3 cursor-pointer group">
                     <div class="w-full h-32 lg:h-52 flex justify-center" on:click={() => {goto(`/product/${item.slug}`)}}>
-                        <img src={item.feature_image} alt="" class="h-full group-hover:scale-105 duration-200">
+                        <img src={`${item.feature_image}`} alt="" class="h-full group-hover:scale-105 duration-200">
                     </div>
                     <div class="w-full space-y-3">
                         <div>
@@ -37,7 +37,7 @@
                                 <div class="flex w-full justify-between items-end">
                                     <div class="leading-3">
                                         <p class="font-medium text-sm">{text[2]}</p>
-                                        <p class="font-semibold text-xl">$ {JSON.parse(item.affiliate)[0].price}</p>
+                                        <p class="font-semibold lg:text-xl">Rp. {JSON.parse(item.affiliate)[0].price}</p>
                                     </div>
                                     <button class="w-7 md:w-9 rounded-md bg-sky-500 hover:bg-white aspect-square border border-sky-500 duration-100 text-white hover:text-sky-500 flex items-center justify-center" on:click={() => {goto(`/product/${item.slug}`)}}>
                                         <i class='bx bx-right-arrow-alt text-xl' ></i>

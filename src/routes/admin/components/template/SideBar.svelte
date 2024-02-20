@@ -31,7 +31,7 @@
     </div>
     <div class="w-full h-[43.75rem] space-y-2">
         {#each data as item}
-        <div class="flex text-white justify-center lg:justify-start items-center gap-2 h-14 rounded-lg px-3 {item.active ? 'bg-white/20' : ''} cursor-pointer">
+        <div class="flex text-white justify-center lg:justify-start items-center gap-2 h-14 rounded-lg px-3 hover:bg-white/20 {item.active ? 'bg-white/20' : ''} cursor-pointer" on:click={() => {goto(item.route)}}>
             <i class='bx bx-dollar-circle text-2xl'></i>
             <p class="text-xl hidden lg:flex">{item.title}</p>
         </div>
