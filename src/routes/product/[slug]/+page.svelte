@@ -51,15 +51,15 @@
       {/if}
     </div>
     <div class="w-full h-auto bg-gray-100 flex">
-      <div class="w-[10%] hidden lg:flex h-[700px] mt-20 justify-center items-center">
-        <p>[Iklan]</p>
+      <div class="w-[10%] hidden lg:flex h-screen justify-center items-center border sticky top-0">
+        <p>Iklan</p>
       </div>
       {#if dataSpec != ''}
       <div class="w-full lg:w-[80%] mx-auto py-20">
         <SpecDetail data={dataSpec}/>
       </div>
       {/if}
-      <div class="w-[10%] hidden lg:flex h-[700px] mt-20 justify-center items-center">
+      <div class="w-[10%] hidden lg:flex h-screen justify-center items-center border sticky top-0">
         <p>[Iklan]</p>
       </div>
     </div>

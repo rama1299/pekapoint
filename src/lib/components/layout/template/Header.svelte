@@ -248,7 +248,7 @@
                     <a href="/product" class="hover:text-sky-500 duration-200 ease-in-out">{text[1]}</a>
                     <a href="/compare" class="hover:text-sky-500 duration-200 ease-in-out">{text[2]}</a>
                     <a href="/blog" class="hover:text-sky-500 duration-200 ease-in-out">{text[3]}</a>
-                    <a href="/about" class="hover:text-sky-500 duration-200 ease-in-out">Tentang</a>
+                    <a href="/about" class="hover:text-sky-500 duration-200 ease-in-out">{text[4]}</a>
 
                     <div class="flex justify-center items-center relative" on:mouseleave={() => {toggleDropdown = false}} on:mouseenter={() => {toggleDropdown = true}}>
                         <button class="flex justify-center items-center hover:text-sky-500 h-16 uppercase">

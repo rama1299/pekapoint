@@ -49,7 +49,7 @@
 
 </script>
 
-<div class=" container mx-auto h-12">
+<div class=" w-full mx-auto h-12">
     <div class="h-full flex justify-start gap-5 items-center ">
         <div class="font-semibold text-xl">
             <p>Filter</p>

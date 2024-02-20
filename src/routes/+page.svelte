@@ -19,6 +19,8 @@
 
 	let width
 	let dataAds = data.dataAds || []
+
+	console.log(data.dataAds)
 </script>
 
 <svelte:head>
@@ -28,25 +30,23 @@
 <Layout>
 	<main class="w-full bg-white">
 			<Header data={data.dataTitleProduct}></Header>
-			<!-- {#each dataAds as ads} -->
-				<!-- {#if ads.content_position == 'top' && ads.page == '/'} -->
-					 <div class="lg:w-wrap container mx-auto my-7 flex justify-center items-center bg-cover h-24">
-						<p>[IKLAN]</p>
+			{#each dataAds as ads}
+				{#if ads.content_position == 'top' && ads.page == 'home'}
+					 <div class="w-full lg:w-[70%] mx-auto my-7 flex justify-center items-center h-24">
+						{@html ads.content}
 					 </div>
-				<!-- {/if} -->
-			<!-- {/each} -->
-			<div class="w-full flex bg-white gap-2">
-				{#if width > 990}
-					<!-- {#each dataAds as ads} -->
-						<!-- {#if ads.content_position == 'left' && ads.page == '/'} -->
-							<div class="w-[15%] min-h-[1400px] flex justify-center items-center">
-								<div class=" w-full h-[750px] flex justify-center items-center">
-									<p>[IKLAN]</p>
+				{/if}
+			{/each}
+			<div class="w-full flex bg-white gap-2 pt-7 justify-center">
+					{#each dataAds as ads}
+						{#if ads.content_position == 'left' && ads.page == 'home'}
+							<div class="w-[15%] h-screen hidden lg:flex justify-center items-center mt-20">
+								<div class=" w-full h-[80%] flex justify-center items-center">
+									{@html ads.content}
 								</div>
 							</div>
-						<!-- {/if} -->
-					<!-- {/each} -->
-				{/if}
+						{/if}
+					{/each}
 				{#if data.dataTopProduct.length > 0}
 					<div class="bg-white w-full lg:w-[70%]">
 						<div class="w-full mx-auto">
@@ -54,17 +54,15 @@
 						</div>
 					</div>
 				{/if}
-				{#if width > 990}
-					<!-- {#each dataAds as ads} -->
-						<!-- {#if ads.content_position == 'right' && ads.page == '/'} -->
-							<div class="w-[15%] min-h-[1400px] flex justify-center items-center">
-								<div class=" w-full h-[750px] flex justify-center items-center">
-									<p>[IKLAN]</p>
+					{#each dataAds as ads}
+						{#if ads.content_position == 'right' && ads.page == 'home'}
+							<div class="w-[15%] h-screen hidden lg:flex justify-center items-center mt-20">
+								<div class=" w-full h-[80%] flex justify-center items-center">
+									{@html ads.content}
 								</div>
 							</div>
-						<!-- {/if} -->
-					<!-- {/each} -->
-				{/if}
+						{/if}
+					{/each}
 			</div>
 				{#if data.dataProductMostView.length > 0}
 					<div class="flex justify-center items-center w-full lg:w-[70%] mx-auto bg-white h-[900px]">

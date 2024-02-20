@@ -131,7 +131,7 @@
                 {#if item.feature_image.includes('https')}
                     <img src={`${item.feature_image}`} alt="" class="h-full w-auto">
                 {:else}
-                    <img src={`../${item.feature_image}`} alt="" class="h-full w-auto">
+                    <img src={`/${item.feature_image}`} alt="" class="h-full w-auto">
                 {/if}
             </div>
             <div class="h-full w-4/6 text-sm flex items-center overflow-hidden">

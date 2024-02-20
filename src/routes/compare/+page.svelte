@@ -42,7 +42,11 @@
         <h1 class="text-2xl lg:text-3xl font-bold text-white">{text[0]}</h1>
     </div>
   </div>
-  <main class="w-full lg:w-[80%] min-h-screen px-2 mx-auto py-5 space-y-4 bg-gray-100">
+<div class="w-full flex">
+  <div class="w-[10%] h-screen hidden lg:flex justify-center items-center mt-24">
+    <p>Iklan</p>
+  </div>
+  <div class="w-full lg:w-[80%] min-h-screen px-2 mx-auto py-5 space-y-4 bg-gray-100">
     <div class="relative z-20">
       <FilterBar/>
     </div>
@@ -50,7 +54,11 @@
     {#if currentPage < totalPages}
        <LoadMore/>
     {/if}
-  </main>
+  </div>
+  <div class="w-[10%] h-screen hidden lg:flex justify-center items-center mt-24">
+    <p>Iklan</p>
+  </div>
+</div>
 </Layout>
 
 <style>

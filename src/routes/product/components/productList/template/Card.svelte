@@ -13,7 +13,6 @@
     export let specs
 
     let text = ['Add to comparison']
-    let feature_image =''
 
     onMount(async ()=> {
         let translate = await Translate.client(text)
@@ -22,14 +21,6 @@
         const initialValue = getFromSessionStorage('compareDataSession')
 
         initialValue ? compareDataStore.set(initialValue) : compareDataStore.set([])
-        
-        const regex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i
-
-        if (!regex.test(data.feature_image)) {
-            feature_image = `../${data.feature_image}`
-        } else {
-            feature_image = data.feature_image
-        }
 
     })
 
@@ -57,7 +48,11 @@
         <div class="relative w-full">
             <div class="flex w-full justify-center cursor-pointer" on:keypress={() => {() => {goto(`/product/${data.slug}`)}}} on:click={() => {goto(`/product/${data.slug}`)}}>
                 <div class="w-1/2 pr-2">
-                    <img src={feature_image} alt="" class="h-44 m-auto cursor-pointer hover:scale-105 duration-200" >
+                    {#if data.feature_image.includes('https')}
+                        <img src={`${data.feature_image}`} alt="" class="h-44 m-auto cursor-pointer hover:scale-105 duration-200" >
+                    {:else}
+                        <img src={`/${data.feature_image}`} alt="" class="h-44 m-auto cursor-pointer hover:scale-105 duration-200" >
+                    {/if}
                     <div class="h-10 w-10 rounded-full absolute left-0 -top-2 bg_img">
                         <ChartDonut score={data.spec_score}/>
                         <div class="absolute w-full h-full flex justify-center items-center top-0">
@@ -77,7 +72,7 @@
                 <a href={`/product/${data.slug}`} class="font-semibold cursor-pointer hover:underline underline-offset-1 leading-5">{data.title}</a>
                 <div class="flex items-center justify-end gap-2 bg-gradient-to-r from-sky-600 to-indigo-800 px-2 group text-white rounded-tl-lg absolute right-0 cursor-pointer">
                     <i class='bx bx-git-compare text-lg compare_btn'></i>
-                    <p class="font-medium close truncate w-full text-sm" on:keypress={()=> {handleCompare(data.title, data.slug, feature_image)}} on:click={()=> {handleCompare(data.title, data.slug, feature_image)}}>| {text[0]}</p>
+                    <p class="font-medium close truncate w-full text-sm" on:keypress={()=> {handleCompare(data.title, data.slug, data.feature_image)}} on:click={()=> {handleCompare(data.title, data.slug, data.feature_image)}}>| {text[0]}</p>
                 </div>
             </div>
         </div>
