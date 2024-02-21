@@ -31,6 +31,7 @@
     })
 
     export let data
+    let dataAds = data.dataAds
 
     let dataProduct = data.dataProduct
     let dataSpec = data.dataSpec
@@ -79,13 +80,27 @@
       <div class="w-full lg:w-[80%] mx-auto px-5 py-10 space-y-10">
           <CompareImage data={dataProduct}/>
       </div>
-      <div class="w-full lg:w-[80%] mx-auto my-7 flex justify-center items-center h-24">
-        <p>Iklan</p>
-      </div>
+      {#if dataAds != []}
+        {#each dataAds as ads}
+          {#if ads.content_position == 'top'}
+          <div class="w-full lg:w-[80%] mx-auto my-7 flex justify-center items-center h-24">
+            {@html ads}
+          </div>
+          {/if}
+        {/each}
+      {/if}
       <div class="w-full flex">
-        <div class="w-full lg:w-[10%] h-screen mt-24 sticky top-0 pt-14 hidden lg:flex justify-center items-center">
-          <p>Iklan</p>
-        </div>
+        {#if dataAds != []}
+          {#each dataAds as ads}
+            {#if ads.content_position == 'left'}
+            <div class="w-full lg:w-[10%] h-screen mt-24 sticky top-0 pt-14 hidden lg:flex justify-center items-center">
+              <div class="w-full h-[80%] flex justify-center items-center">
+                {@html ads.content}
+              </div>
+            </div>
+            {/if}
+          {/each}
+        {/if}
         <div class="w-full lg:w-[80%] pr-5 pl-2 lg:px-5 flex gap-2 lg:gap-5 mx-auto">
           <div class="w-1/12 h-screen sticky top-16 lg:top-20 divide-y-2" bind:offsetHeight={heightContainerLagend} bind:offsetWidth={widthContainerLagend}>
               {#each dataProduct as data, i (i)}
@@ -97,9 +112,17 @@
             <CompareDetailList data={dataSpecWithAdd}/>
           </div>
         </div>
-        <div class="w-full lg:w-[10%] h-screen mt-24 sticky top-0 pt-14 hidden lg:flex justify-center items-center">
-          <p>Iklan</p>
-        </div>
+        {#if dataAds != []}
+          {#each dataAds as ads}
+            {#if ads.content_position == 'left'}
+            <div class="w-full lg:w-[10%] h-screen mt-24 sticky top-0 pt-14 hidden lg:flex justify-center items-center">
+              <div class="w-full h-[80%] flex justify-center items-center">
+                {@html ads.content}
+              </div>
+            </div>
+            {/if}
+          {/each}
+        {/if}
       </div>
       <div class="w-full lg:w-[80%] mx-auto px-5 py-10 space-y-10">
           <ComparePrice data={dataSpecWithAdd}/>

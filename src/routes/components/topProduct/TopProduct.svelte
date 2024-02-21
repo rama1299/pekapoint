@@ -22,7 +22,11 @@
             <div class="w-full col-span-1 border-2 rounded-lg p-5">
                 <div class="w-full h-full flex md:flex-col justify-between gap-3 cursor-pointer group">
                     <div class="w-full h-32 lg:h-52 flex justify-center" on:click={() => {goto(`/product/${item.slug}`)}}>
-                        <img src={`${item.feature_image}`} alt="" class="h-full group-hover:scale-105 duration-200">
+                        {#if item.feature_image.includes('https')}
+                             <img src={`${item.feature_image}`} alt="" class="h-full group-hover:scale-105 duration-200">
+                        {:else}
+                            <img src={`/${item.feature_image}`} alt="" class="h-full group-hover:scale-105 duration-200">
+                        {/if}
                     </div>
                     <div class="w-full space-y-3">
                         <div>
