@@ -10,6 +10,7 @@
   export let spec
   export let variant = []
   let text = ['Show More']
+  export let dataAds
 
   onMount(async () => {
     let translate = await Translate.client(text)
@@ -66,11 +67,17 @@
                 </Description>
             </div>
         </div>
-        <div class="w-full px-5 lg:px-10">
-            <div class=" w-full h-24 flex justify-center items-center">
-                <p>[Iklan]</p>
-            </div>
-        </div>
+        {#if dataAds != []}
+            {#each dataAds as ads}
+                {#if ads.content_position == 'top'}
+                <div class="w-full px-5 lg:px-10">
+                    <div class=" w-full h-24 flex justify-center items-center">
+                        {@html ads.content}
+                    </div>
+                </div>
+                {/if}
+            {/each}
+        {/if}
         <div class=" w-full mx-auto lg:px-10 px-5">
             <Affiliate data={dataAffiliate}/>
         </div>

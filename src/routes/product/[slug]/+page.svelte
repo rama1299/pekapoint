@@ -31,6 +31,7 @@
   let dataVariant = data.dataVariant.length == 0 ? [] : data.dataVariant[0]
   let title = ''
   let dataTagCompare = []
+  let dataAds = data.dataAds
 
 </script>
 
@@ -46,22 +47,38 @@
     <div class="w-full h-auto bg-white">
       {#if dataProduct != '' && dataSpec != ''}
         <div class="w-full lg:w-[80%] mx-auto py-20">
-          <ProductDetail data={dataProduct} spec={dataSpec} variant={dataVariant}/>
+          <ProductDetail data={dataProduct} spec={dataSpec} variant={dataVariant} dataAds={dataAds}/>
         </div>
       {/if}
     </div>
-    <div class="w-full h-auto bg-gray-100 flex">
-      <div class="w-[10%] hidden lg:flex h-screen justify-center items-center border sticky top-0">
-        <p>Iklan</p>
-      </div>
+    <div class="w-full h-auto bg-gray-100 flex justify-center">
+      {#if dataAds != []}
+        {#each dataAds as ads}
+          {#if ads.content_position == 'left'}
+             <div class="w-[10%] hidden lg:flex h-screen justify-center items-center sticky top-0">
+              <div class="w-full h-[80%] flex justify-center items-center">
+                {@html ads.content}
+              </div>
+             </div>
+          {/if}
+        {/each}
+      {/if}
       {#if dataSpec != ''}
       <div class="w-full lg:w-[80%] mx-auto py-20">
         <SpecDetail data={dataSpec}/>
       </div>
       {/if}
-      <div class="w-[10%] hidden lg:flex h-screen justify-center items-center border sticky top-0">
-        <p>[Iklan]</p>
-      </div>
+      {#if dataAds != []}
+        {#each dataAds as ads}
+          {#if ads.content_position == 'right'}
+             <div class="w-[10%] hidden lg:flex h-screen justify-center items-center sticky top-0">
+              <div class="w-full h-[80%] flex justify-center items-center">
+                {@html ads.content}
+              </div>
+             </div>
+          {/if}
+        {/each}
+      {/if}
     </div>
     <div class="w-full h-auto bg-white">
       <div class="w-full lg:w-[80%] mx-auto py-20">

@@ -29,7 +29,11 @@
 <div class="w-full col-span-1 border-2 rounded-lg p-5 bg-white">
     <div class="w-full h-full flex md:flex-col justify-between gap-3 cursor-pointer group">
         <div class="w-full h-32 lg:h-52 flex justify-center" on:click={() => {goto(`${data.url}`)}}>
-            <img src={`${dataProduct[0].feature_image}`} alt="" class="h-full group-hover:scale-105 duration-200">
+            {#if dataProduct[0].feature_image.includes('https')}
+                 <img src={`${dataProduct[0].feature_image}`} alt="" class="h-full group-hover:scale-105 duration-200">
+            {:else}
+                <img src={`/${dataProduct[0].feature_image}`} alt="" class="h-full group-hover:scale-105 duration-200">
+            {/if}
         </div>
         <div class="w-full space-y-3">
             <div class="w-full overflow-hidden">
