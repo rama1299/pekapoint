@@ -3,7 +3,6 @@
 
     export let data
     $: dataProduct = data.product
-    console.log(data)
 
 </script>
 

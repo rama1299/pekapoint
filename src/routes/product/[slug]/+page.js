@@ -3,6 +3,7 @@ import { FetchProduct } from '../../../modules/fetchProduct.js';
 import { FetchHpVariant } from '../../../modules/fetchHpVariant.js';
 import { checkIpInfo } from '../../../helpers/checkIpInfo.js';
 import { FetchProductUrl } from '../../../modules/fetchProductUrl.js';
+import { FetchAds } from '../../../modules/fetchAdsManagement.js';
 
 
 /** @type {import('./$types').PageLoad} */
@@ -10,8 +11,15 @@ export async function load({ params, url }) {
     try {
         const pathName = url.pathname
         const slug = params.slug;
+        let dataAds = []
 
         const productUrlResponse = await FetchProductUrl.getProductUrlByUrl(pathName)
+
+        let responseAds = await FetchAds.getAllAds('product-slug')
+
+        if (responseAds.status == 200) {
+            dataAds = responseAds.data
+        }
 
         if (productUrlResponse && productUrlResponse.status === 200) {
 
@@ -32,10 +40,10 @@ export async function load({ params, url }) {
                 //     return { dataProduct: dataProduct[0], dataSpec: dataSpec[0], dataVariant: dataVariant, status: 'success' };
                 // }
 
-                return { dataProduct: dataProduct[0], dataSpec: dataSpec[0], dataVariant: [], status: 'success' };
+                return { dataProduct: dataProduct[0], dataSpec: dataSpec[0], dataVariant: [], dataAds, status: 'success' };
             }
             
-            return { dataProduct: [], dataSpec: [], dataVariant: [], status: 'error' };
+            return { dataProduct: [], dataSpec: [], dataVariant: [], dataAds, status: 'error' };
         } else {
 
             const productResponse = await FetchProduct.getProductBySlug(slug);
@@ -49,7 +57,7 @@ export async function load({ params, url }) {
                 if (specResponse && specResponse.status === 200) {
                     const dataSpec = specResponse.data;
 
-                    const variantResponse = await FetchHpVariant.getVariantById(dataId)
+                    // const variantResponse = await FetchHpVariant.getVariantById(dataId)
                     dataId = [dataId]
                     
                     // if (variantResponse && variantResponse.status === 200) {
@@ -67,20 +75,20 @@ export async function load({ params, url }) {
 
                     const createProductUrl = await FetchProductUrl.createProductUrl(dataInputProductUrl)
                     
-                    return { dataProduct: dataProduct[0], dataSpec: dataSpec[0], dataVariant: [], status: 'success' }; 
+                    return { dataProduct: dataProduct[0], dataSpec: dataSpec[0], dataVariant: [], dataAds, status: 'success' }; 
                 }
     
             } else {
-                return { dataProduct: [], dataSpec: [], dataVariant: [], status: 'error' };
+                return { dataProduct: [], dataSpec: [], dataVariant: [], status: 'error', dataAds: []};
             }
 
-            return { dataProduct: [], dataSpec: [], dataVariant: [], status: 'error' };
+            return { dataProduct: [], dataSpec: [], dataVariant: [], status: 'error', dataAds: [] };
         }
     } catch (error) {
         console.error("Error loading product:", error.message);
         if (error.response.status === 401 || error.response.statusText == 'Unauthorized') {
             Cookies.remove('status')
         }
-        return { dataProduct: [], dataSpec: [], dataVariant: [], status: 'error' };
+        return { dataProduct: [], dataSpec: [], dataVariant: [], status: 'error', dataAds:[] };
     }
 }

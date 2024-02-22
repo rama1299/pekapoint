@@ -8,6 +8,7 @@
   import { Translate } from '../../helpers/translate';
 
   export let data
+  let dataAds = data.dataAds
   let text = ['Compare']
 
   onMount(async () => {
@@ -42,10 +43,18 @@
         <h1 class="text-2xl lg:text-3xl font-bold text-white">{text[0]}</h1>
     </div>
   </div>
-<div class="w-full flex">
-  <div class="w-[10%] h-screen hidden lg:flex justify-center items-center mt-24">
-    <p>Iklan</p>
-  </div>
+<div class="w-full flex justify-center">
+  {#if dataAds != []}
+    {#each dataAds as ads}
+      {#if ads.content_position == 'left'}
+      <div class="w-[10%] h-screen hidden lg:flex justify-center items-center mt-24">
+        <div class="w-full h-[80%] flex justify-center items-center">
+          {@html ads.content}
+        </div>
+      </div>
+      {/if}
+    {/each}
+  {/if}
   <div class="w-full lg:w-[80%] min-h-screen px-2 mx-auto py-5 space-y-4 bg-gray-100">
     <div class="relative z-20">
       <FilterBar/>
@@ -55,9 +64,17 @@
        <LoadMore/>
     {/if}
   </div>
-  <div class="w-[10%] h-screen hidden lg:flex justify-center items-center mt-24">
-    <p>Iklan</p>
-  </div>
+  {#if dataAds != []}
+    {#each dataAds as ads}
+      {#if ads.content_position == 'right'}
+      <div class="w-[10%] h-screen hidden lg:flex justify-center items-center mt-24">
+        <div class="w-full h-[80%] flex justify-center items-center">
+          {@html ads.content}
+        </div>
+      </div>
+      {/if}
+    {/each}
+  {/if}
 </div>
 </Layout>
 
