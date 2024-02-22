@@ -289,7 +289,7 @@
             </div>
     
             {#if filterToggle.isBrand}
-                <div id="dropdownBrand" class="w-[400px] h-auto bg-white absolute top-12 left-0 rounded-md border z-10 p-6">
+                <div id="dropdownBrand" class="w-[500px] h-auto bg-white absolute top-12 left-0 rounded-md border z-10 p-6">
                     <div class="grid grid-cols-3 gap-x-6 gap-y-1 max-h-[310px] overflow-auto">
                         {#each brand as data (data.id)}
                              <div class="w-full h-auto flex justify-start">
