@@ -1,6 +1,11 @@
 import { pool } from "../../../config/dbConfig.js"
 import { getImagesFromData } from "../../../system/services/getImagesFromData.js";
 import { Translate } from "../../../system/services/translate.js";
+import dotenv from 'dotenv'
+
+dotenv.config() 
+
+const schema = process.env.SCHEMA
 
 
 export class ProductController {
@@ -46,7 +51,7 @@ export class ProductController {
                 const arrayBrand = filterObject[0].brand
                 const query = {
                     text: `SELECT *, '[{"store":"Shopee","price":"19450000","link":"https://shopee.co.id/Handphone-cat.11044458.11044476"},{"store":"Tokopedia","price":"20000000","link":"https://shopee.co.id/Handphone-cat.11044458.11044476"}]' as affiliate, '21000000' as launch_price
-                    FROM public.products
+                    FROM ${schema}.products
                     WHERE title ILIKE ANY($1::text[]) AND summary IS NOT NULL
                     ORDER BY spec_score DESC, release_date DESC
                     LIMIT $2
@@ -56,7 +61,7 @@ export class ProductController {
 
                 const response = await client.query(query)
                 const totalResult = await pool.query({
-                    text: `SELECT COUNT(*) FROM public.products WHERE title ILIKE ANY($1::text[]) AND summary IS NOT NULL`,
+                    text: `SELECT COUNT(*) FROM ${schema}.products WHERE title ILIKE ANY($1::text[]) AND summary IS NOT NULL`,
                     values: [arrayBrand.map(brand => `%${brand}%`)],
                 });
               
@@ -92,7 +97,7 @@ export class ProductController {
                                   '[{"store":"Shopee","price":"19450000","link":"https://shopee.co.id/Handphone-cat.11044458.11044476"},
                                     {"store":"Tokopedia","price":"20000000","link":"https://shopee.co.id/Handphone-cat.11044458.11044476"}]' as affiliate,
                                   '21000000' as launch_price
-                            FROM public.products
+                            FROM ${schema}.products
                             WHERE summary IS NOT NULL
                                 AND EXISTS (
                                     SELECT 1
@@ -106,7 +111,7 @@ export class ProductController {
                 };
                 const response = await client.query(query)
                 const totalResult = await pool.query({
-                    text: `SELECT COUNT(*) FROM public.products
+                    text: `SELECT COUNT(*) FROM ${schema}.products
                     WHERE summary IS NOT NULL
                     AND EXISTS (
                         SELECT 1
@@ -147,7 +152,7 @@ export class ProductController {
 
                 const query = {
                     text: `SELECT *, '[{"store":"Shopee","price":"19450000","link":"https://shopee.co.id/Handphone-cat.11044458.11044476"},{"store":"Tokopedia","price":"20000000","link":"https://shopee.co.id/Handphone-cat.11044458.11044476"}]' as affiliate, '21000000' as launch_price
-                    FROM public.products
+                    FROM ${schema}.products
                     WHERE title ILIKE ANY($1::text[]) AND summary IS NOT NULL
                         AND EXISTS (
                             SELECT 1
@@ -162,7 +167,7 @@ export class ProductController {
 
                 const response = await client.query(query)
                 const totalResult = await pool.query({
-                    text: `SELECT COUNT(*) FROM public.products WHERE title ILIKE ANY($1::text[]) AND summary IS NOT NULL
+                    text: `SELECT COUNT(*) FROM ${schema}.products WHERE title ILIKE ANY($1::text[]) AND summary IS NOT NULL
                     AND EXISTS (
                         SELECT 1
                         FROM json_array_elements(CAST(variant AS json)) AS v
@@ -248,7 +253,7 @@ export class ProductController {
           const slugs = slug.split('-vs-').map((item) => item.replace('vs-', '')).slice(0, 4);
     
           const response = await client.query(
-            'SELECT * FROM products WHERE slug = ANY($1::text[])',
+            `SELECT * FROM ${schema}.products WHERE slug = ANY($1::text[])`,
             [slugs]
           );
     
@@ -350,7 +355,7 @@ export class ProductController {
                         ']}'
                     ) AS resume 
                 FROM 
-                    public.prod_spec_attributes psa 
+                ${schema}.prod_spec_attributes psa 
                     INNER JOIN spec_attributes sa ON psa.attribute_id=sa.id
                     INNER JOIN attribute_groups ag ON psa.attribute_group_id=ag.id
                     LEFT JOIN attr_group_spec_score ags ON ag.id=ags.attr_group_id AND psa.product_id=ags.product_id
@@ -405,7 +410,7 @@ export class ProductController {
         try {
             const response = await client.query(
                 `SELECT DISTINCT SPLIT_PART(title, ' ', 1) AS brand
-                FROM public.products
+                FROM ${schema}.products
                 WHERE summary IS NOT NULL
                 ORDER BY brand ASC;`
             )
@@ -444,7 +449,7 @@ export class ProductController {
             
             const response = await client.query(
                 `SELECT feature_image
-                 FROM public.products
+                 FROM ${schema}.products
                  WHERE slug = $1;`,
                 [slug]
             );
@@ -487,7 +492,7 @@ export class ProductController {
             
             const response = await client.query(
                 `SELECT *, '[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\"},{\"store\":\"Tokopedia\",\"price\":\"20000000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\"}]' as affiliate, '21000000' as launch_price
-                FROM public.products
+                FROM ${schema}.products
                 WHERE ${placeholders} AND summary IS NOT NULL
                 ORDER BY spec_score DESC, release_date DESC
                 LIMIT   $${arraySearch.length + 1}
@@ -503,7 +508,7 @@ export class ProductController {
                 
                 const responseTotal = await client.query(
                     `SELECT COUNT(*)
-                    FROM public.products
+                    FROM ${schema}.products
                     WHERE ${placeholders} AND summary IS NOT NULL`,
                     arraySearch
                     )
@@ -539,7 +544,7 @@ export class ProductController {
         try {
             const findProduct = await client.query(
                 `SELECT title, feature_image, slug, spec_score, '[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]' as affiliate
-                FROM public.products
+                FROM ${schema}.products
                 WHERE summary IS NOT NULL
                 ORDER BY spec_score DESC, created_at DESC
                 LIMIT 12;`

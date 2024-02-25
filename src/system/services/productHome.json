@@ -19,7 +19,7 @@
         }
       ],
       "created_at": null,
-      "visitor": 102
+      "visitor": 113
     },
     {
       "id": 119,
@@ -40,7 +40,7 @@
         }
       ],
       "created_at": null,
-      "visitor": 55
+      "visitor": 81
     },
     {
       "id": 123,
@@ -82,7 +82,7 @@
         }
       ],
       "created_at": "2024-02-04T22:36:54.454Z",
-      "visitor": 25
+      "visitor": 29
     },
     {
       "id": 180,
@@ -103,7 +103,28 @@
         }
       ],
       "created_at": "2024-02-19T08:15:16.863Z",
-      "visitor": 19
+      "visitor": 21
+    },
+    {
+      "id": 128,
+      "url": "/product/xiaomi-12",
+      "product": [
+        {
+          "product_id": 8,
+          "feature_image": "images/xiaomi/12/xiaomi-1249d5fd26471cbed9f987bb48519d9cc5.jpg",
+          "title": "Xiaomi 12",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        }
+      ],
+      "created_at": "2024-02-04T22:32:35.029Z",
+      "visitor": 18
     },
     {
       "id": 131,
@@ -127,27 +148,6 @@
       "visitor": 17
     },
     {
-      "id": 128,
-      "url": "/product/xiaomi-12",
-      "product": [
-        {
-          "product_id": 8,
-          "feature_image": "images/xiaomi/12/xiaomi-1249d5fd26471cbed9f987bb48519d9cc5.jpg",
-          "title": "Xiaomi 12",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        }
-      ],
-      "created_at": "2024-02-04T22:32:35.029Z",
-      "visitor": 17
-    },
-    {
       "id": 122,
       "url": "/product/xiaomi-13",
       "product": [
@@ -166,179 +166,179 @@
         }
       ],
       "created_at": "2024-02-04T07:03:57.212Z",
+      "visitor": 13
+    }
+  ],
+  [
+    {
+      "id": 126,
+      "url": "/compare/xiaomi-13-pro-vs-xiaomi-13-ultra",
+      "product": [
+        {
+          "product_id": 4,
+          "feature_image": "images/xiaomi/13/xiaomi-13-proaa197f5e7ae648c33e6575288fbc1cce.jpg",
+          "title": "Xiaomi 13 Pro",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        },
+        {
+          "product_id": 3,
+          "feature_image": "images/xiaomi/13/xiaomi-13-ultrafeeff34b21bd09b200a2c2bd01be3463.jpg",
+          "title": "Xiaomi 13 Ultra",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        }
+      ],
+      "created_at": "2024-02-04T22:25:56.221Z",
+      "visitor": 43
+    },
+    {
+      "id": 125,
+      "url": "/compare/xiaomi-14-pro-vs-xiaomi-13-ultra",
+      "product": [
+        {
+          "product_id": 2,
+          "feature_image": "images/xiaomi/14/xiaomi-14-proae9fb789b5279017047aacba7b864f63.jpg",
+          "title": "Xiaomi 14 Pro",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        },
+        {
+          "product_id": 3,
+          "feature_image": "images/xiaomi/13/xiaomi-13-ultrafeeff34b21bd09b200a2c2bd01be3463.jpg",
+          "title": "Xiaomi 13 Ultra",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        }
+      ],
+      "created_at": "2024-02-04T22:25:46.823Z",
+      "visitor": 40
+    },
+    {
+      "id": 138,
+      "url": "/compare/xiaomi-mi-11-ultra-vs-xiaomi-mi-11-pro",
+      "product": [
+        {
+          "product_id": 9,
+          "feature_image": "images/xiaomi/mi/xiaomi-mi-11-ultraeb72f19c339b2ed5a6cffc5300666be2.jpg",
+          "title": "Xiaomi Mi 11 Ultra",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        },
+        {
+          "product_id": 11,
+          "feature_image": "images/xiaomi/mi/xiaomi-mi-11-pro8db4934db15ac23261cb3b57135ba4f3.jpg",
+          "title": "Xiaomi Mi 11 Pro",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        }
+      ],
+      "created_at": "2024-02-05T02:11:56.017Z",
+      "visitor": 34
+    },
+    {
+      "id": 130,
+      "url": "/compare/xiaomi-12s-vs-xiaomi-mi-11-pro",
+      "product": [
+        {
+          "product_id": 12,
+          "feature_image": "images/xiaomi/12s/xiaomi-12sa29e934bc0b18c1350032f1d0ae22767.jpg",
+          "title": "Xiaomi 12S",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        },
+        {
+          "product_id": 11,
+          "feature_image": "images/xiaomi/mi/xiaomi-mi-11-pro8db4934db15ac23261cb3b57135ba4f3.jpg",
+          "title": "Xiaomi Mi 11 Pro",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        }
+      ],
+      "created_at": "2024-02-04T22:39:46.263Z",
+      "visitor": 16
+    },
+    {
+      "id": 127,
+      "url": "/compare/xiaomi-12s-ultra-vs-xiaomi-mi-11-ultra",
+      "product": [
+        {
+          "product_id": 6,
+          "feature_image": "images/xiaomi/12s/xiaomi-12s-ultra23076557ac622abce58622d522f76e2b.jpg",
+          "title": "Xiaomi 12S Ultra",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        },
+        {
+          "product_id": 9,
+          "feature_image": "images/xiaomi/mi/xiaomi-mi-11-ultraeb72f19c339b2ed5a6cffc5300666be2.jpg",
+          "title": "Xiaomi Mi 11 Ultra",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        }
+      ],
+      "created_at": "2024-02-04T22:31:00.723Z",
       "visitor": 10
-    }
-  ],
-  [
-    {
-      "id": 126,
-      "url": "/compare/xiaomi-13-pro-vs-xiaomi-13-ultra",
-      "product": [
-        {
-          "product_id": 4,
-          "feature_image": "images/xiaomi/13/xiaomi-13-proaa197f5e7ae648c33e6575288fbc1cce.jpg",
-          "title": "Xiaomi 13 Pro",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        },
-        {
-          "product_id": 3,
-          "feature_image": "images/xiaomi/13/xiaomi-13-ultrafeeff34b21bd09b200a2c2bd01be3463.jpg",
-          "title": "Xiaomi 13 Ultra",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        }
-      ],
-      "created_at": "2024-02-04T22:25:56.221Z",
-      "visitor": 30
-    },
-    {
-      "id": 138,
-      "url": "/compare/xiaomi-mi-11-ultra-vs-xiaomi-mi-11-pro",
-      "product": [
-        {
-          "product_id": 9,
-          "feature_image": "images/xiaomi/mi/xiaomi-mi-11-ultraeb72f19c339b2ed5a6cffc5300666be2.jpg",
-          "title": "Xiaomi Mi 11 Ultra",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        },
-        {
-          "product_id": 11,
-          "feature_image": "images/xiaomi/mi/xiaomi-mi-11-pro8db4934db15ac23261cb3b57135ba4f3.jpg",
-          "title": "Xiaomi Mi 11 Pro",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        }
-      ],
-      "created_at": "2024-02-05T02:11:56.017Z",
-      "visitor": 23
-    },
-    {
-      "id": 125,
-      "url": "/compare/xiaomi-14-pro-vs-xiaomi-13-ultra",
-      "product": [
-        {
-          "product_id": 2,
-          "feature_image": "images/xiaomi/14/xiaomi-14-proae9fb789b5279017047aacba7b864f63.jpg",
-          "title": "Xiaomi 14 Pro",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        },
-        {
-          "product_id": 3,
-          "feature_image": "images/xiaomi/13/xiaomi-13-ultrafeeff34b21bd09b200a2c2bd01be3463.jpg",
-          "title": "Xiaomi 13 Ultra",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        }
-      ],
-      "created_at": "2024-02-04T22:25:46.823Z",
-      "visitor": 19
-    },
-    {
-      "id": 130,
-      "url": "/compare/xiaomi-12s-vs-xiaomi-mi-11-pro",
-      "product": [
-        {
-          "product_id": 12,
-          "feature_image": "images/xiaomi/12s/xiaomi-12sa29e934bc0b18c1350032f1d0ae22767.jpg",
-          "title": "Xiaomi 12S",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        },
-        {
-          "product_id": 11,
-          "feature_image": "images/xiaomi/mi/xiaomi-mi-11-pro8db4934db15ac23261cb3b57135ba4f3.jpg",
-          "title": "Xiaomi Mi 11 Pro",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        }
-      ],
-      "created_at": "2024-02-04T22:39:46.263Z",
-      "visitor": 12
-    },
-    {
-      "id": 127,
-      "url": "/compare/xiaomi-12s-ultra-vs-xiaomi-mi-11-ultra",
-      "product": [
-        {
-          "product_id": 6,
-          "feature_image": "images/xiaomi/12s/xiaomi-12s-ultra23076557ac622abce58622d522f76e2b.jpg",
-          "title": "Xiaomi 12S Ultra",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        },
-        {
-          "product_id": 9,
-          "feature_image": "images/xiaomi/mi/xiaomi-mi-11-ultraeb72f19c339b2ed5a6cffc5300666be2.jpg",
-          "title": "Xiaomi Mi 11 Ultra",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        }
-      ],
-      "created_at": "2024-02-04T22:31:00.723Z",
-      "visitor": 8
     },
     {
       "id": 145,
@@ -372,7 +372,7 @@
         }
       ],
       "created_at": "2024-02-05T06:39:48.940Z",
-      "visitor": 7
+      "visitor": 8
     }
   ],
   [
@@ -408,7 +408,7 @@
         }
       ],
       "created_at": "2024-02-05T06:39:48.940Z",
-      "visitor": 7
+      "visitor": 8
     },
     {
       "id": 138,
@@ -442,7 +442,7 @@
         }
       ],
       "created_at": "2024-02-05T02:11:56.017Z",
-      "visitor": 23
+      "visitor": 34
     },
     {
       "id": 130,
@@ -476,7 +476,7 @@
         }
       ],
       "created_at": "2024-02-04T22:39:46.263Z",
-      "visitor": 12
+      "visitor": 16
     },
     {
       "id": 127,
@@ -510,7 +510,7 @@
         }
       ],
       "created_at": "2024-02-04T22:31:00.723Z",
-      "visitor": 8
+      "visitor": 10
     },
     {
       "id": 126,
@@ -544,7 +544,7 @@
         }
       ],
       "created_at": "2024-02-04T22:25:56.221Z",
-      "visitor": 30
+      "visitor": 43
     },
     {
       "id": 125,
@@ -578,7 +578,7 @@
         }
       ],
       "created_at": "2024-02-04T22:25:46.823Z",
-      "visitor": 19
+      "visitor": 40
     }
   ],
   [
@@ -611,6 +611,20 @@
       "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
     },
     {
+      "title": "Samsung Galaxy S23 Ultra",
+      "feature_image": "images/samsung/galaxy/samsung-galaxy-s23-ultrac1137e5ef328bccdcbbfa94bd8de92c5.jpg",
+      "slug": "samsung-galaxy-s23-ultra",
+      "spec_score": 95,
+      "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
+    },
+    {
+      "title": "Oppo Find X6 Pro",
+      "feature_image": "images/oppo/find/oppo-find-x6-pro0a95923d768f27382c8ac0eb73c69979.jpg",
+      "slug": "oppo-find-x6-pro",
+      "spec_score": 95,
+      "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
+    },
+    {
       "title": "Xiaomi 12S Ultra",
       "feature_image": "images/xiaomi/12s/xiaomi-12s-ultra23076557ac622abce58622d522f76e2b.jpg",
       "slug": "xiaomi-12s-ultra",
@@ -625,6 +639,13 @@
       "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
     },
     {
+      "title": "Google Pixel 8 Pro",
+      "feature_image": "https://images.versus.io/objects/google-pixel-8-pro.front.medium.1696502540011.jpg",
+      "slug": "google-pixel-8-pro",
+      "spec_score": 93,
+      "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
+    },
+    {
       "title": "Xiaomi 13",
       "feature_image": "images/xiaomi/13/xiaomi-1314977655f4c5ff9b87211edc06f9e1a5.jpg",
       "slug": "xiaomi-13",
@@ -632,38 +653,17 @@
       "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
     },
     {
-      "title": "Xiaomi 12",
-      "feature_image": "images/xiaomi/12/xiaomi-1249d5fd26471cbed9f987bb48519d9cc5.jpg",
-      "slug": "xiaomi-12",
-      "spec_score": 90,
+      "title": "Samsung Galaxy S22 Ultra (Qualcomm Snapdragon 8 Gen 1)",
+      "feature_image": "https://images.versus.io/objects/samsung-galaxy-s22-ultra.front.medium.1646341961226.jpg",
+      "slug": "samsung-galaxy-s22-ultra-qualcomm-snapdragon-8-gen-1",
+      "spec_score": 92,
       "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
     },
     {
-      "title": "Xiaomi 12 Pro",
-      "feature_image": "images/xiaomi/12/xiaomi-12-proa40978398f47cd55ba7cd6833aa1ea79.jpg",
-      "slug": "xiaomi-12-pro",
-      "spec_score": 88,
-      "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
-    },
-    {
-      "title": "Xiaomi 12S Pro",
-      "feature_image": "images/xiaomi/12s/xiaomi-12s-prob4b08098821fbc3cd06bbc379aa7dc70.jpg",
-      "slug": "xiaomi-12s-pro",
-      "spec_score": 85,
-      "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
-    },
-    {
-      "title": "Xiaomi Mi 11 Pro",
-      "feature_image": "images/xiaomi/mi/xiaomi-mi-11-pro8db4934db15ac23261cb3b57135ba4f3.jpg",
-      "slug": "xiaomi-mi-11-pro",
-      "spec_score": 84,
-      "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
-    },
-    {
-      "title": "Xiaomi 12S",
-      "feature_image": "images/xiaomi/12s/xiaomi-12sa29e934bc0b18c1350032f1d0ae22767.jpg",
-      "slug": "xiaomi-12s",
-      "spec_score": 83,
+      "title": "Samsung Galaxy S22 Ultra",
+      "feature_image": "images/samsung/galaxy/samsung-galaxy-s22-ultra0f8042922fddd5c952e0bb5fd9e1b045.jpg",
+      "slug": "samsung-galaxy-s22-ultra",
+      "spec_score": 92,
       "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
     }
   ]

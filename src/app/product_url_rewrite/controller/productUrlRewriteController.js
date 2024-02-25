@@ -1,4 +1,9 @@
 import {pool} from '../../../config/dbConfig.js'
+import dotenv from 'dotenv'
+
+dotenv.config() 
+
+const schema = process.env.SCHEMA
 
 export class ProductUrlRewriteController {
     static async getProductUrl(req, res, next) {
@@ -19,7 +24,7 @@ export class ProductUrlRewriteController {
 
             const urlResponse = await client.query(
                 `SELECT product_ids, url, id, created_at
-                FROM public.product_url_rewrite
+                FROM ${schema}.product_url_rewrite
                 WHERE item = $1
                 ORDER BY ${filter} DESC
                 LIMIT $2
@@ -33,7 +38,7 @@ export class ProductUrlRewriteController {
 
             const urlCount = await client.query(
                 `SELECT COUNT(*)
-                FROM public.product_url_rewrite
+                FROM ${schema}.product_url_rewrite
                 WHERE item = 2`
             )
 
@@ -53,7 +58,7 @@ export class ProductUrlRewriteController {
 
             const productResponse = await client.query(
                 `SELECT id, feature_image, title, '[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.5\"}]' as affiliate
-                FROM public.products
+                FROM ${schema}.products
                 WHERE id IN (${placeholders})`,
                 flatAndUniqueIds
             )
@@ -111,7 +116,7 @@ export class ProductUrlRewriteController {
 
             const findData = await client.query(
                 `SELECT *
-                FROM public.product_url_rewrite
+                FROM ${schema}.product_url_rewrite
                 WHERE url = $1;`,
                 [url]
             )
@@ -125,7 +130,7 @@ export class ProductUrlRewriteController {
             const updateVisitor = existData.visitor + 1
 
             const updateData = await client.query(
-                `UPDATE public.product_url_rewrite
+                `UPDATE ${schema}.product_url_rewrite
                 SET visitor = $1
                 WHERE url = $2;`,
                 [updateVisitor, url]
@@ -150,7 +155,7 @@ export class ProductUrlRewriteController {
             }
 
             const findData = await client.query(
-                `SELECT * FROM public.product_url_rewrite WHERE url = $1;`,
+                `SELECT * FROM ${schema}.product_url_rewrite WHERE url = $1;`,
                 [url]
             )
 
@@ -166,7 +171,7 @@ export class ProductUrlRewriteController {
             console.log(item)
 
             const createData = await client.query(
-                `INSERT INTO public.product_url_rewrite (url, product_ids, variant_ids, slug, visitor, write_type, item)
+                `INSERT INTO ${schema}.product_url_rewrite (url, product_ids, variant_ids, slug, visitor, write_type, item)
                 VALUES ($1, $2, $3, $4, $5, $6, $7)`,
                 [url, idProduct, idVariant, slug, visitor, write_type, item]
             )

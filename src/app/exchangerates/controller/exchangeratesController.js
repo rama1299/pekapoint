@@ -1,5 +1,10 @@
 import {pool} from '../../../config/dbConfig.js'
 import axios from 'axios'
+import dotenv from 'dotenv'
+
+dotenv.config() 
+
+const schema = process.env.SCHEMA
 
 export class ExchangeratesController {
     static async updateExchangerates(req, res, next) {
@@ -27,7 +32,7 @@ export class ExchangeratesController {
             const flatValue = arrayKeyValue.flat();
             
             const updateExchangerates = await client.query(
-                `UPDATE public.exchangerates
+                `UPDATE ${schema}.exchangerates
                 SET rate = CASE
                 ${placeholders}
                 END`,
@@ -54,7 +59,7 @@ export class ExchangeratesController {
 
             const findRate = await client.query(
                 `SELECT code, rate, symbol
-                FROM public.exchangerates
+                FROM ${schema}.exchangerates
                 WHERE code IN ($1,'EUR');`,
                 [codeCurrency.toUpperCase()]
             )

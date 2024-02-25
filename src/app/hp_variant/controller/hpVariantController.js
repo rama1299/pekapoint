@@ -1,4 +1,9 @@
 import { pool } from "../../../config/dbConfig.js"
+import dotenv from 'dotenv'
+
+dotenv.config() 
+
+const schema = process.env.SCHEMA
 
 export class HpVariantController {
     static async findVariantByProductId(req, res, next) {
@@ -47,9 +52,9 @@ export class HpVariantController {
                     'currency', vp.currency
                   )) AS prices
                 FROM
-                  public.hp_variants AS v
+                  ${schema}.hp_variants AS v
                 LEFT JOIN
-                  public.hp_variant_prices AS vp ON v.id = vp.variant_id
+                  ${schema}.hp_variant_prices AS vp ON v.id = vp.variant_id
                 WHERE
                   v.product_id IN (${placeholders}) AND vp.country = ${placeholderCountry}
                 GROUP BY

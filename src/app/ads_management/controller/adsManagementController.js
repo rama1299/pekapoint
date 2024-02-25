@@ -1,7 +1,9 @@
-import dotenv from 'dotenv'
 import {pool} from '../../../config/dbConfig.js'
+import dotenv from 'dotenv'
 
 dotenv.config() 
+
+const schema = process.env.SCHEMA
 
 export class AdsManagementController{
     static async findAll(req, res, next) {
@@ -15,7 +17,7 @@ export class AdsManagementController{
             if (page) {
 
                 const response = await client.query(
-                    `SELECT * FROM ads_management WHERE page = $1`,
+                    `SELECT * FROM ${schema}.ads_management WHERE page = $1`,
                     [page]
                 )
 
@@ -23,7 +25,7 @@ export class AdsManagementController{
             } else {
 
                 const response = await client.query(
-                    `SELECT * FROM ads_management`
+                    `SELECT * FROM ${schema}.ads_management`
                 )
 
                 dataFindAll = response
@@ -50,7 +52,7 @@ export class AdsManagementController{
             let id = parseFloat(req.params.id) || null
 
             const findData = await client.query(
-                `SELECT * FROM ads_management WHERE id = $1`,
+                `SELECT * FROM ${schema}.ads_management WHERE id = $1`,
                 [id]
             )
 
@@ -79,7 +81,7 @@ export class AdsManagementController{
             let rowCount = 0
 
             const createData = await client.query(
-                `INSERT INTO ads_management(title, page, content_position, content)
+                `INSERT INTO ${schema}.ads_management(title, page, content_position, content)
                 VALUES ($1,$2,$3,$4)`,
                 [title, page, content_position, content]
             )
@@ -117,7 +119,7 @@ export class AdsManagementController{
             let rowCount = 0
 
             const existData = await client.query(
-                `SELECT * FROM ads_management WHERE id = $1`,
+                `SELECT * FROM ${schema}.ads_management WHERE id = $1`,
                 [id]
             )
 
@@ -126,7 +128,7 @@ export class AdsManagementController{
             }
 
             const updateData = await client.query(
-                `UPDATE ads_management
+                `UPDATE ${schema}.ads_management
                 SET title = $1, page = $2, content_position = $3, content = $4
                 WHERE id = $5`,
                 [title, page, content_position, content, id]
@@ -153,7 +155,7 @@ export class AdsManagementController{
             let id = parseFloat(req.params.id) || null
 
             const deleteData = await client.query(
-                `DELETE FROM ads_management WHERE id = $1`,
+                `DELETE FROM ${schema}.ads_management WHERE id = $1`,
                 [id]
             )
 

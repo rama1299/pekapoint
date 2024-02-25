@@ -51,34 +51,41 @@
 </svelte:head>
 
 <Layout isProductPage={true}>
-    <div class="w-full h-52 lg:h-80 bg-cover bg_gradient">
+    <!-- <div class="w-full h-52 lg:h-80 bg-cover bg_gradient">
         <div class="w-full lg:w-[90%] font-monst h-full pt-24 px-3 lg:px-0 lg:pt-40 mx-auto">
             <h1 class="text-2xl lg:text-3xl font-bold text-white">{text[0]}</h1>
         </div>
-    </div>
+    </div> -->
     <div class="w-full flex">
         {#if dataAds.length > 0}
             {#each dataAds as item}
                 {#if item.content_position == 'left'}
                      <div class="w-[10%] h-screen hidden lg:flex justify-center items-center p-2 mt-24">
-                        <div class="w-full h-[80%] flex justify-center items-center">
+                        <div class="wrapper flex justify-center items-center">
                             {@html item.content}
                         </div>
                      </div>
                 {/if} 
             {/each}
         {/if}
-        <div class="w-full lg:w-[80%] min-h-[600px] font-monst m-auto space-y-4 py-5">
+        <div class="wrapper min-h-[600px] font-monst m-auto space-y-4 py-5">
             <div class="w-full px-2">
                 <FilterBar/>
             </div>
-            {#if productList.length > 0}
-                <div class="w-full min-h-[600px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-flow-row m-auto gap-4 px-5 lg:px-0">
-                    {#each productList as item (item.id)}
-                        <ProductList item={item}/>
-                    {/each}
+            <div class="w-full h-full flex justify-between items-start gap-5">
+                <div class="hidden w-[25%] h-[750px] bg-white border rounded lg:flex sticky top-5">
+
                 </div>
-            {/if}
+                <div class="w-full lg:w-[75%] h-full">
+                    {#if productList.length > 0}
+                        <div class="w-full min-h-[600px] grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 grid-flow-row m-auto gap-4">
+                            {#each productList as item (item.id)}
+                                <ProductList item={item}/>
+                            {/each}
+                        </div>
+                    {/if}
+                </div>
+            </div>
     
             {#if productList.length == 0 && status == 'error'}
             <div class="w-full h-[500px]">
@@ -95,7 +102,7 @@
             {#each dataAds as item}
                 {#if item.content_position == 'right'}
                      <div class="w-[10%] h-screen hidden lg:flex justify-center items-center p-2 mt-24">
-                        <div class="w-full h-[80%] flex justify-center items-center">
+                        <div class="wrapper flex justify-center items-center">
                             {@html item.content}
                         </div>
                      </div>

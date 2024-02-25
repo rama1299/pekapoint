@@ -49,9 +49,9 @@
             <div class="flex w-full justify-center cursor-pointer" on:keypress={() => {() => {goto(`/product/${data.slug}`)}}} on:click={() => {goto(`/product/${data.slug}`)}}>
                 <div class="w-1/2 pr-2">
                     {#if data.feature_image.includes('https')}
-                        <img src={`${data.feature_image}`} alt="" class="h-44 m-auto cursor-pointer hover:scale-105 duration-200" >
+                        <img src={`${data.feature_image}`} alt="" class="h-36 m-auto cursor-pointer hover:scale-105 duration-200" >
                     {:else}
-                        <img src={`/${data.feature_image}`} alt="" class="h-44 m-auto cursor-pointer hover:scale-105 duration-200" >
+                        <img src={`/${data.feature_image}`} alt="" class="h-36 m-auto cursor-pointer hover:scale-105 duration-200" >
                     {/if}
                     <div class="h-10 w-10 rounded-full absolute left-0 -top-2 bg_img">
                         <ChartDonut score={data.spec_score}/>
@@ -60,10 +60,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-1/2 h-44 overflow-hidden relative">
+                <!-- <div class="w-1/2 h-44 overflow-hidden relative">
                     <div class="w-full h-full gradient absolute top-0 left-0"></div>
                     <SpecDetail data={specs} tabControl={tabControl}/>
-                </div>
+                </div> -->
             </div>
             <!-- <div class="flex w-full justify-end mt-3 absolute bottom-16">
                 <p class="rounded-tl-lg py-1 px-2 font-medium bg-gradient-to-l from-yellow-300 to-orange-500 text-white text-end cursor-pointer hover:scale-105 duration-200">{formatCurrencyIDR(data.launch_price)}</p>

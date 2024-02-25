@@ -8,6 +8,8 @@ import jwt from 'jsonwebtoken'
 
 dotenv.config()
 
+const schema = process.env.SCHEMA
+
 export class UserController {
     static async userRegister(req, res, next) {
         const client = await pool.connect();
@@ -24,7 +26,7 @@ export class UserController {
           }
 
           const findUser = await client.query(
-            `SELECT * FROM public.app_user
+            `SELECT * FROM ${schema}.app_user
             WHERE username = $1;`,
             [username]
           )
@@ -36,7 +38,7 @@ export class UserController {
           const hashedPassword = await generateHashPassword(password, 10);
     
           const query = {
-            text: `INSERT INTO public.app_user (username, password, email, role) VALUES ($1, $2, $3, $4);`,
+            text: `INSERT INTO ${schema}.app_user (username, password, email, role) VALUES ($1, $2, $3, $4);`,
             values: [username, hashedPassword, email, role],
           };
     
@@ -67,7 +69,7 @@ export class UserController {
             }
 
             const findUser = await client.query(
-                `SELECT * FROM public.app_user
+                `SELECT * FROM ${schema}.app_user
                 WHERE username = $1;`,
                 [username]
             )
@@ -118,7 +120,7 @@ export class UserController {
       }
 
       const findUser = await client.query(
-        `SELECT * FROM public.app_user
+        `SELECT * FROM ${schema}.app_user
         WHERE username = $1;`,
         [username]
       )
