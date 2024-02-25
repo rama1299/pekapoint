@@ -69,16 +69,16 @@
             {/each}
         {/if}
         <div class="wrapper min-h-[600px] font-monst m-auto space-y-4 py-5">
-            <div class="w-full px-2">
+            <!-- <div class="w-full px-2">
                 <FilterBar/>
-            </div>
-            <div class="w-full h-full flex justify-between items-start gap-5">
-                <div class="hidden w-[25%] h-[750px] bg-white border rounded lg:flex sticky top-5">
+            </div> -->
+            <div class="w-full h-full flex justify-end items-start gap-4">
+                <div class="hidden w-[20%] h-[650px] bg-white border border-sekunder-300 rounded lg:flex sticky top-4">
 
                 </div>
-                <div class="w-full lg:w-[75%] h-full">
+                <div class="w-full lg:w-[80%] h-full">
                     {#if productList.length > 0}
-                        <div class="w-full min-h-[600px] grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 grid-flow-row m-auto gap-4">
+                        <div class="w-full min-h-[600px] grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 grid-flow-row m-auto gap-4">
                             {#each productList as item (item.id)}
                                 <ProductList item={item}/>
                             {/each}

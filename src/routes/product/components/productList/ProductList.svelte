@@ -25,7 +25,7 @@
 
 </script>
 
-<div class="w-full h-fit cursor-default bg-white rounded-lg overflow-hidden border-2">
+<div class="w-full h-fit cursor-default bg-white rounded-lg overflow-hidden border border-sekunder-300">
   <div>
     <Card data={item} tabControl={tabControl} specs={spec}/>
     <Afiliate data={item.affiliate} slug={item.slug}/>

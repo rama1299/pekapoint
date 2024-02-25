@@ -41,8 +41,10 @@
         },
         toolbar: false,
         getFillColor: (group, label, data, defaultFillColor) => {
-            if (group === 'Remaining') {
-            return '#eeeeee';
+            if (group === 'score') {
+                return '#0062bd';
+            } else if (group === 'Remaining') {
+                return '#eeeeee';
             }
         },
         tooltip: false,

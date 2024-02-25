@@ -19,7 +19,7 @@
         }
       ],
       "created_at": null,
-      "visitor": 113
+      "visitor": 119
     },
     {
       "id": 119,
@@ -40,28 +40,7 @@
         }
       ],
       "created_at": null,
-      "visitor": 81
-    },
-    {
-      "id": 123,
-      "url": "/product/xiaomi-12-pro",
-      "product": [
-        {
-          "product_id": 7,
-          "feature_image": "images/xiaomi/12/xiaomi-12-proa40978398f47cd55ba7cd6833aa1ea79.jpg",
-          "title": "Xiaomi 12 Pro",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        }
-      ],
-      "created_at": "2024-02-04T07:07:05.098Z",
-      "visitor": 35
+      "visitor": 98
     },
     {
       "id": 129,
@@ -82,7 +61,28 @@
         }
       ],
       "created_at": "2024-02-04T22:36:54.454Z",
-      "visitor": 29
+      "visitor": 39
+    },
+    {
+      "id": 123,
+      "url": "/product/xiaomi-12-pro",
+      "product": [
+        {
+          "product_id": 7,
+          "feature_image": "images/xiaomi/12/xiaomi-12-proa40978398f47cd55ba7cd6833aa1ea79.jpg",
+          "title": "Xiaomi 12 Pro",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        }
+      ],
+      "created_at": "2024-02-04T07:07:05.098Z",
+      "visitor": 36
     },
     {
       "id": 180,
@@ -124,6 +124,27 @@
         }
       ],
       "created_at": "2024-02-04T22:32:35.029Z",
+      "visitor": 19
+    },
+    {
+      "id": 121,
+      "url": "/product/xiaomi-12s-ultra",
+      "product": [
+        {
+          "product_id": 6,
+          "feature_image": "images/xiaomi/12s/xiaomi-12s-ultra23076557ac622abce58622d522f76e2b.jpg",
+          "title": "Xiaomi 12S Ultra",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        }
+      ],
+      "created_at": "2024-02-04T07:02:20.976Z",
       "visitor": 18
     },
     {
@@ -146,27 +167,6 @@
       ],
       "created_at": "2024-02-05T00:46:08.448Z",
       "visitor": 17
-    },
-    {
-      "id": 122,
-      "url": "/product/xiaomi-13",
-      "product": [
-        {
-          "product_id": 5,
-          "feature_image": "images/xiaomi/13/xiaomi-1314977655f4c5ff9b87211edc06f9e1a5.jpg",
-          "title": "Xiaomi 13",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        }
-      ],
-      "created_at": "2024-02-04T07:03:57.212Z",
-      "visitor": 13
     }
   ],
   [
@@ -202,7 +202,7 @@
         }
       ],
       "created_at": "2024-02-04T22:25:56.221Z",
-      "visitor": 43
+      "visitor": 44
     },
     {
       "id": 125,
@@ -236,7 +236,7 @@
         }
       ],
       "created_at": "2024-02-04T22:25:46.823Z",
-      "visitor": 40
+      "visitor": 41
     },
     {
       "id": 138,
@@ -270,7 +270,7 @@
         }
       ],
       "created_at": "2024-02-05T02:11:56.017Z",
-      "visitor": 34
+      "visitor": 40
     },
     {
       "id": 130,
@@ -304,7 +304,7 @@
         }
       ],
       "created_at": "2024-02-04T22:39:46.263Z",
-      "visitor": 16
+      "visitor": 19
     },
     {
       "id": 127,
@@ -442,7 +442,7 @@
         }
       ],
       "created_at": "2024-02-05T02:11:56.017Z",
-      "visitor": 34
+      "visitor": 40
     },
     {
       "id": 130,
@@ -476,7 +476,7 @@
         }
       ],
       "created_at": "2024-02-04T22:39:46.263Z",
-      "visitor": 16
+      "visitor": 19
     },
     {
       "id": 127,
@@ -544,7 +544,7 @@
         }
       ],
       "created_at": "2024-02-04T22:25:56.221Z",
-      "visitor": 43
+      "visitor": 44
     },
     {
       "id": 125,
@@ -578,7 +578,7 @@
         }
       ],
       "created_at": "2024-02-04T22:25:46.823Z",
-      "visitor": 40
+      "visitor": 41
     }
   ],
   [

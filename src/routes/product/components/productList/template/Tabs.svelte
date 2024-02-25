@@ -43,10 +43,10 @@
 
 </script>
 <!-- display -->
-<div class="bg-white w-full relative px-4 pb-4 m-auto {tabControl.isPerformance ? '' : 'hidden'}">
+<div class="bg-white w-full relative px-3 pb-3 m-auto {tabControl.isPerformance ? '' : 'hidden'}">
     <!-- <p class="text-center text-md font-medium absolute left-4 -top-5 text-gray-700">{titleTab}</p> -->
-    <div class="flex justify-center md:justify-between justify-items-center items-center gap-2 mt-3 pt-1 ">
-        <div class="w-full h-36 space-y-[6px]">
+    <div class="flex justify-center md:justify-between justify-items-center items-center gap-2 pt-1 ">
+        <div class="w-full space-y-[6px]">
             <!-- <Radar labels={display.labels} scores={display.scores}/> -->
             {#each dataProgressBar as item, i (i)}
                 {#if i <= 4}

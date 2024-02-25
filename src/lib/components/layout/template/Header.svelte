@@ -60,6 +60,8 @@
             language: name
         }
 
+        toggleDropdown = false
+
         await Cookies.remove('geoInfo')
         await Cookies.set('geoInfo', JSON.stringify(geoInfo))
 
@@ -191,6 +193,9 @@
         resetValue()
     }
 
+    let toggleCategorySearch = false
+    let toggleCategory = false
+
 </script>
 
 <svelte:window bind:scrollY={y} />
@@ -206,7 +211,7 @@
                 </div>
                 <div id="search" class="w-full flex justify-end lg:justify-start gap-1 items-center">
                     {#if isProductPage}
-                    <div class="max-w-80 flex justify-between items-center h-8 lg:h-10 bg-white/20 text-white rounded-lg relative">
+                    <div class="max-w-80 flex justify-between items-center h-8 lg:h-10 bg-white/20 text-white relative">
                         <div class="h-full aspect-square flex justify-center items-center rounded-l-lg">
                             <i class='bx bx-search text-xl'></i>
                         </div>
@@ -316,18 +321,17 @@
                     <div class="flex justify-center items-center gap-3 divide-x-2 divide-sekunder-200 font-medium">
                         <div>
                             <div class="relative">
-                                <div class="flex justify-center items-center gap-1 cursor-pointer">
+                                <div class="flex justify-center items-center gap-1 cursor-pointer" on:click={() => {toggleDropdown = !toggleDropdown}}>
                                     <div class="w-5 h-2 bg-red-600"></div>
                                     <p>Indonesia</p>
                                     <i class='bx bx-chevron-down text-xl'></i>
                                 </div>
-                                <!-- <div class="absolute border top-8 right-0">
+                                <div class="absolute border top-8 right-0 {toggleDropdown ? 'show' : 'dropdown_hidden'}">
                                     <div class="bg-white shadow-lg">
-                                        <p class="h-8 w-24 flex justify-center items-center">Indonesia</p>
-                                        <p class="h-8 w-24 flex justify-center items-center">English</p>
-                                        <p class="h-8 w-24 flex justify-center items-center">Itali</p>
+                                        <p class="h-8 w-24 flex justify-center items-center hover:bg-sekunder-200 cursor-pointer" on:click={() => {handleLanguage('id')}}>Indonesia</p>
+                                        <p class="h-8 w-24 flex justify-center items-center hover:bg-sekunder-200 cursor-pointer" on:click={() => {handleLanguage('en')}}>English</p>
                                     </div>
-                                </div> -->
+                                </div>
                             </div>
                         </div>
                         <div>
@@ -355,39 +359,73 @@
                     <div class="w-[25%] flex justify-start items-center">
                         <p class="text-4xl font-bold italic text-sekunder-950 cursor-pointer" on:click={() => {goto(`/`)}}>Pekapoint.</p>
                     </div>
-                    <div class="w-[50%] flex justify-center h-11 bg-white rounded-full overflow-hidden border-2 border-primary-500">
-                        <div class="w-[60%] h-full flex justify-center items-center font-medium text-sekunder-950">
-                            <input type="text" class="w-full h-full border-none bg-transparent focus:ring-0 pl-5 placeholder-text-sekunder-950" placeholder="Search for product...">
+                    <div class="w-[50%] relative">
+                        <div class="w-full flex justify-center h-11 bg-white rounded-full overflow-hidden border-2 border-primary-500">
+                            <div id="search" class="w-[60%] h-full flex justify-center items-center font-medium text-sekunder-950">
+                                <input type="text" class="w-full h-full border-none bg-transparent focus:ring-0 pl-5 placeholder-text-sekunder-950" placeholder="Search for product..." bind:value={valueInput} on:keydown={handleKeyInput}>
+                            </div>
+                            <div class="w-[30%] h-full flex justify-center items-center gap-5 cursor-pointer" on:click={() => {toggleCategorySearch = !toggleCategorySearch}}>
+                                <p>All Brand</p>
+                                <i class='bx bxs-down-arrow text-xs'></i>
+                            </div>
+                            <div class="w-[10%] h-full flex justify-center items-center bg-primary-500 active:bg-primary-700 cursor-pointer duration-100" on:click={handleEnter}>
+                                <i class='bx bx-search text-white text-xl'></i>
+                            </div>
                         </div>
-                        <div class="w-[30%] h-full flex justify-center items-center gap-5 cursor-pointer">
-                            <p>All Brand</p>
-                            <i class='bx bxs-down-arrow text-xs'></i>
-                        </div>
-                        <div class="w-[10%] h-full flex justify-center items-center bg-primary-500 active:bg-primary-700 cursor-pointer duration-100">
-                            <i class='bx bx-search text-white text-xl'></i>
-                        </div>
+
+                        {#if valueInput.length > 0 && dataFilter.length > 0}
+                            <div class="w-[60%] z-10 border border-sekunder-300 divide-y divide-sekunder-300 max-h-48 lg:max-h-80 bg-white overflow-auto lg:overflow-hidden snap-y snap-mandatory rounded-lg absolute top-11 shadow-lg left-0"
+                            tabindex="0"
+                            bind:this={containerScroll}>
+                                {#each dataFilter as item, i}
+                                    <div class="{selectedOptionIndex == i ? 'bg-sekunder-100' : ''} w-full h-8 lg:h-10 hover:bg-sekunder-100 flex justify-between items-center px-3 snap-start"
+                                    tabindex="0"
+                                    on:click={() => {handleSelect(item.title)}}
+                                    id="idOption{i}"
+                                    >
+                                        <p class="w-full h-full truncate flex items-center text-sekunder-950">{item.title}</p>
+                                    </div>
+                                {/each}
+                            </div>
+                        {/if}
+
+                        {#if toggleCategorySearch}
+                            <div class="w-[30%] absolute top-11 bg-white right-[10%] z-10 border rounded-lg border-sekunder-300 overflow-hidden">
+                                <div class="w-full h-10 flex justify-start items-center px-3 cursor-pointer hover:bg-sekunder-100" on:click={() => {toggleCategorySearch = false}}>
+                                    <p>All Category</p>
+                                </div>
+                            </div>
+                        {/if}
+
                     </div>
                     <div class="w-[25%] flex justify-end items-center gap-5 text-2xl">
-                        <div>
-                            <i class='bx bx-git-compare text-sekunder-950 cursor-pointer hover:text-accent-red-600 active:text-accent-red-700 duration-100' on:click={() => {goto(`/compare`)}}></i>
+                        <div class="flex justify-center items-center group cursor-pointer">
+                            <i class='bx bx-git-compare text-sekunder-950 group-hover:text-accent-red-600 group-active:text-accent-red-700 duration-100' on:click={() => {goto(`/compare`)}}></i>
+                            <p class="text-sm group-hover:text-accent-red-600 group-active:text-accent-red-700 duration-100">Compare</p>
                         </div>
-                        <div>
-                            <i class='bx bx-user text-sekunder-950 cursor-pointer hover:text-accent-red-600 active:text-accent-red-700 duration-100'></i>
+                        <div class="flex justify-center items-center group cursor-pointer">
+                            <i class='bx bx-user text-sekunder-950 group-hover:text-accent-red-600 group-active:text-accent-red-700 duration-100'></i>
+                            <p class="text-sm group-hover:text-accent-red-600 group-active:text-accent-red-700 duration-100">My Account</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="w-full  border-t-2 border-b-2 border-primary-500 ">
+        <!-- border-t-2 border-b-2 border-primary-500 -->
+        <div class="w-full bg-primary-500">
             <div class="wrapper mx-auto">
                 <div class="w-full flex justify-between items-center h-12">
-                    <div class="relative">
-                        <div class="flex justify-center items-center">
+                    <div id="category" class="relative">
+                        <div class="flex justify-center items-center cursor-pointer" on:click={() => {toggleCategory = !toggleCategory}}>
                             <i class='bx bx-menu text-4xl text-sekunder-950'></i>
                         </div>
-                        <!-- <div class="w-52 h-72 bg-white absolute top-[46px] left-0 border-r-2 border-l-2 border-b-2 border-primary-500">
-                            
-                        </div> -->
+                        {#if toggleCategory}
+                             <div class="w-52 bg-white absolute top-[46px] left-0 border-r-2 border-l-2 rounded-b-lg overflow-hidden border-b-2 border-primary-500 z-10">
+                                 <div class="w-full h-10 flex justify-start items-center px-3 cursor-pointer hover:bg-sekunder-100" on:click={() => {toggleCategory = false}}>
+                                     <p>Smarphone</p>
+                                 </div>
+                             </div>
+                        {/if}
                     </div>
                     <div class="flex justify-center items-center gap-10 font-bold text-sekunder-950">
                         <a class="h-10 flex items-center cursor-pointer hover:text-accent-red-600 active:text-accent-red-700 duration-100 {route == '/' ? 'text-accent-red-600' : ''}" href="/">Home</a>
@@ -451,8 +489,8 @@
         transition: 0.3s ease;
     }
 
-    ::placeholder {
+    /* ::placeholder {
         color: white;
-    }
+    } */
 
 </style>
