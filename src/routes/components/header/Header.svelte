@@ -23,8 +23,8 @@
     $: titleData = findDataCategory.title
 </script>
 
-<div class="w-full h-[600px] lg:h-[750px] flex justify-center items-start pt-36 relative">
-    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+<div class="w-full h-[600px] lg:h-[750px] flex justify-center items-start pt-52 relative bg-[url('/gradient1.png')]">
+    <!-- <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
 		xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100%" height="100%" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice">
 		<defs>
 			<linearGradient id="bg">
@@ -73,11 +73,11 @@
           repeatCount="indefinite" />
 			</use>
 		</g>
-	</svg>
-    <div class="container flex flex-col justify-center items-center gap-5 lg:gap-7 z-10">
-        <div class="text-center px-5">
-            <p class="text-2xl lg:text-4xl font-bold text-white">{text[0] +' '+ brand}</p>
-            <p class="leading-5 lg:text-xl font-medium text-white">{text[1]}</p>
+	</svg> -->
+    <div class="container flex flex-col justify-center items-center gap-5 lg:gap-14 z-10">
+        <div class="text-center px-5 space-y-2">
+            <p class="text-2xl lg:text-4xl font-bold text-sekunder-950">{text[0] +' '+ brand}</p>
+            <p class="leading-5 lg:text-xl font-medium text-sekunder-950">{text[1]}</p>
         </div>
         <!-- <FormCompare data={titleData}/> -->
         <SearchEngine data={titleData}/>

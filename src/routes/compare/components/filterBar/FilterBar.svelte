@@ -49,20 +49,17 @@
 
 </script>
 
-<div class=" w-full mx-auto h-12">
-    <div class="h-full flex justify-start gap-5 items-center ">
-        <div class="font-semibold text-xl">
-            <p>Filter</p>
-        </div>
-        <div id="dropDown" class="relative h-full">
-            <div class=" flex justify-between items-center h-full w-40 bg-white rounded-md px-2 border cursor-pointer" on:click={()=> {dropdownFilter = !dropdownFilter}}>
+<div class="w-full mx-auto">
+    <div class="w-full h-10 flex justify-start gap-5 items-center bg-white border border-sekunder-300 rounded-md">
+        <div id="dropDown" class="relative h-full w-full">
+            <div class=" flex justify-between items-center h-full w-full bg-white rounded-md px-2 cursor-pointer" on:click={()=> {dropdownFilter = !dropdownFilter}}>
                 <p class="font-medium">{filter}</p>
                 <i class='bx bx-chevron-down text-xl'></i>
             </div>
-            <div class=" {dropdownFilter ? '' : 'hidden'} absolute w-34 bg-white rounded-md border shadow-lg p-3 top-12 right-0">
+            <div class=" {dropdownFilter ? '' : 'hidden'} absolute w-full bg-white rounded-md border border-sekunder-300 shadow-lg top-10 right-0">
                 <div class="w-full text-end space-y-1 font-medium">
-                    <p class="w-full hover:text-sky-500 cursor-pointer" on:click={()=> {handleFilter('Most Viewed')}}>{text[0]}</p>
-                    <p class="w-full hover:text-sky-500 cursor-pointer" on:click={()=> {handleFilter('New')}}>{text[1]}</p>
+                    <p class="w-full hover:bg-sekunder-50 cursor-pointer px-2 py-1" on:click={()=> {handleFilter('Most Viewed')}}>{text[0]}</p>
+                    <p class="w-full hover:bg-sekunder-50 cursor-pointer px-2 py-1" on:click={()=> {handleFilter('New')}}>{text[1]}</p>
                 </div>
             </div>
         </div>

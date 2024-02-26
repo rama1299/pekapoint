@@ -56,7 +56,7 @@
             <h1 class="text-2xl lg:text-3xl font-bold text-white">{text[0]}</h1>
         </div>
     </div> -->
-    <div class="w-full flex">
+    <div class="w-full flex pt-14 lg:pt-0">
         {#if dataAds.length > 0}
             {#each dataAds as item}
                 {#if item.content_position == 'left'}
@@ -73,12 +73,15 @@
                 <FilterBar/>
             </div> -->
             <div class="w-full h-full flex justify-end items-start gap-4">
-                <div class="hidden w-[20%] h-[650px] bg-white border border-sekunder-300 rounded lg:flex sticky top-4">
-
+                <div class="hidden lg:w-[25%] xl:w-[20%] h-[650px] lg:flex sticky top-4 flex-col">
+                    <div class="bg-sekunder-50 w-full h-full rounded-lg p-4 space-y-2">
+                        <p class="font-semibold">Filter</p>
+                        <FilterBar/>
+                    </div>
                 </div>
-                <div class="w-full lg:w-[80%] h-full">
+                <div class="w-full lg:w-[75%] xl:[w-80%] h-full">
                     {#if productList.length > 0}
-                        <div class="w-full min-h-[600px] grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 grid-flow-row m-auto gap-4">
+                        <div class="w-full min-h-[600px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-flow-row m-auto gap-4">
                             {#each productList as item (item.id)}
                                 <ProductList item={item}/>
                             {/each}

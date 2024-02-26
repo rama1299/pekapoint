@@ -38,12 +38,12 @@
   <title>{text[0]}</title>
 </svelte:head>
 <Layout>
-  <div class="w-full h-52 lg:h-80 bg-cover bg_gradient">
+  <!-- <div class="w-full h-52 lg:h-80 bg-cover bg_gradient">
     <div class="w-full lg:w-[90%] font-monst h-full pt-24 px-3 lg:px-0 lg:pt-40 mx-auto">
         <h1 class="text-2xl lg:text-3xl font-bold text-white">{text[0]}</h1>
     </div>
-  </div>
-<div class="w-full flex justify-center">
+  </div> -->
+<div class="w-full flex justify-center pt-12 lg:pt-0">
   {#if dataAds != []}
     {#each dataAds as ads}
       {#if ads.content_position == 'left'}
@@ -55,11 +55,18 @@
       {/if}
     {/each}
   {/if}
-  <div class="w-full lg:w-[80%] min-h-screen px-2 mx-auto py-5 space-y-4 bg-gray-100">
-    <div class="relative z-20">
-      <FilterBar/>
+  <div class="wrapper min-h-screen px-2 mx-auto py-5 space-y-4">
+    <div class="w-full h-full flex justify-end gap-4">
+      <div class="w-[25%] hidden lg:flex h-full">
+        <div class="w-full h-[600px] space-y-2 p-4 bg-sekunder-50 rounded-lg border border-sekunder-300 sticky top-4">
+          <p class="font-semibold">Filter</p>
+          <FilterBar/>
+        </div>
+      </div>
+      <div class="w-full lg:w-[75%]">
+        <CompareList data={dataCompare}/>
+      </div>
     </div>
-    <CompareList data={dataCompare}/>
     {#if currentPage < totalPages}
        <LoadMore/>
     {/if}

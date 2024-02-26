@@ -112,7 +112,7 @@
 
 {#if $compareDataStore.length > 0 && !isToggleSearch}
 <div class=" position z-40 border rounded-t-lg">
-    <div class="bg-gradient-to-r from-sky-600 to-indigo-800 flex justify-between {isToggleBtn ? 'w-60' :'w-auto'} md:w-64 h-10 items-center px-3 py-1 text-white rounded-t-lg cursor-pointer" on:keypress={handleToggelBtn} on:click={handleToggelBtn}>
+    <div class="bg-sekunder-950 flex justify-between {isToggleBtn ? 'w-60' :'w-auto'} md:w-64 h-10 items-center px-3 py-1 text-white rounded-t-lg cursor-pointer" on:keypress={handleToggelBtn} on:click={handleToggelBtn}>
         <div class="flex items-center gap-1">
             <!-- <p class="{isToggleBtn ? 'hidden' : ''} md:hidden">Compare</p> -->
             <i class='bx bx-git-compare'></i>
@@ -138,17 +138,17 @@
                 <p class="text-start font-medium leading-4">{item.title}</p>
             </div>
             <div class="flex justify-start items-center cursor-pointer" on:keypress={()=> {removeItemById(item.title)}} on:click={()=> {removeItemById(item.title)}}>
-                <i class='bx bx-x text-black hover:text-red-600 text-2xl w-1/6'></i>
+                <i class='bx bx-x text-sekunder-950 hover:text-accent-red-600 text-2xl w-1/6'></i>
             </div>
         </div>
         {/each}
         <div class="h-12 bg-white flex justify-center items-center w-full">
             <div class="{$compareDataStore.length === 3 ? 'w-full' : 'w-2/3'} h-full flex justify-center items-center">
-                <button class="bg-sky-600 hover:bg-sky-500 rounded-full text-white h-8 px-2 text-sm font-medium" on:click={handleCompare}>{text[1]}</button>
+                <button class="bg-sekunder-950 hover:bg-white hover:text-sekunder-950 rounded-full border border-sekunder-950 text-white h-8 px-2 text-sm font-medium" on:click={handleCompare}>{text[1]}</button>
             </div>
             <div class="w-1/3 h-full flex justify-center items-center {$compareDataStore.length === 4 ? 'hidden' : ''}">
-                <button class="bg-sky-600 hover:bg-sky-500 rounded-full w-8 h-8">
-                    <i class='bx bx-plus text-white  text-lg items-center' on:keypress={handleSearchToggle} on:click={handleSearchToggle}></i>
+                <button class="bg-sekunder-950 hover:bg-white hover:text-sekunder-950 border border-sekunder-950 text-white rounded-full w-8 h-8">
+                    <i class='bx bx-plus text-lg items-center' on:keypress={handleSearchToggle} on:click={handleSearchToggle}></i>
                 </button>
             </div>
         </div>
@@ -158,7 +158,7 @@
 
 {#if isToggleSearch}
 <div class="w-64 position z-40 _shadow rounded-t-lg">
-    <div class="bg-gradient-to-r from-sky-600 to-indigo-800 flex justify-between w-64 md:w-64 h-10 items-center px-3 py-1 text-white rounded-t-lg cursor-pointer">
+    <div class="bg-sekunder-950 flex justify-between w-64 md:w-64 h-10 items-center px-3 py-1 text-white rounded-t-lg cursor-pointer">
         <div class="flex items-center gap-1">
             <i class='bx bx-search'></i>
             <div class="flex">
@@ -166,7 +166,7 @@
                 <p class="ml-2">{text[2]}</p>
             </div>
         </div>
-        <i class='bx bx-x hover:text-red-600 text-xl md:block' on:keypress={handleSearchToggle} on:click={handleSearchToggle}></i>
+        <i class='bx bx-x hover:text-accent-red-600 text-xl md:block' on:keypress={handleSearchToggle} on:click={handleSearchToggle}></i>
     </div>
     {#if searchValue.length >= 2}
          <div class="w-full md:w-64 max-h-48 overflow-auto">
@@ -176,8 +176,8 @@
                           <div class="w-5/6 pl-2">
                               <p class="w-full overflow-hidden truncate text-sm leading-6">{data.title}</p>
                           </div>
-                          <div class="h-full rounded-full bg-sky-600 aspect-square flex items-center justify-end border cursor-pointer group hover:bg-white hover:border-sky-600" on:click={()=> {handleSelect(data.title)}}>
-                                  <i class='bx bx-plus group-hover:text-sky-600 text-white w-full h-full flex justify-center text-xl items-center'></i>
+                          <div class="h-full rounded-full bg-sekunder-950 hover:bg-white hover:text-sekunder-950 rounded-full border border-sekunder-950 text-white aspect-square flex items-center justify-end border cursor-pointer" on:click={()=> {handleSelect(data.title)}}>
+                                  <i class='bx bx-plus w-full h-full flex justify-center text-xl items-center'></i>
                           </div>
                       </div>
                   </div>

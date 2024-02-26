@@ -37,12 +37,12 @@
 </WebsiteHeader> -->
 
 <Layout>
-  <div class="w-full h-52 lg:h-80 bg-cover bg_gradient">
+  <!-- <div class="w-full h-52 lg:h-80 bg-cover bg_gradient">
     <div class="w-full lg:w-[90%] font-monst h-full pt-24 px-3 lg:px-0 lg:pt-40 mx-auto">
         <h1 class="text-2xl lg:text-3xl font-bold text-white">{text[0]}</h1>
     </div>
-</div>
-  <div class="p-10 min-h-[600px]">
+</div> -->
+  <div class="p-10 min-h-screen">
     <div class="max-w-screen-md mx-auto px-6 pt-12 sm:pt-24">
       <div class="font-bold text-sm">LATEST ARTICLES</div>
       {#if data.articles.length === 0}

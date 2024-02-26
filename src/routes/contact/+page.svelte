@@ -22,9 +22,9 @@
 
   <main class="w-auto min-h-screen mx-auto">
     <div class="wrapper pt-20">
-      <p class="text-2xl text-sekunder-950 font-semibold">Page About</p>
+      <p class="text-2xl text-sekunder-950 font-semibold">Page Contact</p>
     </div>
-    </main>
+  </main>
 </Layout>
 
 <style>

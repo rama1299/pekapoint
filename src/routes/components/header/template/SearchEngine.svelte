@@ -158,22 +158,22 @@
 
 <div id="search" class="w-full h-40">
     <div class="mx-auto flex justify-center items-center">
-        <div class="w-5/6 lg:w-1/2 h-9 lg:h-12 bg-white rounded-lg relative">
+        <div class="w-5/6 lg:w-1/2 h-9 lg:h-12 border-2 bg-white border-primary-500 rounded-full relative">
             <div class="w-full h-full flex justify-between items-center">
                 <div class="h-full aspect-square flex justify-center items-center rounded-l-lg">
                     <i class='bx bx-search text-xl'></i>
                 </div>
                 <div class="h-full w-full">
-                    <input class="w-full h-full flex justify-start items-center font-medium pl-0 pr-3 border-none bg-transparent focus:border-none focus:ring-0 ring-0" placeholder="Search..." type="text" bind:value={valueInput} on:keydown={handleKeyInput}>
+                    <input class="w-full h-full flex justify-start items-center font-medium pl-0 pr-3 border-none bg-transparent focus:border-none focus:ring-0 ring-0" placeholder="Search product or comparison..." type="text" bind:value={valueInput} on:keydown={handleKeyInput}>
                 </div>
                 {#if valueInput.length > 0}
                      <div class="h-full aspect-square flex justify-center items-center group cursor-pointer" on:click={resetValue}>
-                         <i class='bx bx-x text-2xl text-black group-hover:text-red-500'></i>
+                         <i class='bx bx-x text-2xl text-sekunder-950 group-hover:text-accent-red-600'></i>
                      </div>
                 {/if}
             </div>
             {#if valueInput.length > 0 && dataFilter.length > 0}
-                 <div class="w-full max-h-60 lg:max-h-80 bg-white overflow-auto lg:overflow-hidden snap-y snap-mandatory rounded-lg absolute top-11 lg:top-14 left-0"
+                 <div class="w-full max-h-60 lg:max-h-80 bg-white overflow-auto lg:overflow-hidden snap-y snap-mandatory rounded-lg absolute top-11 lg:top-12 left-0"
                  tabindex="0"
                  bind:this={containerScroll}>
                      {#each dataFilter as item, i}
@@ -184,8 +184,8 @@
                          >
                              <p class="w-full h-full truncate flex items-center">{item.title}</p>
                              <div class="h-full aspect-square group cursor-pointer flex justify-end items-center" on:click={addCompare(item.title)}>
-                                <div class="h-6 aspect-square flex justify-center items-center rounded-md border-2 border-sky-500 group-hover:bg-sky-500">
-                                    <i class='bx bx-plus text-xl text-sky-500 group-hover:text-white' ></i>
+                                <div class="h-6 aspect-square flex justify-center items-center rounded-md border-2 border-sekunder-950 group-hover:bg-primary-500">
+                                    <i class='bx bx-plus text-xl text-sekunder-950'></i>
                                 </div>
                              </div>
                          </div>
@@ -196,16 +196,16 @@
                 <div class="w-full mt-2 space-y-2">
                     <div class="w-full flex justify-start items-center gap-2 flex-wrap">
                         {#each selectedOptionCompare as title, i}
-                            <div class="max-w-[208px] border h-8 flex justify-between gap-2 pr-1 pl-2 items-center rounded-md bg-white/20">
-                                <p class="w-full truncate text-white align-middle text-sm">{title}</p>
+                            <div class="max-w-[208px] border h-8 flex justify-between gap-2 pr-1 pl-2 items-center rounded-md bg-primary-500/60">
+                                <p class="w-full truncate text-sekunder-950 align-middle text-sm">{title}</p>
                                 <div on:click={() => {removeCompareSelected(title)}}>
-                                    <i class='bx bx-x text-xl text-white hover:text-red-500 cursor-pointer'></i>
+                                    <i class='bx bx-x text-xl text-sekunder-950 hover:text-accent-red-600 cursor-pointer'></i>
                                 </div>
                             </div>
                         {/each}
                     </div>
                     <div class="w-full flex justify-center items-center">
-                        <div class="h-9 w-36 bg-sky-500 rounded-lg flex justify-center items-center gap-2 text-white font-medium border-2 border-sky-500 hover:bg-white hover:text-sky-500 cursor-pointer duration-100"
+                        <div class="h-9 w-36 bg-sekunder-950 rounded-lg flex justify-center items-center gap-2 text-white font-medium hover:bg-primary-500 hover:text-sekunder-950 cursor-pointer duration-100"
                         on:click={handleCompare}>
                             <p>Compare</p>
                             <p>{`(${selectedOptionCompare.length}/4)`}</p>

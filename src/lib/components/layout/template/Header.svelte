@@ -200,267 +200,282 @@
 
 <svelte:window bind:scrollY={y} />
 
-
-<!-- <nav class="w-full z-50 top-0 {isDetailProductPage ? 'bg-[#0A1831]' : y > 1 ? 'bg-[#0A1831]' : 'bg-transparent'} duration-200 ease-out fixed">
-    <div class="w-full lg:w-[90%] mx-auto ">
-        <div class="flex w-full justify-between items-center font-monst text-white">
-            <div class="w-full lg:w-1/2 flex justify-between lg:justify-start items-center lg:gap-8 lg:px-0 lg:py-0 gap-3 py-2 px-2">
-                <div class="flex justify-start gap-1 items-center cursor-pointer">
-                    <i class='bx bx-{toggleMenu ? 'x rotate-180 ' : 'menu -rotate-180'} duration-300 ease-in-out text-3xl lg:hidden ' on:click={handleMenu}></i>
-                    <h1 class=" text-2xl md:text-3xl font-bold italic" on:click={() => {goto(`/`)}}>{brand}</h1>
-                </div>
-                <div id="search" class="w-full flex justify-end lg:justify-start gap-1 items-center">
-                    {#if isProductPage}
-                    <div class="max-w-80 flex justify-between items-center h-8 lg:h-10 bg-white/20 text-white relative">
-                        <div class="h-full aspect-square flex justify-center items-center rounded-l-lg">
-                            <i class='bx bx-search text-xl'></i>
-                        </div>
-                        <div class="h-full w-full">
-                            <input class="w-full h-full flex justify-start items-center font-medium p-0 border-none bg-transparent focus:border-none focus:ring-0 ring-0" placeholder="Search..." type="text" bind:value={valueInput} on:keydown={handleKeyInput}>
-                        </div>
-                        <div class="h-full w-8">
-                            {#if valueInput.length > 0}
-                                 <div class="h-full flex justify-center items-center group cursor-pointer" on:click={resetValue}>
-                                     <i class='bx bx-x text-2xl group-hover:text-red-500'></i>
+{#if $page.route.id == '/'}
+     <nav class="w-full z-50 top-0 {isDetailProductPage ? 'bg-primary-500' : y > 1 ? 'bg-primary-500' : 'bg-transparent'} duration-200 ease-out hidden lg:flex fixed">
+         <div class="wrapper mx-auto ">
+             <div class="flex w-full justify-between items-center text-sekunder-950">
+                 <div class="w-full lg:w-1/3 flex justify-between lg:justify-start items-center lg:gap-8 gap-3">
+                     <div class="flex justify-start gap-1 items-center cursor-pointer">
+                         <i class='bx bx-{toggleMenu ? 'x rotate-180 ' : 'menu -rotate-180'} duration-300 ease-in-out text-3xl lg:hidden ' on:click={handleMenu}></i>
+                         <img src={ y > 1 ?"/pekapoint.png" : "/pekapoint-yellow.png"} alt="" class="w-52">
+                         <!-- <h1 class=" text-2xl md:text-3xl font-bold italic" on:click={() => {goto(`/`)}}>{brand}</h1> -->
+                     </div>
+                     <div id="search" class="w-full flex justify-end lg:justify-start gap-1 items-center">
+                         {#if isProductPage}
+                         <div class="max-w-80 flex justify-between items-center h-8 lg:h-10 bg-white/20 text-sekunder-950 relative">
+                             <div class="h-full aspect-square flex justify-center items-center rounded-l-lg">
+                                 <i class='bx bx-search text-xl'></i>
+                             </div>
+                             <div class="h-full w-full">
+                                 <input class="w-full h-full flex justify-start items-center font-medium p-0 border-none bg-transparent focus:border-none focus:ring-0 ring-0" placeholder="Search..." type="text" bind:value={valueInput} on:keydown={handleKeyInput}>
+                             </div>
+                             <div class="h-full w-8">
+                                 {#if valueInput.length > 0}
+                                      <div class="h-full flex justify-center items-center group cursor-pointer" on:click={resetValue}>
+                                          <i class='bx bx-x text-2xl group-hover:text-red-500'></i>
+                                      </div>
+                                 {/if}
+                             </div>
+                             {#if valueInput.length > 0 && dataFilter.length > 0}
+                                 <div class="w-full max-h-48 lg:max-h-80 bg-white overflow-auto lg:overflow-hidden snap-y snap-mandatory rounded-lg absolute top-11 lg:top-[60px] shadow-lg left-0"
+                                 tabindex="0"
+                                 bind:this={containerScroll}>
+                                     {#each dataFilter as item, i}
+                                         <div class="{selectedOptionIndex == i ? 'bg-gray-200' : ''} w-full h-8 lg:h-10 border hover:bg-gray-200 flex justify-between items-center px-3 snap-start"
+                                         tabindex="0"
+                                         on:click={() => {handleSelect(item.title)}}
+                                         id="idOption{i}"
+                                         >
+                                             <p class="w-full h-full truncate flex items-center text-black">{item.title}</p>
+                                         </div>
+                                     {/each}
                                  </div>
-                            {/if}
-                        </div>
-                        {#if valueInput.length > 0 && dataFilter.length > 0}
-                            <div class="w-full max-h-48 lg:max-h-80 bg-white overflow-auto lg:overflow-hidden snap-y snap-mandatory rounded-lg absolute top-11 lg:top-[60px] shadow-lg left-0"
-                            tabindex="0"
-                            bind:this={containerScroll}>
-                                {#each dataFilter as item, i}
-                                    <div class="{selectedOptionIndex == i ? 'bg-gray-200' : ''} w-full h-8 lg:h-10 border hover:bg-gray-200 flex justify-between items-center px-3 snap-start"
-                                    tabindex="0"
-                                    on:click={() => {handleSelect(item.title)}}
-                                    id="idOption{i}"
-                                    >
-                                        <p class="w-full h-full truncate flex items-center text-black">{item.title}</p>
-                                    </div>
-                                {/each}
-                            </div>
-                        {/if}
-                    </div>
-                    
-                    <div class="w-auto" on:click={handleToggleFilterMobile}>
-                        <i class='bx bx-filter-alt text-2xl lg:hidden' ></i>
-                    </div>
-                    {/if}
-                </div>
-            </div>
-            <div class="w-1/2 lg:flex justify-between font-medium text-white items-center hidden text-md">
-                <div class="w-full flex justify-between items-center capitalize text">
-                    <a href="/" class="hover:text-sky-500 duration-200 ease-in-out">{text[0]}</a>
-                    <a href="/product" class="hover:text-sky-500 duration-200 ease-in-out">{text[1]}</a>
-                    <a href="/compare" class="hover:text-sky-500 duration-200 ease-in-out">{text[2]}</a>
-                    <a href="/blog" class="hover:text-sky-500 duration-200 ease-in-out">{text[3]}</a>
-                    <a href="/about" class="hover:text-sky-500 duration-200 ease-in-out">{text[4]}</a>
+                             {/if}
+                         </div>
+                         
+                         <div class="w-auto" on:click={handleToggleFilterMobile}>
+                             <i class='bx bx-filter-alt text-2xl lg:hidden' ></i>
+                         </div>
+                         {/if}
+                     </div>
+                 </div>
+                 <div class="w-2/3 lg:flex justify-between font-semibold text-sekunder-950 items-center hidden text-md">
+                     <div class="w-full flex justify-between items-center capitalize text">
+                         <a href="/" class="text-sekunder-950 { y > 1 ?"hover:text-accent-red-600" : "hover:text-primary-500"}">{text[0]}</a>
+                         <a href="/product" class="text-sekunder-950 { y > 1 ?"hover:text-accent-red-600" : "hover:text-primary-500"}">{text[1]}</a>
+                         <a href="/compare" class="text-sekunder-950 { y > 1 ?"hover:text-accent-red-600" : "hover:text-primary-500"}">{text[2]}</a>
+                         <a href="/blog" class="text-sekunder-950 { y > 1 ?"hover:text-accent-red-600" : "hover:text-primary-500"}">{text[3]}</a>
+                         <a href="/about" class="text-sekunder-950 { y > 1 ?"hover:text-accent-red-600" : "hover:text-primary-500"}">{text[4]}</a>
+                         <a href="/contact" class="text-sekunder-950 { y > 1 ?"hover:text-accent-red-600" : "hover:text-primary-500"}">Contact Us</a>
+     
+                         <div class="flex justify-center items-center relative" on:mouseleave={() => {toggleDropdown = false}} on:mouseenter={() => {toggleDropdown = true}}>
+                             <button class="flex justify-center items-center { y > 1 ?"hover:text-accent-red-600" : "hover:text-primary-500"} h-14 uppercase">
+                                 {languageTitle}
+                                 <i class='bx bx-chevron-{toggleDropdown ? 'up' : 'down'} text-lg' ></i>
+                             </button>
+                                 <div class="absolute top-14 right-0 {toggleDropdown ? 'show' : 'dropdown_hidden'} ">
+                                     <div class="w-auto h-auto overflow-hidden bg-white shadow-lg z-50 duration-300 ease-in transition">
+                                         <div class="w-full h-10 hover:bg-sekunder-50 flex justify-end items-center px-2 group cursor-pointer" on:click={() => {handleLanguage('id')}}>
+                                             <p class="text-sekunder-950">Indonesia</p>
+                                         </div>
+                                         <div class="w-full h-10 hover:bg-sekunder-50 flex justify-end items-center px-2 group cursor-pointer" on:click={() => {handleLanguage('en')}}>
+                                             <a href="" class="text-sekunder-950">English</a>
+                                         </div>
+                                     </div>
+                                 </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <!-- <div class="w-full pb-5 h-auto absolute {toggleMenu ? 'show' : 'dropdown_hidden'}">
+             <div class="container mx-auto px-3">
+                 <div class="w-full h-auto max-h-96 overflow-auto rounded-lg bg-white border-t-4 border-[#0A1831] shadow-lg ">
+                     <div class="flex flex-col w-full h-auto capitalize font-semibold gap-5 pt-5 px-5">
+                         <a href="/" class="hover:text-sky-500">{text[0]}</a>
+                         <a href="/product" class="hover:text-sky-500">{text[1]}</a>
+                         <a href="/compare" class="hover:text-sky-500">{text[2]}</a>
+                         <a href="/blog" class="hover:text-sky-500">{text[3]}</a>
+                         <a href="/about" class="hover:text-sky-500">{text[4]}</a>
+                     </div>
+                     <div class="flex flex-col w-full h-auto capitalize font-semibold gap-5 p-5">
+                         <button class="w-full h-full flex justify-between" on:click={() => { toggleDropdown = !toggleDropdown}}>
+                             <p>Engish</p>
+                             <i class='bx bx-chevron-{toggleDropdown ? 'up' : 'down'} text-lg' ></i>
+                         </button>
+                         <div class="flex flex-col w-full h-auto capitalize font-semibold gap-5 px-7 {toggleDropdown ? '' : 'hidden'}">
+                             <div on:click={() => {handleLanguage('id')}}>
+                                 <p class="hover:text-sky-500" >Indonesia</p>
+                             </div>
+                             <div on:click={() => {handleLanguage('en')}}>
+                                 <p class="hover:text-sky-500">English</p>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div> -->
+     </nav>
+{/if}
 
-                    <div class="flex justify-center items-center relative" on:mouseleave={() => {toggleDropdown = false}} on:mouseenter={() => {toggleDropdown = true}}>
-                        <button class="flex justify-center items-center hover:text-sky-500 h-16 uppercase">
-                            {languageTitle}
-                            <i class='bx bx-chevron-{toggleDropdown ? 'up' : 'down'} text-lg' ></i>
-                        </button>
-                            <div class="absolute top-16 right-0 {toggleDropdown ? 'show' : 'dropdown_hidden'} ">
-                                <div class="w-auto h-auto rounded-b-lg rounded-l-lg overflow-hidden bg-white shadow-lg border-t-[#0A1831] border-t-4 z-50 duration-300 ease-in transition">
-                                    <div class="w-full h-8 border-b flex justify-end items-center px-2 group cursor-pointer" on:click={() => {handleLanguage('id')}}>
-                                        <p class="text-black group-hover:text-sky-500">Indonesia</p>
-                                    </div>
-                                    <div class="w-full h-8 border-b flex justify-end items-center px-2 group cursor-pointer" on:click={() => {handleLanguage('en')}}>
-                                        <a href="" class="text-black group-hover:text-sky-500">English</a>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="w-full pb-5 h-auto absolute {toggleMenu ? 'show' : 'dropdown_hidden'}">
-        <div class="container mx-auto px-3">
-            <div class="w-full h-auto max-h-96 overflow-auto rounded-lg bg-white border-t-4 border-[#0A1831] shadow-lg ">
-                <div class="flex flex-col w-full h-auto capitalize font-semibold gap-5 pt-5 px-5">
-                    <a href="/" class="hover:text-sky-500">{text[0]}</a>
-                    <a href="/product" class="hover:text-sky-500">{text[1]}</a>
-                    <a href="/compare" class="hover:text-sky-500">{text[2]}</a>
-                    <a href="/blog" class="hover:text-sky-500">{text[3]}</a>
-                    <a href="/about" class="hover:text-sky-500">{text[4]}</a>
-                </div>
-                <div class="flex flex-col w-full h-auto capitalize font-semibold gap-5 p-5">
-                    <button class="w-full h-full flex justify-between" on:click={() => { toggleDropdown = !toggleDropdown}}>
-                        <p>Engish</p>
-                        <i class='bx bx-chevron-{toggleDropdown ? 'up' : 'down'} text-lg' ></i>
-                    </button>
-                    <div class="flex flex-col w-full h-auto capitalize font-semibold gap-5 px-7 {toggleDropdown ? '' : 'hidden'}">
-                        <div on:click={() => {handleLanguage('id')}}>
-                            <p class="hover:text-sky-500" >Indonesia</p>
-                        </div>
-                        <div on:click={() => {handleLanguage('en')}}>
-                            <p class="hover:text-sky-500">English</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</nav> -->
-<nav class="w-full bg-white hidden lg:flex">
-    <div class="w-full">
-        <div class="w-full">
-            <div class="wrapper mx-auto flex justify-end items-center text-sm gap-5 py-1">
-                <div class="w-full flex justify-between items-center relative">
-                    <div>
-                        <div class="flex justify-center items-center gap-1 cursor-pointer">
-                            <i class='bx bx-phone text-xl text-primary-500'></i>
-                            <div class="flex justify-center items-center gap-1">
-                                <p>Support</p>
-                                <p class="font-semibold">(+62)856 9529 4245</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex justify-center items-center gap-3 divide-x-2 divide-sekunder-200 font-medium">
-                        <div>
-                            <div class="relative">
-                                <div class="flex justify-center items-center gap-1 cursor-pointer" on:click={() => {toggleDropdown = !toggleDropdown}}>
-                                    <div class="w-5 h-2 bg-red-600"></div>
-                                    <p>Indonesia</p>
-                                    <i class='bx bx-chevron-down text-xl'></i>
-                                </div>
-                                <div class="absolute border top-8 right-0 {toggleDropdown ? 'show' : 'dropdown_hidden'}">
-                                    <div class="bg-white shadow-lg">
-                                        <p class="h-8 w-24 flex justify-center items-center hover:bg-sekunder-200 cursor-pointer" on:click={() => {handleLanguage('id')}}>Indonesia</p>
-                                        <p class="h-8 w-24 flex justify-center items-center hover:bg-sekunder-200 cursor-pointer" on:click={() => {handleLanguage('en')}}>English</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="relative">
-                                <div class="flex justify-center items-center gap-1 pl-3 cursor-pointer">
-                                    <p class="">$ USD</p>
-                                    <i class='bx bx-chevron-down text-xl'></i>
-                                </div>
-                            </div>
-                            <!-- <div class="absolute border top-8 right-0">
-                                <div class="bg-white shadow-lg">
-                                    <p class="h-8 w-20 flex justify-center items-center">USD</p>
-                                    <p class="h-8 w-20 flex justify-center items-center">EUR</p>
-                                    <p class="h-8 w-20 flex justify-center items-center">IDR</p>
-                                </div>
-                            </div> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="w-full border-t bg-white">
-            <div class="wrapper mx-auto">
-                <div class="w-full flex justify-between items-center py-7">
-                    <div class="w-[25%] flex justify-start items-center">
-                        <p class="text-4xl font-bold italic text-sekunder-950 cursor-pointer" on:click={() => {goto(`/`)}}>Pekapoint.</p>
-                    </div>
-                    <div class="w-[50%] relative">
-                        <div class="w-full flex justify-center h-11 bg-white rounded-full overflow-hidden border-2 border-primary-500">
-                            <div id="search" class="w-[60%] h-full flex justify-center items-center font-medium text-sekunder-950">
-                                <input type="text" class="w-full h-full border-none bg-transparent focus:ring-0 pl-5 placeholder-text-sekunder-950" placeholder="Search for product..." bind:value={valueInput} on:keydown={handleKeyInput}>
-                            </div>
-                            <div class="w-[30%] h-full flex justify-center items-center gap-5 cursor-pointer" on:click={() => {toggleCategorySearch = !toggleCategorySearch}}>
-                                <p>All Brand</p>
-                                <i class='bx bxs-down-arrow text-xs'></i>
-                            </div>
-                            <div class="w-[10%] h-full flex justify-center items-center bg-primary-500 active:bg-primary-700 cursor-pointer duration-100" on:click={handleEnter}>
-                                <i class='bx bx-search text-white text-xl'></i>
-                            </div>
-                        </div>
-
-                        {#if valueInput.length > 0 && dataFilter.length > 0}
-                            <div class="w-[60%] z-10 border border-sekunder-300 divide-y divide-sekunder-300 max-h-48 lg:max-h-80 bg-white overflow-auto lg:overflow-hidden snap-y snap-mandatory rounded-lg absolute top-11 shadow-lg left-0"
-                            tabindex="0"
-                            bind:this={containerScroll}>
-                                {#each dataFilter as item, i}
-                                    <div class="{selectedOptionIndex == i ? 'bg-sekunder-100' : ''} w-full h-8 lg:h-10 hover:bg-sekunder-100 flex justify-between items-center px-3 snap-start"
-                                    tabindex="0"
-                                    on:click={() => {handleSelect(item.title)}}
-                                    id="idOption{i}"
-                                    >
-                                        <p class="w-full h-full truncate flex items-center text-sekunder-950">{item.title}</p>
-                                    </div>
-                                {/each}
-                            </div>
-                        {/if}
-
-                        {#if toggleCategorySearch}
-                            <div class="w-[30%] absolute top-11 bg-white right-[10%] z-10 border rounded-lg border-sekunder-300 overflow-hidden">
-                                <div class="w-full h-10 flex justify-start items-center px-3 cursor-pointer hover:bg-sekunder-100" on:click={() => {toggleCategorySearch = false}}>
-                                    <p>All Category</p>
-                                </div>
-                            </div>
-                        {/if}
-
-                    </div>
-                    <div class="w-[25%] flex justify-end items-center gap-5 text-2xl">
-                        <div class="flex justify-center items-center group cursor-pointer">
-                            <i class='bx bx-git-compare text-sekunder-950 group-hover:text-accent-red-600 group-active:text-accent-red-700 duration-100' on:click={() => {goto(`/compare`)}}></i>
-                            <p class="text-sm group-hover:text-accent-red-600 group-active:text-accent-red-700 duration-100">Compare</p>
-                        </div>
-                        <div class="flex justify-center items-center group cursor-pointer">
-                            <i class='bx bx-user text-sekunder-950 group-hover:text-accent-red-600 group-active:text-accent-red-700 duration-100'></i>
-                            <p class="text-sm group-hover:text-accent-red-600 group-active:text-accent-red-700 duration-100">My Account</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- border-t-2 border-b-2 border-primary-500 -->
-        <div class="w-full bg-primary-500">
-            <div class="wrapper mx-auto">
-                <div class="w-full flex justify-between items-center h-12">
-                    <div id="category" class="relative">
-                        <div class="flex justify-center items-center cursor-pointer" on:click={() => {toggleCategory = !toggleCategory}}>
-                            <i class='bx bx-menu text-4xl text-sekunder-950'></i>
-                        </div>
-                        {#if toggleCategory}
-                             <div class="w-52 bg-white absolute top-[46px] left-0 border-r-2 border-l-2 rounded-b-lg overflow-hidden border-b-2 border-primary-500 z-10">
-                                 <div class="w-full h-10 flex justify-start items-center px-3 cursor-pointer hover:bg-sekunder-100" on:click={() => {toggleCategory = false}}>
-                                     <p>Smarphone</p>
+{#if $page.route.id != '/'}
+     <nav class="w-full bg-white hidden lg:flex">
+         <div class="w-full">
+             <div class="w-full">
+                 <div class="wrapper mx-auto flex justify-end items-center text-sm gap-5 py-1">
+                     <div class="w-full flex justify-between items-center relative">
+                         <div>
+                             <div class="flex justify-center items-center gap-1 cursor-pointer">
+                                 <i class='bx bx-phone text-xl text-primary-500'></i>
+                                 <div class="flex justify-center items-center gap-1">
+                                     <p>Support</p>
+                                     <p class="font-semibold">(+62)856 9529 4245</p>
                                  </div>
                              </div>
-                        {/if}
-                    </div>
-                    <div class="flex justify-center items-center gap-10 font-bold text-sekunder-950">
-                        <a class="h-10 flex items-center cursor-pointer hover:text-accent-red-600 active:text-accent-red-700 duration-100 {route == '/' ? 'text-accent-red-600' : ''}" href="/">Home</a>
-                        <a class="h-10 flex items-center cursor-pointer hover:text-accent-red-600 active:text-accent-red-700 duration-100 {route.includes('product') ? 'text-accent-red-600' : ''}" href="/product">Product</a>
-                        <a class="h-10 flex items-center cursor-pointer hover:text-accent-red-600 active:text-accent-red-700 duration-100 {route.includes('compare') ? 'text-accent-red-600' : ''}" href="/compare">Compare</a>
-                        <a class="h-10 flex items-center cursor-pointer hover:text-accent-red-600 active:text-accent-red-700 duration-100 {route.includes('blog') ? 'text-accent-red-600' : ''}" href="/blog">Blog</a>
-                        <p class="h-10 flex items-center cursor-pointer hover:text-accent-red-600 active:text-accent-red-700 duration-100 {route.includes('about') ? 'text-accent-red-600' : ''}" href="/about">About Us</p>
-                    </div>
-                    <div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</nav>
+                         </div>
+                         <div class="flex justify-center items-center gap-3 divide-x-2 divide-sekunder-200 font-medium">
+                             <div>
+                                 <div class="relative">
+                                     <div class="flex justify-center items-center gap-1 cursor-pointer" on:click={() => {toggleDropdown = !toggleDropdown}}>
+                                         <div class="w-5 h-2 bg-red-600"></div>
+                                         <p>Indonesia</p>
+                                         <i class='bx bx-chevron-down text-xl'></i>
+                                     </div>
+                                     <div class="absolute border top-8 right-0 {toggleDropdown ? 'show' : 'dropdown_hidden'}">
+                                         <div class="bg-white shadow-lg">
+                                             <p class="h-8 w-24 flex justify-center items-center hover:bg-sekunder-200 cursor-pointer" on:click={() => {handleLanguage('id')}}>Indonesia</p>
+                                             <p class="h-8 w-24 flex justify-center items-center hover:bg-sekunder-200 cursor-pointer" on:click={() => {handleLanguage('en')}}>English</p>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div>
+                                 <div class="relative">
+                                     <div class="flex justify-center items-center gap-1 pl-3 cursor-pointer">
+                                         <p class="">$ USD</p>
+                                         <i class='bx bx-chevron-down text-xl'></i>
+                                     </div>
+                                 </div>
+                                 <!-- <div class="absolute border top-8 right-0">
+                                     <div class="bg-white shadow-lg">
+                                         <p class="h-8 w-20 flex justify-center items-center">USD</p>
+                                         <p class="h-8 w-20 flex justify-center items-center">EUR</p>
+                                         <p class="h-8 w-20 flex justify-center items-center">IDR</p>
+                                     </div>
+                                 </div> -->
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+             <div class="w-full border-t bg-white">
+                 <div class="wrapper mx-auto">
+                     <div class="w-full flex justify-between items-center py-7">
+                         <div class="w-[25%] flex justify-start items-center">
+                             <img src="/pekapoint-yellow.png" alt="" class="w-40">
+                             <!-- <p class="text-4xl font-bold italic text-sekunder-950 cursor-pointer" on:click={() => {goto(`/`)}}>Pekapoint.</p> -->
+                         </div>
+                         <div class="w-[50%] relative">
+                             <div class="w-full flex justify-center h-11 bg-white rounded-full overflow-hidden border-2 border-primary-500">
+                                 <div id="search" class="w-[60%] h-full flex justify-center items-center font-medium text-sekunder-950">
+                                     <input type="text" class="w-full h-full border-none bg-transparent focus:ring-0 pl-5 placeholder-text-sekunder-950" placeholder="Search for product..." bind:value={valueInput} on:keydown={handleKeyInput}>
+                                 </div>
+                                 <div class="w-[30%] h-full flex justify-center items-center gap-5 cursor-pointer" on:click={() => {toggleCategorySearch = !toggleCategorySearch}}>
+                                     <p>All Brand</p>
+                                     <i class='bx bxs-down-arrow text-xs'></i>
+                                 </div>
+                                 <div class="w-[10%] h-full flex justify-center items-center bg-primary-500 active:bg-primary-700 cursor-pointer duration-100" on:click={handleEnter}>
+                                     <i class='bx bx-search text-white text-xl'></i>
+                                 </div>
+                             </div>
+     
+                             {#if valueInput.length > 0 && dataFilter.length > 0}
+                                 <div class="w-[60%] z-10 border border-sekunder-300 divide-y divide-sekunder-300 max-h-48 lg:max-h-80 bg-white overflow-auto lg:overflow-hidden snap-y snap-mandatory rounded-lg absolute top-11 shadow-lg left-0"
+                                 tabindex="0"
+                                 bind:this={containerScroll}>
+                                     {#each dataFilter as item, i}
+                                         <div class="{selectedOptionIndex == i ? 'bg-sekunder-100' : ''} w-full h-8 lg:h-10 hover:bg-sekunder-100 flex justify-between items-center px-3 snap-start"
+                                         tabindex="0"
+                                         on:click={() => {handleSelect(item.title)}}
+                                         id="idOption{i}"
+                                         >
+                                             <p class="w-full h-full truncate flex items-center text-sekunder-950">{item.title}</p>
+                                         </div>
+                                     {/each}
+                                 </div>
+                             {/if}
+     
+                             {#if toggleCategorySearch}
+                                 <div class="w-[30%] absolute top-11 bg-white right-[10%] z-10 border rounded-lg border-sekunder-300 overflow-hidden">
+                                     <div class="w-full h-10 flex justify-start items-center px-3 cursor-pointer hover:bg-sekunder-100" on:click={() => {toggleCategorySearch = false}}>
+                                         <p>All Category</p>
+                                     </div>
+                                 </div>
+                             {/if}
+     
+                         </div>
+                         <div class="w-[25%] flex justify-end items-center gap-5 text-2xl">
+                             <div class="flex justify-center items-center group cursor-pointer gap-2" on:click={() => {goto(`/compare`)}}>
+                                 <i class='bx bx-git-compare text-sekunder-950 group-hover:text-accent-red-600 group-active:text-accent-red-700 duration-100'></i>
+                                 <p class="text-sm group-hover:text-accent-red-600 group-active:text-accent-red-700 duration-100">Compare</p>
+                             </div>
+                             <div class="flex justify-center items-center group cursor-pointer  gap-2">
+                                 <i class='bx bx-user text-sekunder-950 group-hover:text-accent-red-600 group-active:text-accent-red-700 duration-100'></i>
+                                 <p class="text-sm group-hover:text-accent-red-600 group-active:text-accent-red-700 duration-100">My Account</p>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+             <!-- border-t-2 border-b-2 border-primary-500 -->
+             <div class="w-full bg-primary-500">
+                 <div class="wrapper mx-auto">
+                     <div class="w-full flex justify-start gap-10 items-center h-11">
+                         <div id="category" class="relative">
+                             <div class="flex justify-center items-center cursor-pointer" on:click={() => {toggleCategory = !toggleCategory}}>
+                                 <i class='bx bx-menu text-4xl text-sekunder-950'></i>
+                             </div>
+                             {#if toggleCategory}
+                                  <div class="w-52 bg-white absolute top-[46px] left-0 border-r-2 border-l-2 rounded-b-lg overflow-hidden border-b-2 border-primary-500 z-10">
+                                      <div class="w-full h-10 flex justify-start items-center px-3 cursor-pointer hover:bg-sekunder-100" on:click={() => {toggleCategory = false}}>
+                                          <p>Smarphone</p>
+                                      </div>
+                                  </div>
+                             {/if}
+                         </div>
+                         <div class="flex h-full justify-center items-center font-bold text-sekunder-950 text-sm">
+                             <a class="h-full px-10 flex items-center cursor-pointer duration-100 hover:bg-primary-700/50 {route == '/' ? 'bg-primary-700/50' : ''}" href="/">Home</a>
+                             <a class="h-full px-10 flex items-center cursor-pointer duration-100 hover:bg-primary-700/50 {route.includes('product') ? 'bg-primary-700/50' : ''}" href="/product">Product</a>
+                             <a class="h-full px-10 flex items-center cursor-pointer duration-100 hover:bg-primary-700/50 {route.includes('compare') ? 'bg-primary-700/50' : ''}" href="/compare">Compare</a>
+                             <a class="h-full px-10 flex items-center cursor-pointer duration-100 hover:bg-primary-700/50 {route.includes('blog') ? 'bg-primary-700/50' : ''}" href="/blog">Blog</a>
+                             <a class="h-full px-10 flex items-center cursor-pointer duration-100 hover:bg-primary-700/50 {route.includes('about') ? 'bg-primary-700/50' : ''}" href="/about">About Us</a>
+                             <a class="h-full px-10 flex items-center cursor-pointer duration-100 hover:bg-primary-700/50 {route.includes('contact') ? 'bg-primary-700/50' : ''}" href="/contact">Contact Us</a>
+                       </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </nav>
+{/if}
 
-<!-- <nav class="w-full flex lg:hidden">
-    <div class="wrapper h-14 bg-sekunder-950 text-white flex justify-between items-center">
-        <div class="h-full flex justify-start items-center gap-5 text-2xl">
-            <div class="h-full aspect-square flex justify-center items-center bg-primary-500">
-                <i class='bx bx-menu'></i>
+<nav class="w-full flex lg:hidden fixed top-0 z-10">
+    <div class="wrapper h-12 bg-primary-500 text-white flex justify-between items-center">
+        <div class="h-full flex justify-start items-center gap-5 text-xl">
+            <div class="flex justify-center items-center">
+                <i class='bx bx-menu text-4xl'></i>
             </div>
             <div class="h-full flex justify-center items-center">
-                <p class="font-bold italic">Pekapoint.</p>
+                <img src="/pekapoint.png" alt="" class="h-8">
             </div>
         </div>
         <div class="flex h-full justify-center items-center text-2xl gap-5">
             <div class=" flex justify-center items-center group">
-                <i class='bx bx-search active:text-primary-700'></i>
+                <i class='bx bx-search active:text-primary-700 text-2xl'></i>
             </div>
             <div class=" flex justify-center items-center group">
-                <i class='bx bx-user active:text-primary-700'></i>
+                <i class='bx bx-user active:text-primary-700 text-2xl'></i>
+            </div>
+            <div class=" flex justify-center items-center group">
+                <i class='bx bx-filter-alt active:text-primary-700 text-2xl'></i>
             </div>
         </div>
     </div>
-</nav> -->
+    <!-- <div class="w-full bg-white p-5 absolute z-10 top-14 shadow-lg">
+        <div class="w-full h-40 border">
+
+        </div>
+    </div> -->
+</nav>
 
 
 <style>

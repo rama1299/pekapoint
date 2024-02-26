@@ -57,7 +57,7 @@ export class ProductUrlRewriteController {
             let placeholders = flatAndUniqueIds.map((_, i) => { return `$${i + 1}`})
 
             const productResponse = await client.query(
-                `SELECT id, feature_image, title, '[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.5\"}]' as affiliate
+                `SELECT id, feature_image, spec_score, title, '[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.5\"}]' as affiliate
                 FROM ${schema}.products
                 WHERE id IN (${placeholders})`,
                 flatAndUniqueIds

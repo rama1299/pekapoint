@@ -271,7 +271,7 @@
    
 </script>
 <!-- dekstop -->
-<div class="space-y-2">
+<!-- <div class="space-y-2">
     <div id="containerFilter" class="w-full hidden lg:flex justify-between items-center h-12">
         <div class="flex items-center gap-5 h-full">
         <p class="font-semibold text-xl">Filter</p>
@@ -286,9 +286,9 @@
                         <i class='bx bx-chevron-{filterToggle.isBrand ? 'up' : 'down'} text-lg'></i>
                     </div>
                 </button>
-            </div>
+            </div> -->
     
-            {#if filterToggle.isBrand}
+            <!-- {#if filterToggle.isBrand}
                 <div id="dropdownBrand" class="w-[500px] h-auto bg-white absolute top-12 left-0 rounded-md border z-10 p-6">
                     <div class="grid grid-cols-3 gap-x-6 gap-y-1 max-h-[310px] overflow-auto">
                         {#each brand as data (data.id)}
@@ -299,16 +299,16 @@
                                  </div>
                              </div>
                         {/each}
-                    </div>
+                    </div> -->
                     <!-- <div class="w-auto flex justify-center gap-4 mt-6">
                         <button class="w-28 h-8 border rounded-lg bg-gray-200 hover:bg-gray-300" on:click={clearAll}>{text[2]}</button>
                         <button class="w-28 h-8 border rounded-lg bg-sky-500 hover:bg-sky-600 text-white" on:click={close}>{text[3]}</button>
                     </div> -->
-                </div>
+                <!-- </div>
             {/if}
-        </div>
+        </div> -->
     
-        <div class="flex justify-start gap-5 h-full items-center font-medium text-black relative">
+        <!-- <div class="flex justify-start gap-5 h-full items-center font-medium text-black relative">
             <div class="h-full" on:keypress={() => {handleToggle('isRam')}} on:click={() => {handleToggle('isRam')}} >
                 <button class="w-36 bg-white h-full border rounded-md flex justify-between items-center px-2">
                     <div>RAM</div>
@@ -343,8 +343,8 @@
             </div>
         </div>
     </div>
-    
-    {#if selectedBrand.length > 0 || selectedRam.length > 0}
+     -->
+    <!-- {#if selectedBrand.length > 0 || selectedRam.length > 0}
         <div class="w-full flex flex-wrap gap-3">
             {#each selectedBrand as brand}
                 <div class="justify-between flex items-center px-3 h-8 lg:h-10 bg-sky-500/50 border-2 gap-5 border-sky-500 font medium text-white rounded-md" on:click={() => {removeBrandTag(brand)}}>
@@ -360,6 +360,44 @@
             {/each}
         </div>
     {/if}
+</div> -->
+
+
+<div class="w-full h-full text-sekunder-950">
+    <div class="h-5/6 overflow-y-auto scroll w-full space-y-4">
+        <div>
+            <div class="w-full space-y-3">
+                <div class="w-full h-auto bg-white rounded-lg p-2 border border-sekunder-300">
+                    <p class="font-semibold">{text[0]}</p>
+                    <div class="max-h-48 w-full overflow-auto scroll space-y-1">
+                        {#each brand as data (data.id)}
+                            <div class="w-full h-auto flex justify-start px-2 text-sm">
+                                <div class="flex justify-center gap-x-2 items-center">
+                                <input class="ring-0 focus:ring-0 rounded-md hover:bg-sekunder-50" type="checkbox" bind:checked={data.selected} id={"checkbox" + data.id} on:change={handleSelect}>
+                                <label for={"checkbox" + data.id}>{data.brand}</label>
+                                </div>
+                            </div>
+                        {/each}
+                    </div>
+                </div>
+                <div class="w-full h-auto bg-white rounded-lg p-2 border border-sekunder-300">
+                    <p class="font-semibold">RAM</p>
+                    <div class="max-h-48 w-full overflow-auto scroll">
+                        {#each listRam as data}
+                            <div class="w-full text-sm h-8 border-b flex justify-start items-center px-2 cursor-pointer hover:bg-sekunder-50 {selectedRam.includes(data) ? 'text-sky-500' : ''}" on:click={() => {handleSelectRam(data)}}>
+                                <p>{data + ' GB'}</p>
+                            </div>
+                        {/each}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="w-full h-1/6 ">
+        <div class="h-full w-full flex justify-center gap-2 items-center">
+            <button class="w-full h-10 border rounded-lg bg-sekunder-950 text-white hover:bg-primary-500 hover:text-sekunder-950 active:bg-primary-600 duration-100" on:click={clearAll}>{text[2]}</button>
+        </div>
+    </div>
 </div>
 
 <!-- mobile -->

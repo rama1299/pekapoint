@@ -46,7 +46,7 @@
 <Layout isDetailProductPage={true} >
     <div class="w-full h-auto bg-white">
       {#if dataProduct != '' && dataSpec != ''}
-        <div class="w-full lg:w-[80%] mx-auto py-20">
+        <div class="w-full lg:w-[80%] mx-auto pb-20">
           <ProductDetail data={dataProduct} spec={dataSpec} variant={dataVariant} dataAds={dataAds}/>
         </div>
       {/if}
