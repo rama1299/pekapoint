@@ -7,6 +7,7 @@
         {
           "product_id": 2,
           "feature_image": "images/xiaomi/14/xiaomi-14-proae9fb789b5279017047aacba7b864f63.jpg",
+          "spec_score": 99,
           "title": "Xiaomi 14 Pro",
           "affiliate": [
             {
@@ -19,7 +20,7 @@
         }
       ],
       "created_at": null,
-      "visitor": 148
+      "visitor": 162
     },
     {
       "id": 120,
@@ -28,6 +29,7 @@
         {
           "product_id": 1,
           "feature_image": "images/xiaomi/14/xiaomi-143a40f7be4334a6d4886b73953e20186e.jpg",
+          "spec_score": 100,
           "title": "Xiaomi 14",
           "affiliate": [
             {
@@ -40,7 +42,7 @@
         }
       ],
       "created_at": null,
-      "visitor": 140
+      "visitor": 141
     },
     {
       "id": 129,
@@ -49,6 +51,7 @@
         {
           "product_id": 4,
           "feature_image": "images/xiaomi/13/xiaomi-13-proaa197f5e7ae648c33e6575288fbc1cce.jpg",
+          "spec_score": 96,
           "title": "Xiaomi 13 Pro",
           "affiliate": [
             {
@@ -61,7 +64,7 @@
         }
       ],
       "created_at": "2024-02-04T22:36:54.454Z",
-      "visitor": 50
+      "visitor": 51
     },
     {
       "id": 123,
@@ -70,6 +73,7 @@
         {
           "product_id": 7,
           "feature_image": "images/xiaomi/12/xiaomi-12-proa40978398f47cd55ba7cd6833aa1ea79.jpg",
+          "spec_score": 88,
           "title": "Xiaomi 12 Pro",
           "affiliate": [
             {
@@ -85,12 +89,35 @@
       "visitor": 41
     },
     {
+      "id": 189,
+      "url": "/product/samsung-galaxy-s22-ultra-qualcomm-snapdragon-8-gen-1",
+      "product": [
+        {
+          "product_id": 5081,
+          "feature_image": "https://images.versus.io/objects/samsung-galaxy-s22-ultra.front.medium.1646341961226.jpg",
+          "spec_score": 92,
+          "title": "Samsung Galaxy S22 Ultra (Qualcomm Snapdragon 8 Gen 1)",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        }
+      ],
+      "created_at": "2024-02-21T09:23:57.824Z",
+      "visitor": 37
+    },
+    {
       "id": 190,
       "url": "/product/samsung-galaxy-s23-ultra",
       "product": [
         {
           "product_id": 5079,
           "feature_image": "images/samsung/galaxy/samsung-galaxy-s23-ultrac1137e5ef328bccdcbbfa94bd8de92c5.jpg",
+          "spec_score": 95,
           "title": "Samsung Galaxy S23 Ultra",
           "affiliate": [
             {
@@ -103,7 +130,7 @@
         }
       ],
       "created_at": "2024-02-22T00:04:00.776Z",
-      "visitor": 23
+      "visitor": 25
     },
     {
       "id": 128,
@@ -112,6 +139,7 @@
         {
           "product_id": 8,
           "feature_image": "images/xiaomi/12/xiaomi-1249d5fd26471cbed9f987bb48519d9cc5.jpg",
+          "spec_score": 90,
           "title": "Xiaomi 12",
           "affiliate": [
             {
@@ -127,33 +155,13 @@
       "visitor": 22
     },
     {
-      "id": 189,
-      "url": "/product/samsung-galaxy-s22-ultra-qualcomm-snapdragon-8-gen-1",
-      "product": [
-        {
-          "product_id": 5081,
-          "feature_image": "https://images.versus.io/objects/samsung-galaxy-s22-ultra.front.medium.1646341961226.jpg",
-          "title": "Samsung Galaxy S22 Ultra (Qualcomm Snapdragon 8 Gen 1)",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        }
-      ],
-      "created_at": "2024-02-21T09:23:57.824Z",
-      "visitor": 21
-    },
-    {
       "id": 180,
       "url": "/product/xiaomi-poco-f5-pro",
       "product": [
         {
           "product_id": 17,
           "feature_image": "https://images.versus.io/objects/xiaomi-poco-f5-pro.front.medium.1683644329611.jpg",
+          "spec_score": 80,
           "title": "Xiaomi Poco F5 Pro",
           "affiliate": [
             {
@@ -166,7 +174,7 @@
         }
       ],
       "created_at": "2024-02-19T08:15:16.863Z",
-      "visitor": 21
+      "visitor": 22
     }
   ],
   [
@@ -177,6 +185,7 @@
         {
           "product_id": 9,
           "feature_image": "images/xiaomi/mi/xiaomi-mi-11-ultraeb72f19c339b2ed5a6cffc5300666be2.jpg",
+          "spec_score": 94,
           "title": "Xiaomi Mi 11 Ultra",
           "affiliate": [
             {
@@ -190,6 +199,7 @@
         {
           "product_id": 11,
           "feature_image": "images/xiaomi/mi/xiaomi-mi-11-pro8db4934db15ac23261cb3b57135ba4f3.jpg",
+          "spec_score": 84,
           "title": "Xiaomi Mi 11 Pro",
           "affiliate": [
             {
@@ -202,7 +212,7 @@
         }
       ],
       "created_at": "2024-02-05T02:11:56.017Z",
-      "visitor": 79
+      "visitor": 92
     },
     {
       "id": 126,
@@ -211,6 +221,7 @@
         {
           "product_id": 4,
           "feature_image": "images/xiaomi/13/xiaomi-13-proaa197f5e7ae648c33e6575288fbc1cce.jpg",
+          "spec_score": 96,
           "title": "Xiaomi 13 Pro",
           "affiliate": [
             {
@@ -224,6 +235,7 @@
         {
           "product_id": 3,
           "feature_image": "images/xiaomi/13/xiaomi-13-ultrafeeff34b21bd09b200a2c2bd01be3463.jpg",
+          "spec_score": 98,
           "title": "Xiaomi 13 Ultra",
           "affiliate": [
             {
@@ -236,7 +248,7 @@
         }
       ],
       "created_at": "2024-02-04T22:25:56.221Z",
-      "visitor": 69
+      "visitor": 73
     },
     {
       "id": 125,
@@ -245,6 +257,7 @@
         {
           "product_id": 2,
           "feature_image": "images/xiaomi/14/xiaomi-14-proae9fb789b5279017047aacba7b864f63.jpg",
+          "spec_score": 99,
           "title": "Xiaomi 14 Pro",
           "affiliate": [
             {
@@ -258,6 +271,7 @@
         {
           "product_id": 3,
           "feature_image": "images/xiaomi/13/xiaomi-13-ultrafeeff34b21bd09b200a2c2bd01be3463.jpg",
+          "spec_score": 98,
           "title": "Xiaomi 13 Ultra",
           "affiliate": [
             {
@@ -270,7 +284,7 @@
         }
       ],
       "created_at": "2024-02-04T22:25:46.823Z",
-      "visitor": 54
+      "visitor": 56
     },
     {
       "id": 130,
@@ -279,6 +293,7 @@
         {
           "product_id": 12,
           "feature_image": "images/xiaomi/12s/xiaomi-12sa29e934bc0b18c1350032f1d0ae22767.jpg",
+          "spec_score": 83,
           "title": "Xiaomi 12S",
           "affiliate": [
             {
@@ -292,6 +307,7 @@
         {
           "product_id": 11,
           "feature_image": "images/xiaomi/mi/xiaomi-mi-11-pro8db4934db15ac23261cb3b57135ba4f3.jpg",
+          "spec_score": 84,
           "title": "Xiaomi Mi 11 Pro",
           "affiliate": [
             {
@@ -304,7 +320,7 @@
         }
       ],
       "created_at": "2024-02-04T22:39:46.263Z",
-      "visitor": 30
+      "visitor": 36
     },
     {
       "id": 145,
@@ -313,6 +329,7 @@
         {
           "product_id": 4,
           "feature_image": "images/xiaomi/13/xiaomi-13-proaa197f5e7ae648c33e6575288fbc1cce.jpg",
+          "spec_score": 96,
           "title": "Xiaomi 13 Pro",
           "affiliate": [
             {
@@ -326,6 +343,7 @@
         {
           "product_id": 3,
           "feature_image": "images/xiaomi/13/xiaomi-13-ultrafeeff34b21bd09b200a2c2bd01be3463.jpg",
+          "spec_score": 98,
           "title": "Xiaomi 13 Ultra",
           "affiliate": [
             {
@@ -338,7 +356,7 @@
         }
       ],
       "created_at": "2024-02-05T06:39:48.940Z",
-      "visitor": 24
+      "visitor": 25
     },
     {
       "id": 127,
@@ -347,6 +365,7 @@
         {
           "product_id": 6,
           "feature_image": "images/xiaomi/12s/xiaomi-12s-ultra23076557ac622abce58622d522f76e2b.jpg",
+          "spec_score": 95,
           "title": "Xiaomi 12S Ultra",
           "affiliate": [
             {
@@ -360,6 +379,7 @@
         {
           "product_id": 9,
           "feature_image": "images/xiaomi/mi/xiaomi-mi-11-ultraeb72f19c339b2ed5a6cffc5300666be2.jpg",
+          "spec_score": 94,
           "title": "Xiaomi Mi 11 Ultra",
           "affiliate": [
             {
@@ -383,6 +403,7 @@
         {
           "product_id": 4,
           "feature_image": "images/xiaomi/13/xiaomi-13-proaa197f5e7ae648c33e6575288fbc1cce.jpg",
+          "spec_score": 96,
           "title": "Xiaomi 13 Pro",
           "affiliate": [
             {
@@ -396,6 +417,7 @@
         {
           "product_id": 3,
           "feature_image": "images/xiaomi/13/xiaomi-13-ultrafeeff34b21bd09b200a2c2bd01be3463.jpg",
+          "spec_score": 98,
           "title": "Xiaomi 13 Ultra",
           "affiliate": [
             {
@@ -408,7 +430,7 @@
         }
       ],
       "created_at": "2024-02-05T06:39:48.940Z",
-      "visitor": 24
+      "visitor": 25
     },
     {
       "id": 138,
@@ -417,6 +439,7 @@
         {
           "product_id": 9,
           "feature_image": "images/xiaomi/mi/xiaomi-mi-11-ultraeb72f19c339b2ed5a6cffc5300666be2.jpg",
+          "spec_score": 94,
           "title": "Xiaomi Mi 11 Ultra",
           "affiliate": [
             {
@@ -430,6 +453,7 @@
         {
           "product_id": 11,
           "feature_image": "images/xiaomi/mi/xiaomi-mi-11-pro8db4934db15ac23261cb3b57135ba4f3.jpg",
+          "spec_score": 84,
           "title": "Xiaomi Mi 11 Pro",
           "affiliate": [
             {
@@ -442,7 +466,7 @@
         }
       ],
       "created_at": "2024-02-05T02:11:56.017Z",
-      "visitor": 79
+      "visitor": 92
     },
     {
       "id": 130,
@@ -451,6 +475,7 @@
         {
           "product_id": 12,
           "feature_image": "images/xiaomi/12s/xiaomi-12sa29e934bc0b18c1350032f1d0ae22767.jpg",
+          "spec_score": 83,
           "title": "Xiaomi 12S",
           "affiliate": [
             {
@@ -464,6 +489,7 @@
         {
           "product_id": 11,
           "feature_image": "images/xiaomi/mi/xiaomi-mi-11-pro8db4934db15ac23261cb3b57135ba4f3.jpg",
+          "spec_score": 84,
           "title": "Xiaomi Mi 11 Pro",
           "affiliate": [
             {
@@ -476,7 +502,7 @@
         }
       ],
       "created_at": "2024-02-04T22:39:46.263Z",
-      "visitor": 30
+      "visitor": 36
     },
     {
       "id": 127,
@@ -485,6 +511,7 @@
         {
           "product_id": 6,
           "feature_image": "images/xiaomi/12s/xiaomi-12s-ultra23076557ac622abce58622d522f76e2b.jpg",
+          "spec_score": 95,
           "title": "Xiaomi 12S Ultra",
           "affiliate": [
             {
@@ -498,6 +525,7 @@
         {
           "product_id": 9,
           "feature_image": "images/xiaomi/mi/xiaomi-mi-11-ultraeb72f19c339b2ed5a6cffc5300666be2.jpg",
+          "spec_score": 94,
           "title": "Xiaomi Mi 11 Ultra",
           "affiliate": [
             {
@@ -519,6 +547,7 @@
         {
           "product_id": 4,
           "feature_image": "images/xiaomi/13/xiaomi-13-proaa197f5e7ae648c33e6575288fbc1cce.jpg",
+          "spec_score": 96,
           "title": "Xiaomi 13 Pro",
           "affiliate": [
             {
@@ -532,6 +561,7 @@
         {
           "product_id": 3,
           "feature_image": "images/xiaomi/13/xiaomi-13-ultrafeeff34b21bd09b200a2c2bd01be3463.jpg",
+          "spec_score": 98,
           "title": "Xiaomi 13 Ultra",
           "affiliate": [
             {
@@ -544,7 +574,7 @@
         }
       ],
       "created_at": "2024-02-04T22:25:56.221Z",
-      "visitor": 69
+      "visitor": 73
     },
     {
       "id": 125,
@@ -553,6 +583,7 @@
         {
           "product_id": 2,
           "feature_image": "images/xiaomi/14/xiaomi-14-proae9fb789b5279017047aacba7b864f63.jpg",
+          "spec_score": 99,
           "title": "Xiaomi 14 Pro",
           "affiliate": [
             {
@@ -566,6 +597,7 @@
         {
           "product_id": 3,
           "feature_image": "images/xiaomi/13/xiaomi-13-ultrafeeff34b21bd09b200a2c2bd01be3463.jpg",
+          "spec_score": 98,
           "title": "Xiaomi 13 Ultra",
           "affiliate": [
             {
@@ -578,7 +610,7 @@
         }
       ],
       "created_at": "2024-02-04T22:25:46.823Z",
-      "visitor": 54
+      "visitor": 56
     }
   ],
   [

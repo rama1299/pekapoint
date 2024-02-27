@@ -41,7 +41,7 @@ export async function updateProductHomeJson() {
             const placeholders = flatAndUniqueIds.map((_, i) => `$${i + 1}`);
 
             const productResponse = await client.query(
-                `SELECT id, feature_image, title, '[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.5\"}]' as affiliate
+                `SELECT id, feature_image, title, spec_score, '[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.5\"}]' as affiliate
                 FROM public.products
                 WHERE id IN (${placeholders})`,
                 flatAndUniqueIds
@@ -62,6 +62,7 @@ export async function updateProductHomeJson() {
                         return {
                             product_id: product.id,
                             feature_image: product.feature_image,
+                            spec_score: product.spec_score,
                             title: product.title,
                             affiliate: JSON.parse(product.affiliate)
                         };
@@ -69,6 +70,7 @@ export async function updateProductHomeJson() {
                         return {
                             product_id: '',
                             feature_image: '',
+                            spec_score: '',
                             title: '',
                             affiliate: []
                         };

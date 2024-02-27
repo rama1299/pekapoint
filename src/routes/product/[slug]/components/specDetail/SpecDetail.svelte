@@ -101,7 +101,7 @@
   </script>
   
   <section id="containerSpec" class="w-full">
-      <div class="w-full mx-auto px-5 lg:px-10 space-y-5">
+      <div class="w-full mx-auto space-y-5">
           <div class="space-y-3">
               <div>
                   <p class="text-2xl font-semibold">{text[0]}</p>
@@ -111,12 +111,12 @@
                       {#each datas as data, index (data.title)}
                           {#each btnTabs as btn, i (btn.name)}
                               {#if data.code.toLocaleLowerCase() == btn.name.toLocaleLowerCase()}
-                                  <div class="bg-white lg:px-8 cursor-pointer w-full h-12 lg:h-[75px] lg:h-20 {btn.active ? 'border-sky-500' : ''} rounded-md flex gap-2 justify-center lg:justify-between items-center text-md font-medium border-2 duration-100 hover:border-sky-500" key={i} on:click={() => {handleShowIndex(index, btn.name)}}>
+                                  <div class="bg-white lg:px-8 cursor-pointer w-full h-12 lg:h-[75px] lg:h-20 {btn.active ? 'border-sekunder-950' : ''} rounded-md flex gap-2 justify-center lg:justify-between items-center text-md font-medium border-2 duration-100 hover:border-sekunder-950" key={i} on:click={() => {handleShowIndex(index, btn.name)}}>
                                       <div class="flex justify-start items-center gap-5">
-                                          <i class="{btn.className} {btn.active ? 'text-sky-500' : ''} text-3xl lg:group-hover:text-sky-500" ></i>
-                                          <p class="hidden lg:block {btn.active ? 'text-sky-500' : ''}">{data.title}</p>
+                                          <i class="{btn.className} {btn.active ? 'text-sekunder-950' : ''} text-3xl lg:group-hover:text-sekunder-950" ></i>
+                                          <p class="hidden lg:block {btn.active ? 'text-sekunder-950' : ''}">{data.title}</p>
                                       </div>
-                                      <i class='bx bx-chevron-right text-3xl hidden lg:block {btn.active ? 'text-sky-500' : ''}' ></i>
+                                      <i class='bx bx-chevron-right text-3xl hidden lg:block {btn.active ? 'text-sekunder-950' : ''}' ></i>
                                   </div>
                               {/if}
                           {/each}

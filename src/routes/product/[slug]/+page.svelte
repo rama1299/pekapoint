@@ -46,12 +46,12 @@
 <Layout isDetailProductPage={true} >
     <div class="w-full h-auto bg-white">
       {#if dataProduct != '' && dataSpec != ''}
-        <div class="w-full lg:w-[80%] mx-auto pb-20">
+        <div class="wrapper mx-auto pb-20">
           <ProductDetail data={dataProduct} spec={dataSpec} variant={dataVariant} dataAds={dataAds}/>
         </div>
       {/if}
     </div>
-    <div class="w-full h-auto bg-gray-100 flex justify-center">
+    <div class="w-full h-auto bg-sekunder-50 flex justify-center">
       {#if dataAds != []}
         {#each dataAds as ads}
           {#if ads.content_position == 'left'}
@@ -64,7 +64,7 @@
         {/each}
       {/if}
       {#if dataSpec != ''}
-      <div class="w-full lg:w-[80%] mx-auto py-20">
+      <div class="wrapper mx-auto py-20">
         <SpecDetail data={dataSpec}/>
       </div>
       {/if}
@@ -81,7 +81,7 @@
       {/if}
     </div>
     <div class="w-full h-auto bg-white">
-      <div class="w-full lg:w-[80%] mx-auto py-20">
+      <div class="wrapper mx-auto py-20">
         <PriceDetail/>
       </div>
     </div>

@@ -1,33 +1,35 @@
 <script>
 	import { goto } from '$app/navigation';
+  import { onMount } from "svelte";
+  import ProgressBar from "./ProgressBar.svelte";
+
     export let data
     $: dataProduct = data.product
+
 </script>
 
 <div>
-    <div class="w-full overflow-hidden bg-white p-5 space-y-2 border-2 rounded-lg">
-        <div class="w-full h-full flex justify-center items-center gap-1 relative group">
+    <div class="w-full overflow-hidden bg-white p-2 border space-y-2 border-sekunder-300 rounded-lg">
+        <div class="w-full h-full flex flex-col justify-between items-center relative group divide-y divide-sekunder-300">
             {#each dataProduct as product, i}
-                <div class="w-1/2 h-full space-y-5">
-                    <div class="w-full aspect-auto h-44 md:h-auto md:aspect-square overflow-hidden flex justify-center items-end group-hover:scale-105 duration-200" on:click={() => {goto(`${data.url}`)}}>
+                <div class="w-full h-full flex justify-start items-center">
+                    <div class="h-24 aspect-square p-1 overflow-hidden flex justify-start items-center group-hover:scale-105 duration-200" on:click={() => {goto(`${data.url}`)}}>
                         {#if product.feature_image.includes('https')}
-                            <img src={`${product.feature_image}`} class="w-auto h-full" alt="">
-                            {:else}
-                            <img src={`/${product.feature_image}`} class="w-auto h-full" alt="">
+                            <img src={`${product.feature_image}`} alt="" class="h-full w-fit">
+                        {:else}
+                            <img src={`/${product.feature_image}`} alt="" class="h-full w-fit">
                         {/if}
                     </div>
-                    <a href={data.url} class="max-w-full max-h-10 font-semibold flex justify-center text-center items-start overflow-hidden leading-5 group-hover:text-sky-500">{product.title}</a>
-                    <!-- <p class="w-full flex font-semibold justify-center text-center">Rp. {product.affiliate[0].price}</p> -->
+                    <div class="w-full h-24 flex flex-col justify-center items-start py-2">
+                        <a href={data.url} class="w-full max-h-10 font-semibold flex justify-start text-start items-end overflow-hidden text-sm leading-5">{product.title}</a>
+                        <p class="w-full flex text-accent-red-600 font-medium justify-start text-start text-sm items-start">Rp. {product.affiliate[0].price}</p>
+                        <div class="w-full h-2">
+                            <ProgressBar score={product.spec_score}></ProgressBar>
+                        </div>
+                    </div>
                 </div>
             {/each}
-            <div class="w-full flex justify-center absolute top-20">
-                <p class="font-semibold group-hover:scale-110 duration-200 ease-in-out group-hover:text-sky-500">VS</p>
-            </div>
+                <p class="w-6 h-6 flex justify-center items-center text-xs font-medium rounded-full border bg-white absolute top-[45%]">VS</p>
         </div>
-        <!-- <div class="w-full flex flex-col justify-center items-center">
-            <p class="max-w-full font font-semibold flex justifi start items-center truncate">{dataProduct[0].title}</p>
-            <p class="w-full font font-semibold flex justify-center items-center">VS</p>
-            <p class="max-w-full font font-semibold flex justifi start items-center truncate">{dataProduct[1].title}</p>
-        </div> -->
     </div>
 </div>

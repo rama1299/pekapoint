@@ -23,8 +23,8 @@
         labels: labels,
         datasets: [
           {
-            backgroundColor: 'rgb(75, 192, 192, 0.5)',
-            borderColor: 'rgb(75, 192, 192)',
+            backgroundColor: 'rgb(254, 215, 0, 0.5)',
+            borderColor: 'rgb(254, 215, 0)',
             data: scores,
           },
         ],

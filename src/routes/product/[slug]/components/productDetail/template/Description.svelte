@@ -105,15 +105,17 @@ import Cookies from "js-cookie";
                     <p class="absolute w-full h-full top-[10px] text-center flex justify-center score font-semibold">{data.spec_score}</p>
                 </div>
             </div>
-            <div>
+            <div class="text-sekunder-950 space-y-2">
                 {#each cleanedDesc as desc}
-                    <p class="text-start font-medium">{desc.title}</p>
-                    <p class="italic">{@html desc.spec}</p>
+                    <div class="leading-5">
+                        <p class="text-start font-semibold">{desc.title}</p>
+                        <p class="italic">{@html desc.spec}</p>
+                    </div>
                 {/each}
             </div>
-            <div class="w-full">
+            <!-- <div class="w-full">
                 <slot/>
-            </div>
+            </div> -->
         </div>
         <div></div>
     </div>

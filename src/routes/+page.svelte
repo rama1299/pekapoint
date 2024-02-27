@@ -32,7 +32,7 @@
 			<Header data={data.dataTitleProduct}></Header>
 			{#each dataAds as ads}
 				{#if ads.content_position == 'top' && ads.page == 'home'}
-					 <div class="w-full lg:w-[70%] mx-auto my-7 flex justify-center items-center h-24">
+					 <div class="wrapper mx-auto my-7 flex justify-center items-center h-24">
 						{@html ads.content}
 					 </div>
 				{/if}
@@ -48,8 +48,8 @@
 						{/if}
 					{/each}
 				{#if data.dataTopProduct.length > 0}
-					<div class="bg-white w-full lg:w-[70%]">
-						<div class="w-full mx-auto">
+					<div class="bg-white w-full py-10">
+						<div class="wrapper mx-auto">
 							<TopProduct data={data.dataTopProduct}/>
 						</div>
 					</div>
@@ -65,13 +65,13 @@
 					{/each}
 			</div>
 				{#if data.dataProductMostView.length > 0}
-					<div class="flex justify-center items-center w-full lg:w-[70%] mx-auto bg-white h-[900px]">
-						<div class="w-full mx-auto">
-							<SliderProductView data={data.dataProductMostView}/>
+					<div class="flex justify-center items-center w-full mx-auto py-10">
+						<div class="wrapper mx-auto">
+							<SliderProductView data={data.dataProductMostView} title={'Product Most View'}/>
 						</div>
 					</div>
 				{/if}
-			<div class="flex justify-center items-center w-full py-10 bg-sky-500 h-[400px] lg:h-[550px]">
+			<!-- <div class="flex justify-center items-center w-full py-10 bg-sky-500 h-[400px] lg:h-[550px]">
 				<div class="container flex px-5 justify-center flex-col items-center gap-10">
 					<di class="text-center font-bold text-2xl lg:text-4xl text-white ">
 						<p>{brand},</p>
@@ -88,18 +88,18 @@
 						</button>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			{#if data.dataComapreMostView.length > 0}
-				 <div class="flex justify-center items-center w-full h-[900px] bg-gray-100">
-					 <div class="w-full lg:w-[70%] mx-auto">
-						 <SlideCompareView data={data.dataComapreMostView}/>
+				 <div class="flex justify-center items-center w-full py-10">
+					 <div class="wrapper mx-auto">
+						 <SlideCompareView data={data.dataComapreMostView} title={'Comparison Most View'}/>
 					 </div>
 				 </div>
 			{/if}
 			{#if data.dataCompareNew.length > 0}
-				 <div class="flex justify-center items-center bg-white w-full h-[900px]">
-					 <div class="w-full lg:w-[70%] mx-auto">
-						 <SliderCompareNew data={data.dataCompareNew}/>
+				 <div class="flex justify-center items-center w-full py-10">
+					 <div class="wrapper mx-auto">
+						 <SliderCompareNew data={data.dataCompareNew} title={'Comparison Latest'}/>
 					 </div>
 				 </div>
 			{/if}

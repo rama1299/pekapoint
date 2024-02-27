@@ -1,4 +1,4 @@
-<div class="w-full border-2 p-3 rounded-lg hover:border-sky-500">
+<div class="w-full border-2 p-3 rounded-lg hover:border-sekunder-950">
     <div class=" grid w-full grid-cols-1 lg:grid-cols-5 gap-3 lg-gap-0">
         <div class="w-full h-full flex justify-between lg:justify-start items-center col-1">
             <div class="flex gap-3 items-center justify-start">
@@ -21,26 +21,26 @@
             </div>
         </div>
         <div class="w-full h-full col-1 lg:col-span-2 flex justify-start items-center gap-3 flex-wrap px-0 lg:px-3">
-            <div class="flex bg-gray-100 items-center px-1 rounded-md gap-1">
+            <div class="flex bg-sekunder-50 items-center px-1 rounded-md gap-1">
                 <i class='bx bx-package'></i>
                 <p>Gratis Ongkir</p>
             </div>
-            <div class="flex bg-gray-100 items-center px-1 rounded-md gap-1">
+            <div class="flex bg-sekunder-50 items-center px-1 rounded-md gap-1">
                 <i class='bx bx-map'></i>
                 <p>Bali</p>
             </div>
-            <div class="flex bg-gray-100 items-center px-1 rounded-md gap-1">
+            <div class="flex bg-sekunder-50 items-center px-1 rounded-md gap-1">
                 <p>Info Selengkapnya</p>
                 <i class='bx bx-info-circle' ></i>
             </div>
         </div>
         <div class="w-full h-full col-1 lg:flex justify-center items-center px-3 hidden">
             <div>
-                <p class="text-xl font-semibold">Rp. 7.000.000</p>
+                <p class="text-xl font-semibold text-accent-red-600">Rp. 7.000.000</p>
             </div>
         </div>
         <div class="w-full h-full col-1 lg:py-2">
-                <button class="w-full h-full py-2 rounded-lg bg-sky-500 text-md font-semibold text-white">Checkout</button>
+                <button class="w-full h-full py-2 rounded-lg bg-sekunder-950 text-md font-semibold border-2 border-sekunder-950 hover:bg-primary-500 hover:text-sekunder-950 duration-100 text-white">Checkout</button>
         </div>
     </div>
 </div>

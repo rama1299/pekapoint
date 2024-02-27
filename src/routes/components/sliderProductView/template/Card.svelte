@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
 	import { goto } from '$app/navigation';
     export let data
     import { onMount } from "svelte";
@@ -11,7 +11,7 @@
         let textTranslate = await Translate.client(text)
         text = textTranslate
     })
-</script>
+</script> -->
 
 <!-- <div>
     <div class="w-full overflow-hidden bg-white shadow-lg p-5 space-y-2 border-2 rounded-lg hover:border-sky-500 duration-100">
@@ -26,7 +26,7 @@
     </div>
 </div> -->
 
-<div class="w-full col-span-1 border-2 rounded-lg p-5 bg-white">
+<!-- <div class="w-full col-span-1 border-2 rounded-lg p-5 bg-white">
     <div class="w-full h-full flex md:flex-col justify-between gap-3 cursor-pointer group">
         <div class="w-full h-32 lg:h-52 flex justify-center" on:click={() => {goto(`${data.url}`)}}>
             {#if dataProduct[0].feature_image.includes('https')}
@@ -58,4 +58,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

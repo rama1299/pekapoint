@@ -54,11 +54,11 @@
 <svelte:window bind:scrollY={windowScroll}/>
 <section class="w-full">
     <div class="w-full bg-white mx-auto space-y-5">
-        <div class=" flex-wrap lg:flex-nowrap lg:flex mx-auto justify-center items-start lg:px-10 gap-5" bind:offsetHeight={sectionDescription}>
+        <div class=" flex-wrap lg:flex-nowrap lg:flex mx-auto justify-center items-start gap-5" bind:offsetHeight={sectionDescription}>
             <div class="w-full lg:w-1/2 lg:sticky top-[120px] static space-y-5">
                 <Image  image={data.images}/>
             </div>
-            <div class="w-full lg:w-1/2 px-5">
+            <div class="w-full lg:w-1/2">
                 <Description data={data} variant={data.variant} on:message={handleMessageDesc}>
                     <div class="flex justify-center items-center text-blue-500 hover:text-blue-600 gap-2 cursor-pointer lg:w-1/2 mx-auto" on:click={showMore}>
                         <p class="font-medium text-sm">{text[0]}</p>
@@ -70,7 +70,7 @@
         {#if dataAds != []}
             {#each dataAds as ads}
                 {#if ads.content_position == 'top'}
-                <div class="w-full px-5 lg:px-10">
+                <div class="w-full">
                     <div class=" w-full h-24 flex justify-center items-center">
                         {@html ads.content}
                     </div>
@@ -78,10 +78,10 @@
                 {/if}
             {/each}
         {/if}
-        <div class=" w-full mx-auto lg:px-10 px-5">
+        <div class=" w-full mx-auto">
             <Affiliate data={dataAffiliate}/>
         </div>
-        <div class="w-full mx-auto lg:px-10 px-5">
+        <div class="w-full mx-auto">
             <SpecSummary data={spec} />
         </div>
     </div>

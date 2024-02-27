@@ -17,14 +17,14 @@
                                   <p class=" font-medium">{item.title}</p>
                                   <i class='bx bx-check text-green-400 text-3xl'></i>
                               </div>
-                              <p class="text-sm text-gray-500 font-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                              <p class="text-sm text-sekunder-950 font-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
                                   molestiae quas vel sint commodi.</p>
                               {:else if  item.spec.toLowerCase() == 'no'}
                               <div class="flex gap-2 items-center">
                                   <p class=" font-medium">{item.title}</p>
-                                  <i class='bx bx-x text-red-600 text-3xl'></i>
+                                  <i class='bx bx-x text-accent-red-600 text-3xl'></i>
                               </div>
-                              <p class="text-sm text-gray-500 font-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                              <p class="text-sm text-sekunder-950 font-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
                                   molestiae quas vel sint commodi.</p>
                               {:else}
                               <p class=" font-medium">{item.title}</p>

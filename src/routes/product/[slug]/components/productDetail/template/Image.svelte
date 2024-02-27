@@ -74,12 +74,12 @@ function prevSlide() {
         </div>
         <div class="hidden lg:flex w-full" style="height: {widthColImage}px;">
             <div class="py-2">
-                <div on:click={prevSlide} class="w-7 h-full cursor-pointer group flex justify-start items-center"><i class='bx bx-chevron-left group-hover:text-black text-gray-500 active:text-sky-500 text-4xl'></i></div>
+                <div on:click={prevSlide} class="w-7 h-full cursor-pointer group flex justify-start items-center"><i class='bx bx-chevron-left group-hover:text-black text-sekunder-300 active:text-sekunder-950 text-4xl'></i></div>
             </div>
             <div class=" hidden w-full lg:grid grid-flow-col overflow-x-auto snap-mandatory snap-x hidden-scroll" bind:offsetWidth={widthContainerImage} bind:this={containerScroll}>
                 {#each images as image, i (i)}
                     <div key={i} style="width: {widthColImage}px;" class=" col-span-1 w-full aspect-square snap-start rounded-lg p-2 flex justify-center images-center" on:click={() => { goToStartPage(i)}}>
-                        <div class="border bg-gray-100 border-2 border-gray-200 hover:border-sky-500 w-full h-full rounded-xl flex justify-center items-center overflow-hidden">
+                        <div class="border bg-sekunder-50 border-2 border-sekunder-50 hover:border-sekunder-950 w-full h-full rounded-xl flex justify-center items-center overflow-hidden">
                             {#if image.includes('https')}
                                 <img src={`${image}`} alt="" class="h-full w-auto">
                             {:else}
@@ -90,7 +90,7 @@ function prevSlide() {
                 {/each}
             </div>
             <div class="py-2">
-                <div on:click={nextSlide} class="w-7 h-full cursor-pointer group flex justify-start items-center"><i class='bx bx-chevron-right group-hover:text-black text-gray-500 active:text-sky-500 text-4xl'></i></div>
+                <div on:click={nextSlide} class="w-7 h-full cursor-pointer group flex justify-start items-center"><i class='bx bx-chevron-right group-hover:text-black text-sekunder-300 active:text-sekunder-950 text-4xl'></i></div>
             </div>
         </div>
     </div>

@@ -361,7 +361,7 @@
              <div class="w-full border-t bg-white">
                  <div class="wrapper mx-auto">
                      <div class="w-full flex justify-between items-center py-7">
-                         <div class="w-[25%] flex justify-start items-center">
+                         <div class="w-[25%] flex justify-start items-center lg:pl-10">
                              <img src="/pekapoint-yellow.png" alt="" class="w-40">
                              <!-- <p class="text-4xl font-bold italic text-sekunder-950 cursor-pointer" on:click={() => {goto(`/`)}}>Pekapoint.</p> -->
                          </div>
@@ -406,11 +406,11 @@
                          </div>
                          <div class="w-[25%] flex justify-end items-center gap-5 text-2xl">
                              <div class="flex justify-center items-center group cursor-pointer gap-2" on:click={() => {goto(`/compare`)}}>
-                                 <i class='bx bx-git-compare text-sekunder-950 group-hover:text-accent-red-600 group-active:text-accent-red-700 duration-100'></i>
+                                 <i class='bx bx-git-compare text-sm text-sekunder-950 group-hover:text-accent-red-600 group-active:text-accent-red-700 duration-100'></i>
                                  <p class="text-sm group-hover:text-accent-red-600 group-active:text-accent-red-700 duration-100">Compare</p>
                              </div>
                              <div class="flex justify-center items-center group cursor-pointer  gap-2">
-                                 <i class='bx bx-user text-sekunder-950 group-hover:text-accent-red-600 group-active:text-accent-red-700 duration-100'></i>
+                                 <i class='bx bx-user text-sm text-sekunder-950 group-hover:text-accent-red-600 group-active:text-accent-red-700 duration-100'></i>
                                  <p class="text-sm group-hover:text-accent-red-600 group-active:text-accent-red-700 duration-100">My Account</p>
                              </div>
                          </div>
@@ -434,12 +434,12 @@
                              {/if}
                          </div>
                          <div class="flex h-full justify-center items-center font-bold text-sekunder-950 text-sm">
-                             <a class="h-full px-10 flex items-center cursor-pointer duration-100 hover:bg-primary-700/50 {route == '/' ? 'bg-primary-700/50' : ''}" href="/">Home</a>
-                             <a class="h-full px-10 flex items-center cursor-pointer duration-100 hover:bg-primary-700/50 {route.includes('product') ? 'bg-primary-700/50' : ''}" href="/product">Product</a>
-                             <a class="h-full px-10 flex items-center cursor-pointer duration-100 hover:bg-primary-700/50 {route.includes('compare') ? 'bg-primary-700/50' : ''}" href="/compare">Compare</a>
-                             <a class="h-full px-10 flex items-center cursor-pointer duration-100 hover:bg-primary-700/50 {route.includes('blog') ? 'bg-primary-700/50' : ''}" href="/blog">Blog</a>
-                             <a class="h-full px-10 flex items-center cursor-pointer duration-100 hover:bg-primary-700/50 {route.includes('about') ? 'bg-primary-700/50' : ''}" href="/about">About Us</a>
-                             <a class="h-full px-10 flex items-center cursor-pointer duration-100 hover:bg-primary-700/50 {route.includes('contact') ? 'bg-primary-700/50' : ''}" href="/contact">Contact Us</a>
+                             <a class="h-full px-10 flex items-center cursor-pointer duration-100 hover:bg-primary-700/50 {route == '/' ? 'bg-primary-700/50 text-sekunder-50' : ''}" href="/">Home</a>
+                             <a class="h-full px-10 flex items-center cursor-pointer duration-100 hover:bg-primary-700/50 {route.includes('product') ? 'bg-primary-700/50 text-sekunder-50' : ''}" href="/product">Product</a>
+                             <a class="h-full px-10 flex items-center cursor-pointer duration-100 hover:bg-primary-700/50 {route.includes('compare') ? 'bg-primary-700/50 text-sekunder-50' : ''}" href="/compare">Compare</a>
+                             <a class="h-full px-10 flex items-center cursor-pointer duration-100 hover:bg-primary-700/50 {route.includes('blog') ? 'bg-primary-700/50 text-sekunder-50' : ''}" href="/blog">Blog</a>
+                             <a class="h-full px-10 flex items-center cursor-pointer duration-100 hover:bg-primary-700/50 {route.includes('about') ? 'bg-primary-700/50 text-sekunder-50' : ''}" href="/about">About Us</a>
+                             <a class="h-full px-10 flex items-center cursor-pointer duration-100 hover:bg-primary-700/50 {route.includes('contact') ? 'bg-primary-700/50 text-sekunder-50' : ''}" href="/contact">Contact Us</a>
                        </div>
                      </div>
                  </div>

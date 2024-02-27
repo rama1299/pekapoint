@@ -8,6 +8,7 @@
     import { Translate } from '../../helpers/translate';
     export let data
     import ProductNotFound from './components/ProductNotFound.svelte';
+    import HomeProduct from './components/homeProduct/HomeProduct.svelte';
 
     $: totalPages = data.totalPages
     let productList = []
@@ -56,7 +57,7 @@
             <h1 class="text-2xl lg:text-3xl font-bold text-white">{text[0]}</h1>
         </div>
     </div> -->
-    <div class="w-full flex pt-14 lg:pt-0">
+    <div class="w-full flex pt-12 lg:pt-0">
         {#if dataAds.length > 0}
             {#each dataAds as item}
                 {#if item.content_position == 'left'}
@@ -68,39 +69,43 @@
                 {/if} 
             {/each}
         {/if}
-        <div class="wrapper min-h-[600px] font-monst m-auto space-y-4 py-5">
-            <!-- <div class="w-full px-2">
-                <FilterBar/>
-            </div> -->
-            <div class="w-full h-full flex justify-end items-start gap-4">
-                <div class="hidden lg:w-[25%] xl:w-[20%] h-[650px] lg:flex sticky top-4 flex-col">
-                    <div class="bg-sekunder-50 w-full h-full rounded-lg p-4 space-y-2">
-                        <p class="font-semibold">Filter</p>
-                        <FilterBar/>
-                    </div>
-                </div>
-                <div class="w-full lg:w-[75%] xl:[w-80%] h-full">
-                    {#if productList.length > 0}
-                        <div class="w-full min-h-[600px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-flow-row m-auto gap-4">
-                            {#each productList as item (item.id)}
-                                <ProductList item={item}/>
-                            {/each}
-                        </div>
-                    {/if}
-                </div>
-            </div>
-    
-            {#if productList.length == 0 && status == 'error'}
-            <div class="w-full h-[500px]">
-                <ProductNotFound/>
-            </div>
-            {/if}
-            {#if productList.length > 0 && currentPage < totalPages}
-                 <div class="w-full">
-                     <LoadMoreButton/>
+        <div class="w-full">
+            {#if $page.url.pathname == '/product' && $page.url.search.length == 0}
+                <HomeProduct></HomeProduct>
+            { :else if $page.url.pathname == '/product' && $page.url.search.length > 0}
+                 <div class="wrapper min-h-[600px] font-monst m-auto py-5">
+                     <div class="w-full h-full flex justify-between items-start gap-4">
+                         <div class="hidden lg:w-1/4 xl:w-1/5 h-[650px] lg:flex sticky top-4 flex-col">
+                             <div class="bg-sekunder-50 w-full h-full rounded-lg p-4 space-y-2">
+                                 <p class="font-semibold">Filter</p>
+                                 <FilterBar/>
+                             </div>
+                         </div>
+                         <div class="w-full lg:w-3/4 xl:w-4/5 h-full">
+                             {#if productList.length > 0}
+                                 <div class="w-full min-h-[600px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-flow-row m-auto gap-4">
+                                     {#each productList as item (item.id)}
+                                         <ProductList item={item}/>
+                                     {/each}
+                                 </div>
+                             {/if}
+                         </div>
+                     </div>
+             
+                     {#if productList.length == 0 && status == 'error'}
+                     <div class="w-full h-[500px]">
+                         <ProductNotFound/>
+                     </div>
+                     {/if}
+                     {#if productList.length > 0 && currentPage < totalPages}
+                         <div class="w-full">
+                             <LoadMoreButton/>
+                         </div>
+                     {/if}
                  </div>
             {/if}
         </div>
+
         {#if dataAds.length > 0}
             {#each dataAds as item}
                 {#if item.content_position == 'right'}

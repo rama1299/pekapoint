@@ -30,7 +30,7 @@
     };
   });
 
-  toTopContainer()
+//   toTopContainer()
   }
 
   function toTopContainer() {
@@ -114,13 +114,13 @@ $: datas = datas.map(data => {
 <div id=containerSummary class="w-full space-y-5">
     <div class="w-full space-y-3">
         <p class="text-2xl font-semibold">{text[0]}</p>
-        <div class="w-full flex flex-row-reverse lg:block mx-auto gap-2 border-gray-100 border-2 rounded-lg pb-5">
-            <div class="w-1/6 lg:w-full grid grid-rows-8 lg:grid-cols-8 divide-gray-200 lg:divide-y-0 divide-x-0 lg:divide-x-2 border-gray-100 border-y-2 lg:border-y-0 border-l-0 lg:border-r-0  h-96 lg:h-auto lg:static sticky top-12">
+        <div class="w-full flex flex-row-reverse lg:block mx-auto gap-2 border-sekunder-100 border-2 rounded-lg pb-5">
+            <div class="w-1/6 lg:w-full grid grid-rows-8 lg:grid-cols-8 divide-sekunder-100 lg:divide-y-0 divide-x-0 lg:divide-x-2 border-sekunder-100 border-y-2 lg:border-y-0 border-l-0 lg:border-r-0  h-96 lg:h-auto lg:static sticky top-12">
                 {#each datas as data, index (index, data.title)}
                     {#each btnTabs as btn, i (i,btn.name )}
                         {#if data.code.toLocaleLowerCase() == btn.name.toLocaleLowerCase()}
-                        <div class="w-full col-span-1 lg:py-2 flex justify-center items-center cursor-pointer {btn.active ? 'bg-gray-200' : 'bg-gray-100 group'} " on:click={() => {handleTabs(index, btn.name)}}>
-                            <i class="{btn.className} {btn.active ? 'text-sky-600' : ''} text-2xl lg:group-hover:text-sky-600" ></i>
+                        <div class="w-full col-span-1 lg:py-2 flex justify-center items-center cursor-pointer {btn.active ? 'bg-sekunder-100' : 'bg-sekunder-50 group'} " on:click={() => {handleTabs(index, btn.name)}}>
+                            <i class="{btn.className} {btn.active ? 'text-sekunder-950' : ''} text-2xl lg:group-hover:text-sekunder-950" ></i>
                         </div>
                         {/if}
                     {/each}
@@ -141,9 +141,9 @@ $: datas = datas.map(data => {
                     <div class="w-full lg:w-1/2 rounded-lg  py-0 lg:py-5 px-5 space-y-2 lg:absolute -top-16 right-0 lg:overflow-auto lg:max-h-[425px]">
                         {#each datas[index].attributes as spec, i (i)}
                              {#if spec.spec.toLocaleLowerCase() != 'yes' && spec.spec.toLocaleLowerCase() != 'no' && spec.spec != ''}
-                                 <div class="leading-tight w-full ">
+                                 <div class="leading-tight w-full text-sekunder-950 ">
                                      <div class="w-full">
-                                         <div class="text-start font-medium">{spec.title}</div>
+                                         <div class="text-start font-semibold">{spec.title}</div>
                                      </div>
                                      <div>
                                          <div class="italic">{removeHtmlTags(spec.spec)}</div>

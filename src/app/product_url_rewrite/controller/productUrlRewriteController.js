@@ -77,6 +77,7 @@ export class ProductUrlRewriteController {
                         return {
                             product_id : data.id,
                             feature_image: data.feature_image,
+                            spec_score: data.spec_score,
                             title: data.title,
                             affiliate : JSON.parse(data.affiliate)
                         }
@@ -84,6 +85,7 @@ export class ProductUrlRewriteController {
                         return {
                             product_id : '',
                             feature_image: '',
+                            spec_score: '',
                             title: '',
                             affiliate: [],
                         }

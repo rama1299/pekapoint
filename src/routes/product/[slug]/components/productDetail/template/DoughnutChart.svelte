@@ -22,7 +22,7 @@
 			data: {
 				labels: chartLabels,
 				datasets: [{
-					backgroundColor: ['rgb(75, 192, 192)', 'rgb(195, 195, 195, 0.5)'],
+					backgroundColor: ['rgb(0, 98, 189)', 'rgb(249, 249, 249, 0.5)'],
 					data: [score, rest],
           borderColor: 'transparent'
 				}]
