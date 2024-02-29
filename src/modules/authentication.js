@@ -11,28 +11,6 @@ let domainApi = import.meta.env.VITE_DOMAIN_API
 export class Authentication {
     static async login() {
             try {
-
-                const checkExchange = Cookies.get('exchange')
-                if (!checkExchange) {
-                    const geoInfo = await checkIpInfo()
-                    let {currency} = geoInfo
-    
-                    if (currency.length > 3) {
-                        const arrayCurrency = currency.split(",")
-                        currency = arrayCurrency[0]
-                    }
-    
-                    const getExchange = await instance.get(`${domainApi}/api/exchangerates/update/${currency}`)
-                    
-                    if (getExchange.status == 200) {
-                        const dataExchange = getExchange.data
-                        Cookies.set('exchange', JSON.stringify(dataExchange))
-                    } else {
-                        Cookies.set('exchange', "")
-                    }
-    
-                }
-
                 const status = Cookies.get('status') // cek status di cookie
 
                 if (!status) { //jika status undefined
@@ -40,29 +18,37 @@ export class Authentication {
                     if (response && response.status == 200) { // jika berhasil
                         const setStatusToCookie = await setCookie('status', 'success') // set status success di cookie
                     } else {
-                        console.error(response.data.message)
+                        throw new Error('Login Failed')
                     }
                 }
             } catch (error) {
-                console.log('login error')
+                console.error(error.message)
             }
     }
 
     static async authAdmin() {
         try {
             const response = await instance.post(`/login/admin`, data)
-            return response
+            if (response.status == 200) {
+                return response
+            } else {
+                throw new Error('Authenticaton error')
+            }
         } catch (error) {
-            console.log('auth admin error')
+            console.error(error.message)
         }
     }
 
     static async loginAdmin(dataAdmin) {
         try {
             const response = await instance.post(`/login/admin`, dataAdmin)
-            return response
+            if(response.status == 200) {
+                return response
+            } else {
+                throw new Error('Login error')
+            }
         } catch (error) {
-            console.log('login admin error')
+            console.error(error.message)
         }
     }
 }

@@ -51,8 +51,8 @@
 <svelte:window bind:innerWidth={widthScreen}/>
 <div class="w-full">
     <div class="w-full h-full space-y-3">
-        <div class="w-full">
-            <p class="text-2xl font-semibold">{text[0]}</p>
+        <div class="w-full flex justify-between items-end border-b border-sekunder-200 pb-1">
+            <p class="text-xl font-semibold bg-primary-500 pl-5 pr-10 py-1 relative -bottom-1 tag">{text[0]}</p>
         </div>
         <div bind:this={scrollContainer} bind:offsetWidth={widthContainer} class="w-full grid grid-flow-col overflow-x-auto snap-x snap-mandatory scrollbar-hidden">
                 {#each device as item, i (i)}

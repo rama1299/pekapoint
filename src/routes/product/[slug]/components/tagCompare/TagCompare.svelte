@@ -62,7 +62,7 @@
 
     async function fethcImage(slug) {
         try {
-            const res = await fetch(`${domainApi}/api/product/image/${slug}`)
+            const res = await fetch(`${domainApi}/product/image/${slug}`)
             if (res.ok) {
                 const parseJson = await readablestreamToJson(res.body)
                 const image = parseJson[0].feature_image

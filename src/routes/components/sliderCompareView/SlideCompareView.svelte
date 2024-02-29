@@ -12,8 +12,6 @@
     const textTranslate = await Translate.client(text)
     text = textTranslate
 
-    console.log(data)
-
     containerScroll.scrollTo({
         left: 0,
         behavior: 'smooth'

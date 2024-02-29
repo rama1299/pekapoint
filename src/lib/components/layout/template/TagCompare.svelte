@@ -1,11 +1,11 @@
 <script>
 	import { goto } from '$app/navigation';
-    import { saveToSessionStorage } from '../../../../../helpers/sessionStorage';
-	import { compareDataStore } from '../../../../../stores';
-    import product from '../../../../../helpers/product.json'
-  import { readablestreamToJson } from '../../../../../helpers/readablestreamToJson';
+    import { saveToSessionStorage } from '../../../../helpers/sessionStorage';
+	import { compareDataStore } from '../../../../stores';
+    import product from '../../../../helpers/product.json'
+  import { readablestreamToJson } from '../../../../helpers/readablestreamToJson';
   import { onMount } from 'svelte';
-  import { Translate } from '../../../../../helpers/translate';
+  import { Translate } from '../../../../helpers/translate';
 
   let text = ['item selected', 'Compare', 'Search']
 

@@ -122,3 +122,7 @@ li.ProseMirror-selectednode:after {
     padding-right: 0;         /* lg:px-0 */
   }
 }
+
+.tag {
+clip-path: polygon(0 0, 84% 0, 100% 100%, 0% 100%);
+}

@@ -103,11 +103,11 @@
   <section id="containerSpec" class="w-full">
       <div class="w-full mx-auto space-y-5">
           <div class="space-y-3">
-              <div>
-                  <p class="text-2xl font-semibold">{text[0]}</p>
+              <div class="w-full flex justify-between items-end border-b border-sekunder-200 pb-1">
+                  <p class="text-xl font-semibold bg-primary-500 pl-5 pr-10 py-1 relative -bottom-1 tag">{text[0]}</p>
               </div>
               <div class="flex justify-center items-start gap-3 lg:gap-5   ">
-                  <div class="w-1/6 lg:w-1/4 space-y-3 py-1 sticky top-16 lg:top-24">
+                  <div class="w-1/6 lg:w-1/4 space-y-3 py-1 sticky top-4">
                       {#each datas as data, index (data.title)}
                           {#each btnTabs as btn, i (btn.name)}
                               {#if data.code.toLocaleLowerCase() == btn.name.toLocaleLowerCase()}

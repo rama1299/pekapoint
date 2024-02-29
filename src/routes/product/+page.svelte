@@ -19,6 +19,8 @@
     let text = ['Products']
     $: status = data.status
 
+   
+
     onMount(async() => {
         let translate = await Translate.client(text)
         text = translate
@@ -75,11 +77,8 @@
             { :else if $page.url.pathname == '/product' && $page.url.search.length > 0}
                  <div class="wrapper min-h-[600px] font-monst m-auto py-5">
                      <div class="w-full h-full flex justify-between items-start gap-4">
-                         <div class="hidden lg:w-1/4 xl:w-1/5 h-[650px] lg:flex sticky top-4 flex-col">
-                             <div class="bg-sekunder-50 w-full h-full rounded-lg p-4 space-y-2">
-                                 <p class="font-semibold">Filter</p>
+                         <div class="hidden lg:w-1/4 xl:w-1/5 lg:flex sticky top-4 flex-col">
                                  <FilterBar/>
-                             </div>
                          </div>
                          <div class="w-full lg:w-3/4 xl:w-4/5 h-full">
                              {#if productList.length > 0}

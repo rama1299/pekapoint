@@ -1,9 +1,11 @@
 <script>
+	import { page } from '$app/stores';
   import Footer from "./template/Footer.svelte";
   import Header from "./template/Header.svelte";
   import { onMount } from "svelte";
   import {checkIpInfo} from '../../../helpers/checkIpInfo.js'
   import product from '../../../helpers/product.json'
+  import TagCompare from "./template/TagCompare.svelte";
 
   onMount(async() => {
     await checkIpInfo()
@@ -22,4 +24,7 @@
 
 <Header {isProductPage} {isDetailProductPage} {titleData}></Header>
 <slot/>
+{#if $page.url.pathname == '/compare' || $page.url.pathname == '/product'}
+  <TagCompare/>
+{/if}
 <Footer></Footer>

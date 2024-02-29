@@ -58,7 +58,7 @@
 
 <div class="w-full h-full space-y-5 ">
     <div class="w-full flex justify-between items-end border-b border-sekunder-200 pb-1">
-        <p class="font-semibold">{title}</p>
+        <p class="font-semibold bg-primary-500 pl-5 pr-10 py-1 relative -bottom-1 tag">{title}</p>
         <div class="flex justify-center items-center text-2xl">
             <i class='bx bx-chevron-left' on:click={prev}></i>
             <i class='bx bx-chevron-right' on:click={next}></i>
@@ -95,4 +95,8 @@
     ::-webkit-scrollbar{
  display: none;
 }
+
+    .tag {
+        clip-path: polygon(0 0, 84% 0, 100% 100%, 0% 100%);
+    }
 </style>

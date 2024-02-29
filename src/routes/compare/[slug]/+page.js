@@ -7,87 +7,104 @@ import { FetchProductUrl } from '../../../modules/fetchProductUrl.js';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({ params, url }) {
+    const pathName = url.pathname
+    const slug = params.slug;
+
+    let dataAds = []
+    let dataProduct = []
+    let dataSpec = []
+    let dataVariant = []
+    let status = 'error'
     try {
-        const pathName = url.pathname
-        const slug = params.slug;
 
-        let dataAds = []
+        try {
+            let responseAds = await FetchAds.getAllAds('compare-slug')
 
-        let responseAds = await FetchAds.getAllAds('compare-slug')
-
-        if (responseAds.status == 200) {
-            dataAds = responseAds.data
+            if (responseAds && responseAds.status == 200) {
+                dataAds = responseAds.data
+            }            
+        } catch (error) {
+            console.error(error.message)
         }
 
-        const productUrlResponse = await FetchProductUrl.getProductUrlByUrl(pathName)
-
-        if (productUrlResponse && productUrlResponse.status === 200) {
-
-            const {product_ids, slug, variant_ids} = productUrlResponse.data
-
-            const productResponse = await FetchProduct.getProductBySlug(slug)
-            const specResponse = await FetchProduct.getSpecProductById(JSON.parse(product_ids))
+        try {
+            const productUrlResponse = await FetchProductUrl.getProductUrlByUrl(pathName)
             
-            if (productResponse && productResponse.status === 200 && specResponse && specResponse.status === 200) {
+            if (productUrlResponse && productUrlResponse.status === 200) {
 
-                const dataProduct = productResponse.data
-                const dataSpec = specResponse.data
+                const {product_ids, slug, variant_ids} = productUrlResponse.data
 
-                // const responseVariant = await FetchHpVariant.getVariantById(JSON.parse(product_ids))
+                try {
+                    const productResponse = await FetchProduct.getProductBySlug(slug)
+                    const specResponse = await FetchProduct.getSpecProductById(JSON.parse(product_ids))
 
-                // if (responseVariant && responseVariant.status == 200) {
-                //     const dataVariant = responseVariant.data
-                //     return { dataProduct: dataProduct, dataSpec: dataSpec, dataVariant: dataVariant, status: 'success' };
-                // }
+                    if (productResponse && productResponse.status === 200 && specResponse && specResponse.status === 200) {
+        
+                        const resDataProduct = productResponse.data
+                        const resDataSpec = specResponse.data
+        
+                        dataProduct = resDataProduct
+                        dataSpec = resDataSpec
+                        status= 'success'
 
-                return { dataProduct: dataProduct, dataSpec: dataSpec, dataVariant: [], status: 'success', dataAds };
-            }
-            
-            return { dataProduct: [], dataSpec: [], dataVariant: [], status: 'error', dataAds };
-        } else {
-
-            const productResponse = await FetchProduct.getProductBySlug(slug);
-
-            if (productResponse && productResponse.status === 200) {
-                const dataProduct = productResponse.data;
-                let dataId = dataProduct.map(data => data.id)
-    
-                const specResponse = await FetchProduct.getSpecProductById(dataId);
-
-                if (specResponse && specResponse.status === 200) {
-                    const dataSpec = specResponse.data;
-
-                    // const variantResponse = await FetchHpVariant.getVariantById(dataId)
+                    }
                     
-                    // if (variantResponse && variantResponse.status === 200) {
-                    //     const dataVariant = variantResponse.data
-
-                    //     const variantId = dataVariant.map(data => data.id)
-                    //     const dataInputProductUrl = {url : pathName, idProduct : dataId, idVariant : variantId, write_type: 'compare'}
-
-                    //     const createProductUrl = await FetchProductUrl.createProductUrl(dataInputProductUrl)
-
-                    //     return { dataProduct: dataProduct, dataSpec: dataSpec, dataVariant: dataVariant, status: 'success' };
-                    // }
-                    
-                    const dataInputProductUrl = {url: pathName, idProduct: dataId, write_type: 'compare'}
-
-                    const createProductUrl = await FetchProductUrl.createProductUrl(dataInputProductUrl)
-                    
-                    return { dataProduct: dataProduct, dataSpec: dataSpec, dataVariant: [], status: 'success', dataAds }; 
+                } catch (error) {
+                    console.error(error.message)
                 }
     
             } else {
-                return { dataProduct: [], dataSpec: [], dataVariant: [], status: 'error', dataAds };
-            }
+    
+                try {
+                    const productResponse = await FetchProduct.getProductBySlug(slug);
+                    
+                    if (productResponse && productResponse.status === 200) {
 
-            return { dataProduct: [], dataSpec: [], dataVariant: [], status: 'error', dataAds };
+                        const resDataProduct = productResponse.data;
+                        let dataId = resDataProduct.map(data => data.id)
+
+                        try {
+                            const specResponse = await FetchProduct.getSpecProductById(dataId);
+
+                            if (specResponse && specResponse.status === 200) {
+
+                                const resDataSpec = specResponse.data;
+                                
+                                const dataInputProductUrl = {url: pathName, idProduct: dataId, write_type: 'compare'}
+
+                                try {
+
+                                    await FetchProductUrl.createProductUrl(dataInputProductUrl)
+                                    
+                                } catch (error) {
+                                    console.error(error.message)
+                                }
+            
+                                dataProduct = resDataProduct
+                                dataSpec = resDataSpec
+                                status= 'success'
+
+                            }
+                            
+                        } catch (error) {
+                            console.error(error.message)
+                        }
+                    }
+                } catch (error) {
+                    console.error(error.message)
+                }
+            }
+        } catch (error) {
+            console.error(error.message)
         }
+        
+        return { dataProduct, dataSpec, dataVariant, status, dataAds }
+
     } catch (error) {
-        console.error("Error loading product:", error.message);
+        console.error(error.message);
         if (error.response.status === 401 || error.response.statusText == 'Unauthorized') {
             Cookies.remove('status')
         }
-        return { dataProduct: [], dataSpec: [], dataVariant: [], status: 'error', dataAds: [] };
+        return { dataProduct, dataSpec, dataVariant, status, dataAds }
     }
 } 

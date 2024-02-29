@@ -3,9 +3,9 @@
     export let data
 </script>
 
-<div class="w-full space-y-8">
+<div class="w-full space-y-5">
     <div class="w-full flex justify-between items-end border-b border-sekunder-200 pb-1">
-        <p class="text-xl font-semibold">Top Product</p>
+        <p class="font-semibold bg-primary-500 pl-5 pr-10 py-1 relative -bottom-1 tag">Top Product</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-4">
         {#each data as product}
@@ -27,3 +27,9 @@
         {/each}
     </div>
 </div>
+
+<style>
+    .tag {
+        clip-path: polygon(0 0, 84% 0, 100% 100%, 0% 100%);
+    }
+</style>

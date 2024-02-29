@@ -15,9 +15,13 @@
   onMount(async () => {
     let translate = await Translate.client(text)
     text = translate
+
+    if (typeof dataVariant == 'string') {
+        dataVariant = JSON.parse(dataVariant)
+    }
   })
   
-  let dataVariant = variant.length != [] ? variant.data : []
+  let dataVariant = data.variant
 
   $: variantAffiliate = '6GB/64GB'
   let price 
@@ -59,11 +63,11 @@
                 <Image  image={data.images}/>
             </div>
             <div class="w-full lg:w-1/2">
-                <Description data={data} variant={data.variant} on:message={handleMessageDesc}>
-                    <div class="flex justify-center items-center text-blue-500 hover:text-blue-600 gap-2 cursor-pointer lg:w-1/2 mx-auto" on:click={showMore}>
+                <Description data={data} variant={dataVariant} on:message={handleMessageDesc}>
+                    <!-- <div class="flex justify-center items-center text-blue-500 hover:text-blue-600 gap-2 cursor-pointer lg:w-1/2 mx-auto" on:click={showMore}>
                         <p class="font-medium text-sm">{text[0]}</p>
                         <i class='bx bx-down-arrow-alt text-xl'></i>
-                    </div>
+                    </div> -->
                 </Description>
             </div>
         </div>

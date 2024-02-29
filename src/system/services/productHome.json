@@ -20,7 +20,7 @@
         }
       ],
       "created_at": null,
-      "visitor": 162
+      "visitor": 195
     },
     {
       "id": 120,
@@ -42,7 +42,7 @@
         }
       ],
       "created_at": null,
-      "visitor": 141
+      "visitor": 145
     },
     {
       "id": 129,
@@ -108,7 +108,7 @@
         }
       ],
       "created_at": "2024-02-21T09:23:57.824Z",
-      "visitor": 37
+      "visitor": 38
     },
     {
       "id": 190,
@@ -130,29 +130,7 @@
         }
       ],
       "created_at": "2024-02-22T00:04:00.776Z",
-      "visitor": 25
-    },
-    {
-      "id": 128,
-      "url": "/product/xiaomi-12",
-      "product": [
-        {
-          "product_id": 8,
-          "feature_image": "images/xiaomi/12/xiaomi-1249d5fd26471cbed9f987bb48519d9cc5.jpg",
-          "spec_score": 90,
-          "title": "Xiaomi 12",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        }
-      ],
-      "created_at": "2024-02-04T22:32:35.029Z",
-      "visitor": 22
+      "visitor": 26
     },
     {
       "id": 180,
@@ -175,6 +153,28 @@
       ],
       "created_at": "2024-02-19T08:15:16.863Z",
       "visitor": 22
+    },
+    {
+      "id": 121,
+      "url": "/product/xiaomi-12s-ultra",
+      "product": [
+        {
+          "product_id": 6,
+          "feature_image": "images/xiaomi/12s/xiaomi-12s-ultra23076557ac622abce58622d522f76e2b.jpg",
+          "spec_score": 95,
+          "title": "Xiaomi 12S Ultra",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        }
+      ],
+      "created_at": "2024-02-04T07:02:20.976Z",
+      "visitor": 22
     }
   ],
   [
@@ -212,7 +212,7 @@
         }
       ],
       "created_at": "2024-02-05T02:11:56.017Z",
-      "visitor": 92
+      "visitor": 104
     },
     {
       "id": 126,
@@ -248,7 +248,7 @@
         }
       ],
       "created_at": "2024-02-04T22:25:56.221Z",
-      "visitor": 73
+      "visitor": 81
     },
     {
       "id": 125,
@@ -284,7 +284,7 @@
         }
       ],
       "created_at": "2024-02-04T22:25:46.823Z",
-      "visitor": 56
+      "visitor": 61
     },
     {
       "id": 130,
@@ -320,7 +320,7 @@
         }
       ],
       "created_at": "2024-02-04T22:39:46.263Z",
-      "visitor": 36
+      "visitor": 44
     },
     {
       "id": 145,
@@ -356,7 +356,7 @@
         }
       ],
       "created_at": "2024-02-05T06:39:48.940Z",
-      "visitor": 25
+      "visitor": 30
     },
     {
       "id": 127,
@@ -392,10 +392,82 @@
         }
       ],
       "created_at": "2024-02-04T22:31:00.723Z",
-      "visitor": 14
+      "visitor": 16
+    },
+    {
+      "id": 231,
+      "url": "/compare/xiaomi-redmi-note-12-pro-plus-vs-xiaomi-mi-10s",
+      "product": [
+        {
+          "product_id": 31,
+          "feature_image": "images/xiaomi/mi/xiaomi-mi-10s813972e73c35041e77352cdd3a4b1cb2.jpg",
+          "spec_score": 71,
+          "title": "Xiaomi Mi 10S",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        },
+        {
+          "product_id": 33,
+          "feature_image": "images/xiaomi/redmi/xiaomi-redmi-note-12-pro-plusf17ce782bad3bcf76b8dcc42b3dd9cac.jpg",
+          "spec_score": 71,
+          "title": "Xiaomi Redmi Note 12 Pro Plus",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        }
+      ],
+      "created_at": "2024-02-28T15:41:05.403Z",
+      "visitor": 1
     }
   ],
   [
+    {
+      "id": 231,
+      "url": "/compare/xiaomi-redmi-note-12-pro-plus-vs-xiaomi-mi-10s",
+      "product": [
+        {
+          "product_id": 31,
+          "feature_image": "images/xiaomi/mi/xiaomi-mi-10s813972e73c35041e77352cdd3a4b1cb2.jpg",
+          "spec_score": 71,
+          "title": "Xiaomi Mi 10S",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        },
+        {
+          "product_id": 33,
+          "feature_image": "images/xiaomi/redmi/xiaomi-redmi-note-12-pro-plusf17ce782bad3bcf76b8dcc42b3dd9cac.jpg",
+          "spec_score": 71,
+          "title": "Xiaomi Redmi Note 12 Pro Plus",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        }
+      ],
+      "created_at": "2024-02-28T15:41:05.403Z",
+      "visitor": 1
+    },
     {
       "id": 145,
       "url": "/compare/xiaomi-13-ultra-vs-xiaomi-13-pro",
@@ -430,7 +502,7 @@
         }
       ],
       "created_at": "2024-02-05T06:39:48.940Z",
-      "visitor": 25
+      "visitor": 30
     },
     {
       "id": 138,
@@ -466,7 +538,7 @@
         }
       ],
       "created_at": "2024-02-05T02:11:56.017Z",
-      "visitor": 92
+      "visitor": 104
     },
     {
       "id": 130,
@@ -502,7 +574,7 @@
         }
       ],
       "created_at": "2024-02-04T22:39:46.263Z",
-      "visitor": 36
+      "visitor": 44
     },
     {
       "id": 127,
@@ -538,7 +610,7 @@
         }
       ],
       "created_at": "2024-02-04T22:31:00.723Z",
-      "visitor": 14
+      "visitor": 16
     },
     {
       "id": 126,
@@ -574,7 +646,7 @@
         }
       ],
       "created_at": "2024-02-04T22:25:56.221Z",
-      "visitor": 73
+      "visitor": 81
     },
     {
       "id": 125,
@@ -610,7 +682,7 @@
         }
       ],
       "created_at": "2024-02-04T22:25:46.823Z",
-      "visitor": 56
+      "visitor": 61
     }
   ],
   [

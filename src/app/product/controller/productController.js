@@ -297,7 +297,6 @@ export class ProductController {
                 summary: JSON.stringify({[titleGroup]: attribute})
             }
         }))
-        console.log(data)
         
         res.status(200).json(data);
         } catch (error) {
@@ -452,6 +451,36 @@ export class ProductController {
                  FROM ${schema}.products
                  WHERE slug = $1;`,
                 [slug]
+            );
+
+            const data = response.rows
+            if (data.length === 0) {
+                throw ({name: 'ErrorNotFound'})
+            }
+
+            res.status(200).json(data)
+        } catch (error) {
+            next(error)
+        } finally {
+            client.release();
+        }
+    }
+
+    static async findProductImageBytitle(req, res, next) {
+        const client = await pool.connect()
+        const title = req.body.title
+
+        try {
+            
+            if (!title) {
+                throw ({name: 'ValidationError'})
+            }
+            
+            const response = await client.query(
+                `SELECT feature_image, slug
+                 FROM ${schema}.products
+                 WHERE title = $1;`,
+                [title]
             );
 
             const data = response.rows

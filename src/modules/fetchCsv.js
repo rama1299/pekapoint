@@ -4,20 +4,26 @@ export class FetchCsv {
     static async getCsvClient() {
         try {
             const response = await instance.get(`/csv-client`)
-            return response
+            if(response.status == 200) {
+                return response
+            } else {
+                throw new Error('failed get csv client')
+            }
         } catch (error) {
-            console.error("Error fetching:", error.response.data.message || error.message);
-            throw error;
+            console.error(error.message);
         }
     }
 
     static async getCsvServer() {
         try {
             const response = await instance.get(`/csv-server`)
-            return response
+            if(response.status == 200) {
+                return response
+            } else {
+                throw new Error('failed get csv server')
+            }
         } catch (error) {
-            console.error("Error fetching:", error.response.data.message || error.message);
-            throw error;
+            console.error(error.message);
         }
     }
 }

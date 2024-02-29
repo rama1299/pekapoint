@@ -41,13 +41,16 @@
 <div class="w-full space-y-5">
     <div class="w-full space-y-3">
         <div class="w-full flex justify-between items-start">
-            <p class="text-2xl font-semibold">{text[0]}</p>
-            <div class="flex h-9 justify-center gap-3">
-                <div class="aspect-square flex justify-center items-center cursor-pointer" on:click={goToPrevPage}>
-                    <i class='bx bx-chevron-left text-3xl'></i>
-                </div>
-                <div  class="aspect-square flex justify-center items-center cursor-pointer" on:click={goToNextPage}>
-                    <i class='bx bx-chevron-right text-3xl'></i>
+            <div class="w-full flex justify-between items-end border-b border-sekunder-200 pb-1">
+                <p class="text-xl font-semibold bg-primary-500 pl-5 pr-10 py-1 relative -bottom-1 tag">{text[0]}</p>
+
+                <div class="flex h-9 justify-center gap-3">
+                    <div class="aspect-square flex justify-center items-center cursor-pointer" on:click={goToPrevPage}>
+                        <i class='bx bx-chevron-left text-3xl'></i>
+                    </div>
+                    <div  class="aspect-square flex justify-center items-center cursor-pointer" on:click={goToNextPage}>
+                        <i class='bx bx-chevron-right text-3xl'></i>
+                    </div>
                 </div>
             </div>
         </div>

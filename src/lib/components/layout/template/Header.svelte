@@ -1,11 +1,15 @@
 <script>
+	import { Api } from './../../../../modules/api.js';
+	import { FetchProduct } from './../../../../modules/fetchProduct.js';
 	import { page } from '$app/stores';
 	import Cookies from 'js-cookie';
 	import { goto } from '$app/navigation';
-	import { isFilterProduct } from './../../../../stores.js';
+	import { isFilterProduct, compareDataStore } from './../../../../stores.js';
     import { onMount } from 'svelte';
     import { checkIpInfo } from '../../../../helpers/checkIpInfo.js';
 	import { Translate } from '../../../../helpers/translate.js';
+    import { dataBrand } from '../../../../stores.js'
+    import {saveToSessionStorage, getFromSessionStorage} from '../../../../helpers/sessionStorage.js'
 
 	let text = ['home', 'products', 'compare', 'blog', 'about us']
 
@@ -21,15 +25,67 @@
         const textTranslate = await Translate.client(text, arrayRoute.length < 3 ? false : true)
 		text = textTranslate
 
-        document.addEventListener('click', handleOutSideSearch);
+        // try {
+        //     await Api.getGeoInfo()
+        // } catch (error) {
+        //     console.error(error)
+        // }
+
+        compareInit()
+
+        let fetchBrand = await fecthDataBrand()
+
+        dataBrand.set(fetchBrand) 
+
+        document.addEventListener('click', handleOutsideClick);
 
         languageTitle = JSON.parse(Cookies.get('geoInfo')).language
     
         return () => {
-        document.removeEventListener('click', handleOutSideSearch);
+        document.removeEventListener('click', handleOutsideClick);
         };
 
     })
+
+    async function fecthDataBrand() {
+        try {
+
+            // const dataBrandSession = sessionStorage.getItem('')
+            
+            const respons = await FetchProduct.getBrandProducts()
+            if (respons.status == 200) {
+                return respons.data
+            }
+            
+            return []
+        } catch (error) {
+            console.log('fetch data brand error')
+            return []
+        }
+    }
+
+    function handleOutsideClick(event) {
+
+        let categoryId = document.getElementById('category')
+        let menuCategoryId = document.getElementById('menuCategory')
+        if (categoryId && !categoryId.contains(event.target) && menuCategoryId && !menuCategoryId.contains(event.target)) {
+            toggleCategory = false
+        }
+
+        let searchMobile = document.getElementById('searchMobile')
+        let optionSearchMobile = document.getElementById('optionSearchMobile')
+        if (searchMobile && !searchMobile.contains(event.target) && optionSearchMobile && !optionSearchMobile.contains(event.target)) {
+            toggleSearchMobile = false
+        }
+
+        let buttonMenuMobile = document.getElementById('buttonMenuMobile')
+        let menuMobile = document.getElementById('menuMobile')
+        if (buttonMenuMobile && !buttonMenuMobile.contains(event.target) && menuMobile && !menuMobile.contains(event.target)) {
+            toggleMenu = false
+        }
+
+        handleOutSideSearch()
+    }
 
     function handleOutSideSearch(event) {
         let search = document.getElementById('search')
@@ -37,10 +93,12 @@
         if (search || !search.contains(event.target)) {
             resetValue()
         }
+
     }
  
     let toggleMenu = false
     let toggleDropdown = false
+    let toggleDropdownAccount = false
     let y
 
     let languageTitle = ''
@@ -61,6 +119,7 @@
         }
 
         toggleDropdown = false
+        toggleMenu = false
 
         await Cookies.remove('geoInfo')
         await Cookies.set('geoInfo', JSON.stringify(geoInfo))
@@ -149,17 +208,36 @@
                 selectedOptionCompare = [...selectedOptionCompare, dataFilter[selectedOptionIndex].title]
             }
         }
+
+        toggleSearchMobile = false
     }
 
-    function addCompare(title) {
-        selectedOptionCompare = [...selectedOptionCompare, title]
-        resetValue()
-
+    function compareInit() {
+        const exisitData = getFromSessionStorage('compareDataSession')
+        compareDataStore.set(exisitData)
     }
 
-    function removeCompareSelected(titleRemove) {
-        let filterArray = selectedOptionCompare.filter((title) => title != titleRemove)
-        selectedOptionCompare = filterArray
+    async function addCompare(title) {
+        try {
+            const response = await FetchProduct.getFeatureImageByTitle(title)
+            if (response.status == 200) {
+                const resData = response.data
+
+                let data = {title: title, feature_image: resData[0].feature_image, slug: resData[0].slug}
+                
+                const isDataExists = $compareDataStore.some(existingData => existingData.slug === data.slug)
+
+                if (!isDataExists && $compareDataStore.length < 4) {
+                    compareDataStore.update(existingData => [...existingData, data])
+                    saveToSessionStorage('compareDataSession', $compareDataStore)
+
+                } else {
+                    console.log('Data sudah ada tambahkan');
+                }
+            }
+        } catch (error) {
+            console.log('error')
+        }
     }
 
     function resetValue() {
@@ -168,16 +246,6 @@
         currentColIndex = null
     }
 
-
-    function handleCompare() {
-        let link = selectedOptionCompare.map(item => item.toLowerCase().replace(/\s+/g, '-')).join('-vs-')
-        
-        if (selectedOptionCompare.length > 1) {
-            goto(`/compare/${link}`)
-        } else {
-            goto(`/product/${link}`)
-        }
-    }
 
     function handleProductUnoptionSearch(type) {
         if (type) {
@@ -195,6 +263,8 @@
 
     let toggleCategorySearch = false
     let toggleCategory = false
+
+    let toggleSearchMobile = false
 
 </script>
 
@@ -327,8 +397,7 @@
                              <div>
                                  <div class="relative">
                                      <div class="flex justify-center items-center gap-1 cursor-pointer" on:click={() => {toggleDropdown = !toggleDropdown}}>
-                                         <div class="w-5 h-2 bg-red-600"></div>
-                                         <p>Indonesia</p>
+                                         <p class="uppercase">{languageTitle}</p>
                                          <i class='bx bx-chevron-down text-xl'></i>
                                      </div>
                                      <div class="absolute border top-8 right-0 {toggleDropdown ? 'show' : 'dropdown_hidden'}">
@@ -361,47 +430,59 @@
              <div class="w-full border-t bg-white">
                  <div class="wrapper mx-auto">
                      <div class="w-full flex justify-between items-center py-7">
-                         <div class="w-[25%] flex justify-start items-center lg:pl-10">
+                         <div class="w-[25%] flex justify-start items-center pl-1">
                              <img src="/pekapoint-yellow.png" alt="" class="w-40">
                              <!-- <p class="text-4xl font-bold italic text-sekunder-950 cursor-pointer" on:click={() => {goto(`/`)}}>Pekapoint.</p> -->
                          </div>
                          <div class="w-[50%] relative">
                              <div class="w-full flex justify-center h-11 bg-white rounded-full overflow-hidden border-2 border-primary-500">
-                                 <div id="search" class="w-[60%] h-full flex justify-center items-center font-medium text-sekunder-950">
+                                 <div id="search" class="w-[90%] h-full flex justify-center items-center font-medium text-sekunder-950">
                                      <input type="text" class="w-full h-full border-none bg-transparent focus:ring-0 pl-5 placeholder-text-sekunder-950" placeholder="Search for product..." bind:value={valueInput} on:keydown={handleKeyInput}>
                                  </div>
-                                 <div class="w-[30%] h-full flex justify-center items-center gap-5 cursor-pointer" on:click={() => {toggleCategorySearch = !toggleCategorySearch}}>
+                                 <!-- <div class="w-[30%] h-full flex justify-center items-center gap-5 cursor-pointer" on:click={() => {toggleCategorySearch = !toggleCategorySearch}}>
                                      <p>All Brand</p>
                                      <i class='bx bxs-down-arrow text-xs'></i>
-                                 </div>
+                                 </div> -->
                                  <div class="w-[10%] h-full flex justify-center items-center bg-primary-500 active:bg-primary-700 cursor-pointer duration-100" on:click={handleEnter}>
                                      <i class='bx bx-search text-white text-xl'></i>
                                  </div>
                              </div>
      
                              {#if valueInput.length > 0 && dataFilter.length > 0}
-                                 <div class="w-[60%] z-10 border border-sekunder-300 divide-y divide-sekunder-300 max-h-48 lg:max-h-80 bg-white overflow-auto lg:overflow-hidden snap-y snap-mandatory rounded-lg absolute top-11 shadow-lg left-0"
+                                 <div class="w-[90%] z-10 border border-sekunder-300 divide-y divide-sekunder-300 max-h-48 lg:max-h-80 bg-white overflow-auto lg:overflow-hidden snap-y snap-mandatory rounded-lg absolute top-11 shadow-lg left-0"
                                  tabindex="0"
                                  bind:this={containerScroll}>
                                      {#each dataFilter as item, i}
                                          <div class="{selectedOptionIndex == i ? 'bg-sekunder-100' : ''} w-full h-8 lg:h-10 hover:bg-sekunder-100 flex justify-between items-center px-3 snap-start"
                                          tabindex="0"
-                                         on:click={() => {handleSelect(item.title)}}
                                          id="idOption{i}"
-                                         >
+                                         >  <div class="w-[90%] h-full" on:click={() => {handleSelect(item.title)}}>
                                              <p class="w-full h-full truncate flex items-center text-sekunder-950">{item.title}</p>
+                                            </div>
+                                             <div class="h-full aspect-square group cursor-pointer flex justify-end items-center" on:click={addCompare(item.title)}>
+                                                <div class="h-6 aspect-square flex justify-center items-center rounded-md border-2 border-sekunder-950 group-hover:bg-primary-500">
+                                                    <i class='bx bx-plus text-xl text-sekunder-950'></i>
+                                                </div>
+                                             </div>
                                          </div>
                                      {/each}
                                  </div>
                              {/if}
      
-                             {#if toggleCategorySearch}
-                                 <div class="w-[30%] absolute top-11 bg-white right-[10%] z-10 border rounded-lg border-sekunder-300 overflow-hidden">
-                                     <div class="w-full h-10 flex justify-start items-center px-3 cursor-pointer hover:bg-sekunder-100" on:click={() => {toggleCategorySearch = false}}>
-                                         <p>All Category</p>
-                                     </div>
+                             <!-- {#if toggleCategorySearch}
+                                 <div class="w-[30%] h-80 border-2 border-primary-500 absolute top-11 bg-white right-[10%] z-10 rounded-lg overflow-y-auto">
+                                    {#if $dataBrand.length > 0}
+                                    <div class="w-full h-10 flex justify-start items-center px-3 cursor-pointer hover:bg-sekunder-100" on:click={() => {toggleCategorySearch = false}}>
+                                        <p>All Brand</p>
+                                    </div>
+                                        {#each $dataBrand as item}
+                                            <div class="w-full h-10 flex justify-start items-center px-3 cursor-pointer hover:bg-sekunder-100" on:click={() => {toggleCategorySearch = false}}>
+                                                <p>{item.brand}</p>
+                                            </div>
+                                        {/each}
+                                    {/if}
                                  </div>
-                             {/if}
+                             {/if} -->
      
                          </div>
                          <div class="w-[25%] flex justify-end items-center gap-5 text-2xl">
@@ -421,17 +502,28 @@
              <div class="w-full bg-primary-500">
                  <div class="wrapper mx-auto">
                      <div class="w-full flex justify-start gap-10 items-center h-11">
-                         <div id="category" class="relative">
-                             <div class="flex justify-center items-center cursor-pointer" on:click={() => {toggleCategory = !toggleCategory}}>
-                                 <i class='bx bx-menu text-4xl text-sekunder-950'></i>
-                             </div>
-                             {#if toggleCategory}
-                                  <div class="w-52 bg-white absolute top-[46px] left-0 border-r-2 border-l-2 rounded-b-lg overflow-hidden border-b-2 border-primary-500 z-10">
-                                      <div class="w-full h-10 flex justify-start items-center px-3 cursor-pointer hover:bg-sekunder-100" on:click={() => {toggleCategory = false}}>
-                                          <p>Smarphone</p>
-                                      </div>
-                                  </div>
-                             {/if}
+                         <div  class="relative">
+                            <div id="category" class="flex justify-center items-center cursor-pointer" on:click={() => {toggleCategory = !toggleCategory}}>
+                                 <i class='bx bx-menu text-4xl text-sekunder-950 hover:text-white duration-100'></i>
+                            </div>
+                            {#if toggleCategory}
+                                <div id="menuCategory" class="bg-white absolute top-[40px] w-40 text-sm rounded-b-lg max-h-80 overflow-y-auto left-0 border-r-2 overflow-hidden border-2 border-primary-500 z-10">
+                                   {#if $dataBrand.length > 0}
+                                        <div class="w-full h-10 flex justify-start items-center px-3 cursor-pointer hover:bg-sekunder-100" on:click={() => {goto(`/product?search=`)}}>
+                                            <p>All Brand</p>
+                                        </div>
+                                       {#each $dataBrand as item}
+                                               <div class="w-full h-10 flex justify-start items-center px-3 cursor-pointer hover:bg-sekunder-100" on:click={() => {goto(`/product?filter=brand%3D${item.brand}`)}}>
+                                                   <p>{item.brand}</p>
+                                               </div>
+                                       {/each}
+                                   {:else}
+                                        <div class="w-full h-10 flex justify-start items-center px-3 cursor-pointer hover:bg-sekunder-100">
+                                           <p>Data Not Found</p>
+                                        </div>
+                                    {/if}
+                                </div>
+                            {/if}
                          </div>
                          <div class="flex h-full justify-center items-center font-bold text-sekunder-950 text-sm">
                              <a class="h-full px-10 flex items-center cursor-pointer duration-100 hover:bg-primary-700/50 {route == '/' ? 'bg-primary-700/50 text-sekunder-50' : ''}" href="/">Home</a>
@@ -448,33 +540,111 @@
      </nav>
 {/if}
 
-<nav class="w-full flex lg:hidden fixed top-0 z-10">
-    <div class="wrapper h-12 bg-primary-500 text-white flex justify-between items-center">
-        <div class="h-full flex justify-start items-center gap-5 text-xl">
-            <div class="flex justify-center items-center">
-                <i class='bx bx-menu text-4xl'></i>
+<nav class="w-full flex lg:hidden fixed top-0 z-50">
+    <div class="wrapper h-12 bg-primary-500 text-sekunder-950 flex justify-between items-center">
+        <div class="h-full flex justify-start items-center gap-2 text-xl">
+            <div id="buttonMenuMobile" class="flex justify-center items-center" on:click={() => {toggleMenu = !toggleMenu}}>
+                <i class='bx bx-menu text-3xl'></i>
             </div>
             <div class="h-full flex justify-center items-center">
-                <img src="/pekapoint.png" alt="" class="h-8">
+                <img src="/pekapoint.png" alt="" class="h-6">
             </div>
         </div>
-        <div class="flex h-full justify-center items-center text-2xl gap-5">
-            <div class=" flex justify-center items-center group">
-                <i class='bx bx-search active:text-primary-700 text-2xl'></i>
+        <div class="flex h-full justify-center items-center text-xl gap-2">
+                <div id="" class=" flex justify-center items-center group" on:click={() => {goto(`/product?search=`)}}>
+                    <i class='bx bx-category active:text-primary-700'></i>
+                </div>
+            {#if $page.route.id == '/product' || $page.route.id == '/compare'}
+                <div id="searchMobile" class=" flex justify-center items-center group" on:click={() => {toggleSearchMobile = !toggleSearchMobile}}>
+                    <i class='bx bx-search active:text-primary-700'></i>
+                </div>
+            {/if}
+            <!-- <div class=" flex justify-center items-center group">
+                <i class='bx bx-user active:text-primary-700'></i>
+            </div> -->
+            {#if $page.route.id == '/product' || $page.route.id == '/compare'}
+                 <div class=" flex justify-center items-center group">
+                     <i class='bx bx-filter-alt active:text-primary-700'></i>
+                 </div>
+            {/if}
+        </div>
+    </div>
+
+    {#if toggleMenu}
+    <div id="menuMobile" class="w-full bg-white p-5 absolute z-50 top-12 shadow-lg divide-y">
+        <div class="w-full overflow-auto">
+            <div class="flex flex-col w-full h-auto capitalize font-medium divide-y">
+                <a href="/" class="py-2">{text[0]}</a>
+                <a href="/product" class="py-2">{text[1]}</a>
+                <a href="/compare" class="py-2">{text[2]}</a>
+                <a href="/blog" class="py-2">{text[3]}</a>
+                <a href="/about" class="py-2">{text[4]}</a>
+                <a href="/contact" class="py-2">Contact Us</a>
             </div>
-            <div class=" flex justify-center items-center group">
-                <i class='bx bx-user active:text-primary-700 text-2xl'></i>
+            <div class="flex flex-col w-full h-auto capitalize font-medium gap-2 py-2">
+                <button class="w-full flex justify-between" on:click={() => { toggleDropdown = !toggleDropdown}}>
+                    <p class="uppercase">{languageTitle}</p>
+                    <i class='bx bx-chevron-{toggleDropdown ? 'up' : 'down'} text-lg' ></i>
+                </button>
+                <div class="flex flex-col w-full h-auto capitalize font-medium px-5 {toggleDropdown ? '' : 'hidden'}">
+                    <div on:click={() => {handleLanguage('id')}}>
+                        <p class="py-2" >Indonesia</p>
+                    </div>
+                    <div on:click={() => {handleLanguage('en')}}>
+                        <p class="py-2">English</p>
+                    </div>
+                </div>
             </div>
-            <div class=" flex justify-center items-center group">
-                <i class='bx bx-filter-alt active:text-primary-700 text-2xl'></i>
+            <div class="flex flex-col w-full h-auto capitalize font-medium gap-2 py-2">
+                <button class="w-full flex justify-between" on:click={() => { toggleDropdownAccount = !toggleDropdownAccount}}>
+                    <p class="">Account</p>
+                    <i class='bx bx-chevron-{toggleDropdownAccount ? 'up' : 'down'} text-lg' ></i>
+                </button>
+                <div class="flex flex-col w-full h-auto capitalize font-medium px-5 {toggleDropdownAccount ? '' : 'hidden'}">
+                    <div>
+                        <p class="py-2" >Sign In</p>
+                    </div>
+                    <div>
+                        <p class="py-2">Register</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <!-- <div class="w-full bg-white p-5 absolute z-10 top-14 shadow-lg">
-        <div class="w-full h-40 border">
+    {/if}
 
+    {#if toggleSearchMobile}
+         <div id="optionSearchMobile" class="w-full bg-white p-5 absolute z-50 top-12 shadow-lg max-h-96 overflow-auto space-y-3">
+             <div class="w-full flex justify-center h-10 bg-white rounded-full overflow-hidden border border-primary-500">
+                 <div class="w-[85%] h-full flex justify-center items-center font-medium text-sekunder-950">
+                     <input type="text" class="w-full h-full border-none bg-transparent focus:ring-0 pl-5 placeholder-text-sekunder-950" placeholder="Search for product..." bind:value={valueInput} on:keydown={handleKeyInput}>
+                 </div>
+                 <div class="w-[15%] h-full flex justify-center items-center bg-primary-500 active:bg-primary-700 cursor-pointer duration-100" on:click={handleEnter}>
+                     <i class='bx bx-search text-white text-xl'></i>
+                 </div>
+             </div>
+             {#if valueInput.length > 0 && dataFilter.length > 0}
+             <div class="w-full divide-y divide-sekunder-300 max-h-48 lg:max-h-80 bg-white overflow-auto lg:overflow-hidden snap-y snap-mandatory"
+             tabindex="0"
+             bind:this={containerScroll}>
+                 {#each dataFilter as item, i}
+                     <div class="{selectedOptionIndex == i ? 'bg-sekunder-100' : ''} w-full h-8 lg:h-10 hover:bg-sekunder-100 flex justify-between items-center px-3 snap-start"
+                     tabindex="0"
+                     id="idOption{i}"
+                     >  <div class="w-[90%] h-full" on:click={() => {handleSelect(item.title)}}>
+                         <p class="w-full h-full truncate flex items-center text-accent-blue-600">{item.title}</p>
+                        </div>
+                         <div class="h-full aspect-square group cursor-pointer flex justify-end items-center" on:click={addCompare(item.title)}>
+                            <div class="h-5 aspect-square flex justify-center items-center">
+                                <i class='bx bx-git-compare text-sekunder-950'></i>
+                            </div>
+                         </div>
+                     </div>
+                 {/each}
+             </div>
+            {/if}
         </div>
-    </div> -->
+    {/if}
 </nav>
 
 

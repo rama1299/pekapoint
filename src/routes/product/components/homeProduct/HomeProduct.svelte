@@ -12,7 +12,6 @@
             if (fetchData.status == 200) {
                 data = fetchData.data
             }
-            console.log(data)
         } catch (error) {
             console.error('fetch data failed')
         }

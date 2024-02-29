@@ -364,6 +364,11 @@
 
 
 <div class="w-full h-full text-sekunder-950">
+    <div class="bg-sekunder-50 w-full h-full rounded-lg p-4 space-y-2">
+        <div class="w-full flex justify-between items-center">
+            <p class="font-semibold">Filter</p>
+            <p class="font-semibold hover:text-sekunder-950 cursor-pointer border bg-sekunder-950 text-white hover:bg-primary-500 border-sekunder-950 px-1 rounded-md" on:click={clearAll}>{text[2]}</p>
+        </div>
     <div class="h-5/6 overflow-y-auto scroll w-full space-y-4">
         <div>
             <div class="w-full space-y-3">
@@ -393,11 +398,7 @@
             </div>
         </div>
     </div>
-    <div class="w-full h-1/6 ">
-        <div class="h-full w-full flex justify-center gap-2 items-center">
-            <button class="w-full h-10 border rounded-lg bg-sekunder-950 text-white hover:bg-primary-500 hover:text-sekunder-950 active:bg-primary-600 duration-100" on:click={clearAll}>{text[2]}</button>
-        </div>
-    </div>
+</div>
 </div>
 
 <!-- mobile -->

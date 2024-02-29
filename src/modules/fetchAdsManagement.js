@@ -5,45 +5,65 @@ export class FetchAds {
         const query = page ? `?page=${page}` : ''
         try {
             const response = await instance.get(`/ads${query}`)
-            return response
-        } catch (error) {
-            console.log('get all ads error')
+            if (response.status == 200) {
+                return response
+            } else {
+                throw new Error('Get ads failed')
+            }
+         } catch (error) {
+            console.error(error.message)
         }
     }
 
     static async getAdsById(id) {
         try {
             const response = await instance.get(`/ads/${id}`)
-            return response
+            if (response.status == 200) {
+                return response
+            } else {
+                throw new Error('Get ads by id failed')
+            }
         } catch (error) {
-            console.log('get all ads error')
+            console.error(error.message)
         }
     }
 
     static async createAds(data) {
         try {
             const response = await instance.post(`/ads`, data)
-            return response
+            if (response.status == 200) {
+                return response
+            } else {
+                throw new Error('Get ads failed')
+            }
         } catch (error) {
-            console.log('create ads error')
+            console.error(error.message)
         }
     }
 
     static async updateAds(data, id) {
         try {
             const response = await instance.put(`/ads/${id}`, data)
-            return response
+            if (response.status == 200) {
+                return response
+            } else {
+                throw new Error('Get ads failed')
+            }
         } catch (error) {
-            console.log('create ads error')
+            console.error(error.message)
         }
     }
 
     static async deleteAds(id) {
         try {
             const response = await instance.delete(`/ads/${id}`)
-            return response
+            if (response.status == 200) {
+                return response
+            } else {
+                throw new Error('Get ads failed')
+            }
         } catch (error) {
-            console.log('get all ads error')
+            console.error(error.message)
         }
     }
 }

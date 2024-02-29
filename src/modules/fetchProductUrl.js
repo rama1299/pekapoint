@@ -9,19 +9,20 @@ export class FetchProductUrl {
 
             const response = await instance.get(`/product-url/${item}${query}`);
 
-            if (response.status === 401) {
+            if( response.status == 200) {
+                return response
+            } else if (response.status === 401) {
 
                 Cookies.remove('status')
                 await Authentication.login()
                 const response = await instance.get(`/product-url/${item}${query}`);
 
                 return response
+            } else {
+                throw new Error('Error get product url')
             }
-
-            return response;
         } catch (error) {
-            console.error("Error fetching products:", error.response.data.message || error.message);
-            throw error;
+            console.error(error.message);
         }
     }
 
@@ -31,19 +32,21 @@ export class FetchProductUrl {
 
             const response = await instance.post(`/product-url`, {url});
 
-            if (response.status === 401) {
+            if (response.status == 200) {
+                return response
+            } else if (response.status === 401) {
 
                 Cookies.remove('status')
                 await Authentication.login()
                 const response = await instance.post(`/product-url`, {url});
 
                 return response
+            } else {
+                throw new Error('Error get product by url')
             }
 
-            return response;
         } catch (error) {
-            console.error("Error fetching products:", error.response.data.message || error.message);
-            throw error;
+            console.error(error.message);
         }
     }
 
@@ -53,19 +56,21 @@ export class FetchProductUrl {
 
             const response = await instance.post(`/product-url/create`, data);
 
-            if (response.status === 401) {
+            if (response.status == 200) {
+                return response
+            } else if (response.status === 401) {
 
                 Cookies.remove('status')
                 await Authentication.login()
                 const response = await instance.post(`/product-url/create`, data);
 
                 return response
+            } else {
+                throw new Error('error create Product rl')
             }
 
-            return response;
         } catch (error) {
-            console.error("Error fetching products:", error.response.data.message || error.message);
-            throw error;
+            console.error(error.message);
         }
     }
 }

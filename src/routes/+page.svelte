@@ -20,16 +20,18 @@
 	let width
 	let dataAds = data.dataAds || []
 
-	console.log(data.dataAds)
 </script>
 
 <svelte:head>
   <title>{brand}</title>
 </svelte:head>
+
 <svelte:window bind:innerWidth={width}/>
 <Layout>
 	<main class="w-full bg-white">
 			<Header data={data.dataTitleProduct}></Header>
+
+			<!-- iklan top-->
 			{#each dataAds as ads}
 				{#if ads.content_position == 'top' && ads.page == 'home'}
 					 <div class="wrapper mx-auto my-7 flex justify-center items-center h-24">
@@ -37,7 +39,10 @@
 					 </div>
 				{/if}
 			{/each}
+			<!-- -->
+
 			<div class="w-full flex bg-white gap-2 pt-7 justify-center">
+				<!-- iklan left -->
 					{#each dataAds as ads}
 						{#if ads.content_position == 'left' && ads.page == 'home'}
 							<div class="w-[15%] h-screen hidden lg:flex justify-center items-center mt-20">
@@ -47,6 +52,9 @@
 							</div>
 						{/if}
 					{/each}
+					<!--  -->
+				
+				<!-- content top product -->
 				{#if data.dataTopProduct.length > 0}
 					<div class="bg-white w-full py-10">
 						<div class="wrapper mx-auto">
@@ -54,6 +62,9 @@
 						</div>
 					</div>
 				{/if}
+				<!--  -->
+
+					<!-- iklan right -->
 					{#each dataAds as ads}
 						{#if ads.content_position == 'right' && ads.page == 'home'}
 							<div class="w-[15%] h-screen hidden lg:flex justify-center items-center mt-20">
@@ -63,46 +74,33 @@
 							</div>
 						{/if}
 					{/each}
+					<!--  -->
+
 			</div>
-				{#if data.dataProductMostView.length > 0}
-					<div class="flex justify-center items-center w-full mx-auto py-10">
-						<div class="wrapper mx-auto">
-							<SliderProductView data={data.dataProductMostView} title={'Product Most View'}/>
-						</div>
-					</div>
-				{/if}
-			<!-- <div class="flex justify-center items-center w-full py-10 bg-sky-500 h-[400px] lg:h-[550px]">
-				<div class="container flex px-5 justify-center flex-col items-center gap-10">
-					<di class="text-center font-bold text-2xl lg:text-4xl text-white ">
-						<p>{brand},</p>
-						<p>{text[0]}</p>
-					</di>
-					<div>
-						<button class="w-52 h-12 border-2 border-white flex justify-center items-center rounded-lg group hover:bg-white duration-100" on:click={()=> {
-							scrollTo({
-								top: 0,
-								behavior: 'smooth'
-							})
-						}}>
-							<p class="text-white font-semibold group-hover:text-sky-500">{text[1]}</p>
-						</button>
+
+			<!-- other content -->
+			{#if data.dataProductMostView.length > 0}
+				<div class="flex justify-center items-center w-full mx-auto py-10">
+					<div class="wrapper mx-auto">
+						<SliderProductView data={data.dataProductMostView} title={'Product Most View'}/>
 					</div>
 				</div>
-			</div> -->
+			{/if}
 			{#if data.dataComapreMostView.length > 0}
-				 <div class="flex justify-center items-center w-full py-10">
-					 <div class="wrapper mx-auto">
-						 <SlideCompareView data={data.dataComapreMostView} title={'Comparison Most View'}/>
-					 </div>
-				 </div>
+				<div class="flex justify-center items-center w-full py-10">
+					<div class="wrapper mx-auto">
+						<SlideCompareView data={data.dataComapreMostView} title={'Comparison Most View'}/>
+					</div>
+				</div>
 			{/if}
 			{#if data.dataCompareNew.length > 0}
-				 <div class="flex justify-center items-center w-full py-10">
-					 <div class="wrapper mx-auto">
-						 <SliderCompareNew data={data.dataCompareNew} title={'Comparison Latest'}/>
-					 </div>
-				 </div>
+				<div class="flex justify-center items-center w-full py-10">
+					<div class="wrapper mx-auto">
+						<SliderCompareNew data={data.dataCompareNew} title={'Comparison Latest'}/>
+					</div>
+				</div>
 			{/if}
+			<!--  -->
 	</main>
 </Layout>
 <style>

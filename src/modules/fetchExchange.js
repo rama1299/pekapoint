@@ -8,20 +8,22 @@ export class FetchExchange {
             await Authentication.login()
 
             const response = await instance.get(`/exchangerates/update/${code}`)
-
-            if (response.status === 401) { 
+            
+            if (response.status == 200) {
+                return response
+            } else if (response.status === 401) { 
 
                 Cookies.remove('status')
                 await Authentication.login() 
                 const response = await instance.get(`/exchangerates/update/${code}`);
 
                 return response
+            } else {
+                throw new Error('Exchangerates error')
             }
 
-            return response
         } catch (error) {
-            console.error("Error fetching:", error.response.data.message || error.message);
-            throw error;
+            console.error(error.message);
         }
     }
 }

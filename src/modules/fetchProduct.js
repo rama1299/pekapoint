@@ -6,24 +6,24 @@ import { checkIpInfo } from "../helpers/checkIpInfo";
 export class FetchProduct {
     static async getProducts(query) {
         try {
-            await Authentication.login() // Sebelum fetch login dulu
+            await Authentication.login()
             
-            const response = await instance.get(`/product${query}`); //fetch data
-            
-            if (response.status === 401) { // jika status 401
+            const response = await instance.get(`/product${query}`);
+
+            if (response.status == 200) {
+                return response
+            } else if (response.status === 401) { // jika status 401
 
                 Cookies.remove('status') //hapus status login
                 await Authentication.login() // login kembali
-                const response = await instance.get(`/product${query}`); // fetch data lagi
+                const response = await instance.get(`/product${query}`);
 
                 return response
+            } else {
+                throw new Error('Error get product')
             }
-
-            // jika tidak 401 kembalikan
-            return response;
         } catch (error) {
-            console.error("Error fetching products:", error.message);
-            throw error;
+            console.error(error.message);
         }
     }
 
@@ -33,19 +33,21 @@ export class FetchProduct {
             
             const response = await instance.get(`/product/brand`);
 
-            if (response.status === 401) {
+            if (response.status == 200) {
+                return response
+            } else if (response.status === 401) {
 
                 Cookies.remove('status')
                 await Authentication.login()
                 const response = await instance.get(`/product/brand`);
 
                 return response
+            } else {
+                throw new Error('Error get brand')
             }
 
-            return response;
         } catch (error) {
-            console.error("Error fetching products:", error.message);
-            throw error;
+            console.error(error.message);
         }
     }
 
@@ -55,19 +57,21 @@ export class FetchProduct {
             
             const response = await instance.get(`/product/top`);
 
-            if (response.status === 401) {
+            if (response.status == 200) {
+                return response
+            } else if (response.status === 401) {
 
                 Cookies.remove('status')
                 await Authentication.login()
                 const response = await instance.get(`/product/top`);
 
                 return response
+            } else {
+                throw new Error('Error get top product')
             }
 
-            return response;
         } catch (error) {
-            console.error("Error fetching products:", error.message);
-            throw error;
+            console.error(error.message);
         }
     }
 
@@ -77,19 +81,21 @@ export class FetchProduct {
             
             const response = await instance.get(`/product/${slug}`);
 
-            if (response.status === 401) {
+            if (response.status == 200) {
+                return response
+            } else if (response.status === 401) {
 
                 Cookies.remove('status')
                 await Authentication.login()
                 const response = await instance.get(`/product/${slug}`);
 
                 return response
+            } else {
+                throw new Error('Error get product by slug')
             }
 
-            return response;
         } catch (error) {
-            console.error(`Error fetching product by slug ${slug}:`, error.message);
-            throw error;
+            console.error(error.message);
         }
     }
 
@@ -99,19 +105,21 @@ export class FetchProduct {
             
             const response = await instance.get(`/product/spec/${id}`);
 
-            if (response.status === 401) {
+            if (response.status == 200) {
+                return response
+            } else if (response.status === 401) {
 
                 Cookies.remove('status')
                 await Authentication.login()
                 const response = await instance.get(`/product/spec/${id}`);
 
                 return response
+            } else {
+                throw new Error('Error get product spec by id')
             }
 
-            return response;
         } catch (error) {
-            console.error(`Error fetching spec product by ID ${id}:`, error.message);
-            throw error;
+            console.error(error.message);
         }
     }
 
@@ -125,19 +133,21 @@ export class FetchProduct {
             
             const response = await instance.post(`/product/search${queryPage}`, data);
 
-            if (response.status === 401) {
+            if (response.status == 200) {
+                return response
+            } else if (response.status === 401) {
 
                 Cookies.remove('status')
                 await Authentication.login()
                 const response = await instance.post(`/product/search${queryPage}`, data);
 
                 return response
+            } else {
+                throw new Error('Error get product search')
             }
 
-            return response;
         } catch (error) {
-            console.error(`Error fetching spec product by Search ${search}:`, error.message);
-            throw error;
+            console.error(error.message);
         }
     }
 
@@ -147,19 +157,45 @@ export class FetchProduct {
             
             const response = await instance.get(`/home-product`);
 
-            if (response.status === 401) {
+            if (response.status == 200) {
+                return response
+            } else if (response.status === 401) {
 
                 Cookies.remove('status')
                 await Authentication.login()
                 const response = await instance.get(`/home-product`);
 
                 return response
+            } else {
+                throw new Error('Error get home product')
             }
 
-            return response;
         } catch (error) {
-            console.error("Error fetching products:", error.message);
-            throw error;
+            console.error(error.message);
+        }
+    }
+
+    static async getFeatureImageByTitle(title) {
+        try {
+            await Authentication.login()
+            
+            const response = await instance.post(`/product/image`, {title});
+
+            if (response.status == 200) {
+                return response
+            } else if (response.status === 401) {
+
+                Cookies.remove('status')
+                await Authentication.login()
+                const response = await instance.post(`/product/image/${slug}`);
+
+                return response
+            } else {
+                throw new Error('Error get feature image')
+            }
+
+        } catch (error) {
+            console.error(error.message);
         }
     }
 }

@@ -98,17 +98,17 @@
 <svelte:window bind:innerWidth={widthScreen}/>
 <div class="w-full divide-y-2">
     <div class="space-y-3 pb-3">
-        <div>
-            <p class="text-xl font-semibold">{key}</p>
+        <div class="w-full flex justify-between items-end border-b border-sekunder-200 pb-1">
+            <p class="text-xl font-semibold bg-primary-500 pl-5 pr-10 py-1 relative -bottom-1 tag">{key}</p>
         </div>
         <div class="{isExpand ? '' : 'max-h-[698px]'} duration-200 w-full font-medium overflow-hidden">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                 {#each dataTableSpec as data}
-                    <div class="w-full h-56 border-2 rounded-lg overflow-hidden p-3 space-y-2">
+                    <div class="w-full h-56 border border-sekunder-300 rounded-lg overflow-hidden p-3 space-y-2">
                         <div>
-                            <p class="font-semibold">{data.title}</p>
+                            <p class="text-sm font-semibold">{data.title}</p>
                         </div>
-                        <div class="font-medium text-sm w-full overflow-hidden space-y-3">
+                        <div class="font-medium text-sm w-full overflow-hidden space-y-1">
                         {#each data.attributes as attribute, i}
                                 {#if attribute.spec.toLowerCase() == 'yes'}
                                 <div class="flex items-center">
@@ -134,7 +134,7 @@
             </div>
         </div>
         <div class="w-full flex justify-center items-center">
-            <p class="font-medium text-sky-500 cursor-pointer" on:click={handleExpand}>{isExpand ? text[0] : text[1]}</p>
+            <p class="font-medium text-sekunder-950 cursor-pointer" on:click={handleExpand}>{isExpand ? text[0] : text[1]}</p>
         </div>
     </div>
     <div></div>

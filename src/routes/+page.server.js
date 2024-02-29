@@ -14,22 +14,31 @@ export async function load() {
 		let dataAds = []
 		let dataTitleProduct = product
 
-		let response = await FetchProduct.getHomeProducts()
-		let ads = await FetchAds.getAllAds('home')
+		try {
+			let ads = await FetchAds.getAllAds('home')
 
-		if (response.status == 200) {
-			let productHome = response.data
-
-			dataProductMostView = productHome[0]
-			dataComapreMostView = productHome[1]
-			dataCompareNew = productHome[2]
-			dataTopProduct = productHome[3]
+			if (ads.status == 200) {
+				dataAds = ads.data
+			}
+		} catch (error) {
+			console.error(error)
 		}
 
-		if (ads.status == 200) {
-			dataAds = ads.data
+		
+		try {
+			let response = await FetchProduct.getHomeProducts()
+			
+			if (response.status == 200) {
+				let productHome = response.data
+				
+				dataProductMostView = productHome[0]
+				dataComapreMostView = productHome[1]
+				dataCompareNew = productHome[2]
+				dataTopProduct = productHome[3]
+			}
+		} catch (error) {
+			console.log(error)
 		}
-
 		return {dataTitleProduct, dataProductMostView, dataComapreMostView, dataCompareNew, dataTopProduct, dataAds}
 	} catch (error) {
 		return {dataTitleProduct: [], dataProductMostView: [], dataComapreMostView: [], dataCompareNew: [], dataTopProduct: []}
