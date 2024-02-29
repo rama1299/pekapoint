@@ -25,11 +25,11 @@
         const textTranslate = await Translate.client(text, arrayRoute.length < 3 ? false : true)
 		text = textTranslate
 
-        // try {
-        //     await Api.getGeoInfo()
-        // } catch (error) {
-        //     console.error(error)
-        // }
+        try {
+            await Api.getGeoInfo()
+        } catch (error) {
+            console.error(error)
+        }
 
         compareInit()
 

@@ -31,7 +31,7 @@
     <Afiliate data={item.affiliate} slug={item.slug}/>
     <Tabs data={spec} geekbench_score={item.geekbench_score} antutu_score={item.antutu_score} on:message={handleMessage}/>
     </div>
-    <TagCompare/>
+    <!-- <TagCompare/> -->
 </div>
 
 
