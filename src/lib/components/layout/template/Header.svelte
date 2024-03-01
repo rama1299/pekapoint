@@ -505,7 +505,7 @@
                                  <i class='bx bx-category text-2xl text-sekunder-950 hover:text-white duration-100'></i>
                             </div>
                             {#if toggleCategory}
-                                <div id="menuCategory" class="bg-white absolute top-[40px] w-40 text-sm rounded-b-lg max-h-80 overflow-y-auto left-0 border-r-2 overflow-hidden border-2 border-primary-500 z-10">
+                                <div id="menuCategory" class="bg-white absolute z-30 top-[40px] w-40 text-sm rounded-b-lg max-h-80 overflow-y-auto left-0 border-r-2 overflow-hidden border-2 border-primary-500">
                                    {#if $dataBrand.length > 0}
                                         <div class="w-full h-10 flex justify-start items-center px-3 cursor-pointer hover:bg-sekunder-100" on:click={() => {goto(`/product?search=`)}}>
                                             <p>All Brand</p>
