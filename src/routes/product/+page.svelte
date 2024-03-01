@@ -77,7 +77,7 @@
             { :else if $page.url.pathname == '/product' && $page.url.search.length > 0}
                  <div class="wrapper min-h-[600px] font-monst m-auto py-5">
                      <div class="w-full h-full flex justify-between items-start gap-4">
-                         <div class="hidden lg:w-1/4 xl:w-1/5 lg:flex sticky top-4 flex-col">
+                         <div class="z-20 w-full lg:w-1/4 xl:w-1/5 lg:flex fixed lg:sticky top-12 left-0 lg:top-4 flex-col">
                                  <FilterBar/>
                          </div>
                          <div class="w-full lg:w-3/4 xl:w-4/5 h-full">

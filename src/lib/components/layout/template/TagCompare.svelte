@@ -1,6 +1,6 @@
 <script>
 	import { goto } from '$app/navigation';
-    import { saveToSessionStorage } from '../../../../helpers/sessionStorage';
+    import { saveToSessionStorage, getFromSessionStorage } from '../../../../helpers/sessionStorage';
 	import { compareDataStore } from '../../../../stores';
     import product from '../../../../helpers/product.json'
   import { readablestreamToJson } from '../../../../helpers/readablestreamToJson';
@@ -14,6 +14,8 @@
   onMount(async () => {
     let translate = await Translate.client(text)
     text = translate
+
+    await compareInit()
   })
 
     $: category = 'smartphone'
@@ -107,6 +109,11 @@
         } catch (error) {
             console.log(error)
         }
+    }
+
+    function compareInit() {
+        const exisitData = getFromSessionStorage('compareDataSession') || []
+        compareDataStore.set(exisitData)
     }
 
 </script>

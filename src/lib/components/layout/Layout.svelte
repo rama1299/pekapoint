@@ -24,7 +24,7 @@
 
 <Header {isProductPage} {isDetailProductPage} {titleData}></Header>
 <slot/>
-<!-- {#if $page.url.pathname == '/compare' || $page.url.pathname == '/product'}
+{#if $page.url.pathname == '/compare' || $page.url.pathname == '/product'}
   <TagCompare/>
-{/if} -->
+{/if}
 <Footer></Footer>

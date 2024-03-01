@@ -31,8 +31,6 @@
             console.error(error)
         }
 
-        compareInit()
-
         let fetchBrand = await fecthDataBrand()
 
         dataBrand.set(fetchBrand) 
@@ -82,6 +80,11 @@
         let menuMobile = document.getElementById('menuMobile')
         if (buttonMenuMobile && !buttonMenuMobile.contains(event.target) && menuMobile && !menuMobile.contains(event.target)) {
             toggleMenu = false
+        }
+
+        let language = document.getElementById('language')
+        if(language && !language.contains(event.target)) {
+            toggleDropdown = false
         }
 
         handleOutSideSearch()
@@ -210,11 +213,6 @@
         }
 
         toggleSearchMobile = false
-    }
-
-    function compareInit() {
-        const exisitData = getFromSessionStorage('compareDataSession')
-        compareDataStore.set(exisitData)
     }
 
     async function addCompare(title) {
@@ -395,7 +393,7 @@
                          </div>
                          <div class="flex justify-center items-center gap-3 divide-x-2 divide-sekunder-200 font-medium">
                              <div>
-                                 <div class="relative">
+                                 <div id="language" class="relative">
                                      <div class="flex justify-center items-center gap-1 cursor-pointer" on:click={() => {toggleDropdown = !toggleDropdown}}>
                                          <p class="uppercase">{languageTitle}</p>
                                          <i class='bx bx-chevron-down text-xl'></i>
@@ -457,11 +455,11 @@
                                          tabindex="0"
                                          id="idOption{i}"
                                          >  <div class="w-[90%] h-full" on:click={() => {handleSelect(item.title)}}>
-                                             <p class="w-full h-full truncate flex items-center text-sekunder-950">{item.title}</p>
+                                             <p class="w-full h-full truncate flex items-center text-accent-blue-600">{item.title}</p>
                                             </div>
-                                             <div class="h-full aspect-square group cursor-pointer flex justify-end items-center" on:click={addCompare(item.title)}>
-                                                <div class="h-6 aspect-square flex justify-center items-center rounded-md border-2 border-sekunder-950 group-hover:bg-primary-500">
-                                                    <i class='bx bx-plus text-xl text-sekunder-950'></i>
+                                             <div class="h-full aspect-square group cursor-pointer flex justify-end items-center group" on:click={addCompare(item.title)}>
+                                                <div class="h-6 aspect-square flex justify-center items-center">
+                                                    <i class='bx bx-git-compare text-xl text-sekunder-950 group-hover:text-accent-red-600'></i>
                                                 </div>
                                              </div>
                                          </div>
@@ -504,7 +502,7 @@
                      <div class="w-full flex justify-start gap-10 items-center h-11">
                          <div  class="relative">
                             <div id="category" class="flex justify-center items-center cursor-pointer" on:click={() => {toggleCategory = !toggleCategory}}>
-                                 <i class='bx bx-menu text-4xl text-sekunder-950 hover:text-white duration-100'></i>
+                                 <i class='bx bx-category text-2xl text-sekunder-950 hover:text-white duration-100'></i>
                             </div>
                             {#if toggleCategory}
                                 <div id="menuCategory" class="bg-white absolute top-[40px] w-40 text-sm rounded-b-lg max-h-80 overflow-y-auto left-0 border-r-2 overflow-hidden border-2 border-primary-500 z-10">
@@ -563,7 +561,7 @@
                 <i class='bx bx-user active:text-primary-700'></i>
             </div> -->
             {#if $page.route.id == '/product' || $page.route.id == '/compare'}
-                 <div class=" flex justify-center items-center group">
+                 <div class=" flex justify-center items-center group" on:click={handleToggleFilterMobile}>
                      <i class='bx bx-filter-alt active:text-primary-700'></i>
                  </div>
             {/if}

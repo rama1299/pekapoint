@@ -1,7 +1,5 @@
-import {readablestreamToJson} from '../helpers/readablestreamToJson.js'
 import product from '../helpers/product.json'
 import { FetchProduct } from '../modules/fetchProduct.js'
-import axios from 'axios'
 import { FetchAds } from '../modules/fetchAdsManagement.js'
 
 /** @type {import('./$types').PageServerLoad} */
@@ -16,8 +14,8 @@ export async function load() {
 
 		try {
 			let ads = await FetchAds.getAllAds('home')
-
-			if (ads.status == 200) {
+			
+			if (ads && ads.status == 200) {
 				dataAds = ads.data
 			}
 		} catch (error) {

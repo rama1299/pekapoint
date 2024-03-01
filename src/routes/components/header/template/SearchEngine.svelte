@@ -182,10 +182,10 @@
                          on:click={() => {handleSelect(item.title)}}
                          id="idOption{i}"
                          >
-                             <p class="w-full h-full truncate flex items-center">{item.title}</p>
+                             <p class="w-full h-full truncate flex items-center text-accent-blue-600">{item.title}</p>
                              <div class="h-full aspect-square group cursor-pointer flex justify-end items-center" on:click={addCompare(item.title)}>
-                                <div class="h-6 aspect-square flex justify-center items-center rounded-md border-2 border-sekunder-950 group-hover:bg-primary-500">
-                                    <i class='bx bx-plus text-xl text-sekunder-950'></i>
+                                <div class="h-6 aspect-square flex justify-center items-center">
+                                    <i class='bx bx-git-compare text-xl text-sekunder-950 group-hover:text-accent-red-600'></i>
                                 </div>
                              </div>
                          </div>

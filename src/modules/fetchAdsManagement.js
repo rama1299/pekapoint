@@ -5,13 +5,13 @@ export class FetchAds {
         const query = page ? `?page=${page}` : ''
         try {
             const response = await instance.get(`/ads${query}`)
-            if (response.status == 200) {
+            if (response && response.status == 200) {
                 return response
             } else {
                 throw new Error('Get ads failed')
             }
          } catch (error) {
-            console.error(error.message)
+            console.error('error')
         }
     }
 

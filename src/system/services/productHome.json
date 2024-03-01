@@ -1,28 +1,6 @@
 [
   [
     {
-      "id": 119,
-      "url": "/product/xiaomi-14-pro",
-      "product": [
-        {
-          "product_id": 2,
-          "feature_image": "images/xiaomi/14/xiaomi-14-proae9fb789b5279017047aacba7b864f63.jpg",
-          "spec_score": 99,
-          "title": "Xiaomi 14 Pro",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        }
-      ],
-      "created_at": null,
-      "visitor": 195
-    },
-    {
       "id": 120,
       "url": "/product/xiaomi-14",
       "product": [
@@ -42,7 +20,29 @@
         }
       ],
       "created_at": null,
-      "visitor": 145
+      "visitor": 310
+    },
+    {
+      "id": 119,
+      "url": "/product/xiaomi-14-pro",
+      "product": [
+        {
+          "product_id": 2,
+          "feature_image": "images/xiaomi/14/xiaomi-14-proae9fb789b5279017047aacba7b864f63.jpg",
+          "spec_score": 99,
+          "title": "Xiaomi 14 Pro",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        }
+      ],
+      "created_at": null,
+      "visitor": 210
     },
     {
       "id": 129,
@@ -111,50 +111,6 @@
       "visitor": 38
     },
     {
-      "id": 190,
-      "url": "/product/samsung-galaxy-s23-ultra",
-      "product": [
-        {
-          "product_id": 5079,
-          "feature_image": "images/samsung/galaxy/samsung-galaxy-s23-ultrac1137e5ef328bccdcbbfa94bd8de92c5.jpg",
-          "spec_score": 95,
-          "title": "Samsung Galaxy S23 Ultra",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        }
-      ],
-      "created_at": "2024-02-22T00:04:00.776Z",
-      "visitor": 26
-    },
-    {
-      "id": 180,
-      "url": "/product/xiaomi-poco-f5-pro",
-      "product": [
-        {
-          "product_id": 17,
-          "feature_image": "https://images.versus.io/objects/xiaomi-poco-f5-pro.front.medium.1683644329611.jpg",
-          "spec_score": 80,
-          "title": "Xiaomi Poco F5 Pro",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        }
-      ],
-      "created_at": "2024-02-19T08:15:16.863Z",
-      "visitor": 22
-    },
-    {
       "id": 121,
       "url": "/product/xiaomi-12s-ultra",
       "product": [
@@ -174,6 +130,50 @@
         }
       ],
       "created_at": "2024-02-04T07:02:20.976Z",
+      "visitor": 30
+    },
+    {
+      "id": 190,
+      "url": "/product/samsung-galaxy-s23-ultra",
+      "product": [
+        {
+          "product_id": 5079,
+          "feature_image": "images/samsung/galaxy/samsung-galaxy-s23-ultrac1137e5ef328bccdcbbfa94bd8de92c5.jpg",
+          "spec_score": 95,
+          "title": "Samsung Galaxy S23 Ultra",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        }
+      ],
+      "created_at": "2024-02-22T00:04:00.776Z",
+      "visitor": 27
+    },
+    {
+      "id": 128,
+      "url": "/product/xiaomi-12",
+      "product": [
+        {
+          "product_id": 8,
+          "feature_image": "images/xiaomi/12/xiaomi-1249d5fd26471cbed9f987bb48519d9cc5.jpg",
+          "spec_score": 90,
+          "title": "Xiaomi 12",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        }
+      ],
+      "created_at": "2024-02-04T22:32:35.029Z",
       "visitor": 22
     }
   ],
@@ -212,7 +212,7 @@
         }
       ],
       "created_at": "2024-02-05T02:11:56.017Z",
-      "visitor": 104
+      "visitor": 119
     },
     {
       "id": 126,
@@ -248,7 +248,7 @@
         }
       ],
       "created_at": "2024-02-04T22:25:56.221Z",
-      "visitor": 81
+      "visitor": 82
     },
     {
       "id": 125,
@@ -320,7 +320,7 @@
         }
       ],
       "created_at": "2024-02-04T22:39:46.263Z",
-      "visitor": 44
+      "visitor": 45
     },
     {
       "id": 145,
@@ -356,7 +356,7 @@
         }
       ],
       "created_at": "2024-02-05T06:39:48.940Z",
-      "visitor": 30
+      "visitor": 31
     },
     {
       "id": 127,
@@ -502,7 +502,7 @@
         }
       ],
       "created_at": "2024-02-05T06:39:48.940Z",
-      "visitor": 30
+      "visitor": 31
     },
     {
       "id": 138,
@@ -538,7 +538,7 @@
         }
       ],
       "created_at": "2024-02-05T02:11:56.017Z",
-      "visitor": 104
+      "visitor": 119
     },
     {
       "id": 130,
@@ -574,7 +574,7 @@
         }
       ],
       "created_at": "2024-02-04T22:39:46.263Z",
-      "visitor": 44
+      "visitor": 45
     },
     {
       "id": 127,
@@ -646,7 +646,7 @@
         }
       ],
       "created_at": "2024-02-04T22:25:56.221Z",
-      "visitor": 81
+      "visitor": 82
     },
     {
       "id": 125,

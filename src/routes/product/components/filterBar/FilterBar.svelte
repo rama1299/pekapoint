@@ -157,7 +157,7 @@
                 if (queryFilterBrand) {
                     goto(`/product?${queryFilterBrand}`)
                 } else {
-                    goto(`/product`)
+                    goto(`/product?search=`)
                 }
             }
         }
@@ -228,7 +228,7 @@
             if (queryFilterRam) {
                 goto(`/product?${queryFilterRam}`)
             } else {
-                goto(`/product`)
+                goto(`/product?search=`)
             }
         }
     }
@@ -253,7 +253,7 @@
     })
     selectedBrand = []
     selectedRam = []
-    goto(`/product`)
+    goto(`/product?search=`)
   }
 
   function close() {
@@ -363,7 +363,7 @@
 </div> -->
 
 
-<div class="w-full h-full text-sekunder-950">
+<div class="w-full h-full text-sekunder-950 hidden lg:flex">
     <div class="bg-sekunder-50 w-full h-full rounded-lg p-4 space-y-2">
         <div class="w-full flex justify-between items-center">
             <p class="font-semibold">Filter</p>
@@ -403,51 +403,48 @@
 
 <!-- mobile -->
 {#if $isFilterProduct}
-    <div class="w-full bg-black bg-opacity-70 h-screen fixed z-50 top-0 left-0 lg:hidden">
-        <button class="fixed top-3 right-3 flex justify-center items-center w-8 h-8" on:click={handleToggleMobile}>
-            <i class='bx bx-x font-semibold text-white text-4xl'></i>
-        </button>
-        <div class="w-80 h-full bg-gray-100 z-50">
-            <div class="h-5/6 overflow-y-auto scroll w-full p-4 space-y-4">
-                <div>
-                    <div class="">
-                        <p class="font-semibold">{text[1]}</p>
-                    </div>
-                    <div class="w-full space-y-3">
-                        <div class="w-full h-auto bg-white rounded-lg p-2 border">
-                            <p class="font-semibold">{text[0]}</p>
-                            <div class="max-h-48 w-full overflow-auto scroll space-y-1">
-                                {#each brand as data (data.id)}
-                                    <div class="w-full h-auto flex justify-start px-2">
-                                        <div class="flex justify-center gap-x-2 items-center">
-                                        <input class="ring-0 focus:ring-0 rounded-md bg-gray-100" type="checkbox" bind:checked={data.selected} id={"checkbox" + data.id} on:change={handleSelect}>
-                                        <label for={"checkbox" + data.id}>{data.brand}</label>
-                                        </div>
-                                    </div>
-                                {/each}
-                            </div>
-                        </div>
-                        <div class="w-full h-auto bg-white rounded-lg p-2 border">
-                            <p class="font-semibold">RAM</p>
-                            <div class="max-h-48 w-full overflow-auto scroll">
-                                {#each listRam as data}
-                                    <div class="w-full h-8 border-b flex justify-start items-center px-2 {selectedRam.includes(data) ? 'text-sky-500' : ''}" on:click={() => {handleSelectRam(data)}}>
-                                        <p>{data + ' GB'}</p>
-                                    </div>
-                                {/each}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div class="w-full h-screen bg-sekunder-950/50 absolute lg:hidden">
+    <div class="absolute top-2 right-2 w-8 aspect-square flex justify-center items-center rounded-full bg-white" on:click={handleToggleMobile}>
+        <i class='bx bx-x text-2xl text-accent-red-600'></i>
+    </div>
+    <div class="w-[60%] md:w-[40%] lg:w-full h-screen text-sekunder-950">
+        <div class="bg-sekunder-50 w-full h-full rounded-lg p-4 space-y-2">
+            <div class="w-full flex justify-between items-center">
+                <p class="font-semibold">Filter</p>
+                <p class="font-semibold hover:text-sekunder-950 cursor-pointer border bg-sekunder-950 text-white hover:bg-primary-500 border-sekunder-950 px-1 rounded-md" on:click={clearAll}>{text[2]}</p>
             </div>
-            <div class="w-80 h-1/6 ">
-                <div class="h-full w-full flex justify-center gap-2 items-center">
-                    <button class="px-4 py-2 border rounded-lg bg-gray-300" on:click={clearAll}>{text[2]}</button>
-                    <button class="px-4 py-2 border rounded-lg bg-sky-500 text-white" on:click={handleToggleMobile}>{text[3]}</button>
+        <div class="h-5/6 overflow-y-auto scroll w-full space-y-4">
+            <div>
+                <div class="w-full space-y-3">
+                    <div class="w-full h-auto bg-white rounded-lg p-2 border border-sekunder-300">
+                        <p class="font-semibold">{text[0]}</p>
+                        <div class="max-h-48 w-full overflow-auto scroll space-y-1">
+                            {#each brand as data (data.id)}
+                                <div class="w-full h-auto flex justify-start px-2 text-sm">
+                                    <div class="flex justify-center gap-x-2 items-center">
+                                    <input class="ring-0 focus:ring-0 rounded-md hover:bg-sekunder-50" type="checkbox" bind:checked={data.selected} id={"checkbox" + data.id} on:change={handleSelect}>
+                                    <label for={"checkbox" + data.id}>{data.brand}</label>
+                                    </div>
+                                </div>
+                            {/each}
+                        </div>
+                    </div>
+                    <div class="w-full h-auto bg-white rounded-lg p-2 border border-sekunder-300">
+                        <p class="font-semibold">RAM</p>
+                        <div class="max-h-48 w-full overflow-auto scroll">
+                            {#each listRam as data}
+                                <div class="w-full text-sm h-8 border-b flex justify-start items-center px-2 cursor-pointer hover:bg-sekunder-50 {selectedRam.includes(data) ? 'text-sky-500' : ''}" on:click={() => {handleSelectRam(data)}}>
+                                    <p>{data + ' GB'}</p>
+                                </div>
+                            {/each}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
+</div>
 {/if}
 
 

@@ -44,7 +44,7 @@
 </svelte:head>
 {#if status === 'success'}
 <Layout isDetailProductPage={true} >
-    <div class="w-full h-auto bg-white">
+    <div class="w-full h-auto bg-white pt-4 lg:pt-0">
       {#if dataProduct != '' && dataSpec != ''}
         <div class="wrapper mx-auto pb-20">
           <ProductDetail data={dataProduct} spec={dataSpec} variant={dataVariant} dataAds={dataAds}/>

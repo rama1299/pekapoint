@@ -76,7 +76,7 @@
 {#if data.status != 'error'}
   <Layout isDetailProductPage={true} >
   {#if status === 'success'}
-    <main class="w-full h-auto mx-auto bg-white">
+    <main class="w-full h-auto mx-auto bg-white pt-4 lg:pt-0">
       <div class="w-full lg:w-[80%] mx-auto px-5 py-10 space-y-10">
           <CompareImage data={dataProduct}/>
       </div>

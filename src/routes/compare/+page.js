@@ -15,8 +15,6 @@ export async function load({ url }) {
             
             if (responseAds && responseAds.status == 200) {
                 dataAds = responseAds.data
-            } else if (responseAds && responseAds.status == 404) {
-                throw new Error('ads not found')
             }
         } catch (error) {
             console.error(error.message)

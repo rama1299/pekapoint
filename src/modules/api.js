@@ -1,3 +1,10 @@
+import Cookies from "js-cookie"
+import { checkIpInfo } from "../helpers/checkIpInfo";
+import { instance } from "./axios";
+
+let domainApi = import.meta.env.VITE_DOMAIN_API
+
+
 export class Api {
     static async getGeoInfo() {
         try {           
@@ -22,7 +29,7 @@ export class Api {
 
             }
         } catch (error) {
-            console.error('error geoinfo')
+            console.error('get geoinfo failed')
         }
     }
 }
