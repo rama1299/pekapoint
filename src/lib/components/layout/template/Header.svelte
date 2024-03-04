@@ -9,15 +9,18 @@
     import { checkIpInfo } from '../../../../helpers/checkIpInfo.js';
 	import { Translate } from '../../../../helpers/translate.js';
     import { dataBrand } from '../../../../stores.js'
-    import {saveToSessionStorage, getFromSessionStorage} from '../../../../helpers/sessionStorage.js'
-
-	let text = ['home', 'products', 'compare', 'blog', 'about us']
-
+    import { saveToSessionStorage } from '../../../../helpers/sessionStorage.js'
+    import { getExchagerates } from '../../../../helpers/exchagerates.js'
     export let isProductPage
     export let isDetailProductPage
     export let titleData
+
+
     const brand = import.meta.env.VITE_BRAND
+    let text = ['home', 'products', 'compare', 'blog', 'about us']
     let route = ''
+    let exchagerates = ''
+    let currentCurrency = ''
 
     onMount(async () => {
         route = $page.route.id ??'/'
@@ -28,17 +31,24 @@
         try {
             await Api.getGeoInfo()
         } catch (error) {
-            console.error(error)
+            console.error(error.message)
         }
 
-        let fetchBrand = await fecthDataBrand()
+        try {
+            exchagerates = await getExchagerates()
+        } catch (error) {
+            console.error(error.message)
+        }
 
+        currentCurrency = JSON.parse(window.sessionStorage.getItem('currency')) || ''
+
+        let fetchBrand = await fecthDataBrand()
         dataBrand.set(fetchBrand) 
+
+        languageTitle = JSON.parse(Cookies.get('geoInfo')).language
 
         document.addEventListener('click', handleOutsideClick);
 
-        languageTitle = JSON.parse(Cookies.get('geoInfo')).language
-    
         return () => {
         document.removeEventListener('click', handleOutsideClick);
         };
@@ -47,8 +57,6 @@
 
     async function fecthDataBrand() {
         try {
-
-            // const dataBrandSession = sessionStorage.getItem('')
             
             const respons = await FetchProduct.getBrandProducts()
             if (respons.status == 200) {
@@ -87,6 +95,11 @@
             toggleDropdown = false
         }
 
+        let currency = document.getElementById('currency')
+        if(currency && !currency.contains(event.target)) {
+            toggleCurrency = false
+        }
+
         handleOutSideSearch()
     }
 
@@ -101,7 +114,10 @@
  
     let toggleMenu = false
     let toggleDropdown = false
+    let toggleDropdownlang = false
     let toggleDropdownAccount = false
+    let toggleDropdownCurrency = false
+    let toggleCurrency = false
     let y
 
     let languageTitle = ''
@@ -259,6 +275,19 @@
         resetValue()
     }
 
+    function handleChangeCurrency(code) {
+        let changeCurrency = exchagerates.find((item) => item.code == code)
+
+        window.sessionStorage.removeItem('currency')
+
+        window.sessionStorage.setItem('currency', JSON.stringify(changeCurrency))
+        
+        currentCurrency = changeCurrency
+        toggleMenu = false
+
+        window.location.reload()
+    }
+
     let toggleCategorySearch = false
     let toggleCategory = false
 
@@ -334,7 +363,7 @@
                                  <div class="absolute top-14 right-0 {toggleDropdown ? 'show' : 'dropdown_hidden'} ">
                                      <div class="w-auto h-auto overflow-hidden bg-white shadow-lg z-50 duration-300 ease-in transition">
                                          <div class="w-full h-10 hover:bg-sekunder-50 flex justify-end items-center px-2 group cursor-pointer" on:click={() => {handleLanguage('id')}}>
-                                             <p class="text-sekunder-950">Indonesia</p>
+                                             <p class="text-sekunder-950">Indonesian</p>
                                          </div>
                                          <div class="w-full h-10 hover:bg-sekunder-50 flex justify-end items-center px-2 group cursor-pointer" on:click={() => {handleLanguage('en')}}>
                                              <a href="" class="text-sekunder-950">English</a>
@@ -346,33 +375,6 @@
                  </div>
              </div>
          </div>
-         <!-- <div class="w-full pb-5 h-auto absolute {toggleMenu ? 'show' : 'dropdown_hidden'}">
-             <div class="container mx-auto px-3">
-                 <div class="w-full h-auto max-h-96 overflow-auto rounded-lg bg-white border-t-4 border-[#0A1831] shadow-lg ">
-                     <div class="flex flex-col w-full h-auto capitalize font-semibold gap-5 pt-5 px-5">
-                         <a href="/" class="hover:text-sky-500">{text[0]}</a>
-                         <a href="/product" class="hover:text-sky-500">{text[1]}</a>
-                         <a href="/compare" class="hover:text-sky-500">{text[2]}</a>
-                         <a href="/blog" class="hover:text-sky-500">{text[3]}</a>
-                         <a href="/about" class="hover:text-sky-500">{text[4]}</a>
-                     </div>
-                     <div class="flex flex-col w-full h-auto capitalize font-semibold gap-5 p-5">
-                         <button class="w-full h-full flex justify-between" on:click={() => { toggleDropdown = !toggleDropdown}}>
-                             <p>Engish</p>
-                             <i class='bx bx-chevron-{toggleDropdown ? 'up' : 'down'} text-lg' ></i>
-                         </button>
-                         <div class="flex flex-col w-full h-auto capitalize font-semibold gap-5 px-7 {toggleDropdown ? '' : 'hidden'}">
-                             <div on:click={() => {handleLanguage('id')}}>
-                                 <p class="hover:text-sky-500" >Indonesia</p>
-                             </div>
-                             <div on:click={() => {handleLanguage('en')}}>
-                                 <p class="hover:text-sky-500">English</p>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-         </div> -->
      </nav>
 {/if}
 
@@ -400,26 +402,32 @@
                                      </div>
                                      <div class="absolute border top-8 right-0 {toggleDropdown ? 'show' : 'dropdown_hidden'}">
                                          <div class="bg-white shadow-lg">
-                                             <p class="h-8 w-24 flex justify-center items-center hover:bg-sekunder-200 cursor-pointer" on:click={() => {handleLanguage('id')}}>Indonesia</p>
+                                             <p class="h-8 w-24 flex justify-center items-center hover:bg-sekunder-200 cursor-pointer" on:click={() => {handleLanguage('id')}}>Indonesian</p>
                                              <p class="h-8 w-24 flex justify-center items-center hover:bg-sekunder-200 cursor-pointer" on:click={() => {handleLanguage('en')}}>English</p>
                                          </div>
                                      </div>
                                  </div>
                              </div>
                              <div>
-                                 <div class="relative">
-                                     <div class="flex justify-center items-center gap-1 pl-3 cursor-pointer">
-                                         <p class="">$ USD</p>
+                                 <div id="currency" class="relative">
+                                     <div class="flex justify-center items-center gap-1 pl-3 cursor-pointer" on:click={() => {toggleCurrency = !toggleCurrency}}>
+                                        {#if currentCurrency != ''}
+                                             <p class="">{currentCurrency.symbol + ' ' + currentCurrency.code}</p>
+                                        {:else}
+                                            <p class=""></p>
+                                        {/if}
                                          <i class='bx bx-chevron-down text-xl'></i>
                                      </div>
                                  </div>
-                                 <!-- <div class="absolute border top-8 right-0">
+                                 <div class="absolute border top-8 right-0 z-20 {toggleCurrency ? 'show' : 'dropdown_hidden'}">
                                      <div class="bg-white shadow-lg">
-                                         <p class="h-8 w-20 flex justify-center items-center">USD</p>
-                                         <p class="h-8 w-20 flex justify-center items-center">EUR</p>
-                                         <p class="h-8 w-20 flex justify-center items-center">IDR</p>
+                                        {#if exchagerates != ''}
+                                            {#each exchagerates as item}
+                                                <p class="py-2 w-20 flex justify-center items-center cursor-pointer hover:bg-sekunder-200" on:click={() => {handleChangeCurrency(item.code)}}>{item.symbol + ' ' + item.code}</p>
+                                            {/each}
+                                        {/if}
                                      </div>
-                                 </div> -->
+                                 </div>
                              </div>
                          </div>
                      </div>
@@ -428,9 +436,8 @@
              <div class="w-full border-t bg-white">
                  <div class="wrapper mx-auto">
                      <div class="w-full flex justify-between items-center py-7">
-                         <div class="w-[25%] flex justify-start items-center pl-1">
+                         <div class="w-[25%] flex justify-start items-center pl-1 cursor-pointer" on:click={() => {goto(`/`)}}>
                              <img src="/pekapoint-yellow.png" alt="" class="w-40">
-                             <!-- <p class="text-4xl font-bold italic text-sekunder-950 cursor-pointer" on:click={() => {goto(`/`)}}>Pekapoint.</p> -->
                          </div>
                          <div class="w-[50%] relative">
                              <div class="w-full flex justify-center h-11 bg-white rounded-full overflow-hidden border-2 border-primary-500">
@@ -496,7 +503,6 @@
                      </div>
                  </div>
              </div>
-             <!-- border-t-2 border-b-2 border-primary-500 -->
              <div class="w-full bg-primary-500">
                  <div class="wrapper mx-auto">
                      <div class="w-full flex justify-start gap-10 items-center h-11">
@@ -507,11 +513,8 @@
                             {#if toggleCategory}
                                 <div id="menuCategory" class="bg-white absolute z-30 top-[40px] w-40 text-sm rounded-b-lg max-h-80 overflow-y-auto left-0 border-r-2 overflow-hidden border-2 border-primary-500">
                                    {#if $dataBrand.length > 0}
-                                        <div class="w-full h-10 flex justify-start items-center px-3 cursor-pointer hover:bg-sekunder-100" on:click={() => {goto(`/product?search=`)}}>
-                                            <p>All Brand</p>
-                                        </div>
                                        {#each $dataBrand as item}
-                                               <div class="w-full h-10 flex justify-start items-center px-3 cursor-pointer hover:bg-sekunder-100" on:click={() => {goto(`/product?filter=brand%3D${item.brand}`)}}>
+                                               <div class="w-full h-10 flex justify-start items-center px-3 cursor-pointer hover:bg-sekunder-100" on:click={() => {goto(`/product?filter=brand%3D${item.brand}`); toggleCategory= false;}}>
                                                    <p>{item.brand}</p>
                                                </div>
                                        {/each}
@@ -549,17 +552,11 @@
             </div>
         </div>
         <div class="flex h-full justify-center items-center text-xl gap-2">
-                <div id="" class=" flex justify-center items-center group" on:click={() => {goto(`/product?search=`)}}>
-                    <i class='bx bx-category active:text-primary-700'></i>
-                </div>
             {#if $page.route.id == '/product' || $page.route.id == '/compare'}
                 <div id="searchMobile" class=" flex justify-center items-center group" on:click={() => {toggleSearchMobile = !toggleSearchMobile}}>
                     <i class='bx bx-search active:text-primary-700'></i>
                 </div>
             {/if}
-            <!-- <div class=" flex justify-center items-center group">
-                <i class='bx bx-user active:text-primary-700'></i>
-            </div> -->
             {#if $page.route.id == '/product' || $page.route.id == '/compare'}
                  <div class=" flex justify-center items-center group" on:click={handleToggleFilterMobile}>
                      <i class='bx bx-filter-alt active:text-primary-700'></i>
@@ -570,7 +567,7 @@
 
     {#if toggleMenu}
     <div id="menuMobile" class="w-full bg-white p-5 absolute z-50 top-12 shadow-lg divide-y">
-        <div class="w-full overflow-auto">
+        <div class="w-full max-h-96 overflow-auto divide-y">
             <div class="flex flex-col w-full h-auto capitalize font-medium divide-y">
                 <a href="/" class="py-2">{text[0]}</a>
                 <a href="/product" class="py-2">{text[1]}</a>
@@ -580,17 +577,32 @@
                 <a href="/contact" class="py-2">Contact Us</a>
             </div>
             <div class="flex flex-col w-full h-auto capitalize font-medium gap-2 py-2">
-                <button class="w-full flex justify-between" on:click={() => { toggleDropdown = !toggleDropdown}}>
+                <button class="w-full flex justify-between" on:click={() => { toggleDropdownlang = !toggleDropdownlang}}>
                     <p class="uppercase">{languageTitle}</p>
-                    <i class='bx bx-chevron-{toggleDropdown ? 'up' : 'down'} text-lg' ></i>
+                    <i class='bx bx-chevron-{toggleDropdownlang ? 'up' : 'down'} text-lg' ></i>
                 </button>
-                <div class="flex flex-col w-full h-auto capitalize font-medium px-5 {toggleDropdown ? '' : 'hidden'}">
+                <div class="flex flex-col w-full h-auto capitalize font-medium px-5 {toggleDropdownlang ? '' : 'hidden'}">
                     <div on:click={() => {handleLanguage('id')}}>
-                        <p class="py-2" >Indonesia</p>
+                        <p class="py-2" >Indonesian</p>
                     </div>
                     <div on:click={() => {handleLanguage('en')}}>
                         <p class="py-2">English</p>
                     </div>
+                </div>
+            </div>
+            <div class="flex flex-col w-full h-auto capitalize font-medium gap-2 py-2">
+                <button class="w-full flex justify-between" on:click={() => { toggleDropdownCurrency = !toggleDropdownCurrency}}>
+                    <p class="uppercase">{currentCurrency.symbol +' '+ currentCurrency.code}</p>
+                    <i class='bx bx-chevron-{toggleDropdownCurrency ? 'up' : 'down'} text-lg' ></i>
+                </button>
+                <div class="flex flex-col w-full h-auto capitalize font-medium px-5 {toggleDropdownCurrency ? '' : 'hidden'}">
+                    {#if exchagerates != ''}
+                        {#each exchagerates as item}
+                             <div on:click={() => {handleChangeCurrency(item.code)}}>
+                                 <p class="py-2" >{item.symbol + ' ' + item.code}</p>
+                             </div>
+                        {/each}
+                    {/if}
                 </div>
             </div>
             <div class="flex flex-col w-full h-auto capitalize font-medium gap-2 py-2">

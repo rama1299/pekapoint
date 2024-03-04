@@ -1,7 +1,7 @@
 <script>
 	import { goto } from '$app/navigation';
-    import { formatCurrency } from '../../../../helpers/currency';
     import ProgressBar from "./ProgressBar.svelte";
+    import { formatCurrency } from '../../../../../../../helpers/currency';
 
     export let data
     $: dataProduct = data.product

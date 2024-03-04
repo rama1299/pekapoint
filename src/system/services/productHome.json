@@ -20,7 +20,7 @@
         }
       ],
       "created_at": null,
-      "visitor": 310
+      "visitor": 324
     },
     {
       "id": 119,
@@ -42,7 +42,7 @@
         }
       ],
       "created_at": null,
-      "visitor": 210
+      "visitor": 218
     },
     {
       "id": 129,
@@ -86,7 +86,7 @@
         }
       ],
       "created_at": "2024-02-04T07:07:05.098Z",
-      "visitor": 41
+      "visitor": 42
     },
     {
       "id": 189,
@@ -130,7 +130,7 @@
         }
       ],
       "created_at": "2024-02-04T07:02:20.976Z",
-      "visitor": 30
+      "visitor": 33
     },
     {
       "id": 190,
@@ -152,17 +152,17 @@
         }
       ],
       "created_at": "2024-02-22T00:04:00.776Z",
-      "visitor": 27
+      "visitor": 29
     },
     {
-      "id": 128,
-      "url": "/product/xiaomi-12",
+      "id": 180,
+      "url": "/product/xiaomi-poco-f5-pro",
       "product": [
         {
-          "product_id": 8,
-          "feature_image": "images/xiaomi/12/xiaomi-1249d5fd26471cbed9f987bb48519d9cc5.jpg",
-          "spec_score": 90,
-          "title": "Xiaomi 12",
+          "product_id": 17,
+          "feature_image": "https://images.versus.io/objects/xiaomi-poco-f5-pro.front.medium.1683644329611.jpg",
+          "spec_score": 80,
+          "title": "Xiaomi Poco F5 Pro",
           "affiliate": [
             {
               "store": "Shopee",
@@ -173,7 +173,7 @@
           ]
         }
       ],
-      "created_at": "2024-02-04T22:32:35.029Z",
+      "created_at": "2024-02-19T08:15:16.863Z",
       "visitor": 22
     }
   ],
@@ -212,7 +212,7 @@
         }
       ],
       "created_at": "2024-02-05T02:11:56.017Z",
-      "visitor": 119
+      "visitor": 126
     },
     {
       "id": 126,
@@ -248,7 +248,7 @@
         }
       ],
       "created_at": "2024-02-04T22:25:56.221Z",
-      "visitor": 82
+      "visitor": 88
     },
     {
       "id": 125,
@@ -284,7 +284,7 @@
         }
       ],
       "created_at": "2024-02-04T22:25:46.823Z",
-      "visitor": 61
+      "visitor": 62
     },
     {
       "id": 130,
@@ -356,7 +356,7 @@
         }
       ],
       "created_at": "2024-02-05T06:39:48.940Z",
-      "visitor": 31
+      "visitor": 33
     },
     {
       "id": 127,
@@ -395,14 +395,14 @@
       "visitor": 16
     },
     {
-      "id": 231,
-      "url": "/compare/xiaomi-redmi-note-12-pro-plus-vs-xiaomi-mi-10s",
+      "id": 234,
+      "url": "/compare/solana-mobile-saga-vs-archos-saphir-50x",
       "product": [
         {
-          "product_id": 31,
-          "feature_image": "images/xiaomi/mi/xiaomi-mi-10s813972e73c35041e77352cdd3a4b1cb2.jpg",
-          "spec_score": 71,
-          "title": "Xiaomi Mi 10S",
+          "product_id": 2967,
+          "feature_image": "https://images.versus.io/objects/archos-saphir-50x.front.medium.1576684641045.jpg",
+          "spec_score": 25,
+          "title": "Archos Saphir 50X",
           "affiliate": [
             {
               "store": "Shopee",
@@ -413,10 +413,10 @@
           ]
         },
         {
-          "product_id": 33,
-          "feature_image": "images/xiaomi/redmi/xiaomi-redmi-note-12-pro-plusf17ce782bad3bcf76b8dcc42b3dd9cac.jpg",
-          "spec_score": 71,
-          "title": "Xiaomi Redmi Note 12 Pro Plus",
+          "product_id": 2718,
+          "feature_image": "https://images.versus.io/objects/solana-mobile-saga.front.medium.1681764629629.jpg",
+          "spec_score": 66,
+          "title": "Solana Mobile Saga",
           "affiliate": [
             {
               "store": "Shopee",
@@ -427,11 +427,191 @@
           ]
         }
       ],
-      "created_at": "2024-02-28T15:41:05.403Z",
-      "visitor": 1
+      "created_at": "2024-03-01T11:39:23.876Z",
+      "visitor": 3
+    },
+    {
+      "id": 236,
+      "url": "/compare/samsung-galaxy-s22-ultra-qualcomm-snapdragon-8-gen-1-vs-xiaomi-redmi-k60-ultra",
+      "product": [
+        {
+          "product_id": 5081,
+          "feature_image": "https://images.versus.io/objects/samsung-galaxy-s22-ultra.front.medium.1646341961226.jpg",
+          "spec_score": 92,
+          "title": "Samsung Galaxy S22 Ultra (Qualcomm Snapdragon 8 Gen 1)",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        },
+        {
+          "product_id": 36,
+          "feature_image": "https://images.versus.io/objects/xiaomi-redmi-k60-ultra.front.medium.1692111263077.jpg",
+          "spec_score": 71,
+          "title": "Xiaomi Redmi K60 Ultra",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        }
+      ],
+      "created_at": "2024-03-01T15:19:20.420Z",
+      "visitor": 3
     }
   ],
   [
+    {
+      "id": 237,
+      "url": "/compare/xiaomi-mi-11-vs-xiaomi-civi-3",
+      "product": [
+        {
+          "product_id": 32,
+          "feature_image": "images/xiaomi/civi/xiaomi-civi-3638621384e741e2f166ea3bdb3054444.jpg",
+          "spec_score": 72,
+          "title": "Xiaomi Civi 3",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        },
+        {
+          "product_id": 30,
+          "feature_image": "images/xiaomi/mi/xiaomi-mi-114d81679ee6acb43b61f7f9def286fd1f.jpg",
+          "spec_score": 72,
+          "title": "Xiaomi Mi 11",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        }
+      ],
+      "created_at": "2024-03-03T00:21:40.325Z",
+      "visitor": 2
+    },
+    {
+      "id": 236,
+      "url": "/compare/samsung-galaxy-s22-ultra-qualcomm-snapdragon-8-gen-1-vs-xiaomi-redmi-k60-ultra",
+      "product": [
+        {
+          "product_id": 5081,
+          "feature_image": "https://images.versus.io/objects/samsung-galaxy-s22-ultra.front.medium.1646341961226.jpg",
+          "spec_score": 92,
+          "title": "Samsung Galaxy S22 Ultra (Qualcomm Snapdragon 8 Gen 1)",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        },
+        {
+          "product_id": 36,
+          "feature_image": "https://images.versus.io/objects/xiaomi-redmi-k60-ultra.front.medium.1692111263077.jpg",
+          "spec_score": 71,
+          "title": "Xiaomi Redmi K60 Ultra",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        }
+      ],
+      "created_at": "2024-03-01T15:19:20.420Z",
+      "visitor": 3
+    },
+    {
+      "id": 234,
+      "url": "/compare/solana-mobile-saga-vs-archos-saphir-50x",
+      "product": [
+        {
+          "product_id": 2967,
+          "feature_image": "https://images.versus.io/objects/archos-saphir-50x.front.medium.1576684641045.jpg",
+          "spec_score": 25,
+          "title": "Archos Saphir 50X",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        },
+        {
+          "product_id": 2718,
+          "feature_image": "https://images.versus.io/objects/solana-mobile-saga.front.medium.1681764629629.jpg",
+          "spec_score": 66,
+          "title": "Solana Mobile Saga",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        }
+      ],
+      "created_at": "2024-03-01T11:39:23.876Z",
+      "visitor": 3
+    },
+    {
+      "id": 232,
+      "url": "/compare/xiaomi-14-vs-xiaomi-14-pro",
+      "product": [
+        {
+          "product_id": 1,
+          "feature_image": "images/xiaomi/14/xiaomi-143a40f7be4334a6d4886b73953e20186e.jpg",
+          "spec_score": 100,
+          "title": "Xiaomi 14",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        },
+        {
+          "product_id": 2,
+          "feature_image": "images/xiaomi/14/xiaomi-14-proae9fb789b5279017047aacba7b864f63.jpg",
+          "spec_score": 99,
+          "title": "Xiaomi 14 Pro",
+          "affiliate": [
+            {
+              "store": "Shopee",
+              "price": "19450000",
+              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
+              "rating": "4.5"
+            }
+          ]
+        }
+      ],
+      "created_at": "2024-03-01T11:35:55.447Z",
+      "visitor": 2
+    },
     {
       "id": 231,
       "url": "/compare/xiaomi-redmi-note-12-pro-plus-vs-xiaomi-mi-10s",
@@ -502,7 +682,7 @@
         }
       ],
       "created_at": "2024-02-05T06:39:48.940Z",
-      "visitor": 31
+      "visitor": 33
     },
     {
       "id": 138,
@@ -538,7 +718,7 @@
         }
       ],
       "created_at": "2024-02-05T02:11:56.017Z",
-      "visitor": 119
+      "visitor": 126
     },
     {
       "id": 130,
@@ -575,114 +755,6 @@
       ],
       "created_at": "2024-02-04T22:39:46.263Z",
       "visitor": 45
-    },
-    {
-      "id": 127,
-      "url": "/compare/xiaomi-12s-ultra-vs-xiaomi-mi-11-ultra",
-      "product": [
-        {
-          "product_id": 6,
-          "feature_image": "images/xiaomi/12s/xiaomi-12s-ultra23076557ac622abce58622d522f76e2b.jpg",
-          "spec_score": 95,
-          "title": "Xiaomi 12S Ultra",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        },
-        {
-          "product_id": 9,
-          "feature_image": "images/xiaomi/mi/xiaomi-mi-11-ultraeb72f19c339b2ed5a6cffc5300666be2.jpg",
-          "spec_score": 94,
-          "title": "Xiaomi Mi 11 Ultra",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        }
-      ],
-      "created_at": "2024-02-04T22:31:00.723Z",
-      "visitor": 16
-    },
-    {
-      "id": 126,
-      "url": "/compare/xiaomi-13-pro-vs-xiaomi-13-ultra",
-      "product": [
-        {
-          "product_id": 4,
-          "feature_image": "images/xiaomi/13/xiaomi-13-proaa197f5e7ae648c33e6575288fbc1cce.jpg",
-          "spec_score": 96,
-          "title": "Xiaomi 13 Pro",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        },
-        {
-          "product_id": 3,
-          "feature_image": "images/xiaomi/13/xiaomi-13-ultrafeeff34b21bd09b200a2c2bd01be3463.jpg",
-          "spec_score": 98,
-          "title": "Xiaomi 13 Ultra",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        }
-      ],
-      "created_at": "2024-02-04T22:25:56.221Z",
-      "visitor": 82
-    },
-    {
-      "id": 125,
-      "url": "/compare/xiaomi-14-pro-vs-xiaomi-13-ultra",
-      "product": [
-        {
-          "product_id": 2,
-          "feature_image": "images/xiaomi/14/xiaomi-14-proae9fb789b5279017047aacba7b864f63.jpg",
-          "spec_score": 99,
-          "title": "Xiaomi 14 Pro",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        },
-        {
-          "product_id": 3,
-          "feature_image": "images/xiaomi/13/xiaomi-13-ultrafeeff34b21bd09b200a2c2bd01be3463.jpg",
-          "spec_score": 98,
-          "title": "Xiaomi 13 Ultra",
-          "affiliate": [
-            {
-              "store": "Shopee",
-              "price": "19450000",
-              "link": "https://shopee.co.id/Handphone-cat.11044458.11044476",
-              "rating": "4.5"
-            }
-          ]
-        }
-      ],
-      "created_at": "2024-02-04T22:25:46.823Z",
-      "visitor": 61
     }
   ],
   [
@@ -712,62 +784,6 @@
       "feature_image": "images/xiaomi/13/xiaomi-13-proaa197f5e7ae648c33e6575288fbc1cce.jpg",
       "slug": "xiaomi-13-pro",
       "spec_score": 96,
-      "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
-    },
-    {
-      "title": "Samsung Galaxy S23 Ultra",
-      "feature_image": "images/samsung/galaxy/samsung-galaxy-s23-ultrac1137e5ef328bccdcbbfa94bd8de92c5.jpg",
-      "slug": "samsung-galaxy-s23-ultra",
-      "spec_score": 95,
-      "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
-    },
-    {
-      "title": "Oppo Find X6 Pro",
-      "feature_image": "images/oppo/find/oppo-find-x6-pro0a95923d768f27382c8ac0eb73c69979.jpg",
-      "slug": "oppo-find-x6-pro",
-      "spec_score": 95,
-      "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
-    },
-    {
-      "title": "Xiaomi 12S Ultra",
-      "feature_image": "images/xiaomi/12s/xiaomi-12s-ultra23076557ac622abce58622d522f76e2b.jpg",
-      "slug": "xiaomi-12s-ultra",
-      "spec_score": 95,
-      "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
-    },
-    {
-      "title": "Xiaomi Mi 11 Ultra",
-      "feature_image": "images/xiaomi/mi/xiaomi-mi-11-ultraeb72f19c339b2ed5a6cffc5300666be2.jpg",
-      "slug": "xiaomi-mi-11-ultra",
-      "spec_score": 94,
-      "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
-    },
-    {
-      "title": "Google Pixel 8 Pro",
-      "feature_image": "https://images.versus.io/objects/google-pixel-8-pro.front.medium.1696502540011.jpg",
-      "slug": "google-pixel-8-pro",
-      "spec_score": 93,
-      "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
-    },
-    {
-      "title": "Xiaomi 13",
-      "feature_image": "images/xiaomi/13/xiaomi-1314977655f4c5ff9b87211edc06f9e1a5.jpg",
-      "slug": "xiaomi-13",
-      "spec_score": 93,
-      "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
-    },
-    {
-      "title": "Samsung Galaxy S22 Ultra (Qualcomm Snapdragon 8 Gen 1)",
-      "feature_image": "https://images.versus.io/objects/samsung-galaxy-s22-ultra.front.medium.1646341961226.jpg",
-      "slug": "samsung-galaxy-s22-ultra-qualcomm-snapdragon-8-gen-1",
-      "spec_score": 92,
-      "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
-    },
-    {
-      "title": "Samsung Galaxy S22 Ultra",
-      "feature_image": "images/samsung/galaxy/samsung-galaxy-s22-ultra0f8042922fddd5c952e0bb5fd9e1b045.jpg",
-      "slug": "samsung-galaxy-s22-ultra",
-      "spec_score": 92,
       "affiliate": "[{\"store\":\"Shopee\",\"price\":\"19450000\",\"link\":\"https://shopee.co.id/Handphone-cat.11044458.11044476\",\"rating\":\"4.0\"}]"
     }
   ]

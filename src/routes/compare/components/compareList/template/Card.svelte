@@ -1,7 +1,7 @@
 <script>
 	import { goto } from '$app/navigation';
-  import { onMount } from "svelte";
-  import ProgressBar from "./ProgressBar.svelte";
+    import ProgressBar from "./ProgressBar.svelte";
+    import { formatCurrency } from '../../../../../helpers/currency';
 
     export let data
     $: dataProduct = data.product
@@ -22,7 +22,7 @@
                     </div>
                     <div class="w-full h-24 flex flex-col justify-center items-start py-2">
                         <a href={data.url} class="w-full max-h-10 font-semibold flex justify-start text-start items-end overflow-hidden text-sm leading-5">{product.title}</a>
-                        <p class="w-full flex text-accent-red-600 font-medium justify-start text-start text-sm items-start">Rp. {product.affiliate[0].price}</p>
+                        <p class="w-full flex text-accent-red-600 font-medium justify-start text-start text-sm items-start">{formatCurrency(parseFloat(product.affiliate[0].price))}</p>
                         <div class="w-full h-2">
                             <ProgressBar score={product.spec_score}></ProgressBar>
                         </div>

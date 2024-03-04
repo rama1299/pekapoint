@@ -1,3 +1,7 @@
+<script>
+    import {formatCurrency} from '../../../../../../helpers/currency.js'
+</script>
+
 <div class="w-full border-2 p-3 rounded-lg hover:border-sekunder-950">
     <div class=" grid w-full grid-cols-1 lg:grid-cols-5 gap-3 lg-gap-0">
         <div class="w-full h-full flex justify-between lg:justify-start items-center col-1">
@@ -17,7 +21,7 @@
                 </div>
             </div>
             <div class="flex items-center lg:hidden">
-                <p class="text-xl font-semibold">Rp. 7.000.000</p>
+                <p class="text-xl font-semibold">{formatCurrency(7000000)}</p>
             </div>
         </div>
         <div class="w-full h-full col-1 lg:col-span-2 flex justify-start items-center gap-3 flex-wrap px-0 lg:px-3">
@@ -36,7 +40,7 @@
         </div>
         <div class="w-full h-full col-1 lg:flex justify-center items-center px-3 hidden">
             <div>
-                <p class="text-xl font-semibold text-accent-red-600">Rp. 7.000.000</p>
+                <p class="text-xl font-semibold text-accent-red-600">{formatCurrency(7000000)}</p>
             </div>
         </div>
         <div class="w-full h-full col-1 lg:py-2">

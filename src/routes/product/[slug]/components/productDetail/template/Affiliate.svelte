@@ -1,7 +1,9 @@
 <script>
-  import { afterUpdate, onMount } from "svelte";
+    import { afterUpdate, onMount } from "svelte";
     import Carousel from "svelte-carousel";
-  import { Translate } from "../../../../../../helpers/translate";
+    import { Translate } from "../../../../../../helpers/translate";
+    import { formatCurrency } from "../../../../../../helpers/currency";
+
     export let data
 
     let text = ['Price']
@@ -72,7 +74,7 @@
                     </div>
                     <div class="w-full h-full flex overflow-hidden justify-center items-center flex-col text-sm">
                         <div class="col-span-2 row-span-1 w-full font-medium text-sekunder-950"><p class="w-full truncate leading-5">{data.title}</p></div>
-                        <p class="col-span-2 row-span-1 w-full text-accent-red-600">Rp. {data.price}</p>
+                        <p class="col-span-2 row-span-1 w-full text-accent-red-600">{formatCurrency(parseFloat(data.price))}</p>
                         <p class="col-span-2 row-span-1 w-full">{data.store}</p>
                     </div>
                 </div>

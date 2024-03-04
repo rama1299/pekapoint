@@ -1,8 +1,11 @@
 <script>
+	import { goto } from '$app/navigation';
     import FeatureProduct from "./template/FeatureProduct.svelte";
     import { onMount } from "svelte";
     import { FetchProduct } from "../../../../modules/fetchProduct";
     import TopProduct from "./template/TopProduct.svelte";
+    import SlideCompareView from "./template/sliderCompareView/SlideCompareView.svelte";
+    import SliderCompareNew from "./template/silderCompareNew/SliderCompareNew.svelte";
 
     let data = []
 
@@ -19,7 +22,7 @@
 </script>
 
 <div class="w-full">
-    <div class="w-full h-64 md:h-[550px] bg-[url('/gradient1.png')] flex justify-center items-center relative lg:pb-10">
+    <div class="w-full h-64 md:h-[550px] bg-[url('/gradient1.png')] flex justify-center items-center relative lg:pb-10 cursor-pointer" on:click={() => {goto(`/product?search=`)}}>
         <div class="wrapper h-full flex items-center">
             <div class="w-1/2 flex flex-col justify-center items-center">
                 <div class="w-40 md:w-80 md:text-4xl flex flex-col gap-5 leading-5 md:leading-none">
@@ -29,7 +32,7 @@
                         <p class="text-sm md:text-xl font-medium">For you money</p>
                     </div>
                     <div>
-                        <button class="h-7 w-24 md:h-10 md:w-40 rounded-lg bg-primary-500 text-sm md:text-xl">Get it Now!</button>
+                        <button class="h-7 w-24 md:h-10 md:w-40 rounded-lg bg-primary-500 text-sm md:text-xl hover:bg-gray-950 hover:text-white duration-100" on:click={() => {goto(`/product?search=`)}}>Get it Now!</button>
                     </div>
                 </div>
             </div>
@@ -50,6 +53,22 @@
                 {#if data[3]}
                     <div class="w-full">
                         <TopProduct data={data[3]}></TopProduct>
+                    </div>
+                {:else}
+                        <div class="w-full h-72"></div>
+                {/if}
+
+                {#if data[1]}
+                    <div class="w-full">
+                        <SlideCompareView data={data[1]} title='Comparison Most View'></SlideCompareView>
+                    </div>
+                {:else}
+                        <div class="w-full h-72"></div>
+                {/if}
+
+                {#if data[2]}
+                    <div class="w-full">
+                        <SliderCompareNew data={data[2]} title='Comparison Latest'></SliderCompareNew>
                     </div>
                 {:else}
                         <div class="w-full h-72"></div>

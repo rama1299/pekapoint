@@ -26,4 +26,28 @@ export class FetchExchange {
             console.error(error.message);
         }
     }
+
+    static async getExchagerates() {
+        try {
+            await Authentication.login()
+
+            const response = await instance.get(`/exchangerates`)
+            
+            if (response.status == 200) {
+                return response
+            } else if (response.status === 401) { 
+
+                Cookies.remove('status')
+                await Authentication.login() 
+                const response = await instance.get(`/exchangerates`);
+
+                return response
+            } else {
+                throw new Error('Exchangerates error')
+            }
+
+        } catch (error) {
+            console.error(error.message);
+        }
+    }
 }

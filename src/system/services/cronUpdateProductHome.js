@@ -94,7 +94,7 @@ export async function updateProductHomeJson() {
             FROM public.products
             WHERE summary IS NOT NULL
             ORDER BY spec_score DESC, created_at DESC
-            LIMIT 12;`
+            LIMIT 4;`
         )
 
         if (findProduct.rows.length == 0) {

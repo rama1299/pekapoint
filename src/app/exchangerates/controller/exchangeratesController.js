@@ -74,4 +74,23 @@ export class ExchangeratesController {
         }
     }
 
+    static async getExchangeRates(req, res, next) {
+        const client = await pool.connect()
+        try {
+            const findData = await client.query(
+                `SELECT *
+                FROM ${schema}.exchangerates
+                WHERE code IN ('EUR', 'IDR', 'USD', 'JPY', 'CNY', 'SGD', 'AED')`
+            )
+
+            const data = findData.rows
+
+            res.status(200).json(data)
+        } catch (error) {
+            next(error)
+        } finally {
+            client.release()
+        }
+    }
+
 }

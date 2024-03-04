@@ -1,7 +1,9 @@
 <script>
 	import { goto } from '$app/navigation';
     import { onMount } from 'svelte';
-  import { Translate } from '../../../helpers/translate';
+    import { Translate } from '../../../helpers/translate';
+    import { formatCurrency } from '../../../helpers/currency';
+
     export let data
     
     let text = ['Our Top Product', 'Products with the best quality and have been tested.', 'Start', 'See All']
@@ -16,7 +18,7 @@
     <div class="w-full flex justify-between items-end border-b border-sekunder-200 pb-1 relative">
         <p class="font-semibold bg-primary-500 pl-5 pr-10 py-1 relative -bottom-1 tag">Top Product</p>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {#each data as product}
             <div class="w-full lg:h-60 flex md:flex-row lg:flex-col justify-center items-center snap-start lg:space-y-2 p-3 duration-100 hover:scale-105 border rounded-md" on:click={() => {goto(`/product/${product.slug}`)}}>
                 <div class="w-1/2 lg:w-full h-24 lg:h-36 flex justify-center items-center">
@@ -29,7 +31,7 @@
                 <div class="w-full h-24 flex flex-col justify-center items-center">
                         <p class="text-sm h-8 w-full text-center text-accent-sekunder-950 leading-4 overflow-hidden">{product.title}</p>
                     <!-- {#each product.affiliate as affiliate} -->
-                        <p class="w-full h-8 flex justify-center items-center text-sm font-medium text-accent-red-600">Rp. 19700000</p>
+                        <p class="w-full h-8 flex justify-center items-center text-sm font-medium text-accent-red-600">{formatCurrency(20100000)}</p>
                     <!-- {/each} -->
                 </div>
             </div>

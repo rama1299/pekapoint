@@ -1,6 +1,8 @@
 <script>
     import { afterUpdate, onMount } from "svelte";
 	import { goto } from '$app/navigation';
+    import { formatCurrency } from "../../../helpers/currency";
+
     export let data
     export let title
 
@@ -80,7 +82,7 @@
                             <div class="w-full h-24 flex flex-col justify-center items-center">
                                     <p class="text-sm h-8 w-full text-center text-accent-sekunder-950 leading-4 overflow-hidden">{product.title}</p>
                                 {#each product.affiliate as affiliate}
-                                    <p class="w-full h-8 flex justify-center items-center text-sm font-medium text-accent-red-600">Rp. {affiliate.price}</p>
+                                    <p class="w-full h-8 flex justify-center items-center text-sm font-medium text-accent-red-600">{formatCurrency(parseFloat(affiliate.price))}</p>
                                 {/each}
                             </div>
                         </div>

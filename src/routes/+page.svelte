@@ -75,17 +75,9 @@
 						{/if}
 					{/each}
 					<!--  -->
-
 			</div>
 
 			<!-- other content -->
-			{#if data.dataProductMostView.length > 0}
-				<div class="flex justify-center items-center w-full mx-auto py-10">
-					<div class="wrapper mx-auto">
-						<SliderProductView data={data.dataProductMostView} title={'Product Most View'}/>
-					</div>
-				</div>
-			{/if}
 			{#if data.dataComapreMostView.length > 0}
 				<div class="flex justify-center items-center w-full py-10">
 					<div class="wrapper mx-auto">
@@ -97,6 +89,13 @@
 				<div class="flex justify-center items-center w-full py-10">
 					<div class="wrapper mx-auto">
 						<SliderCompareNew data={data.dataCompareNew} title={'Comparison Latest'}/>
+					</div>
+				</div>
+			{/if}
+			{#if data.dataProductMostView.length > 0}
+				<div class="flex justify-center items-center w-full mx-auto py-10">
+					<div class="wrapper mx-auto">
+						<SliderProductView data={data.dataProductMostView} title={'Product Most View'}/>
 					</div>
 				</div>
 			{/if}
